@@ -1,0 +1,31 @@
+{
+  "date": "2026-04-13",
+  "target": "linkedin-post",
+  "dimensions": {
+    "novelty": 8,
+    "insight_density": 8,
+    "voice_match": 7,
+    "hook_strength": 9,
+    "teachability": 8
+  },
+  "average": 8.0,
+  "verdict": "ship",
+  "revision_count": 0,
+  "notes": {
+    "novelty": "Contrarian take on the most common prompt engineering advice. Backed by specific research across 15 models. The 'attention budget' framing is original.",
+    "insight_density": "Every paragraph adds new information. The attention budget analogy, the per-task routing recommendation, and the closing reframe all carry weight.",
+    "voice_match": "Close to Aayush's voice — casual, direct, uses 'I've been building'. Could be slightly more informal. No kill list violations found.",
+    "hook_strength": "Opening line directly challenges the most repeated advice in the field. Under 60 chars. Creates immediate tension.",
+    "teachability": "Reader walks away with a specific, actionable framework: use CoT for reasoning tasks, skip it for structured output tasks. Clear mental model."
+  },
+  "kill_list_check": {
+    "violations": 0,
+    "details": "No banned words or patterns found. No em-dashes. No engagement bait. No bullet lists. Doesn't start with 'I'. Varied sentence length (burstiness OK)."
+  },
+  "hook_extraction": {
+    "original_hook": "\"Think step by step\" is making your AI system worse.",
+    "alternative_hook": "The model has a fixed attention budget.",
+    "recommendation": "original",
+    "reason": "Original hook directly challenges known advice. Alternative is interesting but doesn't create the same tension."
+  }
+}

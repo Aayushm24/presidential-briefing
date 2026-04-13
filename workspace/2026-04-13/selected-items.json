@@ -1,0 +1,59 @@
+{
+  "date": "2026-04-13",
+  "lead": {
+    "id": "cot-hurts-instruction-following",
+    "title": "Chain-of-thought prompting hurts instruction-following accuracy across 15 major models",
+    "source": "ArXiv / devflokers.com",
+    "url": "https://www.devflokers.com/blog/new-ai-papers-arxiv-last-24-hours-april-2026",
+    "content_summary": "New research evaluating 15 models (GPT, Claude, LLaMA, DeepSeek) shows chain-of-thought prompting consistently reduces instruction-following performance across nearly all models and datasets. While CoT boosts complex reasoning tasks, it degrades accuracy on direct instruction tasks.",
+    "scores": {
+      "significance": 8,
+      "novelty": 9,
+      "practitioner_impact": 8,
+      "discussion_heat": 6,
+      "connectability": 7
+    },
+    "combined_score": 38,
+    "verdict": "breakthrough",
+    "reason": "Counterintuitive finding that challenges a core assumption in how everyone uses LLMs. Direct builder impact."
+  },
+  "secondary": [
+    {
+      "id": "karpathy-behind-as-programmer",
+      "title": "Karpathy: 'I've never felt this much behind as a programmer. The profession is being dramatically refactored.'",
+      "source": "X/@karpathy",
+      "url": "https://x.com/karpathy/status/2004607146781278521",
+      "content_summary": "Karpathy posted that the bits contributed by programmers are 'increasingly sparse' and that he could be 10X more powerful if he properly strung together available AI tools. Follows his earlier shift from AI coding to AI knowledge management.",
+      "scores": { "significance": 8, "novelty": 7, "practitioner_impact": 8, "discussion_heat": 9, "connectability": 9 },
+      "combined_score": 41
+    },
+    {
+      "id": "mcp-linux-foundation",
+      "title": "Linux Foundation takes MCP under open governance after 97M installs",
+      "source": "Multiple",
+      "url": "https://www.crescendo.ai/news/latest-ai-news-and-updates",
+      "content_summary": "Anthropic's Model Context Protocol crossed 97M installs in March. The Linux Foundation announced it will provide open governance. Every major AI provider now ships MCP-compatible tooling. MCP is no longer experimental — it's infrastructure.",
+      "scores": { "significance": 8, "novelty": 7, "practitioner_impact": 8, "discussion_heat": 7, "connectability": 8 },
+      "combined_score": 38
+    },
+    {
+      "id": "gemini-3-1-ultra-2m-context",
+      "title": "Google launches Gemini 3.1 Ultra with 2M token native multimodal context and sandboxed code execution",
+      "source": "Google / llm-stats.com",
+      "url": "https://llm-stats.com/ai-news",
+      "content_summary": "Gemini 3.1 Ultra features a 2 million token context window that works natively across text, image, audio, and video without transcription intermediaries. Ships with sandboxed Code Execution tool. Google also released TurboQuant to address the KV cache bottleneck for massive context windows.",
+      "scores": { "significance": 7, "novelty": 6, "practitioner_impact": 7, "discussion_heat": 7, "connectability": 7 },
+      "combined_score": 34
+    },
+    {
+      "id": "pwc-ai-performance-gap",
+      "title": "PwC: 75% of AI's economic gains captured by just 20% of companies",
+      "source": "PwC",
+      "url": "https://www.pwc.com/gx/en/news-room/press-releases/2026/pwc-2026-ai-performance-study.html",
+      "content_summary": "PwC's 2026 AI Performance Study released today shows a sharp divergence: leading companies focus AI on growth, not just productivity. The gap between AI leaders and laggards is widening, not closing.",
+      "scores": { "significance": 7, "novelty": 5, "practitioner_impact": 6, "discussion_heat": 5, "connectability": 6 },
+      "combined_score": 29
+    }
+  ],
+  "connections": []
+}

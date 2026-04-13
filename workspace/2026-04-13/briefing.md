@@ -1,0 +1,35 @@
+April 13, 2026
+
+A paper dropped this week that should make you uncomfortable if you build with LLMs. Researchers tested chain-of-thought prompting across 15 major models — GPT, Claude, LLaMA, DeepSeek — and found it consistently makes them worse at following instructions. Not on some models. On nearly all of them. Not on some tasks. Across the board.
+
+This matters because chain-of-thought is probably the single most widely adopted technique in prompt engineering right now. Every tutorial tells you to add "think step by step" or "let's reason through this." It's become the default. And the research says: for a large class of tasks, that default is actively hurting your results.
+
+Let me explain what chain-of-thought actually is and why this finding is counterintuitive.
+
+When you give an LLM a math problem like "If a store has 47 apples and sells 3 bags of 12, how many are left?", the model is more likely to get the right answer if you ask it to show its work. "First, 3 bags of 12 is 36. Then, 47 minus 36 is 11." That's chain-of-thought. You're asking the model to generate intermediate reasoning steps before producing a final answer. It works because transformers process text sequentially — each token they generate becomes context for the next token. By generating reasoning steps, the model is essentially giving itself a scratchpad. It's converting a hard single-step problem into an easier multi-step problem.
+
+The key insight is why this works at all. Transformers have a fixed "depth" of computation per token. Think of it like a CPU that can only run a fixed number of operations per clock cycle. For simple tasks, that's enough. For complex reasoning, it's not. Chain-of-thought is a hack that gives the model more "compute" by spreading the reasoning across multiple tokens. Each generated token is another clock cycle of thinking.
+
+So why would this hurt instruction following?
+
+Here's the finding: when you ask a model to follow a specific format ("return JSON with these fields" or "respond in exactly 3 bullet points" or "use only information from the provided context"), chain-of-thought prompting degrades performance. The model starts reasoning about the task instead of just doing the task. It overthinks. The intermediate steps introduce drift — the model wanders from the instruction while busy thinking through its reasoning. By the time it gets to the actual answer, it's lost track of the constraints.
+
+This is the same problem you'd have if you asked a human to simultaneously explain their reasoning AND follow a strict format. The cognitive load of "show your work" competes with the cognitive load of "follow these rules precisely." The model has a limited attention budget, and chain-of-thought consumes part of it, leaving less for instruction adherence.
+
+The practical implication is immediate. If you're building systems where the LLM needs to produce structured output — JSON parsing, function calling, data extraction, classification into fixed categories — you should probably not be using chain-of-thought. The extra reasoning tokens eat into the model's ability to follow your format spec. For pipeline stages where you need reliable structured output (which is most production AI systems), direct prompting outperforms chain-of-thought.
+
+But here's the nuance: chain-of-thought still wins on genuine reasoning tasks. Multi-step math. Logic puzzles. Complex analysis where the answer requires combining multiple facts. The paper doesn't say "CoT is useless." It says "CoT has a cost, and for tasks where the bottleneck isn't reasoning but instruction compliance, that cost exceeds the benefit."
+
+This maps to something you already know from building systems. There's no free lunch. Every technique has a tradeoff. Chain-of-thought trades instruction-following precision for reasoning depth. The question isn't "should I use CoT?" It's "is reasoning or precision more important for this specific task?"
+
+For your LLM council architecture, this has a direct design implication. Classification tasks (significance scoring, connection classification, format selection) should use direct prompting — no "think step by step." Writing tasks (briefing generation, conviction formation) should use chain-of-thought because the quality of reasoning matters more than format compliance. The council.json file in your system should encode this: some tasks get temperature 0.2 with no CoT, others get temperature 0.6 with explicit reasoning steps.
+
+Karpathy posted something related this week that connects to this. He said he's "never felt this much behind as a programmer" and that "the profession is being dramatically refactored." The bits contributed by humans are "increasingly sparse." He said he could be 10X more powerful if he properly strung together the available AI tools. This follows his earlier shift from using AI for coding to using it for knowledge management. The thread keeps building: the top practitioners aren't using AI harder — they're using it differently. Understanding when NOT to use a technique (like CoT for structured tasks) is part of that shift.
+
+The Linux Foundation announced it's taking Anthropic's Model Context Protocol under open governance. MCP hit 97 million installs in March. Every major AI provider now ships MCP-compatible tooling. This is the moment MCP stopped being Anthropic's protocol and became the industry's protocol. For builders, the design question changes from "should we support MCP?" to "what can we build assuming MCP exists everywhere?" Think of it like HTTP in the mid-90s — once the standard is universal, the interesting work moves up the stack.
+
+Google launched Gemini 3.1 Ultra with a 2 million token context window that works natively across text, image, audio, and video. The interesting part isn't the context length — it's the sandboxed Code Execution tool. The model can write code, run it, test it, and use the output in its reasoning. This is compute-augmented reasoning: instead of thinking in text (which is what chain-of-thought does), the model can think in code. For tasks like data analysis or math, running code is more reliable than reasoning in English. This connects directly to the CoT finding — code execution is a better scratchpad than English reasoning because it's deterministic.
+
+PwC released its 2026 AI Performance Study today. The headline: 75% of AI's economic gains are being captured by 20% of companies. The gap is widening, not closing. The leading companies focus AI on growth (new products, new markets). The laggards focus AI on productivity (doing the same things cheaper). Worth knowing but not surprising — this pattern matches every previous technology wave.
+
+If you read one thing today, find the actual paper on chain-of-thought and instruction following. Understanding when to use and when to avoid CoT is one of the highest-leverage pieces of knowledge for anyone building production AI systems. The paper tested 15 models across multiple datasets — the evidence is broad. Takes about 25 minutes to read the key sections.
