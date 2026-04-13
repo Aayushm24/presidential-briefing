@@ -20,6 +20,9 @@ breathtaking, extraordinary, unparalleled, remarkable, game-changing, game chang
 ## Category 1F: Cliche openers
 "Imagine if", "Picture this", "Let me share", "Here's what I learned", "I've been thinking a lot about", "Let's talk about", "Can we talk about", "Hot take:", "Unpopular opinion:", "I'll say it:"
 
+## Category 1H: LLM analogy patterns
+"It's like [analogy]. [Short dramatic sentence]." — This is the most common LLM tell in explanatory writing. Instead of "It's like X," turn the analogy into a direct question to the reader.
+
 ## Category 1G: Structural patterns
 - Em-dashes (use commas or periods instead)
 - More than 1 emoji per post

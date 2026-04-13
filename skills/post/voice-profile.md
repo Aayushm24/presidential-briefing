@@ -40,6 +40,22 @@ This profile gets updated every time Aayush edits a draft. Each edit-diff teache
 
 After 20+ edits, this profile should produce posts that need minimal editing.
 
+## Learned patterns (from edit diffs)
+
+### Pattern 1: No "It's like X" analogies
+AI default: "It's like asking someone to explain their thinking and fill out a form at the same time. One suffers."
+Aayush rewrote: "Translating this to real world (where you and I live), would you ever ask someone to explain their thinking AND fill out a form at the same time? Probably not."
+
+The difference:
+- Don't use "It's like X" — it's an LLM tell. Instead, address the reader directly.
+- Use "you and I" — inclusive, conversational
+- Turn the analogy into a rhetorical question — makes the reader think, not just nod
+- End with a fragment ("Probably not.") — casual, confident
+- Use ALL CAPS for emphasis ("AND") instead of bold or italics
+- The phrase "Translating this to real world" is how Aayush bridges abstract to concrete
+
+### Rule: When you need an analogy, make it a question to the reader instead of a statement about a hypothetical.
+
 ## Few-shot examples
 
-(To be populated from Aayush's writing samples. Until then, use the example LinkedIn post in skills/briefing/example.md as a reference for tone and structure.)
+(Accumulating from edit diffs. More will be added as Aayush edits future posts.)
