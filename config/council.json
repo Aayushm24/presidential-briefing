@@ -1,0 +1,103 @@
+{
+  "version": "1.0.0",
+  "proxy_base_url": "https://llmproxy.atlan.dev",
+  "description": "LLM Council routing. Models don't compete — they compose. Each task gets the best model for that specific job.",
+  "tasks": {
+    "source_discovery_twitter": {
+      "model": "grok-4-1",
+      "temperature": 0.3,
+      "why": "Only frontier model with native live X/Twitter data access",
+      "used_by": ["intake"]
+    },
+    "significance_scoring": {
+      "model": "claude-sonnet-4-6",
+      "temperature": 0.2,
+      "why": "Classification task. Sonnet is 5x cheaper than Opus and equally good at scoring against a rubric",
+      "used_by": ["filter"]
+    },
+    "brain_connection_classification": {
+      "model": "claude-sonnet-4-6",
+      "temperature": 0.2,
+      "why": "Classifying relationship types (BRIDGE/CONTRADICTS/EXTENDS/CONFIRMS) is structured work",
+      "used_by": ["brain"]
+    },
+    "conviction_formation": {
+      "model": "claude-opus-4-6",
+      "temperature": 0.7,
+      "why": "Forming original takes requires deep reasoning and nuance. Opus only.",
+      "used_by": ["briefing", "post"]
+    },
+    "briefing_writing": {
+      "model": "claude-opus-4-6",
+      "temperature": 0.6,
+      "why": "Long-form teaching with first-principles explanations. Opus for quality and depth.",
+      "used_by": ["briefing"]
+    },
+    "post_writing": {
+      "model": "claude-opus-4-6",
+      "temperature": 0.6,
+      "why": "Voice, nuance, originality. The post must sound like a human with opinions.",
+      "used_by": ["post"]
+    },
+    "format_selection": {
+      "model": "claude-sonnet-4-6",
+      "temperature": 0.2,
+      "why": "Routing decision based on story type. Structured, fast.",
+      "used_by": ["post"]
+    },
+    "hook_extraction": {
+      "model": "claude-sonnet-4-6",
+      "temperature": 0.3,
+      "why": "Finding the most surprising line in a draft. Pattern matching, not creative.",
+      "used_by": ["post"]
+    },
+    "review_structure": {
+      "model": "claude-sonnet-4-6",
+      "temperature": 0.2,
+      "why": "Structural QA: hook strength, flow, format compliance",
+      "used_by": ["review"]
+    },
+    "review_fact_check": {
+      "model": "gemini-3-1-pro-preview",
+      "temperature": 0.1,
+      "why": "Google Search grounding for real-time claim verification",
+      "used_by": ["review"]
+    },
+    "review_concept_accuracy": {
+      "model": "claude-opus-4-6",
+      "temperature": 0.3,
+      "why": "Are the technical explanations correct? Would an ML engineer find errors?",
+      "used_by": ["review"]
+    },
+    "review_teaching_quality": {
+      "model": "claude-sonnet-4-6",
+      "temperature": 0.3,
+      "why": "Could someone with no ML background follow this? Are there logic leaps?",
+      "used_by": ["review"]
+    },
+    "review_voice_match": {
+      "model": "claude-opus-4-6",
+      "temperature": 0.3,
+      "why": "Comparing draft against voice profile requires nuanced judgment",
+      "used_by": ["review"]
+    },
+    "review_adversarial": {
+      "model": "grok-4-1",
+      "temperature": 0.5,
+      "why": "Is this take actually novel? Search X for similar takes. Lowest hallucination rate (4.22%).",
+      "used_by": ["review"]
+    },
+    "review_freshness": {
+      "model": "grok-4-1",
+      "temperature": 0.3,
+      "why": "Is this news actually new? Has someone made this exact connection already?",
+      "used_by": ["review"]
+    },
+    "scoring_synthesis": {
+      "model": "claude-opus-4-6",
+      "temperature": 0.2,
+      "why": "Synthesizing all review outputs into a final confidence score",
+      "used_by": ["review"]
+    }
+  }
+}

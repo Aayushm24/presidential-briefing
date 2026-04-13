@@ -1,0 +1,44 @@
+name,url,feed_url,type,access_method,what_they_share
+Andrej Karpathy (blog),https://karpathy.github.io,https://karpathy.github.io/feed.xml,blog,rss,Deep learning tutorials and neural net architecture posts
+Andrej Karpathy (X),https://x.com/karpathy,,x_account,grok,Deep technical LLM explanations and vibe coding and agents
+Sebastian Raschka,https://magazine.sebastianraschka.com,https://magazine.sebastianraschka.com/feed,newsletter,rss,LLM paper breakdowns and PyTorch code and ML engineering
+Sebastian Raschka (X),https://x.com/rasbt,,x_account,grok,Rigorous ML research commentary
+Nathan Lambert,https://www.interconnects.ai,https://www.interconnects.ai/feed,newsletter,rss,RLHF and alignment and open-source LLM analysis
+Nathan Lambert (X),https://x.com/natolambert,,x_account,grok,Thoughtful AI research takes
+Simon Willison,https://simonwillison.net,https://simonwillison.net/atom/everything/,blog,rss,Practical LLM tools and prompt engineering and open source AI
+Simon Willison (X),https://x.com/simonw,,x_account,grok,LLM tool discoveries and quick reactions
+Ethan Mollick,https://www.oneusefulthing.org,https://www.oneusefulthing.org/feed,newsletter,rss,AI experiments for work and education and creativity
+Ethan Mollick (X),https://x.com/emollick,,x_account,grok,Hands-on AI experiment results
+Garry Tan (X),https://x.com/garrytan,,x_account,grok,AI agents and gbrain and startup theses and YC platform shifts
+Swyx / Shawn Wang,https://www.latent.space,https://www.latent.space/feed,newsletter,rss,AI engineering and agents and devtools and builder interviews
+Swyx (X),https://x.com/swyx,,x_account,grok,AI engineering hot takes and industry analysis
+Tomasz Tunguz (X),https://x.com/ttunguz,,x_account,grok,Data-driven VC insights and AI startup metrics
+Lilian Weng,https://lilianweng.github.io,https://lilianweng.github.io/index.xml,blog,rss,Deep dives on agents and transformers and RL and diffusion (OpenAI researcher)
+Chip Huyen,https://huyenchip.com,https://huyenchip.com/feed.xml,blog,rss,ML systems design and LLMOps and AI product development
+Eugene Yan,https://eugeneyan.com,https://eugeneyan.com/rss/,blog,rss,Applied ML and LLM patterns and production systems
+Hamel Husain,https://hamel.dev,https://hamel.dev/index.xml,blog,rss,LLM fine-tuning and evals and practical ML engineering
+Jay Alammar,https://newsletter.languagemodels.co,https://newsletter.languagemodels.co/feed,newsletter,rss,Illustrated AI explainers and visual transformer breakdowns
+Gary Marcus,https://garymarcus.substack.com,https://garymarcus.substack.com/feed,newsletter,rss,AI criticism and AGI skepticism and safety arguments
+Gwern Branwen,https://gwern.substack.com,https://gwern.substack.com/feed,newsletter,rss,AI scaling research and long-form analysis and forecasting
+Dwarkesh Patel,https://www.dwarkeshpatel.com,https://www.dwarkeshpatel.com/feed,blog,rss,Deep interviews with AI researchers and scaling debates
+George Hotz,https://geohot.github.io/blog,https://geohot.github.io/blog/feed.xml,blog,rss,tinygrad and AI hardware and open-source compute
+OpenAI,https://openai.com/news,https://openai.com/news/rss.xml,lab_blog,rss,Model releases and safety updates and product announcements
+Google DeepMind,https://deepmind.google/blog,https://deepmind.google/blog/rss.xml,lab_blog,rss,Research breakthroughs and Gemini and AlphaFold
+Meta AI / FAIR,https://research.facebook.com,https://research.facebook.com/feed/,lab_blog,rss,Llama releases and open-source model research
+Microsoft Research,https://www.microsoft.com/en-us/research,https://www.microsoft.com/en-us/research/feed/,lab_blog,rss,Phi models and research papers and AI frameworks
+Anthropic,https://www.anthropic.com/research,https://raw.githubusercontent.com/taobojlen/anthropic-rss-feed/main/anthropic_news_rss.xml,lab_blog,rss,Safety and interpretability and Claude engineering
+Cohere,https://cohere.com/blog,https://cohere.com/blog/rss,lab_blog,rss,Enterprise LLM and RAG and embeddings
+BAIR (Berkeley AI),https://bair.berkeley.edu/blog,https://bair.berkeley.edu/blog/feed.xml,lab_blog,rss,Academic AI research and theory and robotics
+Hugging Face,https://huggingface.co/blog,https://huggingface.co/blog/feed.xml,lab_blog,rss,Open-source model releases and transformers library and tutorials
+AI Daily Brief,https://aidailybrief.beehiiv.com,https://aidailybrief.beehiiv.com/feed,newsletter,rss,Daily high-signal AI news and model releases
+Ben's Bites,https://www.bensbites.com,https://www.bensbites.com/feed,newsletter,rss,Daily AI tools and startup summaries with business angle
+The Rundown AI,https://www.therundown.ai,https://rss.beehiiv.com/feeds/2R3C6Bt5wj.xml,newsletter,rss,Daily 5-min AI digest for 2M plus readers
+Import AI (Jack Clark),https://importai.substack.com,https://importai.substack.com/feed,newsletter,rss,Weekly AI policy and research by Anthropic co-founder
+Last Week in AI,https://lastweekin.ai,https://lastweekin.ai/feed,newsletter,rss,Weekly roundup of most important AI news
+The Gradient,https://thegradient.pub,https://thegradient.pub/rss/,newsletter,rss,Long-form AI research analysis and researcher interviews
+ArXiv cs.AI,https://arxiv.org/list/cs.AI/recent,https://rss.arxiv.org/rss/cs.AI,aggregator,rss,New AI papers daily
+ArXiv cs.CL,https://arxiv.org/list/cs.CL/recent,https://rss.arxiv.org/rss/cs.CL,aggregator,rss,New NLP and LLM papers daily
+ArXiv cs.LG,https://arxiv.org/list/cs.LG/recent,https://rss.arxiv.org/rss/cs.LG,aggregator,rss,New ML papers daily
+HN AI-filtered,https://news.ycombinator.com,https://hnrss.org/newest?q=AI+machine+learning,aggregator,rss,HN posts filtered for AI and ML
+GitHub Trending Python,https://github.com/trending/python,https://mshibanami.github.io/GitHubTrendingRSS/daily/python.xml,aggregator,rss,Trending Python repos daily
+Mistral,https://mistral.ai/news,,lab_blog,scrape,Open-weight model releases and benchmarks

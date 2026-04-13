@@ -1,0 +1,22 @@
+# Environment
+.env
+.env.local
+
+# Brain data (managed by gbrain CLI)
+brain/
+
+# Daily workspace artifacts (large JSON files)
+workspace/*/raw-intake.json
+workspace/*/scored-items.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
