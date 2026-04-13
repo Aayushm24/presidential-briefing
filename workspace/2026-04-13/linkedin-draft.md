@@ -1,13 +1,42 @@
-"Think step by step" is making your AI system worse.
+i've been sabotaging my own AI pipelines for months.
 
-New research tested chain-of-thought prompting across 15 models. GPT, Claude, LLaMA, DeepSeek. The finding: CoT consistently degrades instruction-following accuracy. Not on some models. Nearly all of them.
+didn't even know it.
 
-Everyone teaches "add reasoning steps to improve output." For math and logic, that's still true. But for the tasks most production systems actually need — structured output, JSON parsing, classification, format compliance — chain-of-thought actively hurts.
+every prompt i wrote started with "think step by step." it was muscle memory. the internet said so. every tutorial agreed.
 
-The reason is simple. The model has a fixed attention budget. When you ask it to "show its work," those reasoning tokens consume attention that would otherwise go toward following your format spec. Translating this to real world (where you and I live), would you ever ask someone to explain their thinking AND fill out a form at the same time? Probably not.
+then i read a paper that tested chain-of-thought across 15 models.
 
-I've been building multi-model pipelines where some tasks need reasoning and others need precision. This paper confirmed something I suspected: your scoring and classification tasks should use direct prompting. Your writing and synthesis tasks should use CoT. Same system, different technique per task.
+the finding broke my brain:
 
-The 10X AI engineers won't be the ones who memorize every technique. They'll be the ones who know which technique to skip.
+CoT consistently degrades instruction-following accuracy.
 
-When's the last time you removed "think step by step" from a prompt and got better results?
+not on edge cases. across nearly every model tested. GPT, Claude, LLaMA, DeepSeek.
+
+for math and logic? still helps.
+
+but for the tasks most production systems actually need?
+
+- structured output
+- JSON parsing
+- classification
+- format compliance
+
+chain-of-thought actively hurts.
+
+the reason is stupidly simple.
+
+models have a fixed attention budget. when you force them to "show their work," those reasoning tokens eat the attention that should go toward following your format spec.
+
+translating this to real world (where you and i live) — would you ever ask someone to explain their thinking AND fill out a form at the same time?
+
+probably not.
+
+i've been building multi-model pipelines at work. some tasks need reasoning. others need precision.
+
+the moment i stopped treating "think step by step" as a universal default, my outputs got noticeably better.
+
+the 10X AI engineers won't memorize every technique.
+
+they'll know which technique to skip.
+
+what's one "best practice" you stopped using and got better results?

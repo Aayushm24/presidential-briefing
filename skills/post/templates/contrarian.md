@@ -1,33 +1,42 @@
-# Template: Contrarian
+# Template: Contrarian Truth
 
-Use when the lead story challenges something we've believed or written before. Requires a CONTRADICTS brain connection.
+Challenge what everyone believes. Use evidence, not opinion.
 
-## Structure
+## Formula
 
 ```
-[Hook: direct claim that challenges consensus — under 80 chars]
+[the consensus belief, stated simply].
 
-[The consensus view — what most people believe, stated fairly.
- 1-2 sentences. Don't strawman it.]
+[acknowledge you believed it too — "i know. i did it too."]
 
-[The contradiction — what new evidence says. Be specific.
- Named source, exact data point, dated event.]
+[the evidence against it — specific research, numbers, named sources.
+ not "some experts say" but "15 models tested. all of them."]
 
-[Why the consensus was wrong — not "people are dumb" but 
- "the consensus was based on X assumption, and Y just proved 
- that assumption doesn't hold." This is where brain connections 
- shine — connect past position to new evidence.]
+the finding?
+[state it in one punchy line]
 
-[What this means going forward — 1-2 sentences.
- Specific to practitioners, not generic "the future."]
+[brief explanation of WHY it's wrong.
+ one idea per line.
+ make the technical concept accessible.
+ use questions to the reader instead of "it's like X" analogies.]
 
-[Closing question — binary choice that makes the reader 
- examine their own assumption.]
+[what to do instead — specific and actionable.
+ from real experience, not theory.]
+
+[the reframe — one memorable line that sticks.
+ "the 10X engineers won't memorize every technique.
+  they'll know which technique to skip."]
+
+[closing question — makes reader examine their own assumption]
 ```
 
-## Constraints
+## Rules
 
-- Total: 900-1500 characters
 - Must name the specific consensus being challenged
-- Must cite specific evidence, not just opinion
-- Tone: respectful disagreement, not "hot take" energy
+- Must cite specific evidence (numbers, sources, dates)
+- Tone: respectful disagreement, not hot-take energy
+- Include a line that says "i did this too" — solidarity, not superiority
+- Dashes (-) not bullets
+- lowercase i throughout
+- One idea per line
+- Short/medium/long rhythm

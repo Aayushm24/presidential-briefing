@@ -1,58 +1,73 @@
 # Format Selector
 
-Based on the story type and brain connections, select the right post format.
+Based on the story type, brain connections, and Aayush's performance data, select the right post format.
 
 ## Routing logic
 
 Check in this order. First match wins.
 
 ### 1. Brain finds CONTRADICTS connection
-Format: **contrarian**
+Format: **contrarian-truth**
 Template: `templates/contrarian.md`
-When: The lead story challenges something we've written or believed before.
-Hook style: "[Consensus view] is wrong. Here's why."
+When: The lead story challenges something we've believed or written before.
+Hook style: Pattern A (Contrarian Truth)
+Example: "think step by step" is making your AI worse.
 
-### 2. Brain finds BRIDGE connection
+### 2. Personal experience with the topic exists
+Format: **personal-discovery**
+Template: `templates/personal-discovery.md`
+When: Aayush has built something related, or the topic connects to his real work.
+Hook style: Pattern B (Identity/Confession)
+Example: "i've been sabotaging my own AI pipelines for months."
+Note: This is Aayush's top-performing style. Vulnerability + education.
+
+### 3. Brain finds BRIDGE connection
 Format: **dot-connecting**
 Template: `templates/dot-connecting.md`
 When: The lead story connects two previously unrelated topics.
-Hook style: "Three things happened this week that nobody is connecting."
+Hook style: Two facts that don't fit together
+Example: "Cursor raised $900M. Copilot loses money on every user."
 
-### 3. Significance score = 9-10 (major news)
+### 4. Topic lends itself to humor
+Format: **absurd-mirror**
+Template: `templates/absurd-mirror.md`
+When: The topic has an absurd angle that reveals truth through comedy.
+Hook style: Pattern C (Absurd Comparison)
+Example: "the term ARR is getting redefined. it used to mean annual recurring revenue."
+
+### 5. Significance score = 9-10 (major news)
 Format: **news-take**
 Template: `templates/news-take.md`
 When: Something genuinely big happened and we have an original angle.
-Hook style: "[Company] just [did thing]. Everyone is focused on the wrong part."
+Hook style: Pattern E (Specific Number + Surprise) or Pattern F (Direct Challenge)
 
-### 4. Lead story extends a thread we've posted about before
+### 6. Lead story extends a thread we've posted about before
 Format: **evolution**
 Template: `templates/evolution.md`
-When: We wrote about this topic in a past post. Our thinking has evolved.
-Hook style: "I wrote about [X] in [month]. I was wrong about one thing."
+When: Our thinking has evolved on a topic.
+Hook style: Pattern D (Time Bomb)
 
-### 5. No single story dominates (all scores 5-7)
+### 7. No single story dominates (all scores 5-7)
 Format: **curation**
 Template: `templates/curation.md`
 When: Multiple interesting items, none dominant.
-Hook style: "Three things happened in AI this week that are worth your time."
 
-### 6. Brain finds a common misconception
-Format: **mistakes**
+### 8. Brain finds a common misconception
+Format: **hidden-truth**
 Template: `templates/mistakes.md`
-When: We can identify a specific thing people are getting wrong.
-Hook style: "Most people think [X]. The data says otherwise."
+When: We can identify something people are getting wrong.
+Hook style: Pattern A (Contrarian Truth)
 
-### 7. Default
-Format: **news-take**
-Template: `templates/news-take.md`
-When: None of the above match.
+### 9. Default
+Format: **personal-discovery**
+Why default to this: vulnerability + education is Aayush's highest-performing combination. When in doubt, make it personal.
 
 ## Output
 
 ```json
 {
-  "format": "contrarian",
-  "template": "templates/contrarian.md",
-  "reason": "Brain found CONTRADICTS connection between lead story and 'ai-coding-assistants' page"
+  "format": "personal-discovery",
+  "template": "templates/personal-discovery.md",
+  "reason": "Aayush has direct experience building multi-model pipelines where CoT was the default. Personal discovery angle will outperform pure contrarian."
 }
 ```

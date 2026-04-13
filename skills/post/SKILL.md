@@ -59,7 +59,7 @@ Write a LinkedIn post using:
 - Brain connections: {connections}
 
 Rules:
-- Hook must fit in 80 characters (LinkedIn mobile fold)
+- Hook must fit in 70 characters (one line on LinkedIn mobile)
 - Total post: 900-1500 characters
 - Active voice only
 - No words from the kill list

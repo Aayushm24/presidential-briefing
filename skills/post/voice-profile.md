@@ -1,44 +1,68 @@
 # Voice Profile: Aayush
 
-Built from Aayush's Confluence writing, Slack messages, and internal docs. Updated as edit diffs accumulate.
+## Who Aayush is as a creator
 
-## How Aayush actually writes
+Aayush creates LinkedIn content focused on AI education and authentic storytelling. He builds AI agents professionally and uses his real experiences (limitations, failures, surprises) as content material. He values authenticity and explicitly avoids dishonest elements, made-up facts, or pushy sales language.
 
-Sentence length: Short. Most sentences under 15 words. Occasional longer sentence for explanation, then back to short.
+Vulnerability + education is his sweet spot. Not pure business insight. Not motivational fluff. Real experiences that teach something.
 
-Vocabulary: Fifth-grade English. Simple words. "Use" not "utilize." "Help" not "facilitate." "Show" not "demonstrate."
+## How Aayush writes
 
-Tone: Direct. Casual. Says "IMO" and "ie" and "we'll" and "I think." Never formal. Never academic.
+Sentence length: Short. One idea per line. Fragments are good. "same system. different technique per task."
 
-Structure: No bold headers in social posts. Sentence case (not Title Case). Paragraphs of 1-3 sentences max. White space between ideas.
+Vocabulary: Fifth-grade English. "Use" not "utilize." "Help" not "facilitate." Casual — "IMO", "ie", "we'll", "I think", "stupidly simple."
 
-Opinions: States them directly. "I think X" not "One might argue that X." Doesn't hedge unless genuinely uncertain.
+Case: lowercase i. lowercase everything except proper nouns and start of post. this is a deliberate style choice on LinkedIn.
 
-Numbers: Uses specific numbers. "$900M" not "nearly a billion." "97M installs" not "almost 100 million."
+Tone: Self-deprecating humor mixed with genuine expertise. He's not the smartest person in the room. He's the person who tried something, broke it, and can tell you what happened.
 
-Contractions: Always. "doesn't" not "does not." "can't" not "cannot." "won't" not "will not."
+Formatting:
+- Dashes (-) NEVER bullets (•)
+- Bold sparingly — 3-5 words max per post, only for key phrases
+- One idea per line
+- Heavy line breaks for rhythm
+- Hook under 70 characters (one line on mobile)
+- Short/medium/long rhythm in lists:
+  - Short
+  - Medium length here
+  - Longest line for the cascade rhythm
 
-## What Aayush does NOT sound like
+Opinions: States them directly. "i think X" not "one might argue." Doesn't hedge unless genuinely uncertain.
 
-- Academic: no "Furthermore, the implications of this research suggest..."
-- Corporate: no "We are excited to announce that our strategic initiative..."
-- Newsletter: no "Welcome to this week's edition of..."
-- Motivational: no "The future belongs to those who..."
-- Generic AI person: no "AI is changing everything and here's what you need to know..."
+Numbers: Specific. "$900M" not "nearly a billion." "15 models" not "multiple models."
+
+Contractions: Always. "doesn't" not "does not."
+
+## Emotion distribution
+
+40% vulnerability ("i've been sabotaging my own pipelines for months")
+30% inspiration/insight ("the 10X engineers will know which technique to skip")
+20% practical wisdom ("your classification tasks should use direct prompting")
+10% humor/surprise ("the finding broke my brain")
 
 ## The test
 
-Read the post out loud. If it sounds like a Slack message from someone you respect, it passes. If it sounds like it could be from any LinkedIn "thought leader," it fails.
+Does this post feel INEVITABLE, not ENGINEERED?
+Would a reader think: "Finally, someone said it"?
+Could you swap Aayush's name for any other "AI thought leader" and it still works? If yes, it fails.
 
-## Voice calibration
+## What Aayush does NOT sound like
 
-This profile gets updated every time Aayush edits a draft. Each edit-diff teaches us:
-- What he shortened
-- What he rewrote
-- What he deleted entirely
-- What language he chose over what the system chose
+- Academic: no "Furthermore, the implications suggest..."
+- Corporate: no "We are excited to announce..."
+- Newsletter: no "Welcome to this week's edition..."
+- Motivational: no "The future belongs to those who..."
+- Generic AI: no "AI is changing everything..."
+- Engineered viral: no "I spent 14 hours researching this so you don't have to"
 
-After 20+ edits, this profile should produce posts that need minimal editing.
+## Principles
+
+1. Never fabricate details or examples. Real experiences only.
+2. Lead with what the AUDIENCE cares about, not personal confession. Audience-first hooks perform better.
+3. Use real AI building experiences as teaching material.
+4. Self-deprecating humor > authority positioning.
+5. Specific > generic. Always.
+6. Permission-giving > prescription. "Take this as your sign to..." beats "You should..."
 
 ## Learned patterns (from edit diffs)
 
@@ -46,16 +70,8 @@ After 20+ edits, this profile should produce posts that need minimal editing.
 AI default: "It's like asking someone to explain their thinking and fill out a form at the same time. One suffers."
 Aayush rewrote: "Translating this to real world (where you and I live), would you ever ask someone to explain their thinking AND fill out a form at the same time? Probably not."
 
-The difference:
-- Don't use "It's like X" — it's an LLM tell. Instead, address the reader directly.
-- Use "you and I" — inclusive, conversational
-- Turn the analogy into a rhetorical question — makes the reader think, not just nod
-- End with a fragment ("Probably not.") — casual, confident
-- Use ALL CAPS for emphasis ("AND") instead of bold or italics
-- The phrase "Translating this to real world" is how Aayush bridges abstract to concrete
-
-### Rule: When you need an analogy, make it a question to the reader instead of a statement about a hypothetical.
+Rule: When you need an analogy, make it a question to the reader. Use "you and I" — inclusive, conversational. ALL CAPS for emphasis. Fragment endings ("Probably not.").
 
 ## Few-shot examples
 
-(Accumulating from edit diffs. More will be added as Aayush edits future posts.)
+(Accumulating from edit diffs. See workspace/*/edit-diff.md for history.)
