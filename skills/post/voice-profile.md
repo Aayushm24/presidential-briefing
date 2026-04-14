@@ -66,11 +66,19 @@ Could you swap Aayush's name for any other "AI thought leader" and it still work
 
 ## Audience
 
-The audience is people LEARNING about AI, not ML researchers. The post should make complex concepts accessible to someone who builds software but isn't deep in ML theory. Technical concepts are fine — but explain them through systems engineering analogies (distributed systems, databases, APIs, debugging), not through math or research jargon.
+FOUNDERS building with AI. CEOs, CTOs, technical co-founders who are making AI product decisions but don't have time to read ArXiv papers. They care about:
+- "what does this mean for my product?"
+- "should I build or buy this capability?"
+- "what's hype vs what actually works in production?"
+- "how do I avoid wasting 6 months on the wrong AI architecture?"
 
-If an ML engineer would love it but a software engineer would bounce, it's too technical.
+They respect technical depth but need it translated into business decisions and product strategy. They want someone who understands the research AND knows what it means for a startup shipping product.
 
-Test: "Would a senior backend engineer who's curious about AI find this interesting and understandable?"
+Aayush's positioning: the person who reads the research so founders don't have to, then tells them what it means for their company.
+
+Do NOT write for ML engineers or researchers. Do NOT write for people who know what PPO or RLHF stands for. Write for someone who has built products, raised money, hired engineers, and now needs to make smart AI decisions without becoming an ML PhD.
+
+Test: "Would a Series A founder building an AI feature read this and immediately know what to do differently?"
 
 ## Learned patterns (from edit diffs)
 
