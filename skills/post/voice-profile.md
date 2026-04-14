@@ -64,7 +64,25 @@ Could you swap Aayush's name for any other "AI thought leader" and it still work
 5. Specific > generic. Always.
 6. Permission-giving > prescription. "Take this as your sign to..." beats "You should..."
 
+## Audience
+
+The audience is people LEARNING about AI, not ML researchers. The post should make complex concepts accessible to someone who builds software but isn't deep in ML theory. Technical concepts are fine — but explain them through systems engineering analogies (distributed systems, databases, APIs, debugging), not through math or research jargon.
+
+If an ML engineer would love it but a software engineer would bounce, it's too technical.
+
+Test: "Would a senior backend engineer who's curious about AI find this interesting and understandable?"
+
 ## Learned patterns (from edit diffs)
+
+### Pattern 2: Audience-first, not research-first
+AI default: "SPPO — Self-Play Preference Optimization — addresses core PPO limitations for LLM reasoning alignment with sequence-level credit assignment"
+Aayush rewrote: "have you ever fixed a bug by deleting the monitoring that was creating false alerts? that's what one of the most interesting directions in AI training right now actually looks like."
+
+The difference:
+- Open with something the audience has EXPERIENCED, not the paper title
+- The ML concept comes AFTER the hook, explained through familiar systems analogies
+- "credit assignment" becomes "tracing a bug through twelve services"
+- The insight is the PRINCIPLE (subtraction > addition), not the technique (SPPO vs PPO)
 
 ### Pattern 1: No "It's like X" analogies
 AI default: "It's like asking someone to explain their thinking and fill out a form at the same time. One suffers."
