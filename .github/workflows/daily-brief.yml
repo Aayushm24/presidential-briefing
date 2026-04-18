@@ -386,6 +386,8 @@ jobs:
 
           # --- Append history + mark shipped ---
           if [ "$DRY_RUN" != "1" ]; then
+            mkdir -p history
+            touch history/published.jsonl
             jq -n --arg date "$DATE" --arg title "$LEAD_TITLE" \
               '{date:$date, lead_title:$title, status:"shipped"}' \
               >> history/published.jsonl
