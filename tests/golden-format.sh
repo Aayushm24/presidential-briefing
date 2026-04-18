@@ -32,8 +32,10 @@ check_brief() {
   local sources=$(awk '/^## Sources/,0' "$file" | grep -cE '^[0-9]+\.' || true)
   [ "$sources" -ge 3 ] || errors+=("sources_count=$sources (expect >=3)")
 
-  # No em dashes (U+2014)
-  if grep -q $'\u2014' "$file"; then
+  # No em dashes (U+2014) — use UTF-8 byte sequence for portability across bash 3.2 + 4+
+  local em_dash
+  em_dash=$(printf '\xe2\x80\x94')
+  if grep -q "$em_dash" "$file"; then
     errors+=("em_dash_found")
   fi
 

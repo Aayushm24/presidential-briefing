@@ -54,8 +54,10 @@ check_file() {
   content=$(cat "$file")
   local errors=()
 
-  # Em dashes (U+2014)
-  if echo "$content" | grep -q $'\u2014'; then
+  # Em dashes (U+2014) — use UTF-8 byte sequence for portability across bash 3.2 + 4+
+  local em_dash
+  em_dash=$(printf '\xe2\x80\x94')
+  if echo "$content" | grep -q "$em_dash"; then
     errors+=("em_dash found (U+2014 not allowed)")
   fi
 
