@@ -263,44 +263,124 @@ jobs:
           mkdir -p workspace/$TODAY
           echo "quiet_day" > workspace/$TODAY/.status
 
-      - name: Run council + publish via Claude Code
+      # LLM step: council attack + revise + clean + hard gate ONLY.
+      # Delivery (commit/email/Slack) moved to a plain bash step below to avoid
+      # sharing the 600s Claude Code budget with deterministic I/O work.
+      - name: Run council + clean + gates via Claude Code
         if: needs.intake.outputs.quiet_day != 'true'
         uses: anthropics/claude-code-base-action@v0.0.63
         with:
           prompt: |
-            Execute the ship phase. brief.md + posts.md + posts.json already exist in workspace/${{ needs.intake.outputs.today }}/.
-            Follow these skills in order:
-              1. .claude/skills/council/attack/SKILL.md   → council-notes.md (deterministic regex pre-flight + LLM passes)
-              2. If council verdict is REVISE AND iter < 1: .claude/skills/council/revise/SKILL.md (max 1 iteration to fit budget)
-              3. .claude/skills/publish/SKILL.md           → commits, emails, Slack
+            Run council + clean + quality gates. brief.md + posts.md + posts.json
+            already exist in workspace/${{ needs.intake.outputs.today }}/.
+
+            1. Follow .claude/skills/council/attack/SKILL.md — writes council-notes.md
+            2. If council verdict is REVISE AND iter<1: follow .claude/skills/council/revise/SKILL.md
+            3. Run: python3 scripts/clean_text.py workspace/${{ needs.intake.outputs.today }}/brief.md workspace/${{ needs.intake.outputs.today }}/posts.md
+            4. Run: ./tests/kill-list-regex.sh workspace/${{ needs.intake.outputs.today }}/brief.md
+            5. Run: ./tests/kill-list-regex.sh workspace/${{ needs.intake.outputs.today }}/posts.md
+            6. Run: ./tests/golden-format.sh workspace/${{ needs.intake.outputs.today }}/brief.md
+
+            STOP after step 6. DO NOT commit, email, or Slack — those happen in the next workflow step.
+
+            If any gate (4, 5, 6) fails, write `rejected-kill-list` or `rejected-format` to workspace/TODAY/.status and exit 1.
+            If all pass, write `gates-ok` to workspace/TODAY/.status.
 
             TODAY=${{ needs.intake.outputs.today }}
-            DRY_RUN=${{ needs.intake.outputs.dry_run }}
-
-            Council MUST run real LLM passes. Never mock even in DRY_RUN — the safety net is always live.
+            Council MUST run real LLM passes. Never mock.
           settings: .claude/settings.json
           anthropic_api_key: ${{ secrets.ATLAN_LLM_KEY }}
-          claude_args: "--max-turns 60 --dangerously-skip-permissions"
+          claude_args: "--max-turns 50 --dangerously-skip-permissions"
         env:
           ANTHROPIC_AUTH_TOKEN: ${{ secrets.ATLAN_LLM_KEY }}
           ANTHROPIC_BASE_URL: https://llmproxy.atlan.dev
           ANTHROPIC_MODEL: claude-sonnet-4-6
           ANTHROPIC_SMALL_FAST_MODEL: claude-sonnet-4-6
           ATLAN_LLM_KEY: ${{ secrets.ATLAN_LLM_KEY }}
-          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
-          N8N_SLACK_WEBHOOK_URL: ${{ secrets.N8N_SLACK_WEBHOOK_URL }}
-          READWISE_EMAIL: aayushm24@library.readwise.io
-          GMAIL_FROM_ADDRESS: ${{ secrets.GMAIL_FROM_ADDRESS }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
-          GITHUB_REPO: Aayushm24/presidential-briefing
           TODAY: ${{ needs.intake.outputs.today }}
           DRY_RUN: ${{ needs.intake.outputs.dry_run }}
+
+      # Deterministic delivery — plain bash. No LLM involvement.
+      - name: Deliver (commit + email + Slack)
+        if: needs.intake.outputs.quiet_day != 'true'
+        env:
+          DATE: ${{ needs.intake.outputs.today }}
+          DRY_RUN: ${{ needs.intake.outputs.dry_run }}
+          GMAIL_FROM_ADDRESS: ${{ secrets.GMAIL_FROM_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          READWISE_EMAIL: aayushm24@library.readwise.io
+          N8N_SLACK_WEBHOOK_URL: ${{ secrets.N8N_SLACK_WEBHOOK_URL }}
+          GITHUB_REPO: Aayushm24/presidential-briefing
+        run: |
+          set -euo pipefail
+          WS="workspace/${DATE}"
+
+          # Double-check gates — Claude Code's prior step must have written gates-ok
+          STATUS=$(cat "${WS}/.status" 2>/dev/null || echo "unknown")
+          if [ "$STATUS" != "gates-ok" ]; then
+            echo "::error::status is '$STATUS', not 'gates-ok'. Aborting delivery."
+            exit 1
+          fi
+
+          LEAD_TITLE=$(head -1 "${WS}/brief.md" | sed 's/^# //' | head -c 200)
+
+          # --- Commit to GitHub ---
+          if [ "$DRY_RUN" == "1" ]; then
+            echo "[DRY_RUN] would commit ${WS}/brief.md + posts.md to main"
+          else
+            git add "${WS}/brief.md" "${WS}/posts.md" "${WS}/posts.json" 2>/dev/null || true
+            [ -f "${WS}/council-notes.md" ] && git add "${WS}/council-notes.md"
+            [ -f history/published.jsonl ] && git add history/published.jsonl
+            git commit -m "daily brief: ${DATE} — ${LEAD_TITLE}"
+            git push origin main
+            echo "committed to main"
+          fi
+
+          # --- Email brief to Readwise ---
+          SUBJECT="PDB — ${DATE}: $(echo "$LEAD_TITLE" | head -c 60)"
+          if [ "$DRY_RUN" == "1" ]; then
+            echo "[DRY_RUN] would email ${READWISE_EMAIL}: ${SUBJECT}"
+          else
+            python3 scripts/send_gmail.py "${READWISE_EMAIL}" "${SUBJECT}" "$(cat ${WS}/brief.md)"
+          fi
+
+          # --- Slack via n8n webhook ---
+          GITHUB_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/posts.md"
+          POSTS_JSON=$(jq -c '[.options[] | .post]' "${WS}/posts.json")
+          PAYLOAD=$(jq -n \
+            --arg url "$GITHUB_URL" \
+            --argjson posts "$POSTS_JSON" \
+            '{type:"daily_brief", briefing_url:$url, posts:$posts}')
+
+          if [ "$DRY_RUN" == "1" ]; then
+            echo "[DRY_RUN] would POST to n8n: $(echo "$PAYLOAD" | jq -c .)"
+          else
+            HTTP=$(curl -sS -o /tmp/slack-resp.txt -w "%{http_code}" \
+              -X POST "${N8N_SLACK_WEBHOOK_URL}" \
+              -H "Content-Type: application/json" \
+              -d "$PAYLOAD")
+            echo "n8n webhook HTTP $HTTP"
+            cat /tmp/slack-resp.txt
+            [ "$HTTP" == "200" ] || echo "::warning::n8n webhook returned $HTTP (non-fatal)"
+          fi
+
+          # --- Append history + mark shipped ---
+          if [ "$DRY_RUN" != "1" ]; then
+            jq -n --arg date "$DATE" --arg title "$LEAD_TITLE" \
+              '{date:$date, lead_title:$title, status:"shipped"}' \
+              >> history/published.jsonl
+            git add history/published.jsonl
+            git commit -m "history: shipped ${DATE}" --allow-empty || true
+            git push origin main
+          fi
+          echo "shipped" > "${WS}/.status"
+          echo "DELIVERY COMPLETE"
 
       - name: Path allowlist enforcement (live runs only)
         if: needs.intake.outputs.dry_run == '0' && needs.intake.outputs.quiet_day != 'true'
         run: |
-          DIFF_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || git diff --cached --name-only)
+          DIFF_FILES=$(git log --name-only -1 --format= HEAD 2>/dev/null || true)
           FAILED=0
           while IFS= read -r FILE; do
             [ -z "$FILE" ] && continue
@@ -318,8 +398,7 @@ jobs:
             esac
           done <<< "$DIFF_FILES"
           if [ $FAILED -eq 1 ]; then
-            echo "::error::Rolling back unauthorized changes"
-            git reset --hard HEAD~1
+            echo "::error::Unauthorized paths in last commit — manual revert required"
             exit 1
           fi
 
