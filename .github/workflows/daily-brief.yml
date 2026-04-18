@@ -23,11 +23,27 @@ concurrency:
   group: daily-brief-${{ github.event.inputs.today_override || github.run_id }}
   cancel-in-progress: false
 
+# Pipeline split into 3 sequential jobs so each Claude Code invocation stays
+# under the action's 600-sec internal cap. State flows between jobs via the
+# workspace-<date> artifact.
+#
+#   intake  → scan + score + theme-detect + brain-connect   (~4-5 min)
+#   write   → write-briefing + write-posts                   (~5-6 min)
+#   ship    → council/attack + publish                       (~3-5 min)
+
 jobs:
-  brief:
-    name: Run daily pipeline
+  # ============================================================
+  # JOB 1: INTAKE — scan, score, theme-detect, brain-connect
+  # ============================================================
+  intake:
+    name: Intake (scan + score + theme + brain)
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    timeout-minutes: 15
+
+    outputs:
+      today: ${{ steps.today.outputs.today }}
+      dry_run: ${{ steps.dry.outputs.dry_run }}
+      quiet_day: ${{ steps.classify.outputs.quiet_day }}
 
     env:
       LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
@@ -36,8 +52,7 @@ jobs:
       TZ: Asia/Kolkata
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -60,63 +75,217 @@ jobs:
             echo "dry_run=0" >> $GITHUB_OUTPUT
           fi
 
-      - name: Install deps (jq, curl, python3)
+      - name: Install deps
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq jq curl python3 python3-pip
           python3 -m pip install --quiet feedparser requests
+
+      - name: Run intake pipeline via Claude Code
+        uses: anthropics/claude-code-base-action@v0.0.63
+        with:
+          prompt: |
+            Execute the intake phase of the daily-brief pipeline. Follow these skills in order, stop after brain-connect:
+              1. .claude/skills/scan/SKILL.md
+              2. .claude/skills/score/SKILL.md
+              3. .claude/skills/theme-detect/SKILL.md
+              4. .claude/skills/brain-connect/SKILL.md
+
+            TODAY=${{ steps.today.outputs.today }}
+            DRY_RUN=${{ steps.dry.outputs.dry_run }}
+
+            Write all artifacts to workspace/${{ steps.today.outputs.today }}/.
+            Do NOT proceed to write-briefing/write-posts/publish — those run in a separate job.
+            Do NOT fabricate. If scan produces 0 items, exit 1.
+          settings: .claude/settings.json
+          anthropic_api_key: ${{ secrets.ATLAN_LLM_KEY }}
+          claude_args: "--max-turns 40 --dangerously-skip-permissions"
+        env:
+          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ATLAN_LLM_KEY }}
+          ANTHROPIC_BASE_URL: https://llmproxy.atlan.dev
+          ANTHROPIC_MODEL: claude-sonnet-4-6
+          ANTHROPIC_SMALL_FAST_MODEL: claude-sonnet-4-6
+          ATLAN_LLM_KEY: ${{ secrets.ATLAN_LLM_KEY }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
+          SUPABASE_URL: https://xbatqlzrtijdmicoakaq.supabase.co
+          GITHUB_REPO: Aayushm24/presidential-briefing
+          TODAY: ${{ steps.today.outputs.today }}
+          DRY_RUN: ${{ steps.dry.outputs.dry_run }}
+
+      - name: Classify day (quiet vs normal)
+        id: classify
+        run: |
+          TODAY=${{ steps.today.outputs.today }}
+          QUIET="false"
+          if [ -f "workspace/${TODAY}/scored.json" ]; then
+            if [ "$(jq -r '.quiet_day // false' workspace/${TODAY}/scored.json)" == "true" ]; then
+              QUIET="true"
+            fi
+          else
+            # No scored.json = scan failed = treat as quiet
+            QUIET="true"
+          fi
+          echo "quiet_day=$QUIET" >> $GITHUB_OUTPUT
+          echo "classified: quiet_day=$QUIET"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: workspace-${{ steps.today.outputs.today }}
+          path: workspace/${{ steps.today.outputs.today }}/
+          retention-days: 14
+
+  # ============================================================
+  # JOB 2: WRITE — briefing + 3 posts
+  # Skipped on quiet days.
+  # ============================================================
+  write:
+    name: Write (briefing + posts)
+    needs: intake
+    if: needs.intake.outputs.quiet_day != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
+      SUPABASE_URL: https://xbatqlzrtijdmicoakaq.supabase.co
+      GITHUB_REPO: Aayushm24/presidential-briefing
+      TZ: Asia/Kolkata
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install deps
+        run: sudo apt-get install -y -qq jq curl python3
+
+      - name: Download intake artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: workspace-${{ needs.intake.outputs.today }}
+          path: workspace/${{ needs.intake.outputs.today }}/
+
+      - name: Run write pipeline via Claude Code
+        uses: anthropics/claude-code-base-action@v0.0.63
+        with:
+          prompt: |
+            Execute the write phase. Inputs from workspace/${{ needs.intake.outputs.today }}/ are already populated.
+            Follow these skills in order:
+              1. .claude/skills/write-briefing/SKILL.md  → produces brief.md
+              2. .claude/skills/write-posts/SKILL.md     → produces posts.md + posts.json
+
+            TODAY=${{ needs.intake.outputs.today }}
+            DRY_RUN=${{ needs.intake.outputs.dry_run }}
+
+            Use workspace/TODAY/research.md, brain.md, themes.json, scored.json as source material.
+            Do NOT continue to council or publish — that runs in a separate job.
+            Do NOT fabricate. If research.md has fewer than 3 stories, exit 1.
+          settings: .claude/settings.json
+          anthropic_api_key: ${{ secrets.ATLAN_LLM_KEY }}
+          claude_args: "--max-turns 40 --dangerously-skip-permissions"
+        env:
+          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ATLAN_LLM_KEY }}
+          ANTHROPIC_BASE_URL: https://llmproxy.atlan.dev
+          ANTHROPIC_MODEL: claude-opus-4-6
+          ANTHROPIC_SMALL_FAST_MODEL: claude-sonnet-4-6
+          ATLAN_LLM_KEY: ${{ secrets.ATLAN_LLM_KEY }}
+          LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
+          TODAY: ${{ needs.intake.outputs.today }}
+          DRY_RUN: ${{ needs.intake.outputs.dry_run }}
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: workspace-${{ needs.intake.outputs.today }}
+          path: workspace/${{ needs.intake.outputs.today }}/
+          retention-days: 14
+          overwrite: true
+
+  # ============================================================
+  # JOB 3: SHIP — council attack + publish
+  # Runs on both normal AND quiet days.
+  #   Quiet day: POST {"type":"nothing_new"} to n8n, done.
+  #   Normal day: council/attack → publish (commit + email + Slack).
+  # ============================================================
+  ship:
+    name: Ship (council + publish)
+    needs: [intake, write]
+    if: always() && needs.intake.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
+      SUPABASE_URL: https://xbatqlzrtijdmicoakaq.supabase.co
+      GITHUB_REPO: Aayushm24/presidential-briefing
+      TZ: Asia/Kolkata
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install deps
+        run: sudo apt-get install -y -qq jq curl python3
 
       - name: Configure Git identity
         run: |
           git config user.name "presidential-briefing-bot"
           git config user.email "bot@users.noreply.github.com"
 
-      - name: Diag — direct curl to LiteLLM with Bearer + x-api-key
-        env:
-          KEY: ${{ secrets.ATLAN_LLM_KEY }}
-        run: |
-          echo "-- KEY length --"
-          echo "${#KEY}"
-          echo "-- first 4 chars masked --"
-          echo "${KEY:0:4}"
-          echo ""
-          echo "-- Test 1: Authorization: Bearer --"
-          curl -sS -o /tmp/t1.json -w "HTTP %{http_code}\n" -X POST "https://llmproxy.atlan.dev/v1/messages" \
-            -H "Authorization: Bearer $KEY" \
-            -H "anthropic-version: 2023-06-01" \
-            -H "Content-Type: application/json" \
-            -d '{"model":"claude-sonnet-4-6","max_tokens":10,"messages":[{"role":"user","content":"ok"}]}'
-          jq -r '.content[0].text? // .error?' /tmp/t1.json
-          echo ""
-          echo "-- Test 2: x-api-key header --"
-          curl -sS -o /tmp/t2.json -w "HTTP %{http_code}\n" -X POST "https://llmproxy.atlan.dev/v1/messages" \
-            -H "x-api-key: $KEY" \
-            -H "anthropic-version: 2023-06-01" \
-            -H "Content-Type: application/json" \
-            -d '{"model":"claude-sonnet-4-6","max_tokens":10,"messages":[{"role":"user","content":"ok"}]}'
-          jq -r '.content[0].text? // .error?' /tmp/t2.json
+      - name: Download workspace artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: workspace-${{ needs.intake.outputs.today }}
+          path: workspace/${{ needs.intake.outputs.today }}/
 
-      - name: Run daily brief pipeline via Claude Code
+      - name: Quiet-day fast path
+        if: needs.intake.outputs.quiet_day == 'true'
+        env:
+          N8N_SLACK_WEBHOOK_URL: ${{ secrets.N8N_SLACK_WEBHOOK_URL }}
+          DRY_RUN: ${{ needs.intake.outputs.dry_run }}
+        run: |
+          TODAY=${{ needs.intake.outputs.today }}
+          if [ "${DRY_RUN}" == "1" ]; then
+            echo "[DRY_RUN] would POST nothing_new for $TODAY"
+          elif [ -n "$N8N_SLACK_WEBHOOK_URL" ]; then
+            curl -sS -X POST "$N8N_SLACK_WEBHOOK_URL" \
+              -H "Content-Type: application/json" \
+              -d '{"type":"nothing_new"}'
+            echo "quiet-day Slack delivered"
+          else
+            echo "N8N_SLACK_WEBHOOK_URL not set — skipping"
+          fi
+          mkdir -p workspace/$TODAY
+          echo "quiet_day" > workspace/$TODAY/.status
+
+      - name: Run council + publish via Claude Code
+        if: needs.intake.outputs.quiet_day != 'true'
         uses: anthropics/claude-code-base-action@v0.0.63
         with:
           prompt: |
-            Read .claude/skills/daily-brief/SKILL.md and follow it end-to-end.
-            Use TODAY=${{ steps.today.outputs.today }} and DRY_RUN=${{ steps.dry.outputs.dry_run }} from env.
-            Do not deviate from the skill. All secrets are in env.
+            Execute the ship phase. brief.md + posts.md + posts.json already exist in workspace/${{ needs.intake.outputs.today }}/.
+            Follow these skills in order:
+              1. .claude/skills/council/attack/SKILL.md   → council-notes.md (deterministic regex pre-flight + LLM passes)
+              2. If council verdict is REVISE AND iter < 1: .claude/skills/council/revise/SKILL.md (max 1 iteration to fit budget)
+              3. .claude/skills/publish/SKILL.md           → commits, emails, Slack
+
+            TODAY=${{ needs.intake.outputs.today }}
+            DRY_RUN=${{ needs.intake.outputs.dry_run }}
+
+            Council MUST run real LLM passes. Never mock even in DRY_RUN — the safety net is always live.
           settings: .claude/settings.json
-          # Action's preflight validator requires this input. Claude Code CLI will also
-          # see ANTHROPIC_AUTH_TOKEN (env below) and prefer it — sending Bearer header.
           anthropic_api_key: ${{ secrets.ATLAN_LLM_KEY }}
           claude_args: "--max-turns 60 --dangerously-skip-permissions"
         env:
-          # ANTHROPIC_AUTH_TOKEN → CLI sends "Authorization: Bearer <key>" (LiteLLM-compatible).
-          # Without this, CLI falls back to ANTHROPIC_API_KEY and sends "x-api-key" which
-          # the LiteLLM virtual-key auth rejects.
           ANTHROPIC_AUTH_TOKEN: ${{ secrets.ATLAN_LLM_KEY }}
           ANTHROPIC_BASE_URL: https://llmproxy.atlan.dev
           ANTHROPIC_MODEL: claude-sonnet-4-6
           ANTHROPIC_SMALL_FAST_MODEL: claude-sonnet-4-6
-          # Secrets + config that skills reference via ${VAR}
           ATLAN_LLM_KEY: ${{ secrets.ATLAN_LLM_KEY }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           N8N_SLACK_WEBHOOK_URL: ${{ secrets.N8N_SLACK_WEBHOOK_URL }}
@@ -124,15 +293,13 @@ jobs:
           GMAIL_FROM_ADDRESS: ${{ secrets.GMAIL_FROM_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
-          SUPABASE_URL: https://xbatqlzrtijdmicoakaq.supabase.co
           GITHUB_REPO: Aayushm24/presidential-briefing
-          TODAY: ${{ steps.today.outputs.today }}
-          DRY_RUN: ${{ steps.dry.outputs.dry_run }}
+          TODAY: ${{ needs.intake.outputs.today }}
+          DRY_RUN: ${{ needs.intake.outputs.dry_run }}
 
-      - name: Path allowlist enforcement
-        if: steps.dry.outputs.dry_run == '0'
+      - name: Path allowlist enforcement (live runs only)
+        if: needs.intake.outputs.dry_run == '0' && needs.intake.outputs.quiet_day != 'true'
         run: |
-          # Defense in depth — the publish skill already checks, but we double-check here
           DIFF_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || git diff --cached --name-only)
           FAILED=0
           while IFS= read -r FILE; do
@@ -156,13 +323,10 @@ jobs:
             exit 1
           fi
 
-      - name: Upload workspace artifacts
+      - uses: actions/upload-artifact@v4
         if: always()
-        uses: actions/upload-artifact@v4
         with:
-          name: workspace-${{ steps.today.outputs.today }}
-          path: workspace/${{ steps.today.outputs.today }}/
+          name: workspace-${{ needs.intake.outputs.today }}
+          path: workspace/${{ needs.intake.outputs.today }}/
           retention-days: 14
-
-      # Failure notifications: GitHub Actions emails the repo owner automatically on workflow failure.
-      # To get Slack pings too, extend the n8n webhook to accept {"type":"error","message":"...","run_url":"..."} and add a step here.
+          overwrite: true
