@@ -14,7 +14,7 @@ Final step. Commits workspace to GitHub (via path-allowlisted add+commit+push), 
 - `workspace/${TODAY}/brief.md`
 - `workspace/${TODAY}/posts.md`
 - `workspace/${TODAY}/.council-verdict.json`
-- Env: `GMAIL_FROM_ADDRESS`, `GMAIL_APP_PASSWORD`, `READWISE_EMAIL`, `SLACK_BOT_TOKEN` (optional), `SLACK_DM_USER_ID`, `DRY_RUN`, `GITHUB_REPO`
+- Env: `GMAIL_FROM_ADDRESS`, `GMAIL_APP_PASSWORD`, `READWISE_EMAIL`, `N8N_SLACK_WEBHOOK_URL` (optional), `DRY_RUN`, `GITHUB_REPO`
 
 ## Outputs
 
@@ -89,46 +89,58 @@ fi
 
 See `scripts/send_gmail.py` — uses `GMAIL_APP_PASSWORD` + `GMAIL_FROM_ADDRESS`.
 
-### Step 4: Slack DM via chat.postMessage API
+### Step 4: Slack delivery via n8n proxy webhook
 
-Uses the Slack bot token (`xoxb-...` from the "scout slack bot" credential). The bot must have `chat:write` scope + be able to DM the target user.
+Uses `N8N_SLACK_WEBHOOK_URL` — an n8n webhook at `https://atlanhq.app.n8n.cloud/webhook/presidential-briefing-slack` which:
+- Accepts structured JSON payload
+- Uses n8n's stored "scout slack bot" credential to DM `U08G02QDEAG`
+- Keeps the Slack bot token inside n8n (one place to rotate)
+
+**Payload contract:**
+```json
+{
+  "type": "daily_brief",
+  "briefing_url": "https://github.com/Aayushm24/presidential-briefing/blob/main/workspace/2026-04-19/posts.md",
+  "posts": ["post 1 body text", "post 2 body text", "post 3 body text"]
+}
+```
+
+For quiet days use `{"type":"nothing_new"}` (see Step 6).
 
 ```bash
 GITHUB_URL="https://github.com/${GITHUB_REPO}/blob/main/workspace/${DATE}/posts.md"
 
-SLACK_TEXT="daily brief ready — ${LEAD_TITLE}
-scores: avg ${BEST_SCORE}/15 | verdict: *${VERDICT}* | iterations: ${ITER}
+# Build posts array from posts.json (structured output from /write-posts)
+POSTS_JSON=$(jq -c '[.options[] | .post]' workspace/${DATE}/posts.json)
 
-read + pick an option: ${GITHUB_URL}
-
-reply in thread: *1* / *2* / *3* / *edit* / *kill*"
+PAYLOAD=$(jq -n \
+  --arg url "$GITHUB_URL" \
+  --argjson posts "$POSTS_JSON" \
+  '{type: "daily_brief", briefing_url: $url, posts: $posts}')
 
 if [ "${DRY_RUN:-0}" == "1" ]; then
-  echo "[DRY_RUN] would slack to ${SLACK_DM_USER_ID}: ${SLACK_TEXT}"
-elif [ -z "${SLACK_BOT_TOKEN:-}" ]; then
-  echo "[publish] SLACK_BOT_TOKEN not set — skipping Slack DM (brief still delivered via email + Git)"
+  echo "[DRY_RUN] would POST to n8n webhook:"
+  echo "$PAYLOAD" | jq .
+elif [ -z "${N8N_SLACK_WEBHOOK_URL:-}" ]; then
+  echo "[publish] N8N_SLACK_WEBHOOK_URL not set — skipping Slack (brief still delivered via email + Git)"
 else
-  curl -sS -X POST "https://slack.com/api/chat.postMessage" \
-    -H "Authorization: Bearer ${SLACK_BOT_TOKEN}" \
-    -H "Content-Type: application/json; charset=utf-8" \
-    -d "$(jq -n \
-      --arg channel "${SLACK_DM_USER_ID}" \
-      --arg text "$SLACK_TEXT" \
-      '{channel: $channel, text: $text, unfurl_links: false}')" \
-    > workspace/${DATE}/.slack-response.json
+  HTTP_CODE=$(curl -sS -o /tmp/slack-resp.txt -w "%{http_code}" \
+    -X POST "${N8N_SLACK_WEBHOOK_URL}" \
+    -H "Content-Type: application/json" \
+    -d "$PAYLOAD")
 
-  # Verify success (non-fatal — log but don't fail pipeline)
-  if [ "$(jq -r .ok workspace/${DATE}/.slack-response.json)" != "true" ]; then
-    echo "[publish] Slack delivery failed (non-fatal):" >&2
-    cat workspace/${DATE}/.slack-response.json >&2
+  if [ "$HTTP_CODE" != "200" ]; then
+    echo "[publish] n8n webhook returned HTTP $HTTP_CODE (non-fatal):" >&2
+    cat /tmp/slack-resp.txt >&2
   fi
 fi
 ```
 
-Why chat.postMessage not webhook:
-- Uses the existing "scout slack bot" token from n8n (no new webhook to create)
-- Slack MCP hits this same endpoint under the hood — so this is functionally identical
-- Simpler than MCP in CI (no server to launch, no OAuth dance)
+Why n8n webhook proxy not direct Slack API:
+- No Slack bot token in GitHub — token lives in n8n, one place to rotate
+- n8n already has "scout slack bot" credential working from the old pipeline
+- Structured payload lets n8n format the Slack message (emojis, blocks, etc.) centrally
+- Verified working via `verify-secrets.yml` smoke test (HTTP 200, DM delivered)
 
 ### Step 5: Append to history
 
@@ -150,22 +162,17 @@ echo "shipped" > workspace/${DATE}/.status
 
 ### Step 6: Quiet-day path (called from orchestrator Step 9)
 
-If quiet-day, skip the commit + email. Only Slack DM:
+Skip the commit + email. Send `{"type":"nothing_new"}` — n8n formats the quiet-day DM.
 
 ```bash
-SLACK_TEXT="quiet day in AI. nothing above threshold. accumulating for tomorrow.
-${DATE} — top score: ${TOP_SCORE}/10"
-
-if [ -n "${SLACK_BOT_TOKEN:-}" ]; then
-  curl -sS -X POST "https://slack.com/api/chat.postMessage" \
-    -H "Authorization: Bearer ${SLACK_BOT_TOKEN}" \
-    -H "Content-Type: application/json; charset=utf-8" \
-    -d "$(jq -n \
-      --arg channel "${SLACK_DM_USER_ID}" \
-      --arg text "$SLACK_TEXT" \
-      '{channel: $channel, text: $text}')"
+if [ -n "${N8N_SLACK_WEBHOOK_URL:-}" ] && [ "${DRY_RUN:-0}" != "1" ]; then
+  curl -sS -X POST "${N8N_SLACK_WEBHOOK_URL}" \
+    -H "Content-Type: application/json" \
+    -d '{"type":"nothing_new"}'
+elif [ "${DRY_RUN:-0}" == "1" ]; then
+  echo '[DRY_RUN] would POST {"type":"nothing_new"} to n8n webhook'
 else
-  echo "[publish] SLACK_BOT_TOKEN not set — quiet-day notice not delivered. Brain still ingested for tomorrow."
+  echo "[publish] N8N_SLACK_WEBHOOK_URL not set — quiet-day notice not delivered. Brain still ingested for tomorrow."
 fi
 
 echo "quiet_day" > workspace/${DATE}/.status

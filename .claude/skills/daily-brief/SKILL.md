@@ -16,8 +16,7 @@ Required environment variables (read from `.env` locally, GitHub secrets in CI):
 ```
 ATLAN_LLM_KEY          # required — ONE key for BOTH llmproxy.atlan.dev AND api.x.ai (same value)
 SUPABASE_ANON_KEY      # required — brain read via RLS (NOT service key)
-SLACK_BOT_TOKEN        # optional — xoxb- token for chat.postMessage. If empty, Slack is skipped.
-SLACK_DM_USER_ID       # default U08G02QDEAG
+N8N_SLACK_WEBHOOK_URL  # optional — Slack Incoming Webhook URL. If empty, Slack is skipped.
 READWISE_EMAIL         # default aayushm24@library.readwise.io
 GMAIL_FROM_ADDRESS     # required — Gmail address sending the email
 GMAIL_APP_PASSWORD     # required — 16-char App Password (NOT account password)

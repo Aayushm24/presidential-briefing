@@ -257,9 +257,29 @@ Parse 3 OPTION blocks from output. For each:
 
 If any option fails validation: rewrite ONCE with specific fix in the prompt. If still failing, tag option with `[NEEDS-REVISE]` and let `/attack` council handle.
 
-### Step 5: Write posts.md
+### Step 5: Write posts.md + posts.json
 
-Format per the Outputs spec above. Include metadata header (lead, briefing type, preliminary best option). List all 3 options with template tags, hook scores, conviction, post body, dividers.
+**posts.md** — human-readable per the Outputs spec above. Include metadata header (lead, briefing type, preliminary best option). List all 3 options with template tags, hook scores, conviction, post body, dividers.
+
+**posts.json** — structured data for `/publish` to read when building the Slack webhook payload:
+
+```bash
+jq -n \
+  --arg date "$TODAY" \
+  --arg lead "$LEAD_TITLE" \
+  --argjson options "$OPTIONS_JSON" \
+  '{date: $date, lead_title: $lead, best_option: 2, options: $options}' \
+  > workspace/${TODAY}/posts.json
+```
+
+Where `OPTIONS_JSON` is an array:
+```json
+[
+  {"option": 1, "template": "personal-discovery", "hook_pattern": "B", "hook_score": 9, "conviction": "...", "post": "full post body..."},
+  {"option": 2, "template": "dot-connecting", "hook_pattern": "G", "hook_score": 8, "conviction": "...", "post": "..."},
+  {"option": 3, "template": "contrarian", "hook_pattern": "A", "hook_score": 8, "conviction": "...", "post": "..."}
+]
+```
 
 Also save raw LLM output to `.posts-raw.json` for debugging.
 
