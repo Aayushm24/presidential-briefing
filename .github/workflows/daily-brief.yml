@@ -316,12 +316,31 @@ jobs:
           set -euo pipefail
           WS="workspace/${DATE}"
 
-          # Double-check gates — Claude Code's prior step must have written gates-ok
-          STATUS=$(cat "${WS}/.status" 2>/dev/null || echo "unknown")
-          if [ "$STATUS" != "gates-ok" ]; then
-            echo "::error::status is '$STATUS', not 'gates-ok'. Aborting delivery."
+          # Verify required artifacts exist
+          for f in "${WS}/brief.md" "${WS}/posts.md" "${WS}/posts.json"; do
+            if [ ! -f "$f" ]; then
+              echo "::error::missing required artifact: $f"
+              exit 1
+            fi
+          done
+
+          # Deterministic pre-delivery gate — belt-and-braces check.
+          # Claude Code's council step should have cleaned already; this just verifies.
+          python3 scripts/clean_text.py "${WS}/brief.md" "${WS}/posts.md" 2>&1 || true
+
+          ./tests/kill-list-regex.sh "${WS}/brief.md" || {
+            echo "::error::brief.md still has kill-list violations after final clean. Aborting."
             exit 1
-          fi
+          }
+          ./tests/kill-list-regex.sh "${WS}/posts.md" || {
+            echo "::error::posts.md still has kill-list violations after final clean. Aborting."
+            exit 1
+          }
+          ./tests/golden-format.sh "${WS}/brief.md" || {
+            echo "::error::brief.md failed golden format. Aborting."
+            exit 1
+          }
+          echo "pre-delivery gates: all clean"
 
           LEAD_TITLE=$(head -1 "${WS}/brief.md" | sed 's/^# //' | head -c 200)
 
