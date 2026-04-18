@@ -67,33 +67,19 @@ Parse Grok's response. xAI `/responses` returns `output[]` array — look for it
 
 If Grok returns empty or errors: write a single placeholder item `{"title":"[grok-empty]","url":"","summary":"","source":"x/unknown","type":"x_empty"}` so downstream pipeline doesn't break on zero items.
 
-### Step 2: RSS fetch
+### Step 2: RSS fetch (DETERMINISTIC — one call, all feeds)
 
-Read `config/sources.csv`, filter `type=rss OR type=blog OR type=newsletter` where `access_method=rss`, extract `feed_url`.
-
-For each feed:
-1. Fetch with 15s timeout
-2. Parse RSS/Atom with regex for `<item>` or `<entry>` blocks
-3. Extract title, link, pubDate/published/updated, description/summary
-4. Skip items with no date (can't verify recency)
-5. Skip items older than 24h from now
-6. Strip HTML tags to plain text
-
-Sort results by date descending. Cap at 100 items.
-
-**Fetch pattern** (as shell helper — embed inline or call curl per feed):
+**Do NOT iterate feeds yourself.** Run the script ONCE with `--csv` — it handles the whole list, uses 15s timeouts per feed, parses RSS/Atom, filters to last 24h, and emits JSONL on stdout + stats on stderr.
 
 ```bash
-fetch_rss() {
-  local url="$1"
-  local xml
-  xml=$(curl -sS --max-time 15 "$url" 2>/dev/null) || { echo "FAIL $url" >&2; return; }
-  # Parse with awk/sed/etc or feed to a small parser script.
-  # Output one JSON line per item: {"title":"...","url":"...","summary":"...","source":"<domain>","type":"rss","published":"..."}
-}
+python3 scripts/parse_rss.py --csv config/sources.csv \
+  > workspace/${TODAY}/.rss-items.jsonl \
+  2> workspace/${TODAY}/.rss-stats.log
 ```
 
-**Recommended approach:** write a small inline Python/Node parser (bash regex RSS parsing is fragile). Save it as `scripts/parse_rss.py` or similar. Input: feed URL. Output: JSONL of items from last 24h.
+This guarantees all ~41 feeds are attempted (any individual failures logged to stats but don't abort the run). Sort the JSONL by date descending, cap at 100 items.
+
+Parse the JSONL into the intake format. **Do not fabricate** — only include items the script actually emitted to stdout. If stdout is empty: 0 RSS items (legitimate quiet day signal).
 
 ### Step 3: Combine + wrap with content delimiters
 
