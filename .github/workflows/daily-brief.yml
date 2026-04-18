@@ -72,27 +72,31 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
 
       - name: Run daily brief pipeline via Claude Code
-        uses: anthropics/claude-code-base-action@v1
+        uses: anthropics/claude-code-base-action@v0.0.63
         with:
           prompt: |
             Read .claude/skills/daily-brief/SKILL.md and follow it end-to-end.
-            TODAY=${{ steps.today.outputs.today }}
-            DRY_RUN=${{ steps.dry.outputs.dry_run }}
-          allowed_tools: Read,Glob,Grep,Bash,Edit,Write
-          claude_env: |
-            ATLAN_LLM_KEY=${{ secrets.ATLAN_LLM_KEY }}
-            SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}
-            N8N_SLACK_WEBHOOK_URL=${{ secrets.N8N_SLACK_WEBHOOK_URL }}
-            READWISE_EMAIL=aayushm24@library.readwise.io
-            GMAIL_FROM_ADDRESS=${{ secrets.GMAIL_FROM_ADDRESS }}
-            GMAIL_APP_PASSWORD=${{ secrets.GMAIL_APP_PASSWORD }}
-            LLM_PROXY_BASE_URL=https://llmproxy.atlan.dev
-            SUPABASE_URL=https://xbatqlzrtijdmicoakaq.supabase.co
-            GITHUB_REPO=Aayushm24/presidential-briefing
-            TODAY=${{ steps.today.outputs.today }}
-            DRY_RUN=${{ steps.dry.outputs.dry_run }}
+            Use TODAY=${{ steps.today.outputs.today }} and DRY_RUN=${{ steps.dry.outputs.dry_run }} from env.
+            Do not deviate from the skill. All secrets are in env.
+          settings: .claude/settings.json
+          anthropic_api_key: ${{ secrets.ATLAN_LLM_KEY }}
+          claude_args: "--max-turns 60 --dangerously-skip-permissions"
         env:
+          # Route Claude Code CLI's own LLM calls through the Atlan proxy
           ANTHROPIC_API_KEY: ${{ secrets.ATLAN_LLM_KEY }}
+          ANTHROPIC_BASE_URL: https://llmproxy.atlan.dev
+          # Secrets + config that skills reference via ${VAR}
+          ATLAN_LLM_KEY: ${{ secrets.ATLAN_LLM_KEY }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          N8N_SLACK_WEBHOOK_URL: ${{ secrets.N8N_SLACK_WEBHOOK_URL }}
+          READWISE_EMAIL: aayushm24@library.readwise.io
+          GMAIL_FROM_ADDRESS: ${{ secrets.GMAIL_FROM_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
+          SUPABASE_URL: https://xbatqlzrtijdmicoakaq.supabase.co
+          GITHUB_REPO: Aayushm24/presidential-briefing
+          TODAY: ${{ steps.today.outputs.today }}
+          DRY_RUN: ${{ steps.dry.outputs.dry_run }}
 
       - name: Path allowlist enforcement
         if: steps.dry.outputs.dry_run == '0'
