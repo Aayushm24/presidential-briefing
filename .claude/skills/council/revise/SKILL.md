@@ -27,15 +27,43 @@ Hard cap: 2 iterations total (controlled by orchestrator via `workspace/${TODAY}
 
 ## Process
 
-### Step 1: Back up pre-revision
+### Step 0: Back up pre-revision
 
 ```bash
-ITER=$(cat workspace/${TODAY}/.iter)
+ITER=$(cat workspace/${TODAY}/.iter 2>/dev/null || echo 0)
 cp workspace/${TODAY}/posts.md workspace/${TODAY}/posts.md.iter-${ITER}.bak
 [ -f workspace/${TODAY}/brief.md ] && cp workspace/${TODAY}/brief.md workspace/${TODAY}/brief.md.iter-${ITER}.bak
 ```
 
-### Step 2: Build revise prompt for posts
+### Step 1: Deterministic clean (MUST run first)
+
+LLMs cannot be trusted to apply 100% of hard rules (em dashes, kill-list words, audience direct-address). Run the regex fixer first — it substitutes every occurrence deterministically:
+
+```bash
+python3 scripts/clean_text.py workspace/${TODAY}/brief.md workspace/${TODAY}/posts.md 2>&1
+```
+
+This handles:
+- em dashes (U+2014) → commas with spacing normalized
+- Kill-list words → safe synonyms (leverage→use, cutting-edge→leading, etc.)
+- Audience direct-address ("for founders" → "for builders", "hey founders" → removed)
+- Bullets (•) → dashes (-)
+- Transition crutches at sentence starts (Furthermore, In fact, etc.) → deleted
+- Cliche openers (Let me share, Hot take:, etc.) → deleted
+
+After clean, re-run kill-list regex to confirm hard rules are now clean:
+
+```bash
+./tests/kill-list-regex.sh workspace/${TODAY}/brief.md && \
+./tests/kill-list-regex.sh workspace/${TODAY}/posts.md || {
+  echo "[revise] CRITICAL: kill-list violations remain after cleaner. Pattern likely not covered in clean_text.py." >&2
+  exit 1
+}
+```
+
+### Step 2: LLM revise (only for issues regex can't fix)
+
+### Step 3: Build revise prompt for posts
 
 ```
 Apply council corrections to the 3 LinkedIn post options. Do NOT rewrite the briefing (separate step). Focus entirely on improving the posts.
@@ -101,7 +129,7 @@ ${KILL_LIST_CONTENTS}
 Rewrite now.
 ```
 
-### Step 3: Call Opus via proxy
+### Step 4: Call Opus via proxy
 
 ```bash
 curl -sS -X POST "${LLM_PROXY_BASE_URL}/v1/chat/completions" \
@@ -111,7 +139,7 @@ curl -sS -X POST "${LLM_PROXY_BASE_URL}/v1/chat/completions" \
     '{model: $model, messages: [{role: "user", content: $prompt}], temperature: 0.4, max_tokens: 4000}')"
 ```
 
-### Step 4: Parse + write revised posts.md
+### Step 5: Parse + write revised posts.md
 
 Extract 3 ===OPTION N=== blocks + ===SCORES=== block.
 
@@ -142,7 +170,7 @@ Rewrite `workspace/${TODAY}/posts.md` with revised options. Include revision met
 [...]
 ```
 
-### Step 5: Revise brief.md if needed
+### Step 6: Revise brief.md if needed
 
 If council flagged fact errors on brief (e.g., wrong funding amount, wrong company name):
 
@@ -167,7 +195,7 @@ This is a surgical edit. Use Opus with temperature 0.2. Validate post-edit:
 - Word count unchanged by more than 5%
 - Structure preserved (all headers, sections intact)
 
-### Step 6: Handoff back to orchestrator
+### Step 7: Handoff back to orchestrator
 
 Orchestrator's next step is re-running `/attack` on the revised content. Loop continues up to 2 iterations.
 

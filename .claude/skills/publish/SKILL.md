@@ -26,6 +26,39 @@ Final step. Commits workspace to GitHub (via path-allowlisted add+commit+push), 
 
 ## Process
 
+### Step 0: Pre-publish hard-fail gate (MUST run first)
+
+After /revise has run, final brief + posts MUST pass deterministic regex checks. No LLM interpretation — if anything dirty remains, the pipeline refuses to publish.
+
+```bash
+# Run the deterministic cleaner one more time as belt-and-braces (idempotent)
+python3 scripts/clean_text.py workspace/${TODAY}/brief.md workspace/${TODAY}/posts.md 2>&1 || true
+
+# Hard gate — must pass BOTH
+./tests/kill-list-regex.sh workspace/${TODAY}/brief.md || {
+  echo "[publish] REJECTED: brief.md has kill-list violations after revise+clean." >&2
+  echo "rejected-kill-list" > workspace/${TODAY}/.status
+  exit 1
+}
+
+./tests/kill-list-regex.sh workspace/${TODAY}/posts.md || {
+  echo "[publish] REJECTED: posts.md has kill-list violations after revise+clean." >&2
+  echo "rejected-kill-list" > workspace/${TODAY}/.status
+  exit 1
+}
+
+# Golden format check — brief must have all required sections
+./tests/golden-format.sh workspace/${TODAY}/brief.md || {
+  echo "[publish] REJECTED: brief.md failed golden-format (missing sections or structure)." >&2
+  echo "rejected-format" > workspace/${TODAY}/.status
+  exit 1
+}
+
+echo "[publish] quality gates passed — proceeding to delivery"
+```
+
+If any gate fails, the pipeline aborts BEFORE any commit / email / Slack delivery. Upload the workspace as an artifact so the user can inspect what broke.
+
 ### Step 1: Build delivery payload
 
 ```bash
