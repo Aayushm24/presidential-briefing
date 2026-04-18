@@ -82,8 +82,11 @@ jobs:
           claude_args: "--max-turns 60 --dangerously-skip-permissions"
         env:
           # Route Claude Code CLI's own LLM calls through the Atlan LiteLLM proxy.
-          # ANTHROPIC_AUTH_TOKEN -> "Authorization: Bearer <key>" header (proxy-compatible)
-          # DO NOT set ANTHROPIC_API_KEY — that forces "x-api-key" header which LiteLLM rejects
+          # Set BOTH:
+          #   ANTHROPIC_API_KEY — required by claude-code-base-action's preflight validator
+          #   ANTHROPIC_AUTH_TOKEN — Claude Code CLI prefers this when both are set, sends
+          #                         as "Authorization: Bearer <key>" (proxy-compatible)
+          ANTHROPIC_API_KEY: ${{ secrets.ATLAN_LLM_KEY }}
           ANTHROPIC_AUTH_TOKEN: ${{ secrets.ATLAN_LLM_KEY }}
           ANTHROPIC_BASE_URL: https://llmproxy.atlan.dev
           ANTHROPIC_MODEL: claude-sonnet-4-6
