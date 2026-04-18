@@ -1,0 +1,94 @@
+name: LinkedIn Performance
+
+on:
+  schedule:
+    # 11:00 PM IST = 17:30 UTC
+    - cron: '30 17 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Preview changes without committing'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: linkedin-performance
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    name: Snapshot LinkedIn posts
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      TZ: Asia/Kolkata
+      LINKEDIN_PROFILE_URL: https://www.linkedin.com/in/aayush-maheshwari/
+      MAX_POSTS: '25'
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git identity
+        run: |
+          git config user.name "presidential-briefing-bot"
+          git config user.email "bot@users.noreply.github.com"
+
+      - name: Install deps
+        run: |
+          python3 -m pip install --quiet requests
+
+      - name: Set TODAY
+        id: today
+        run: echo "today=$(TZ=Asia/Kolkata date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+
+      - name: Snapshot posts
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: |
+          DRY_FLAG=""
+          if [ "${{ github.event.inputs.dry_run }}" == "true" ]; then
+            DRY_FLAG="--dry-run"
+          fi
+          python3 scripts/linkedin_performance.py $DRY_FLAG
+
+      - name: Path allowlist enforcement
+        if: github.event.inputs.dry_run != 'true'
+        run: |
+          DIFF_FILES=$(git status --porcelain | awk '{print $2}')
+          FAILED=0
+          while IFS= read -r FILE; do
+            [ -z "$FILE" ] && continue
+            case "$FILE" in
+              performance-data/*) ;;
+              *)
+                echo "::error::Path allowlist violation: $FILE"
+                FAILED=1
+                ;;
+            esac
+          done <<< "$DIFF_FILES"
+          if [ $FAILED -eq 1 ]; then
+            echo "::error::Unauthorized files modified — aborting"
+            git checkout -- .
+            exit 1
+          fi
+
+      - name: Commit and push
+        if: github.event.inputs.dry_run != 'true'
+        run: |
+          TODAY=${{ steps.today.outputs.today }}
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "no changes to commit"
+            exit 0
+          fi
+          COUNT=$(git status --porcelain performance-data/ | wc -l | tr -d ' ')
+          git add performance-data/
+          git commit -m "perf: snapshot $TODAY ($COUNT posts)"
+          git pull --rebase origin main
+          git push origin HEAD:main
