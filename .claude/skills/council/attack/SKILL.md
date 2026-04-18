@@ -7,7 +7,11 @@ description: Adversarial review of brief + 3 posts. Grok attacks claims. Opus ru
 
 Multi-pass review of today's `brief.md` + `posts.md`. Writes findings to `workspace/${TODAY}/council-notes.md`.
 
-Three parallel passes:
+**THIS SKILL ALWAYS RUNS FOR REAL. Never mock. Never skip LLM calls in DRY_RUN.** `DRY_RUN` only affects `/publish` (Slack/Gmail/commit). Council MUST do real work every time — it's the safety net between generation and delivery.
+
+Four passes, in order:
+
+0. **Deterministic pre-flight (regex)** — before any LLM call, run `tests/kill-list-regex.sh` against brief.md + posts.md. If it finds em dashes, kill-list words, "for founders", bullets — write them directly to council-notes.md as CONFIRMED violations (no LLM interpretation needed). These are regex-hard rules.
 1. **Voice audit** (Opus, 15-point) — voice, hook, kill-list, format
 2. **Fact check** (Gemini) — verify numbers, quotes, company names, tool names against live web
 3. **Adversarial attack** (Grok) — find logical gaps, straw-man arguments, missing context, freshness check via X search
@@ -53,6 +57,27 @@ Specific revision notes:
 ```
 
 ## Process
+
+### Step 0: Deterministic kill-list pre-flight (MANDATORY — runs every time)
+
+Run the existing regex script against both brief and posts:
+
+```bash
+# Capture violations from each file
+./tests/kill-list-regex.sh workspace/${TODAY}/brief.md > workspace/${TODAY}/.brief-violations.log 2>&1 || true
+./tests/kill-list-regex.sh workspace/${TODAY}/posts.md > workspace/${TODAY}/.posts-violations.log 2>&1 || true
+./tests/golden-format.sh workspace/${TODAY}/brief.md > workspace/${TODAY}/.brief-format.log 2>&1 || true
+
+BRIEF_VIOL=$(grep -c '^  - ' workspace/${TODAY}/.brief-violations.log || echo 0)
+POSTS_VIOL=$(grep -c '^  - ' workspace/${TODAY}/.posts-violations.log || echo 0)
+FORMAT_VIOL=$(grep -c '^  - ' workspace/${TODAY}/.brief-format.log || echo 0)
+
+echo "[attack] pre-flight: brief=${BRIEF_VIOL}, posts=${POSTS_VIOL}, format=${FORMAT_VIOL}"
+```
+
+If total violations > 0, these are CONFIRMED hard-rule failures (em dashes, kill-list words, missing sections). Write them verbatim to the top of `council-notes.md` as "Deterministic findings". Set the verdict to REVISE — no LLM interpretation required.
+
+LLM passes (steps 1-3) still run after this, but pre-flight findings take priority.
 
 ### Step 1: Parse posts.md into structured data
 
