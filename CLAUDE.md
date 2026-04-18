@@ -61,14 +61,14 @@ Any other path change in an automated commit is rejected by the workflow.
 - Sources: `config/sources.csv`
 - Model routing: `config/council.json` (task → model, via `llmproxy.atlan.dev`)
 - Weekly POV: `config/conviction.md`
-- Secrets: GitHub Actions secrets — `ATLAN_LLM_KEY` (shared by llmproxy + xAI), `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_KEY` (weekly only), `GMAIL_APP_PASSWORD`, `GMAIL_FROM_ADDRESS`, `SLACK_BOT_TOKEN` (optional — if empty, Slack delivery is skipped). Non-secret env baked into workflow: `SLACK_DM_USER_ID=U08G02QDEAG`, `READWISE_EMAIL=aayushm24@library.readwise.io`.
+- Secrets: GitHub Actions secrets — `ATLAN_LLM_KEY` (shared by llmproxy + xAI), `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_KEY` (weekly only), `GMAIL_APP_PASSWORD`, `GMAIL_FROM_ADDRESS`, `N8N_SLACK_WEBHOOK_URL` (n8n proxy — Slack bot token lives in n8n, not here). Non-secret env baked into workflow: `SLACK_DM_USER_ID=U08G02QDEAG`, `READWISE_EMAIL=aayushm24@library.readwise.io`.
 
 ## Infrastructure
 
 - **Runtime**: Claude Code headless in GitHub Actions (`anthropics/claude-code-base-action`).
 - **LLM gateway**: `llmproxy.atlan.dev` (LiteLLM proxy, routes to Anthropic/Google/xAI).
 - **Brain**: Supabase Postgres + pgvector. Tables: `brain_pages`, `brain_themes`. RPC: `search_brain`.
-- **Delivery**: Gmail → Readwise Reader inbox + Slack webhook to user ID U08G02QDEAG.
+- **Delivery**: Gmail SMTP → Readwise Reader inbox + n8n webhook → Slack DM (scout slack bot → U08G02QDEAG).
 
 ## Compounding effect
 
