@@ -50,6 +50,12 @@ If `.status` shows a partial state (e.g., `score-ok`), skip already-completed st
 
 Read `.claude/skills/scan/SKILL.md` and follow it. Writes to `workspace/${TODAY}/raw-intake.json`.
 
+**Anti-fabrication gate:** if scan exits non-zero or writes `.status=scan-failed`:
+- DO NOT continue with downstream skills
+- DO NOT invent news items
+- Jump directly to Step 9 (quiet-day path) and deliver `{"type":"nothing_new"}` via Slack
+- Exit 0 (quiet day is a valid outcome, not a failure)
+
 Update status: `echo "scan-ok" > workspace/${TODAY}/.status`
 
 ### Step 2: Score + select
