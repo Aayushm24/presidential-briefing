@@ -27,7 +27,7 @@ jobs:
   brief:
     name: Run daily pipeline
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 50
 
     env:
       LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
