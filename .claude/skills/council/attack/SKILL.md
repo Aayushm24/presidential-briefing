@@ -215,10 +215,10 @@ ${POSTS_MD_CONTENTS}
 </posts>
 ```
 
-Call xAI `/responses` with `x_search` tool (Grok searches X for similar takes):
+Call `/responses` through the Atlan proxy (NOT `api.x.ai` directly — the key only works via proxy):
 
 ```bash
-curl -sS -X POST "https://api.x.ai/v1/responses" \
+curl -sS -X POST "https://llmproxy.atlan.dev/responses" \
   -H "Authorization: Bearer ${ATLAN_LLM_KEY}" \
   -H "Content-Type: application/json" \
   -d "$(jq -n --arg prompt "$GROK_PROMPT" \

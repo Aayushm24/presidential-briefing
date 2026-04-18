@@ -43,16 +43,18 @@ Reads `config/sources.csv`. Outputs a combined list of all candidate items from 
 
 ## Process
 
-### Step 1: X/Twitter scan via Grok
+### Step 1: X/Twitter scan via Grok (through the Atlan proxy)
 
-Call xAI `/responses` endpoint with `x_search` tool. Pull posts from Aayush's tracked handles in last 24 hours.
+**Endpoint:** `https://llmproxy.atlan.dev/responses` (NOT `api.x.ai` — direct xAI requires a different key. Proxy routes to xAI using our virtual key.)
+
+Call the proxy's `/responses` endpoint with the `x_search` tool. Pull posts from Aayush's tracked handles in last 24 hours.
 
 **Tracked handles** (from `config/sources.csv` where `type=x_account`): @karpathy, @rasbt, @natolambert, @simonw, @emollick, @garrytan, @swyx, @ttunguz.
 
 ```bash
 GROK_PROMPT="Today's date = ${TODAY}. Search X/Twitter for posts from the last 24 hours by these X user handles: @karpathy, @rasbt, @natolambert, @simonw, @emollick, @garrytan, @swyx, @ttunguz. For each substantive post about AI technology, research, or industry, return a JSON array: [{author, date_of_post, text, full_post, url, key_claims}]. Skip personal/promotional content. Return ONLY the JSON array and nothing else."
 
-curl -sS -X POST "https://api.x.ai/v1/responses" \
+curl -sS -X POST "https://llmproxy.atlan.dev/responses" \
   -H "Authorization: Bearer ${ATLAN_LLM_KEY}" \
   -H "Content-Type: application/json" \
   -d "$(jq -n --arg prompt "${GROK_PROMPT}" '{
