@@ -14,7 +14,7 @@ Master recipe. Reads each sub-skill and executes it in sequence. Writes intermed
 Required environment variables (read from `.env` locally, GitHub secrets in CI):
 
 ```
-ATLAN_LLM_KEY          # required — ONE key for BOTH llmproxy.atlan.dev AND api.x.ai (same value)
+ATLAN_LLM_KEY          # required — LiteLLM virtual key for llmproxy.atlan.dev (all models route through proxy)
 SUPABASE_ANON_KEY      # required — brain read via RLS (NOT service key)
 N8N_SLACK_WEBHOOK_URL  # optional — Slack Incoming Webhook URL. If empty, Slack is skipped.
 READWISE_EMAIL         # default aayushm24@library.readwise.io
@@ -150,7 +150,7 @@ curl -sS -X POST "${LLM_PROXY_BASE_URL}/v1/chat/completions" \
   -d "$(jq -n --arg model "claude-sonnet-4-6" --arg prompt "..." '{model: $model, messages: [{role: "user", content: $prompt}], temperature: 0.2, max_tokens: 4000}')"
 ```
 
-Grok calls use the SAME `ATLAN_LLM_KEY` directly to `https://api.x.ai/v1/responses` (the proxy doesn't support `x_search` tool, so we hit xAI directly — one key works for both per Atlan's key convention).
+Grok calls go through `https://llmproxy.atlan.dev/responses` (NOT `api.x.ai` — same key, different endpoint). The proxy passes through the `x_search` tool call to xAI internally and returns the xAI `/responses` format.
 
 Gemini calls: via proxy model `gemini-3.1-pro-preview`.
 
