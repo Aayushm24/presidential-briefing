@@ -71,6 +71,31 @@ jobs:
           git config user.name "presidential-briefing-bot"
           git config user.email "bot@users.noreply.github.com"
 
+      - name: Diag — direct curl to LiteLLM with Bearer + x-api-key
+        env:
+          KEY: ${{ secrets.ATLAN_LLM_KEY }}
+        run: |
+          echo "-- KEY length --"
+          echo "${#KEY}"
+          echo "-- first 4 chars masked --"
+          echo "${KEY:0:4}"
+          echo ""
+          echo "-- Test 1: Authorization: Bearer --"
+          curl -sS -o /tmp/t1.json -w "HTTP %{http_code}\n" -X POST "https://llmproxy.atlan.dev/v1/messages" \
+            -H "Authorization: Bearer $KEY" \
+            -H "anthropic-version: 2023-06-01" \
+            -H "Content-Type: application/json" \
+            -d '{"model":"claude-sonnet-4-6","max_tokens":10,"messages":[{"role":"user","content":"ok"}]}'
+          jq -r '.content[0].text? // .error?' /tmp/t1.json
+          echo ""
+          echo "-- Test 2: x-api-key header --"
+          curl -sS -o /tmp/t2.json -w "HTTP %{http_code}\n" -X POST "https://llmproxy.atlan.dev/v1/messages" \
+            -H "x-api-key: $KEY" \
+            -H "anthropic-version: 2023-06-01" \
+            -H "Content-Type: application/json" \
+            -d '{"model":"claude-sonnet-4-6","max_tokens":10,"messages":[{"role":"user","content":"ok"}]}'
+          jq -r '.content[0].text? // .error?' /tmp/t2.json
+
       - name: Run daily brief pipeline via Claude Code
         uses: anthropics/claude-code-base-action@v0.0.63
         with:
