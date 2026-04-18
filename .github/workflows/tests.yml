@@ -1,0 +1,96 @@
+name: Tests
+
+on:
+  push:
+    paths:
+      - 'workspace/**'
+      - '.claude/skills/**'
+      - 'tests/**'
+      - 'config/**'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  golden-format:
+    name: Newsletter format golden test
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install deps
+        run: sudo apt-get install -y jq
+
+      - name: Run golden format tests
+        run: |
+          chmod +x tests/golden-format.sh
+          ./tests/golden-format.sh
+
+  kill-list:
+    name: Kill-list regex check
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run kill-list regex on all workspace briefs and posts
+        run: |
+          chmod +x tests/kill-list-regex.sh
+          ./tests/kill-list-regex.sh
+
+  voice-regression:
+    name: Voice regression on 20-post fixture
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check voice fixtures exist
+        run: |
+          FIXTURE_COUNT=$(ls tests/fixtures/voice/ 2>/dev/null | wc -l)
+          if [ "$FIXTURE_COUNT" -lt 5 ]; then
+            echo "::warning::Only $FIXTURE_COUNT voice fixtures found. Need 20 for full regression. Skipping."
+            exit 0
+          fi
+          echo "Found $FIXTURE_COUNT voice fixtures"
+
+      - name: Run voice regression (lint only, no LLM calls)
+        run: |
+          # Run voice audit RULES (not LLM) against every fixture.
+          # This is a regex/structural check only — catches format regressions in voice.md updates.
+          for FIXTURE in tests/fixtures/voice/*.md; do
+            ./tests/kill-list-regex.sh "$FIXTURE" || exit 1
+          done
+
+  schema-check:
+    name: JSON/YAML schema validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate council.json
+        run: jq empty config/council.json
+
+      - name: Validate sources.csv header
+        run: |
+          HEADER=$(head -1 config/sources.csv)
+          EXPECTED="name,url,feed_url,type,access_method,what_they_share"
+          if [ "$HEADER" != "$EXPECTED" ]; then
+            echo "::error::sources.csv header mismatch. Got: $HEADER"
+            exit 1
+          fi
+
+      - name: Validate GitHub Actions YAML syntax
+        run: |
+          for WF in .github/workflows/*.yml; do
+            python3 -c "import yaml; yaml.safe_load(open('$WF'))" || exit 1
+            echo "OK: $WF"
+          done

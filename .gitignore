@@ -1,9 +1,18 @@
 # Environment
 .env
 .env.local
+.env.*.local
 
 # Brain data (managed by gbrain CLI)
 brain/
+.gbrain/
+
+# Claude Code local state
+.claude/local/
+.claude/cache/
+
+# Backup tmp
+*.bak.*.tmp
 
 # Daily workspace artifacts (large JSON files)
 workspace/*/raw-intake.json

@@ -1,0 +1,143 @@
+name: Daily Brief
+
+on:
+  schedule:
+    # 5:30 AM IST = 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Run without Slack/Gmail/commit side effects'
+        type: boolean
+        default: false
+      today_override:
+        description: 'Override date (YYYY-MM-DD). Useful for replays.'
+        type: string
+        required: false
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: daily-brief-${{ github.event.inputs.today_override || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  brief:
+    name: Run daily pipeline
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    env:
+      LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
+      SUPABASE_URL: https://xbatqlzrtijdmicoakaq.supabase.co
+      GITHUB_REPO: Aayushm24/presidential-briefing
+      TZ: Asia/Kolkata
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set TODAY
+        id: today
+        run: |
+          if [ -n "${{ github.event.inputs.today_override }}" ]; then
+            echo "today=${{ github.event.inputs.today_override }}" >> $GITHUB_OUTPUT
+          else
+            echo "today=$(TZ=Asia/Kolkata date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set DRY_RUN
+        id: dry
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" == "true" ]; then
+            echo "dry_run=1" >> $GITHUB_OUTPUT
+          else
+            echo "dry_run=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Install deps (jq, curl, python3)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq jq curl python3 python3-pip
+          python3 -m pip install --quiet feedparser requests
+
+      - name: Configure Git identity
+        run: |
+          git config user.name "presidential-briefing-bot"
+          git config user.email "bot@users.noreply.github.com"
+
+      - name: Run daily brief pipeline via Claude Code
+        uses: anthropics/claude-code-base-action@v1
+        with:
+          prompt: |
+            Read .claude/skills/daily-brief/SKILL.md and follow it end-to-end.
+            TODAY=${{ steps.today.outputs.today }}
+            DRY_RUN=${{ steps.dry.outputs.dry_run }}
+          allowed_tools: Read,Glob,Grep,Bash,Edit,Write
+          claude_env: |
+            ATLAN_LLM_KEY=${{ secrets.ATLAN_LLM_KEY }}
+            SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}
+            SLACK_BOT_TOKEN=${{ secrets.SLACK_BOT_TOKEN }}
+            SLACK_DM_USER_ID=U08G02QDEAG
+            READWISE_EMAIL=aayushm24@library.readwise.io
+            GMAIL_FROM_ADDRESS=${{ secrets.GMAIL_FROM_ADDRESS }}
+            GMAIL_APP_PASSWORD=${{ secrets.GMAIL_APP_PASSWORD }}
+            LLM_PROXY_BASE_URL=https://llmproxy.atlan.dev
+            SUPABASE_URL=https://xbatqlzrtijdmicoakaq.supabase.co
+            GITHUB_REPO=Aayushm24/presidential-briefing
+            TODAY=${{ steps.today.outputs.today }}
+            DRY_RUN=${{ steps.dry.outputs.dry_run }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ATLAN_LLM_KEY }}
+
+      - name: Path allowlist enforcement
+        if: steps.dry.outputs.dry_run == '0'
+        run: |
+          # Defense in depth — the publish skill already checks, but we double-check here
+          DIFF_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || git diff --cached --name-only)
+          FAILED=0
+          while IFS= read -r FILE; do
+            [ -z "$FILE" ] && continue
+            case "$FILE" in
+              workspace/*) ;;
+              history/*) ;;
+              config/conviction.md) ;;
+              config/conviction.md.bak.*) ;;
+              .claude/skills/write-posts/references/voice.md) ;;
+              .claude/skills/write-posts/references/hooks.md) ;;
+              *)
+                echo "::error::Path allowlist violation: $FILE"
+                FAILED=1
+                ;;
+            esac
+          done <<< "$DIFF_FILES"
+          if [ $FAILED -eq 1 ]; then
+            echo "::error::Rolling back unauthorized changes"
+            git reset --hard HEAD~1
+            exit 1
+          fi
+
+      - name: Upload workspace artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: workspace-${{ steps.today.outputs.today }}
+          path: workspace/${{ steps.today.outputs.today }}/
+          retention-days: 14
+
+      - name: Notify on failure
+        if: failure() && env.SLACK_BOT_TOKEN != ''
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        run: |
+          curl -sS -X POST "https://slack.com/api/chat.postMessage" \
+            -H "Authorization: Bearer ${SLACK_BOT_TOKEN}" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "$(jq -n --arg date "${{ steps.today.outputs.today }}" --arg run "${{ github.run_id }}" \
+              '{channel: "U08G02QDEAG", text: ("daily-brief FAILED on " + $date + " — https://github.com/${{ github.repository }}/actions/runs/" + $run)}')" \
+            || true

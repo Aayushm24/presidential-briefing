@@ -1,0 +1,70 @@
+name: Dead-man Monitor
+
+on:
+  schedule:
+    # 07:00 IST = 01:30 UTC. Runs 1.5h after daily-brief. If daily-brief missed or failed, re-run.
+    - cron: '30 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  check:
+    name: Check today ran
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    env:
+      TZ: Asia/Kolkata
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Check workspace for today
+        id: check
+        run: |
+          TODAY=$(TZ=Asia/Kolkata date +%Y-%m-%d)
+          echo "today=$TODAY" >> $GITHUB_OUTPUT
+          STATUS_FILE="workspace/${TODAY}/.status"
+
+          if [ ! -f "$STATUS_FILE" ]; then
+            echo "::warning::No workspace directory for $TODAY — pipeline never started"
+            echo "needs_rerun=1" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          STATUS=$(cat "$STATUS_FILE")
+          if [ "$STATUS" == "shipped" ] || [ "$STATUS" == "quiet_day" ]; then
+            echo "OK: status=$STATUS"
+            echo "needs_rerun=0" >> $GITHUB_OUTPUT
+          else
+            echo "::warning::status=$STATUS for $TODAY — pipeline incomplete, triggering re-run"
+            echo "needs_rerun=1" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Trigger daily-brief rerun
+        if: steps.check.outputs.needs_rerun == '1'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run daily-brief.yml \
+            -R ${{ github.repository }} \
+            -f dry_run=false \
+            -f today_override="${{ steps.check.outputs.today }}"
+
+      - name: Notify Slack of rerun
+        if: steps.check.outputs.needs_rerun == '1' && env.SLACK_BOT_TOKEN != ''
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        run: |
+          curl -sS -X POST "https://slack.com/api/chat.postMessage" \
+            -H "Authorization: Bearer ${SLACK_BOT_TOKEN}" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "$(jq -n --arg date "${{ steps.check.outputs.today }}" \
+              '{channel: "U08G02QDEAG", text: ("dead-man monitor: daily-brief missed/incomplete for " + $date + ". Triggered rerun.")}')" \
+            || true

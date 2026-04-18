@@ -1,25 +1,59 @@
 # Presidential Briefing
 
-Daily AI knowledge system. Scrapes 40 sources, builds a compounding knowledge brain, generates a presidential briefing delivered to Readwise Reader and a LinkedIn post delivered to Slack.
+Daily AI knowledge system. Runs on GitHub Actions. Scrapes ~40 sources at 5:30 AM IST, scores, clusters into themes, writes a full newsletter + 3 LinkedIn post options, runs a 4-pass council review with adversarial attack, and delivers to Readwise Reader + Slack.
+
+All logic lives as composable Claude Code skills in `.claude/skills/`. Prompts are markdown — diffable, versionable, locally testable.
+
+---
 
 ## What it does
 
-Every morning at 5:30 AM:
+**5:30 AM IST (daily cron)**
+1. **Scan** — pulls 41 RSS feeds + 8 X/Twitter accounts via Grok
+2. **Score** — Sonnet picks top 10 for business relevance + practitioner value
+3. **Theme detect** — clusters stories into patterns (2+ stories per theme)
+4. **Brain connect** — semantic search against Supabase memory of past themes
+5. **Write briefing** — Opus writes 1,200–1,500 word newsletter with Helix 3-layer model (facts → synthesis → conviction)
+6. **Write 3 posts** — Opus writes 3 LinkedIn options in different formats
+7. **Council attack** — Grok adversarial review: find gaps, unsupported claims, voice violations
+8. **Revise** — Opus applies fixes (hard cap: 2 iterations)
+9. **Publish** — commits to `workspace/YYYY-MM-DD/`, emails brief to Readwise, Slack DMs the 3 posts
 
-1. **Intake** — Pulls from 40 sources (RSS feeds, X/Twitter via Grok, ArXiv, HN, GitHub trending)
-2. **Filter** — Scores every item on 5 dimensions. Picks the lead story + 3-5 secondary items.
-3. **Brain** — Ingests significant items into gbrain. Searches for connections to past knowledge.
-4. **Briefing** — Writes a 5-7 minute presidential briefing that teaches AI concepts from first principles.
-5. **Post** — Generates a LinkedIn post from the lead story with an original conviction (not a summary).
-6. **Review** — Multi-model council reviews both outputs. Fact-checks, verifies concepts, checks voice, scores novelty.
-7. **Deliver** — Briefing emailed to Readwise Reader. LinkedIn post sent to Slack for approve/edit/kill.
+**07:00 AM IST (dead-man check)**
+- If today's `workspace/` is empty, re-runs daily-brief. Mitigates GitHub Actions cron "best effort" SLA.
+
+**Sunday 5:30 PM IST (weekly feedback)**
+- Reads LinkedIn engagement via Sheets webhook
+- Writes `workspace/YYYY-MM-DD/conviction-candidates.md` for manual review
+- Auto-updates `hooks.md` scoring from 4-week engagement data
+- Commits changes so Monday's brief reads the updates
+
+---
 
 ## Architecture
 
-- **Orchestration**: n8n (self-hosted at n8n.atlan.com)
-- **LLM routing**: LiteLLM proxy at llmproxy.atlan.dev (Claude Opus for writing, Sonnet for classification, Gemini for fact-checking, Grok for X data + adversarial review)
-- **Knowledge layer**: gbrain (PGLite locally, upgradable to Supabase)
-- **Delivery**: Email (Readwise Reader) + Slack DM
+- **Runtime:** Claude Code headless in GitHub Actions (`anthropics/claude-code-base-action`)
+- **LLM gateway:** `llmproxy.atlan.dev` (LiteLLM proxy → Anthropic, Google, xAI)
+- **Brain:** Supabase Postgres + pgvector
+- **Delivery:** Gmail → Readwise + Slack webhook
+
+See `CLAUDE.md` for the skill routing table, `config/council.json` for model routing per task, `config/conviction.md` for the weekly POV.
+
+---
+
+## Folder structure
+
+```
+.claude/skills/          # composable skills (markdown prompts)
+.github/workflows/       # daily-brief.yml + dead-man.yml + weekly-feedback.yml + tests.yml
+config/                  # sources.csv, council.json, conviction.md
+workspace/YYYY-MM-DD/    # daily artifacts
+history/                 # published.jsonl, engagement.jsonl, themes.jsonl
+tests/                   # golden-format, kill-list-regex, voice-fixtures/
+brain-engine/            # gbrain reference (not active — Supabase is the brain)
+```
+
+---
 
 ## Setup
 
@@ -28,32 +62,32 @@ Every morning at 5:30 AM:
 git clone https://github.com/Aayushm24/presidential-briefing.git
 cd presidential-briefing
 
-# 2. Environment
-cp config/.env.example .env
-# Fill in: ANTHROPIC_AUTH_TOKEN, OPENAI_API_KEY, SLACK_BOT_TOKEN
+# 2. Local .env (for dev runs)
+cp .env.example .env
+# Fill in required keys. ANTHROPIC_AUTH_TOKEN, XAI_API_KEY, SUPABASE_ANON_KEY minimum.
 
-# 3. Initialize gbrain
-bun install -g gbrain
-gbrain init
+# 3. Test with dry run
+DRY_RUN=1 claude -p '/daily-brief'
 
-# 4. Import n8n workflow
-# Import n8n/workflow.json into n8n.atlan.com
+# 4. Wire GitHub Actions secrets
+# Settings -> Secrets and variables -> Actions -> New repository secret
+# Add the same keys as in .env.example.
 ```
 
-## Folder structure
+---
 
-```
-config/          — sources.csv, council.json, env
-skills/          — 7 self-contained skills (intake, filter, brain, briefing, post, review, feedback)
-workspace/       — daily artifacts (YYYY-MM-DD directories)
-brain/           — gbrain data (gitignored, managed by CLI)
-n8n/             — exportable workflow definition
-```
+## The compounding thesis
 
-Each skill has its own SKILL.md with complete instructions. CLAUDE.md at root is the routing table.
+Day 1: empty brain. The newsletter teaches concepts.
+Day 30: 100+ pages of theme history. The newsletter connects today's news to 2-week-old patterns.
+Day 100: 500+ pages. The system writes posts that carry the specificity of someone who has tracked AI daily for months.
 
-## The compounding effect
+The learning loop updates `config/conviction.md` + `.claude/skills/write-posts/references/hooks.md` + `voice.md` from what actually gets engagement on LinkedIn. Auto-rewrite gated at n ≥ 50 posts — before that, Aayush edits manually.
 
-Day 1: empty brain. The briefing teaches concepts. The post summarizes news.
-Day 30: brain has 100+ pages. The briefing connects today's news to past reading. The post makes connections nobody else makes.
-Day 100: brain has 500+ pages. The system writes posts that could only come from someone who has been tracking AI deeply for months.
+---
+
+## Status
+
+Migrating from n8n workflow `9wfJC0I0I0j92r0N` to Claude Code + GitHub Actions. See `~/.gstack/projects/presidential-briefing/aayush-design-20260418.md` for the approved design doc.
+
+**n8n workflow stays live during parallel-run period (days 6–10). Cutover only after 5 consecutive successful parallel runs with equivalent-or-better output.**
