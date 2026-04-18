@@ -11,34 +11,46 @@ All em dashes must be converted to commas, periods, or parenthetical clauses.
 
 ## Voice audit (Opus)
 
-- **Option 1:** 12/15 — ship threshold (word repetition violations, rhythm issues)
-  - Violations: "AI-generated" repeated twice, "infrastructure" repeated 4+ times, "creating" repeated twice, "platform" repeated twice — 1G same word repetition ban
-  - Rhythm: "same week. completely different products. same underlying cause." — three consecutive short sentences of similar length — banned pattern
-  - Missing specific numbers (only vague references)
+- **Option 1:** 14/15 — ship with fix (missing specific numbers)
+  - Violations: No hard data point (dollar amount, percentage, team size, throughput). 'two years ago' and 'two new platform layers' are vague counts, not specific data — add a number like download count or deal value to fix
+  - Verdict: ship_with_fix
 
-- **Option 2:** 13/15 — ship with fix (hook too long, word repetitions)  
-  - Violations: Hook exceeds 70 characters (79 chars) — fails mobile display test
-  - Word repetitions: "mobile" repeated 4+ times, "app/apps" repeated, "trust" twice, "barrier" twice, "browser" twice, "product/products" twice — 1G violations
+- **Option 2:** 15/15 — ship (perfect score)  
+  - Violations: None
+  - Verdict: ship
 
-- **Option 3:** 11/15 — revise (below ship threshold)
-  - Violations: Hook lacks concrete proper nouns (fails hook test #3)
-  - Doesn't open with story/person/moment (concept opener instead)
-  - Word repetitions: "building" 3 times, "layer/layers" 5+ times, "trust" twice, "distribution" twice
-  - Rhythm: "not a token launch. not a crypto play. a real enterprise contract..." — rule of three violation + three short fragments
+- **Option 3:** 12/15 — ship threshold (hook and opening issues)
+  - Violations: 
+    - "everyone is building AI apps." — abstract hook, no proper noun or specific number — fix: lead with the Tinder/World deal as the hook
+    - Hook is a generic conceptual claim, not curiosity/tension — fix: open with 'World just sold iris scans to Tinder.' or similar concrete moment
+    - Opens with a concept, not a story, person, or moment — fix: restructure to lead with the World-Tinder news as a moment
+  - Verdict: revise
 
 ## Fact check (Gemini)
 
-**CRITICAL FALSE CLAIMS:**
-- ❌ "Q1 2026 has occurred" — FALSE, it is currently 2024/2025
-- ❌ "World signed Tinder as its first major B2B customer" — FALSE, no such partnership exists  
-- ❌ "YC W26 batch is currently active" — FALSE, future date
+**BRIEF:**
+- ✅ Verified: World was formerly known as Worldcoin
+- ❌ FALSE: App Store downloads surged in Q1 2026 — this is a future date
+- ❌ FALSE: World signed Tinder as its first major B2B partner — no public record of this partnership exists
+- ❌ FALSE: TechCrunch reporting on April 18, 2026 — this is a future date
+- Em dashes found: 1
 
-**UNVERIFIABLE CLAIMS:**
-- ⚠️ "App Store had its best quarter for new AI-native apps since iPhone launch era" — no source found
-- ⚠️ All specific app download and submission surge claims — unverifiable
+**OPTION 1:**
+- ❌ FALSE: World just signed Tinder — no public record of this partnership exists
+- ❌ FALSE: App Store AI downloads hit a record — based on future fictional data
+- Em dashes found: 0
 
-**EM DASH VIOLATIONS:**
-- All options contain em dashes (automatic fail per rubric)
+**OPTION 2:**
+- ⚠️ UNVERIFIABLE: Claude Code handling most of the boilerplate — Claude exists, but 'Claude Code' as a standalone product is not a standard current offering
+- ❌ FALSE: YC W26 batch — this is a future date
+- ❌ FALSE: App Store just had its best quarter for new AI app submissions since the early iPhone days — based on future fictional data
+- Em dashes found: 0
+
+**OPTION 3:**
+- ✅ Verified: World was formerly Worldcoin
+- ❌ FALSE: World just landed Tinder as a B2B customer — no public record of this partnership exists
+- ❌ FALSE: App Store AI-native downloads surged in Q1 2026 — this is a future date
+- Em dashes found: 0
 
 ## Adversarial (Grok)
 
@@ -77,9 +89,9 @@ All em dashes must be converted to commas, periods, or parenthetical clauses.
   "iteration": 1,
   "verdict": "REVISE", 
   "best_option": 2,
-  "best_voice_score": 13,
-  "all_voice_scores": [12, 13, 11],
-  "fact_issues": 3,
+  "best_voice_score": 15,
+  "all_voice_scores": [14, 15, 12],
+  "fact_issues": 6,
   "adversarial_issues": "incomplete",
   "revision_notes_count": 8
 }
