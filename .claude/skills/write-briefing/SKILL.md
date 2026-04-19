@@ -342,19 +342,14 @@ Run quick validation against `section-order.md` rules:
 
 If validation fails structurally (e.g., missing What-to-do section), rewrite ONCE with specific fix. If second attempt fails, tag `[STRUCTURE-INCOMPLETE]` in the brief and proceed — `/attack` council will catch it.
 
-### Step 5: Append sources footer
+### Step 5: Write final brief
 
-Auto-generate `## Sources` footer from `scored.json` URLs:
+Skip the sources footer — inline links inside each section (when quoting or referencing) already give the reader one-click access. A trailing `## Sources` list adds noise and encourages readers to scan the list instead of the argument.
 
-```markdown
----
-
-## Sources
-
-1. [Lead article title] — [source domain, date]. URL
-2. [#2 title] — ...
-3. [#3 title] — ...
-```
+Inline citation pattern:
+- If quoting: `> "..." — [source name](URL)`
+- If referencing without quoting: end the sentence with a parenthetical link: `(see the [TechCrunch piece](URL) for the full numbers)`
+- Never repeat URLs in a footer; never drop a URL-less name and call it "sourced."
 
 Write final `workspace/${TODAY}/brief.md`.
 

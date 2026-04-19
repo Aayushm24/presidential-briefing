@@ -25,12 +25,13 @@ check_brief() {
   # What to do this week
   grep -q '### What to do this week' "$file" || errors+=("missing_what_to_do_this_week")
 
-  # Sources footer
-  grep -q '^## Sources' "$file" || errors+=("missing_sources_footer")
-
-  # Numbered sources (>=3)
-  local sources=$(awk '/^## Sources/,0' "$file" | grep -cE '^[0-9]+\.' || true)
-  [ "$sources" -ge 3 ] || errors+=("sources_count=$sources (expect >=3)")
+  # Inline citations: no "## Sources" footer (user removed for noise reduction)
+  if grep -q '^## Sources' "$file"; then
+    errors+=("sources_footer_present_should_be_inline_only")
+  fi
+  # Require at least 3 inline markdown links as evidence of sourcing
+  local inline_links=$(grep -oE '\[[^\]]+\]\(https?://[^)]+\)' "$file" | wc -l | tr -d ' ')
+  [ "$inline_links" -ge 3 ] || errors+=("inline_links=$inline_links (expect >=3)")
 
   # No em dashes (U+2014) — use UTF-8 byte sequence for portability across bash 3.2 + 4+
   local em_dash
@@ -39,13 +40,13 @@ check_brief() {
     errors+=("em_dash_found")
   fi
 
-  # No H2 outside Sources
-  local bad_h2=$(awk '/^## Sources/{exit} /^## / && !/^## Sources/{print}' "$file" | wc -l)
+  # No H2 anywhere (we removed the only allowed H2, Sources)
+  local bad_h2=$(grep -cE '^## ' "$file" || true)
   [ "$bad_h2" -eq 0 ] || errors+=("h2_in_body=$bad_h2")
 
-  # Word count 800-2500
+  # Word count: depth target is 1500-2500, gate 1200-2800 to allow slack
   local wc=$(wc -w < "$file")
-  [ "$wc" -ge 600 ] && [ "$wc" -le 3000 ] || errors+=("word_count=$wc (expect 600-3000)")
+  [ "$wc" -ge 1200 ] && [ "$wc" -le 2800 ] || errors+=("word_count=$wc (expect 1200-2800)")
 
   if [ ${#errors[@]} -gt 0 ]; then
     echo "FAIL: $file"

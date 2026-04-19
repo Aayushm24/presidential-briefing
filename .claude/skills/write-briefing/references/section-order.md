@@ -126,19 +126,16 @@ Rules:
 
 ---
 
-## 8. Sources (auto-generated footer)
+## 8. Citations — inline only, no footer
 
-```
----
+Cite sources inline where the claim lives. No trailing "## Sources" section. The reader gets one-click access where they need it, not a footer list they'd skim past.
 
-## Sources
+Patterns:
+- **Quote attribution:** `> "..." — [Publication](URL), YYYY-MM-DD`
+- **Reference without quoting:** end the sentence with a parenthetical link: `(see the [TechCrunch piece](URL) for the full numbers)`
+- **Named-entity link:** first mention of a product/company with public news links back: `[Cerebras](URL) filed for IPO...`
 
-1. [Article title] — [author, publication, date]. URL.
-2. [Article title] — [author, publication, date]. URL.
-...
-```
-
-Every cited claim maps to a numbered source. If a claim doesn't have a source, it gets tagged `[UNGROUNDED]` in the draft (gets resolved or killed during `/attack`).
+Every cited claim must trace to a URL inline. Claims without a link source get tagged `[UNGROUNDED]` in the draft (resolved or killed during `/attack`).
 
 ---
 
@@ -161,7 +158,7 @@ Pipeline enforces structure via `tests/golden-format.sh`:
 - H3 count: 3–8 (sections + secondary posts + closing)
 - "Key takeaways:" bold present
 - "### What to do this week" present (or `### [Week-specific title]` ending in `this week`)
-- "## Sources" footer present with ≥3 numbered sources
 - No em dashes (regex)
-- No H2 headers outside Sources
-- Word count: 800–2,500
+- No H2 headers
+- No "## Sources" footer (inline links only)
+- Word count: 1,500–2,500
