@@ -48,7 +48,7 @@ every agent i built kept losing state between sessions. i blamed the model.
 
 turns out it was me. i was passing everything inline instead of using a memory layer.
 
-[...900-1500 chars total...]
+[...1200-1700 chars total — hit the sweet spot from aayush-linkedin-patterns.md...]
 
 ---
 
@@ -402,7 +402,7 @@ Also save raw LLM output to `.posts-raw.json` for debugging.
 
 ## Kill list
 
-- NEVER write a post longer than 1,500 chars
+- NEVER write a post shorter than 1,100 chars — Aayush's top 5 by engagement average 1,384 chars (range 1,100-1,790). Short posts underperform for his audience. Sweet spot: 1,200-1,700 chars. Hard cap: 1,800 chars.
 - NEVER use the same template twice across options
 - NEVER fabricate Aayush's experience ("i built X" only when verifiable from workspace history)
 - NEVER address the audience directly ("for founders", "hey founders")

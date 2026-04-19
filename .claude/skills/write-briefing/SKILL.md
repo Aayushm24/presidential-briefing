@@ -23,18 +23,38 @@ Read from disk (NOT inline):
 
 Article text for the lead + 2 top secondary stories (fetched inline in this skill, Step 1).
 
-## Length cap
+## Length + depth
 
-**Target: 900–1,200 words.** Previous iteration at 1,655 words contained LLM-padding. Shorter = tighter = less room for slop.
+**Target: 1,800–2,200 words. Hard ceiling: 2,500.** Reversed from the earlier 900-1200 cap because Aayush's feedback was the briefs read shallow — "headlines without explanation." The new rule: explain the mechanism so the reader levels up, not just learns what happened.
 
-Hard caps:
+Section budgets:
 - Title: ≤80 chars, sentence case
-- Hook + bottom line: ≤120 words
-- Main piece (lead section): 500–700 words
-- Each secondary post (#2, #3): 200–300 words each
-- "What to do this week": 150–250 words
+- Hook + bottom line: ≤180 words
+- Main piece (lead section): 900–1,200 words — room to explain the mechanism, precedents, and second-order implications
+- Each secondary post (#2, #3): 350–500 words — enough to connect the dot, not just cite it
+- "What to do this week": 200–300 words
 
-If the draft exceeds 1,300 words, the editor must cut — not split into more sections.
+If draft exceeds 2,500 words, cut padding (adjectives, restatements), never cut explanatory mechanism. Length without depth = slop; depth with length = the reason to read.
+
+### The "explain the mechanism" principle
+
+Every claim in the brief must answer **three things** beyond the headline:
+
+1. **Why is this happening now?** What changed? What precedent does it follow or break? (Not "AI is growing" — "Cerebras was unable to IPO for 2 years because GPU concentration made public-market investors skeptical. The OpenAI contract broke that gate because it turned speculative demand into contracted revenue. That's the precedent that unlocks the capital markets for every specialized-chip startup waiting in queue.")
+
+2. **What's the causal chain from here?** What does this force next for the ecosystem, for competitors, for builders? Trace 2-3 steps forward.
+
+3. **What should a builder reading this update in their head?** Not as a CTA — as a shift in their working mental model. What belief should they now hold more strongly or weakly?
+
+A claim without all three is just news. A claim with all three compounds Aayush's understanding. The brief is the teacher.
+
+### Anti-patterns (explanation edition)
+
+- 🚫 "This matters because..." followed by abstract nouns (transformation, disruption, paradigm shift)
+- 🚫 Summarizing a story's TITLE and calling that "the takeaway"
+- 🚫 Three bullet points listing facts when one paragraph could explain the mechanism
+- 🚫 Ending a section with "time will tell" or "watch this space"
+- 🚫 Saying "this is significant" instead of SHOWING why via a concrete consequence
 
 ## Outputs
 
