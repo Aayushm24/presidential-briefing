@@ -135,23 +135,33 @@ jobs:
           QUIET="false"
           DEGRADED="false"
 
-          # Check scan status file first — it's the source of truth
-          if [ -f "${WS}/.status" ]; then
-            SCAN_STATUS=$(cat "${WS}/.status")
-            case "$SCAN_STATUS" in
-              scan-quiet) QUIET="true" ;;
-              scan-degraded) DEGRADED="true" ;;
-              scan-ok) ;;
-              *) QUIET="true" ;;  # anything unrecognized = safe fallback
-            esac
-          else
-            QUIET="true"  # no status file = something upstream broke
-          fi
-
-          # Score skill can also set quiet_day if no stories clear the bar
-          if [ -f "${WS}/scored.json" ] && [ "$(jq -r '.quiet_day // false' ${WS}/scored.json)" == "true" ]; then
+          # Primary signal: scored.json. If /score classified as quiet OR produced
+          # too few items OR never ran, we're quiet.
+          if [ ! -f "${WS}/scored.json" ]; then
+            echo "no scored.json → quiet"
+            QUIET="true"
+          elif [ "$(jq -r '.quiet_day // false' ${WS}/scored.json)" = "true" ]; then
+            echo "scored.json explicitly says quiet_day=true"
+            QUIET="true"
+          elif [ "$(jq '(.top_10 // []) | length' ${WS}/scored.json)" -lt 3 ]; then
+            TOP_N=$(jq '(.top_10 // []) | length' ${WS}/scored.json)
+            echo "scored.json has only $TOP_N items in top_10 (<3) → quiet"
             QUIET="true"
           fi
+
+          # Independent degradation signal from scan.sh
+          if [ -f "${WS}/.status" ] && [ "$(cat ${WS}/.status)" = "scan-degraded" ]; then
+            DEGRADED="true"
+          fi
+
+          # Diagnostics for future debugging
+          echo "---"
+          echo "scored.json exists: $([ -f "${WS}/scored.json" ] && echo yes || echo no)"
+          echo "scored.json quiet_day: $(jq -r '.quiet_day // "missing"' ${WS}/scored.json 2>/dev/null || echo 'unreadable')"
+          echo "scored.json top_10 count: $(jq '(.top_10 // []) | length' ${WS}/scored.json 2>/dev/null || echo 'unreadable')"
+          echo ".status exists: $([ -f "${WS}/.status" ] && echo yes || echo no)"
+          echo ".status value: $(cat ${WS}/.status 2>/dev/null || echo 'missing')"
+          echo "---"
 
           echo "quiet_day=$QUIET" >> $GITHUB_OUTPUT
           echo "degraded=$DEGRADED" >> $GITHUB_OUTPUT
