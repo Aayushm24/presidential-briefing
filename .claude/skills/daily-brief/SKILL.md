@@ -17,9 +17,7 @@ Required environment variables (read from `.env` locally, GitHub secrets in CI):
 ATLAN_LLM_KEY          # required — LiteLLM virtual key for llmproxy.atlan.dev (all models route through proxy)
 SUPABASE_ANON_KEY      # required — brain read via RLS (NOT service key)
 N8N_SLACK_WEBHOOK_URL  # optional — Slack Incoming Webhook URL. If empty, Slack is skipped.
-READWISE_EMAIL         # default aayushm24@library.readwise.io
-GMAIL_FROM_ADDRESS     # required — Gmail address sending the email
-GMAIL_APP_PASSWORD     # required — 16-char App Password (NOT account password)
+READWISE_TOKEN         # required — Readwise Reader API token (from readwise.io/access_token)
 DRY_RUN                # optional, when '1' skip Slack/Gmail/commit
 TODAY                  # optional, override date for testing (YYYY-MM-DD)
 ```

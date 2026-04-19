@@ -35,7 +35,6 @@
     "LLM_PROXY_BASE_URL": "https://llmproxy.atlan.dev",
     "SUPABASE_URL": "https://xbatqlzrtijdmicoakaq.supabase.co",
     "GITHUB_REPO": "Aayushm24/presidential-briefing",
-    "SLACK_DM_USER_ID": "U08G02QDEAG",
-    "READWISE_EMAIL": "aayushm24@library.readwise.io"
+    "SLACK_DM_USER_ID": "U08G02QDEAG"
   }
 }

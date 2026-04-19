@@ -14,7 +14,7 @@ Final step. Commits workspace to GitHub (via path-allowlisted add+commit+push), 
 - `workspace/${TODAY}/brief.md`
 - `workspace/${TODAY}/posts.md`
 - `workspace/${TODAY}/.council-verdict.json`
-- Env: `GMAIL_FROM_ADDRESS`, `GMAIL_APP_PASSWORD`, `READWISE_EMAIL`, `N8N_SLACK_WEBHOOK_URL` (optional), `DRY_RUN`, `GITHUB_REPO`
+- Env: `READWISE_TOKEN`, `N8N_SLACK_WEBHOOK_URL` (optional), `DRY_RUN`, `GITHUB_REPO`
 
 ## Outputs
 
@@ -104,23 +104,21 @@ else
 fi
 ```
 
-### Step 3: Email brief to Readwise
+### Step 3: Save brief to Readwise Reader (API, not email)
 
-The Readwise Reader inbox accepts emails at `${READWISE_EMAIL}`. Subject becomes the document title. Plain text body is the article.
+Direct POST to Readwise Reader API v3. No email in the loop — clean title (just the H1), proper HTML rendering of headers/quotes/links.
 
 ```bash
-SUBJECT="PDB — ${DATE}: ${LEAD_TITLE:0:60}"
-BODY=$(cat workspace/${DATE}/brief.md)
+GITHUB_BRIEF_URL="https://github.com/${GITHUB_REPO}/blob/main/workspace/${DATE}/brief.md"
 
 if [ "${DRY_RUN:-0}" != "1" ]; then
-  # Uses Gmail SMTP + App Password (simpler than OAuth for a daily cron)
-  python3 scripts/send_gmail.py "${READWISE_EMAIL}" "${SUBJECT}" "${BODY}"
+  python3 scripts/send_readwise.py "workspace/${DATE}/brief.md" "${GITHUB_BRIEF_URL}"
 else
-  echo "[DRY_RUN] would email to ${READWISE_EMAIL}: ${SUBJECT}"
+  echo "[DRY_RUN] would save to Readwise Reader: ${GITHUB_BRIEF_URL}"
 fi
 ```
 
-See `scripts/send_gmail.py` — uses `GMAIL_APP_PASSWORD` + `GMAIL_FROM_ADDRESS`.
+See `scripts/send_readwise.py` — uses `READWISE_TOKEN` env var. Converts markdown → HTML via Python `markdown` library. Tags with `ai-brief` + `daily` + the date.
 
 ### Step 4: Slack delivery via n8n proxy webhook
 

@@ -61,7 +61,7 @@ Any other path change in an automated commit is rejected by the workflow.
 - Sources: `config/sources.csv`
 - Model routing: `config/council.json` (task → model, via `llmproxy.atlan.dev`)
 - Weekly POV: `config/conviction.md`
-- Secrets: GitHub Actions secrets — `ATLAN_LLM_KEY` (shared by llmproxy + xAI), `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_KEY` (weekly only), `GMAIL_APP_PASSWORD`, `GMAIL_FROM_ADDRESS`, `N8N_SLACK_WEBHOOK_URL` (n8n proxy — Slack bot token lives in n8n, not here). Non-secret env baked into workflow: `SLACK_DM_USER_ID=U08G02QDEAG`, `READWISE_EMAIL=aayushm24@library.readwise.io`.
+- Secrets: GitHub Actions secrets — `ATLAN_LLM_KEY` (shared by llmproxy + xAI), `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_KEY` (weekly only), `READWISE_TOKEN` (Readwise Reader API), `N8N_SLACK_WEBHOOK_URL` (n8n proxy — Slack bot token lives in n8n, not here).
 
 ## Infrastructure
 

@@ -79,7 +79,7 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq jq curl python3 python3-pip
-          python3 -m pip install --quiet feedparser requests
+          python3 -m pip install --quiet feedparser requests markdown
 
       # Deterministic scan: RSS (all 44 feeds) + Grok via proxy + merge.
       # No LLM involvement — bash does this much faster than Claude Code
@@ -312,14 +312,12 @@ jobs:
           DRY_RUN: ${{ needs.intake.outputs.dry_run }}
 
       # Deterministic delivery — plain bash. No LLM involvement.
-      - name: Deliver (commit + email + Slack)
+      - name: Deliver (commit + Readwise + Slack)
         if: needs.intake.outputs.quiet_day != 'true'
         env:
           DATE: ${{ needs.intake.outputs.today }}
           DRY_RUN: ${{ needs.intake.outputs.dry_run }}
-          GMAIL_FROM_ADDRESS: ${{ secrets.GMAIL_FROM_ADDRESS }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-          READWISE_EMAIL: aayushm24@library.readwise.io
+          READWISE_TOKEN: ${{ secrets.READWISE_TOKEN }}
           N8N_SLACK_WEBHOOK_URL: ${{ secrets.N8N_SLACK_WEBHOOK_URL }}
           GITHUB_REPO: Aayushm24/presidential-briefing
         run: |
@@ -366,12 +364,14 @@ jobs:
             echo "committed to main"
           fi
 
-          # --- Email brief to Readwise ---
-          SUBJECT="PDB — ${DATE}: $(echo "$LEAD_TITLE" | head -c 60)"
+          # --- Save brief to Readwise Reader via API ---
+          # Title is clean (just the H1), no "PDB — DATE:" prefix.
+          # HTML rendered properly so Reader shows headers, blockquotes, links.
+          GITHUB_BRIEF_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/brief.md"
           if [ "$DRY_RUN" == "1" ]; then
-            echo "[DRY_RUN] would email ${READWISE_EMAIL}: ${SUBJECT}"
+            echo "[DRY_RUN] would save to Readwise Reader: ${GITHUB_BRIEF_URL}"
           else
-            python3 scripts/send_gmail.py "${READWISE_EMAIL}" "${SUBJECT}" "$(cat ${WS}/brief.md)"
+            python3 scripts/send_readwise.py "${WS}/brief.md" "${GITHUB_BRIEF_URL}"
           fi
 
           # --- Slack via n8n webhook ---
