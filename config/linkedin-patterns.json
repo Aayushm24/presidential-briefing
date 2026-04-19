@@ -1,44 +1,52 @@
 {
-  "total_posts": 10,
+  "total_posts": 25,
   "top_5_by_engagement": [
     {
-      "date": "26-May-2025",
+      "date": "2025-05-26",
       "first_line": "I quit my job with zero backup plan.",
       "hook_pattern": "D",
       "style": "Vulnerable Victor",
       "ctas": [
         "soft-close"
       ],
-      "composite_engagement": 294,
-      "reactions": 214,
-      "comments": 25
+      "composite_engagement": 392,
+      "reactions": 264,
+      "comments": 41
     },
     {
-      "date": "21-Jul-2025",
+      "date": "2025-03-05",
+      "first_line": "I’m happy to share that I’m starting a new position as AI program manager at Atlan!",
+      "hook_pattern": "other",
+      "style": "Unclassified",
+      "ctas": [],
+      "composite_engagement": 267,
+      "reactions": 123,
+      "comments": 48
+    },
+    {
+      "date": "2025-07-21",
       "first_line": "I asked AI one simple question about our future...",
       "hook_pattern": "other",
       "style": "Unclassified",
       "ctas": [
         "direct-question"
       ],
-      "composite_engagement": 43,
-      "reactions": 10,
-      "comments": 11
+      "composite_engagement": 117,
+      "reactions": 21,
+      "comments": 32
     },
     {
-      "date": "29-May-2025",
-      "first_line": "I'm convinced some teenager with ChatGPT is destroying my returns.",
-      "hook_pattern": "B",
-      "style": "Contrarian Philosopher",
-      "ctas": [
-        "soft-close"
-      ],
-      "composite_engagement": 39,
-      "reactions": 39,
-      "comments": 0
+      "date": "2024-10-24",
+      "first_line": "Last week was a huge win for me....",
+      "hook_pattern": "other",
+      "style": "Unclassified",
+      "ctas": [],
+      "composite_engagement": 99,
+      "reactions": 69,
+      "comments": 10
     },
     {
-      "date": "28-May-2025",
+      "date": "2025-05-28",
       "first_line": "every startup says they're \"ai-powered\" now.",
       "hook_pattern": "A",
       "style": "Contrarian Philosopher",
@@ -46,86 +54,76 @@
         "direct-question",
         "soft-close"
       ],
-      "composite_engagement": 36,
-      "reactions": 36,
-      "comments": 0
-    },
-    {
-      "date": "13-Sep-2025",
-      "first_line": "I finally broke GPT…",
-      "hook_pattern": "B",
-      "style": "Absurdist Truth-Teller",
-      "ctas": [],
-      "composite_engagement": 25,
-      "reactions": 10,
-      "comments": 5
+      "composite_engagement": 87,
+      "reactions": 57,
+      "comments": 10
     }
   ],
   "bottom_3_by_engagement": [
     {
-      "date": "2-Jun-2025",
-      "first_line": "Last week I discovered I'm terrible",
-      "hook_pattern": "B",
-      "style": "Vulnerable Victor",
-      "composite_engagement": 10
-    },
-    {
-      "date": "30-May-2025",
-      "first_line": "I read something nasty today 😔",
+      "date": "2026-04-17",
+      "first_line": "Every SaaS is shipping an AI button right now. Most of them are going to look ridiculous in 18 months.",
       "hook_pattern": "other",
       "style": "Unclassified",
       "composite_engagement": 7
     },
     {
-      "date": "20-Aug-2025",
-      "first_line": "Your AI startup isn't a SaaS company.",
-      "hook_pattern": "A",
+      "date": "2025-01-28",
+      "first_line": "Any obsidian users in my network? ",
+      "hook_pattern": "other",
       "style": "Unclassified",
-      "composite_engagement": 5
+      "composite_engagement": 1
+    },
+    {
+      "date": "2024-09-20",
+      "first_line": "Can't wait for this Jocelyn Thompson, SPHR!!",
+      "hook_pattern": "other",
+      "style": "Unclassified",
+      "composite_engagement": 1
     }
   ],
   "hook_pattern_stats": {
     "A": {
       "count": 2,
-      "avg_engagement": 20.5
+      "avg_engagement": 47.5
     },
     "B": {
       "count": 4,
-      "avg_engagement": 23.8
+      "avg_engagement": 33.8
     },
     "C": {
       "count": 1,
-      "avg_engagement": 24.0
+      "avg_engagement": 41.0
     },
     "D": {
       "count": 1,
-      "avg_engagement": 294.0
+      "avg_engagement": 392.0
     },
     "other": {
-      "count": 2,
-      "avg_engagement": 25.0
+      "count": 17,
+      "avg_engagement": 55.6
     }
   },
   "style_stats": {
     "Vulnerable Victor": {
       "count": 3,
-      "avg_engagement": 108.3
+      "avg_engagement": 145.0
     },
     "Contrarian Philosopher": {
       "count": 2,
-      "avg_engagement": 37.5
+      "avg_engagement": 69.5
     },
     "Absurdist Truth-Teller": {
       "count": 2,
-      "avg_engagement": 24.5
+      "avg_engagement": 40.5
     },
     "Relatable Human": {
-      "count": 0,
-      "avg_engagement": 0.0
+      "count": 1,
+      "avg_engagement": 67.0
     },
     "Unclassified": {
-      "count": 3,
-      "avg_engagement": 18.3
+      "count": 17,
+      "avg_engagement": 52.2
     }
   },
   "cta_stats": {
@@ -135,7 +133,7 @@
     },
     "direct-question": {
       "count": 4,
-      "avg_engagement": 23.5
+      "avg_engagement": 58.0
     },
     "challenge": {
       "count": 0,
@@ -143,27 +141,44 @@
     },
     "community": {
       "count": 1,
-      "avg_engagement": 24.0
+      "avg_engagement": 41.0
     },
     "soft-close": {
-      "count": 5,
-      "avg_engagement": 82.8
+      "count": 8,
+      "avg_engagement": 98.5
     }
   },
   "length_buckets": {
-    "short (<1000 chars)": [],
-    "medium (1000-2000)": [
-      21,
-      294,
-      36,
-      39,
-      7,
-      10,
-      24,
-      43,
-      5,
-      25
+    "short (<1000 chars)": [
+      267,
+      1,
+      11,
+      1,
+      32,
+      56,
+      17
     ],
-    "long (>=2000)": []
+    "medium (1000-2000)": [
+      12,
+      40,
+      8,
+      117,
+      41,
+      20,
+      8,
+      52,
+      87,
+      23,
+      392,
+      99,
+      50,
+      52,
+      76,
+      73
+    ],
+    "long (>=2000)": [
+      7,
+      67
+    ]
   }
 }

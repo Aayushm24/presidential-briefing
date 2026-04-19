@@ -4,79 +4,79 @@
 
 Read by `/write-posts` when generating the 3 daily options. Use this to weight which Blueprint style/hook/CTA to pick for today's content based on what's actually worked for Aayush.
 
-**Total posts analyzed:** 10
+**Total posts analyzed:** 25
 
 ---
 
 ## Top 5 posts by composite engagement
 
-### #1 — 26-May-2025  (engagement: 294)
+### #1 — 2025-05-26  (engagement: 392)
 - Hook pattern: **D** | Style: **Vulnerable Victor** | CTAs: soft-close
-- Reactions: 214, Comments: 25
+- Reactions: 264, Comments: 41
 - First line: *"I quit my job with zero backup plan."*
 
-### #2 — 21-Jul-2025  (engagement: 43)
+### #2 — 2025-03-05  (engagement: 267)
+- Hook pattern: **other** | Style: **Unclassified** | CTAs: none
+- Reactions: 123, Comments: 48
+- First line: *"I’m happy to share that I’m starting a new position as AI program manager at Atlan!"*
+
+### #3 — 2025-07-21  (engagement: 117)
 - Hook pattern: **other** | Style: **Unclassified** | CTAs: direct-question
-- Reactions: 10, Comments: 11
+- Reactions: 21, Comments: 32
 - First line: *"I asked AI one simple question about our future..."*
 
-### #3 — 29-May-2025  (engagement: 39)
-- Hook pattern: **B** | Style: **Contrarian Philosopher** | CTAs: soft-close
-- Reactions: 39, Comments: 0
-- First line: *"I'm convinced some teenager with ChatGPT is destroying my returns."*
+### #4 — 2024-10-24  (engagement: 99)
+- Hook pattern: **other** | Style: **Unclassified** | CTAs: none
+- Reactions: 69, Comments: 10
+- First line: *"Last week was a huge win for me...."*
 
-### #4 — 28-May-2025  (engagement: 36)
+### #5 — 2025-05-28  (engagement: 87)
 - Hook pattern: **A** | Style: **Contrarian Philosopher** | CTAs: direct-question, soft-close
-- Reactions: 36, Comments: 0
+- Reactions: 57, Comments: 10
 - First line: *"every startup says they're "ai-powered" now."*
-
-### #5 — 13-Sep-2025  (engagement: 25)
-- Hook pattern: **B** | Style: **Absurdist Truth-Teller** | CTAs: none
-- Reactions: 10, Comments: 5
-- First line: *"I finally broke GPT…"*
 
 ## Bottom 3 (what underperforms)
 
-- 2-Jun-2025 | Hook: **B** | Style: **Vulnerable Victor** | Engagement: 10
-  *"Last week I discovered I'm terrible"*
-- 30-May-2025 | Hook: **other** | Style: **Unclassified** | Engagement: 7
-  *"I read something nasty today 😔"*
-- 20-Aug-2025 | Hook: **A** | Style: **Unclassified** | Engagement: 5
-  *"Your AI startup isn't a SaaS company."*
+- 2026-04-17 | Hook: **other** | Style: **Unclassified** | Engagement: 7
+  *"Every SaaS is shipping an AI button right now. Most of them are going to look ridiculous in 18 months."*
+- 2025-01-28 | Hook: **other** | Style: **Unclassified** | Engagement: 1
+  *"Any obsidian users in my network? "*
+- 2024-09-20 | Hook: **other** | Style: **Unclassified** | Engagement: 1
+  *"Can't wait for this Jocelyn Thompson, SPHR!!"*
 
 ## Hook pattern performance
 
 | Pattern | Count | Avg engagement |
 |---|---|---|
-| **D** Time Bomb | 1 | 294.0 |
-| **other** Other/Unclassified | 2 | 25.0 |
-| **C** Absurd Comparison | 1 | 24.0 |
-| **B** Identity / Confession | 4 | 23.8 |
-| **A** Contrarian Truth | 2 | 20.5 |
+| **D** Time Bomb | 1 | 392.0 |
+| **other** Other/Unclassified | 17 | 55.6 |
+| **A** Contrarian Truth | 2 | 47.5 |
+| **C** Absurd Comparison | 1 | 41.0 |
+| **B** Identity / Confession | 4 | 33.8 |
 
 ## Style performance
 
 | Style | Count | Avg engagement |
 |---|---|---|
-| **Vulnerable Victor** | 3 | 108.3 |
-| **Contrarian Philosopher** | 2 | 37.5 |
-| **Absurdist Truth-Teller** | 2 | 24.5 |
-| **Unclassified** | 3 | 18.3 |
-| **Relatable Human** | 0 | 0.0 |
+| **Vulnerable Victor** | 3 | 145.0 |
+| **Contrarian Philosopher** | 2 | 69.5 |
+| **Relatable Human** | 1 | 67.0 |
+| **Unclassified** | 17 | 52.2 |
+| **Absurdist Truth-Teller** | 2 | 40.5 |
 
 ## CTA type performance
 
 | CTA | Count | Avg engagement |
 |---|---|---|
-| soft-close | 5 | 82.8 |
-| community | 1 | 24.0 |
-| direct-question | 4 | 23.5 |
+| soft-close | 8 | 98.5 |
+| direct-question | 4 | 58.0 |
+| community | 1 | 41.0 |
 | permission-giving | 0 | 0 |
 | challenge | 0 | 0 |
 
 ## Reference post (Aayush's top performer — use as voice-matching anchor)
 
-Date: 26-May-2025 | Engagement: 294
+Date: 2025-05-26 | Engagement: 392
 
 ```
 I quit my job with zero backup plan.
