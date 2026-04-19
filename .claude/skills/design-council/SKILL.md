@@ -8,6 +8,15 @@ This skill is adapted from Atlan's Marketing OS design-council (`atlanhq/atlan-m
 - **7-dimension design review.** Hierarchy, Contrast, Flow, Layout, Clear Space, CTA, Scroll-Stop.
 - **Human-paced pauses.** Never auto-advance. Human can kill, combine, redirect, restart.
 - **Quality tests.** Logo-swap, 3-second, thumbnail.
+- **Color theory.** Structured 5-color palettes (moods), 60-30-10 rule. See `references/color-theory.md`.
+- **Plain-English copy.** Every word on the creative reads at 5th-grade level. No MBA vocabulary. See `.claude/skills/write-briefing/references/plain-english-rules.md`.
+
+## Before writing ANY copy — mandatory reads
+
+1. `.claude/skills/write-briefing/references/plain-english-rules.md` — 7 hard language rules. Apply to every chip, headline, body line, footer. No exceptions. If a word is on the banned list (commodity, moat, stack, differentiation, application layer, etc.), pick a concrete replacement.
+2. `.claude/skills/design-council/references/color-theory.md` — pick mood based on post archetype.
+
+The copy on the creative is held to the SAME plain-English bar as the brief and the LinkedIn posts. A creative with "commoditization" on it is REVISE, no matter how pretty it looks.
 
 Skipped (relative to Atlan's): full Discover phase, state management JSON, Figma handoff, Imagen production generation. The personal LinkedIn use case is one-shot, fast, doesn't need designer handoff.
 
