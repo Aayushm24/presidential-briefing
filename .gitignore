@@ -14,9 +14,16 @@ brain/
 # Backup tmp
 *.bak.*.tmp
 
-# Daily workspace artifacts (large JSON files)
+# Daily workspace artifacts — ephemeral scan intermediates, never commit.
+# scan-summary.json IS committed (it's the dashboard). Brief/posts/council-notes committed.
 workspace/*/raw-intake.json
 workspace/*/scored-items.json
+workspace/*/.rss-items.jsonl
+workspace/*/.rss-stats.json
+workspace/*/.rss-stats.log
+workspace/*/.rss-stderr.log
+workspace/*/.grok-raw.json
+workspace/*/.status
 
 # OS
 .DS_Store

@@ -44,6 +44,7 @@ jobs:
       today: ${{ steps.today.outputs.today }}
       dry_run: ${{ steps.dry.outputs.dry_run }}
       quiet_day: ${{ steps.classify.outputs.quiet_day }}
+      degraded: ${{ steps.classify.outputs.degraded }}
 
     env:
       LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
@@ -79,7 +80,10 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq jq curl python3 python3-pip
-          python3 -m pip install --quiet feedparser requests markdown
+          # --break-system-packages defends against PEP 668 if the runner image tightens.
+          # Failing loud here is better than feedparser silently missing downstream.
+          python3 -m pip install --break-system-packages --quiet feedparser requests markdown
+          python3 -c "import feedparser, requests, markdown; print('deps ok')"
 
       # Deterministic scan: RSS (all 44 feeds) + Grok via proxy + merge.
       # No LLM involvement — bash does this much faster than Claude Code
@@ -123,21 +127,67 @@ jobs:
           TODAY: ${{ steps.today.outputs.today }}
           DRY_RUN: ${{ steps.dry.outputs.dry_run }}
 
-      - name: Classify day (quiet vs normal)
+      - name: Classify day (quiet vs normal vs degraded)
         id: classify
         run: |
           TODAY=${{ steps.today.outputs.today }}
+          WS="workspace/${TODAY}"
           QUIET="false"
-          if [ -f "workspace/${TODAY}/scored.json" ]; then
-            if [ "$(jq -r '.quiet_day // false' workspace/${TODAY}/scored.json)" == "true" ]; then
-              QUIET="true"
-            fi
+          DEGRADED="false"
+
+          # Check scan status file first — it's the source of truth
+          if [ -f "${WS}/.status" ]; then
+            SCAN_STATUS=$(cat "${WS}/.status")
+            case "$SCAN_STATUS" in
+              scan-quiet) QUIET="true" ;;
+              scan-degraded) DEGRADED="true" ;;
+              scan-ok) ;;
+              *) QUIET="true" ;;  # anything unrecognized = safe fallback
+            esac
           else
-            # No scored.json = scan failed = treat as quiet
+            QUIET="true"  # no status file = something upstream broke
+          fi
+
+          # Score skill can also set quiet_day if no stories clear the bar
+          if [ -f "${WS}/scored.json" ] && [ "$(jq -r '.quiet_day // false' ${WS}/scored.json)" == "true" ]; then
             QUIET="true"
           fi
+
           echo "quiet_day=$QUIET" >> $GITHUB_OUTPUT
-          echo "classified: quiet_day=$QUIET"
+          echo "degraded=$DEGRADED" >> $GITHUB_OUTPUT
+          echo "classified: quiet_day=$QUIET degraded=$DEGRADED"
+
+      - name: Alarm on scan degradation (early warning to Slack)
+        if: steps.classify.outputs.degraded == 'true' && steps.dry.outputs.dry_run == '0'
+        env:
+          N8N_SLACK_WEBHOOK_URL: ${{ secrets.N8N_SLACK_WEBHOOK_URL }}
+          DATE: ${{ steps.today.outputs.today }}
+        run: |
+          WS="workspace/${DATE}"
+          REASONS=$(jq -c '.degraded_reasons' "${WS}/scan-summary.json" 2>/dev/null || echo '[]')
+          RSS_OK=$(jq -r '.rss.feeds_processed' "${WS}/scan-summary.json" 2>/dev/null || echo "?")
+          RSS_TOTAL=$(jq -r '.rss.feeds_total' "${WS}/scan-summary.json" 2>/dev/null || echo "?")
+          X_POSTS=$(jq -r '.x.posts_within_24h' "${WS}/scan-summary.json" 2>/dev/null || echo "?")
+          GH_SUMMARY_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/scan-summary.json"
+          PAYLOAD=$(jq -n \
+            --arg date "$DATE" \
+            --arg rss "${RSS_OK}/${RSS_TOTAL} feeds ok" \
+            --arg x "${X_POSTS} X posts (24h)" \
+            --arg summary_url "$GH_SUMMARY_URL" \
+            --argjson reasons "$REASONS" \
+            '{
+              type: "scan_degraded",
+              date: $date,
+              message: "Scan degraded — brief will still ship",
+              rss_summary: $rss,
+              x_summary: $x,
+              reasons: $reasons,
+              scan_summary_url: $summary_url
+            }')
+          HTTP=$(curl -sS -o /tmp/slack-resp.txt -w "%{http_code}" \
+            -X POST "${N8N_SLACK_WEBHOOK_URL}" \
+            -H "Content-Type: application/json" -d "$PAYLOAD" || echo "000")
+          echo "degraded alarm → n8n HTTP $HTTP"
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -354,10 +404,11 @@ jobs:
 
           # --- Commit to GitHub ---
           if [ "$DRY_RUN" == "1" ]; then
-            echo "[DRY_RUN] would commit ${WS}/brief.md + posts.md to main"
+            echo "[DRY_RUN] would commit ${WS}/brief.md + posts.md + scan-summary.json to main"
           else
             git add "${WS}/brief.md" "${WS}/posts.md" "${WS}/posts.json" 2>/dev/null || true
             [ -f "${WS}/council-notes.md" ] && git add "${WS}/council-notes.md"
+            [ -f "${WS}/scan-summary.json" ] && git add "${WS}/scan-summary.json"
             [ -f history/published.jsonl ] && git add history/published.jsonl
             git commit -m "daily brief: ${DATE} — ${LEAD_TITLE}"
             git push origin main
@@ -378,17 +429,36 @@ jobs:
           POSTS_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/posts.md"
           BRIEF_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/brief.md"
           POSTS_JSON=$(jq -c '[.options[] | .post]' "${WS}/posts.json")
+
+          # Scan health — always include so Slack shows what the brief was built from
+          if [ -f "${WS}/scan-summary.json" ]; then
+            SCAN_HEALTH=$(jq -c '{
+              status: .status,
+              rss_items: .rss.items_returned,
+              rss_feeds_ok: .rss.feeds_processed,
+              rss_feeds_total: .rss.feeds_total,
+              rss_feeds_failed: .rss.feeds_failed,
+              x_posts: .x.posts_within_24h,
+              x_dropped_stale: .x.posts_dropped_stale,
+              degraded_reasons: .degraded_reasons
+            }' "${WS}/scan-summary.json")
+          else
+            SCAN_HEALTH='{"status":"unknown","note":"scan-summary.json missing"}'
+          fi
+
           PAYLOAD=$(jq -n \
             --arg title "$LEAD_TITLE" \
             --arg brief_url "$BRIEF_URL" \
             --arg posts_url "$POSTS_URL" \
             --argjson posts "$POSTS_JSON" \
+            --argjson scan_health "$SCAN_HEALTH" \
             '{
               type: "daily_brief",
               title: $title,
               briefing_url: $brief_url,
               posts_url: $posts_url,
-              posts: $posts
+              posts: $posts,
+              scan_health: $scan_health
             }')
 
           if [ "$DRY_RUN" == "1" ]; then

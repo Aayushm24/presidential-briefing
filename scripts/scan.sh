@@ -7,13 +7,18 @@
 #   ATLAN_LLM_KEY       LiteLLM virtual key for proxy (same for Grok + Claude via proxy)
 #   LLM_PROXY_BASE_URL  https://llmproxy.atlan.dev (default)
 #
-# Writes:
-#   workspace/$TODAY/raw-intake.json
-#   workspace/$TODAY/.rss-stats.log
-#   workspace/$TODAY/.grok-raw.json
-#   workspace/$TODAY/.status  (scan-ok or scan-failed)
+# Writes (committed every run so main is the source of truth on scan health):
+#   workspace/$TODAY/raw-intake.json      (full intake — what downstream reads)
+#   workspace/$TODAY/scan-summary.json    (per-feed errors + stats — the dashboard)
+#   workspace/$TODAY/.status              (scan-ok | scan-degraded | scan-quiet)
 #
-# Exit 0 on success. Exit 1 if fewer than 3 items collected (triggers quiet-day).
+# Exit codes:
+#   0  Success OR degraded OR quiet (orchestrator routes on .status)
+#   1  Unrecoverable failure (missing env, parse_rss crash, etc.)
+#
+# 24h discipline: both RSS and Grok X posts post-filtered to the last 24 hours
+# from NOW. Anything older is dropped — this pipeline runs daily, yesterday's
+# content is already yesterday's brief.
 
 set -euo pipefail
 
@@ -26,21 +31,36 @@ LLM_PROXY_BASE_URL="${LLM_PROXY_BASE_URL:-https://llmproxy.atlan.dev}"
 echo "[scan] TODAY=$TODAY" >&2
 
 # =============================================================
-# STEP 1: RSS via parse_rss.py (all 44 feeds, single invocation)
+# STEP 1: RSS via parse_rss.py — with structured stats JSON
 # =============================================================
+RSS_STATS="$WS/.rss-stats.json"
 echo "[scan] running parse_rss.py --csv config/sources.csv" >&2
-python3 scripts/parse_rss.py --csv config/sources.csv \
-  > "$WS/.rss-items.jsonl" \
-  2> "$WS/.rss-stats.log" || echo "[scan] parse_rss exited non-zero, continuing" >&2
+# parse_rss.py exits 2 if feedparser missing. Fail loud in that case.
+# stdout = JSON items, stderr = human log. Never collapse them.
+if ! python3 scripts/parse_rss.py --csv config/sources.csv --stats-json "$RSS_STATS" \
+  > "$WS/.rss-items.jsonl" 2> "$WS/.rss-stderr.log"; then
+  echo "::error::parse_rss.py failed — RSS unavailable. Check feedparser install." >&2
+  cat "$WS/.rss-stderr.log" >&2 || true
+  echo "scan-failed" > "$WS/.status"
+  exit 1
+fi
+# Echo parse_rss stderr to the job log for visibility
+cat "$WS/.rss-stderr.log" >&2 || true
 
 RSS_COUNT=$(wc -l < "$WS/.rss-items.jsonl" | tr -d ' ')
-echo "[scan] RSS items: $RSS_COUNT" >&2
+FEEDS_FAILED=$(jq '.feeds_failed' "$RSS_STATS")
+FEEDS_TOTAL=$(jq '.feeds_total' "$RSS_STATS")
+echo "[scan] RSS: $RSS_COUNT items from $(jq '.feeds_processed' "$RSS_STATS")/$FEEDS_TOTAL feeds ($FEEDS_FAILED failed)" >&2
 
 # =============================================================
 # STEP 2: Grok X search via proxy /responses
 # =============================================================
-GROK_PROMPT="Today's date = ${TODAY}. Search X/Twitter for posts from the last 24 hours by these X user handles: @karpathy, @rasbt, @natolambert, @simonw, @emollick, @garrytan, @swyx, @ttunguz. For each substantive post about AI technology, research, or industry, return a JSON array: [{author, date_of_post, text, full_post, url, key_claims}]. Skip personal/promotional content. Return ONLY the JSON array and nothing else."
+# Grok uses `since:YYYY-MM-DD` which is date-granular (up to 48h). We
+# post-filter by date_of_post against NOW-24h below.
+YESTERDAY=$(TZ=UTC date -u -d "yesterday" +%Y-%m-%d 2>/dev/null || TZ=UTC date -u -v-1d +%Y-%m-%d)
+GROK_PROMPT="Today's date = ${TODAY}. Search X/Twitter for posts from the last 24 hours (since ${YESTERDAY}) by these X user handles: @karpathy, @rasbt, @natolambert, @simonw, @emollick, @garrytan, @swyx, @ttunguz. For each substantive post about AI technology, research, or industry, return a JSON array: [{author, date_of_post, text, full_post, url, key_claims}]. Include the exact timestamp in date_of_post if available. Skip personal/promotional content. Return ONLY the JSON array and nothing else."
 
+GROK_STATUS="ok"
 echo "[scan] calling Grok via ${LLM_PROXY_BASE_URL}/responses" >&2
 curl -sS --max-time 120 -X POST "${LLM_PROXY_BASE_URL}/responses" \
   -H "Authorization: Bearer ${ATLAN_LLM_KEY}" \
@@ -51,17 +71,16 @@ curl -sS --max-time 120 -X POST "${LLM_PROXY_BASE_URL}/responses" \
     tools: [{type:"x_search"}],
     temperature: 0.2
   }')" > "$WS/.grok-raw.json" || {
-    echo "[scan] Grok call failed (non-fatal, RSS-only fallback)" >&2
+    echo "::warning::Grok call failed or timed out (non-fatal, RSS-only fallback)" >&2
+    GROK_STATUS="failed"
   }
 
-# Parse Grok — xAI /responses format: output[] array, find item with type=message, extract content[0].text
+# Parse Grok: find the message item, extract content[0].text (Grok's JSON array)
 GROK_TEXT=$(jq -r '.output[]? | select(.type=="message") | .content[0].text // empty' "$WS/.grok-raw.json" 2>/dev/null || echo "")
 
-# Try to extract the JSON array from Grok's text response
-GROK_POSTS="[]"
+GROK_POSTS_ALL="[]"
 if [ -n "$GROK_TEXT" ]; then
-  # Pull the first [...] JSON array out of the text
-  EXTRACTED=$(echo "$GROK_TEXT" | python3 -c "
+  GROK_POSTS_ALL=$(echo "$GROK_TEXT" | python3 -c "
 import sys, re, json
 text = sys.stdin.read()
 m = re.search(r'\[[\s\S]*\]', text)
@@ -74,16 +93,65 @@ try:
 except Exception:
     print('[]')
 " 2>/dev/null || echo "[]")
-  GROK_POSTS="$EXTRACTED"
 fi
 
-GROK_COUNT=$(echo "$GROK_POSTS" | jq 'length' 2>/dev/null || echo 0)
-echo "[scan] Grok X posts: $GROK_COUNT" >&2
+GROK_RAW_COUNT=$(echo "$GROK_POSTS_ALL" | jq 'length' 2>/dev/null || echo 0)
+
+# Post-filter Grok posts to strict last-24h window
+GROK_FILTER_RESULT=$(echo "$GROK_POSTS_ALL" | python3 -c "
+import sys, json
+from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
+
+now = datetime.now(timezone.utc)
+cutoff = now - timedelta(hours=24)
+
+def parse_date(s):
+    if not s:
+        return None
+    try:
+        return datetime.fromisoformat(s.replace('Z', '+00:00'))
+    except Exception:
+        pass
+    try:
+        dt = parsedate_to_datetime(s)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt
+    except Exception:
+        pass
+    # date-only: treat as end of that day UTC (permissive)
+    try:
+        d = datetime.fromisoformat(s[:10]).replace(tzinfo=timezone.utc)
+        return d + timedelta(hours=23, minutes=59)
+    except Exception:
+        return None
+
+posts = json.load(sys.stdin)
+kept, dropped = [], []
+for p in posts:
+    dt = parse_date(p.get('date_of_post', ''))
+    if dt is None:
+        # No parseable date — drop (we can't verify freshness)
+        dropped.append({'url': p.get('url', ''), 'reason': 'unparseable_date', 'date_of_post': p.get('date_of_post', '')})
+        continue
+    if dt < cutoff:
+        dropped.append({'url': p.get('url', ''), 'reason': 'older_than_24h', 'date_of_post': p.get('date_of_post', '')})
+        continue
+    kept.append(p)
+
+print(json.dumps({'kept': kept, 'dropped': dropped, 'cutoff_utc': cutoff.isoformat()}))
+" 2>/dev/null || echo '{"kept":[],"dropped":[],"cutoff_utc":""}')
+
+GROK_POSTS=$(echo "$GROK_FILTER_RESULT" | jq -c '.kept')
+GROK_COUNT=$(echo "$GROK_POSTS" | jq 'length')
+GROK_DROPPED=$(echo "$GROK_FILTER_RESULT" | jq '.dropped | length')
+GROK_CUTOFF=$(echo "$GROK_FILTER_RESULT" | jq -r '.cutoff_utc')
+echo "[scan] Grok: $GROK_COUNT posts within 24h ($GROK_DROPPED dropped as stale, $GROK_RAW_COUNT raw)" >&2
 
 # =============================================================
 # STEP 3: Combine RSS + Grok into raw-intake.json
 # =============================================================
-# Convert Grok posts to the common item shape
 GROK_ITEMS=$(echo "$GROK_POSTS" | jq -c '[.[] | {
   title: (.key_claims // (.text // "")[:100]),
   url: (.url // ""),
@@ -93,56 +161,107 @@ GROK_ITEMS=$(echo "$GROK_POSTS" | jq -c '[.[] | {
   date_posted: (.date_of_post // "")
 }]' 2>/dev/null || echo "[]")
 
-# If Grok returned nothing, add a placeholder so downstream doesn't choke on empty
-if [ "$GROK_COUNT" -eq 0 ]; then
-  GROK_ITEMS='[{"title":"[grok-empty]","url":"","summary":"","source":"x/unknown","type":"x_empty"}]'
-fi
-
-# Convert RSS JSONL to array
 RSS_ITEMS=$(cat "$WS/.rss-items.jsonl" 2>/dev/null | jq -s '.' 2>/dev/null || echo "[]")
-
-# Stats from RSS stderr log
-RSS_TOTAL=$(grep -oE 'feeds_total=[0-9]+' "$WS/.rss-stats.log" 2>/dev/null | head -1 | sed 's/feeds_total=//' || echo 0)
-RSS_PROCESSED=$(grep -oE 'feeds_processed=[0-9]+' "$WS/.rss-stats.log" 2>/dev/null | head -1 | sed 's/feeds_processed=//' || echo 0)
-RSS_FAILED=$(grep -oE 'feeds_failed=[0-9]+' "$WS/.rss-stats.log" 2>/dev/null | head -1 | sed 's/feeds_failed=//' || echo 0)
 
 jq -n \
   --arg date "$TODAY" \
   --argjson rss "$RSS_ITEMS" \
   --argjson grok "$GROK_ITEMS" \
-  --argjson rss_total "$RSS_TOTAL" \
-  --argjson rss_processed "$RSS_PROCESSED" \
-  --argjson rss_failed "$RSS_FAILED" \
   '{
     date: $date,
     items: ($rss + $grok),
     stats: {
-      rss_feeds_total: $rss_total,
-      rss_feeds_processed: $rss_processed,
-      rss_feeds_failed: $rss_failed,
       rss_items: ($rss | length),
-      x_posts: ($grok | map(select(.type != "x_empty")) | length),
+      x_posts: ($grok | length),
       total: (($rss + $grok) | length)
     }
   }' > "$WS/raw-intake.json"
 
-ITEM_COUNT=$(jq '.items | length' "$WS/raw-intake.json")
-echo "[scan] combined items: $ITEM_COUNT" >&2
+TOTAL_COUNT=$(jq '.items | length' "$WS/raw-intake.json")
+echo "[scan] combined items: $TOTAL_COUNT" >&2
 
 # =============================================================
-# STEP 4: Hard gate — fail rather than fabricate
+# STEP 4: scan-summary.json — the committed dashboard
 # =============================================================
-# Need at least 3 REAL items (excluding x_empty placeholder)
-REAL_COUNT=$(jq '[.items[] | select(.type != "x_empty")] | length' "$WS/raw-intake.json")
-echo "[scan] real items (excl x_empty): $REAL_COUNT" >&2
+jq -n \
+  --arg date "$TODAY" \
+  --arg generated_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+  --arg grok_status "$GROK_STATUS" \
+  --arg grok_cutoff "$GROK_CUTOFF" \
+  --argjson rss_stats "$(cat "$RSS_STATS")" \
+  --argjson grok_raw_count "$GROK_RAW_COUNT" \
+  --argjson grok_kept "$GROK_COUNT" \
+  --argjson grok_dropped "$GROK_DROPPED" \
+  --argjson grok_dropped_detail "$(echo "$GROK_FILTER_RESULT" | jq '.dropped')" \
+  '{
+    date: $date,
+    generated_at: $generated_at,
+    rss: {
+      feeds_total: $rss_stats.feeds_total,
+      feeds_processed: $rss_stats.feeds_processed,
+      feeds_failed: $rss_stats.feeds_failed,
+      items_returned: $rss_stats.items_returned,
+      cutoff_utc: $rss_stats.cutoff_utc,
+      failing_feeds: [$rss_stats.per_feed[] | select(.status != "ok") | {url, status, error}]
+    },
+    x: {
+      grok_status: $grok_status,
+      posts_returned_raw: $grok_raw_count,
+      posts_within_24h: $grok_kept,
+      posts_dropped_stale: $grok_dropped,
+      cutoff_utc: $grok_cutoff,
+      dropped_detail: $grok_dropped_detail
+    },
+    totals: {
+      rss_items: $rss_stats.items_returned,
+      x_posts: $grok_kept,
+      total: ($rss_stats.items_returned + $grok_kept)
+    }
+  }' > "$WS/scan-summary.json"
 
-if [ "$REAL_COUNT" -lt 3 ]; then
-  echo "[scan] FAILED: only $REAL_COUNT real items — quiet-day signal" >&2
-  echo "scan-failed" > "$WS/.status"
-  # Don't hard exit — let the orchestrator route to quiet-day
-  # But signal via status file so intake job can classify
-  exit 0
+# =============================================================
+# STEP 5: Health gates — write status
+# =============================================================
+# Three states:
+#   scan-quiet     → <3 total items. Orchestrator skips write, sends "nothing new".
+#   scan-degraded  → ship anyway but alarm (0 in a bucket, or many feed failures)
+#   scan-ok        → green
+REAL_ITEMS=$TOTAL_COUNT
+STATUS="scan-ok"
+REASONS=()
+
+if [ "$REAL_ITEMS" -lt 3 ]; then
+  STATUS="scan-quiet"
+  REASONS+=("total_items=$REAL_ITEMS (<3)")
+else
+  if [ "$RSS_COUNT" -eq 0 ]; then
+    STATUS="scan-degraded"
+    REASONS+=("rss_items=0")
+  fi
+  if [ "$GROK_COUNT" -eq 0 ]; then
+    STATUS="scan-degraded"
+    REASONS+=("x_posts=0 (grok_status=$GROK_STATUS)")
+  fi
+  # Flag if >25% of feeds failed
+  if [ "$FEEDS_TOTAL" -gt 0 ] && [ "$((FEEDS_FAILED * 100 / FEEDS_TOTAL))" -ge 25 ]; then
+    STATUS="scan-degraded"
+    REASONS+=("rss_feeds_failed=$FEEDS_FAILED/$FEEDS_TOTAL ($((FEEDS_FAILED * 100 / FEEDS_TOTAL))%)")
+  fi
 fi
 
-echo "scan-ok" > "$WS/.status"
-echo "[scan] SUCCESS: $ITEM_COUNT items ($RSS_COUNT RSS + $GROK_COUNT X posts)"
+REASONS_JSON=$(printf '%s\n' "${REASONS[@]:-}" | jq -R . | jq -s 'map(select(. != ""))')
+# Append degraded reasons to scan-summary.json
+jq --arg status "$STATUS" --argjson reasons "$REASONS_JSON" \
+  '. + {status: $status, degraded_reasons: $reasons}' \
+  "$WS/scan-summary.json" > "$WS/scan-summary.json.tmp" && mv "$WS/scan-summary.json.tmp" "$WS/scan-summary.json"
+
+echo "$STATUS" > "$WS/.status"
+echo "[scan] status=$STATUS reasons=${REASONS[*]:-none}" >&2
+
+if [ "$STATUS" = "scan-ok" ]; then
+  echo "[scan] SUCCESS: $TOTAL_COUNT items ($RSS_COUNT RSS + $GROK_COUNT X posts, 24h window)"
+elif [ "$STATUS" = "scan-degraded" ]; then
+  echo "::warning::Scan degraded — shipping anyway. Reasons: ${REASONS[*]}"
+else
+  echo "[scan] QUIET DAY — orchestrator routes to nothing_new"
+fi

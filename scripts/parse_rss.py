@@ -48,69 +48,6 @@ def strip_html(s: str) -> str:
     return s
 
 
-def parse_one_feed(url: str, cutoff: datetime, out) -> tuple[int, bool]:
-    """Parse a single feed. Returns (items_emitted, success)."""
-    try:
-        feed = feedparser.parse(
-            url, request_headers={"User-Agent": "presidential-briefing/1.0"}
-        )
-    except Exception as e:
-        print(f"[parse_rss] failed to fetch {url}: {e}", file=sys.stderr)
-        return 0, False
-
-    if feed.bozo and not feed.entries:
-        print(
-            f"[parse_rss] malformed feed {url}: {feed.bozo_exception}",
-            file=sys.stderr,
-        )
-        return 0, False
-
-    domain = urlparse(url).netloc
-    count = 0
-    for entry in feed.entries:
-        published_tuple = (
-            getattr(entry, "published_parsed", None)
-            or getattr(entry, "updated_parsed", None)
-        )
-        if not published_tuple:
-            continue
-
-        try:
-            published_dt = datetime.fromtimestamp(
-                time.mktime(published_tuple), tz=timezone.utc
-            )
-        except (ValueError, OverflowError):
-            continue
-
-        if published_dt < cutoff:
-            continue
-
-        title = strip_html(getattr(entry, "title", "")).strip()
-        if not title:
-            continue
-
-        link = getattr(entry, "link", "").strip()
-        summary_raw = (
-            getattr(entry, "summary", "")
-            or getattr(entry, "description", "")
-            or ""
-        )
-        summary = strip_html(summary_raw)[:500]
-
-        item = {
-            "title": title,
-            "url": link,
-            "summary": summary,
-            "source": domain,
-            "type": "rss",
-            "published": published_dt.isoformat(),
-        }
-        print(json.dumps(item, ensure_ascii=False), file=out)
-        count += 1
-
-    return count, True
-
-
 def iter_feeds_from_csv(csv_path: str):
     """Yield feed_url strings from sources.csv where access_method == 'rss'."""
     with open(csv_path, newline="", encoding="utf-8") as f:
@@ -124,9 +61,66 @@ def iter_feeds_from_csv(csv_path: str):
             yield feed_url
 
 
+def parse_one_feed_detailed(url: str, cutoff: datetime, out) -> dict:
+    """Thin wrapper around parse_one_feed that captures the failure reason."""
+    try:
+        feed = feedparser.parse(
+            url, request_headers={"User-Agent": "presidential-briefing/1.0"}
+        )
+    except Exception as e:
+        print(f"[parse_rss] failed to fetch {url}: {e}", file=sys.stderr)
+        return {"url": url, "status": "fetch_error", "error": str(e)[:200], "items": 0}
+
+    if feed.bozo and not feed.entries:
+        err = str(getattr(feed, "bozo_exception", "unknown"))[:200]
+        print(f"[parse_rss] malformed feed {url}: {err}", file=sys.stderr)
+        return {"url": url, "status": "malformed", "error": err, "items": 0}
+
+    domain = urlparse(url).netloc
+    count = 0
+    for entry in feed.entries:
+        published_tuple = (
+            getattr(entry, "published_parsed", None)
+            or getattr(entry, "updated_parsed", None)
+        )
+        if not published_tuple:
+            continue
+        try:
+            published_dt = datetime.fromtimestamp(
+                time.mktime(published_tuple), tz=timezone.utc
+            )
+        except (ValueError, OverflowError):
+            continue
+        if published_dt < cutoff:
+            continue
+        title = strip_html(getattr(entry, "title", "")).strip()
+        if not title:
+            continue
+        link = getattr(entry, "link", "").strip()
+        summary_raw = (
+            getattr(entry, "summary", "")
+            or getattr(entry, "description", "")
+            or ""
+        )
+        summary = strip_html(summary_raw)[:500]
+        item = {
+            "title": title,
+            "url": link,
+            "summary": summary,
+            "source": domain,
+            "type": "rss",
+            "published": published_dt.isoformat(),
+        }
+        print(json.dumps(item, ensure_ascii=False), file=out)
+        count += 1
+
+    return {"url": url, "status": "ok", "error": None, "items": count}
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--csv", help="Path to sources.csv. Iterates every RSS row.")
+    ap.add_argument("--stats-json", help="Write structured per-feed stats to this path.")
     ap.add_argument(
         "url",
         nargs="?",
@@ -144,23 +138,33 @@ def main() -> None:
     cutoff = datetime.now(timezone.utc) - timedelta(hours=24)
     feeds = list(iter_feeds_from_csv(args.csv)) if args.csv else [args.url]
 
-    total_processed = 0
-    total_failed = 0
+    per_feed: list[dict] = []
     total_items = 0
-
     for feed_url in feeds:
-        count, ok = parse_one_feed(feed_url, cutoff, sys.stdout)
-        total_items += count
-        if ok:
-            total_processed += 1
-        else:
-            total_failed += 1
+        result = parse_one_feed_detailed(feed_url, cutoff, sys.stdout)
+        per_feed.append(result)
+        total_items += result["items"]
+
+    total_processed = sum(1 for r in per_feed if r["status"] == "ok")
+    total_failed = len(per_feed) - total_processed
 
     print(
         f"[parse_rss] feeds_total={len(feeds)} feeds_processed={total_processed} "
         f"feeds_failed={total_failed} items_returned={total_items}",
         file=sys.stderr,
     )
+
+    if args.stats_json:
+        stats = {
+            "cutoff_utc": cutoff.isoformat(),
+            "feeds_total": len(feeds),
+            "feeds_processed": total_processed,
+            "feeds_failed": total_failed,
+            "items_returned": total_items,
+            "per_feed": per_feed,
+        }
+        with open(args.stats_json, "w", encoding="utf-8") as f:
+            json.dump(stats, f, indent=2, ensure_ascii=False)
 
 
 if __name__ == "__main__":
