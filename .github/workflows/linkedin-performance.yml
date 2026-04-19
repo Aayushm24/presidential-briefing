@@ -30,7 +30,9 @@ jobs:
     env:
       TZ: Asia/Kolkata
       LINKEDIN_PROFILE_URL: https://www.linkedin.com/in/aayush-maheshwari/
-      MAX_POSTS: '25'
+      # Engagement on posts older than ~2 weeks barely moves. 5 covers the active window.
+      # Older posts already saved under performance-data/ stay untouched; rebuild still reads all of them.
+      MAX_POSTS: '5'
 
     steps:
       - uses: actions/checkout@v4
@@ -61,6 +63,10 @@ jobs:
           fi
           python3 scripts/linkedin_performance.py $DRY_FLAG
 
+      - name: Rebuild patterns from merged history
+        if: github.event.inputs.dry_run != 'true'
+        run: python3 scripts/rebuild_linkedin_history.py
+
       - name: Path allowlist enforcement
         if: github.event.inputs.dry_run != 'true'
         run: |
@@ -70,6 +76,9 @@ jobs:
             [ -z "$FILE" ] && continue
             case "$FILE" in
               performance-data/*) ;;
+              history/linkedin-posts-history.jsonl) ;;
+              config/linkedin-patterns.json) ;;
+              config/aayush-linkedin-patterns.md) ;;
               *)
                 echo "::error::Path allowlist violation: $FILE"
                 FAILED=1
@@ -91,7 +100,7 @@ jobs:
             exit 0
           fi
           COUNT=$(git status --porcelain performance-data/ | wc -l | tr -d ' ')
-          git add performance-data/
-          git commit -m "perf: snapshot $TODAY ($COUNT posts)"
+          git add performance-data/ history/linkedin-posts-history.jsonl config/linkedin-patterns.json config/aayush-linkedin-patterns.md
+          git commit -m "perf: snapshot $TODAY ($COUNT posts) + rebuilt patterns"
           git pull --rebase origin main
           git push origin HEAD:main
