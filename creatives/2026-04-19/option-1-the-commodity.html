@@ -7,37 +7,55 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f8f9fb; --ink: #0a0b0c; --ink-dim: #52525b;
-    --accent: #0f172a; --border: #e4e4e7;
+    --surface: #fafaf9;
+    --card: #ffffff;
+    --hero: #6d28d9;
+    --hero-soft: #e9d5ff;
+    --accent: #f472b6;
+    --ink: #0a0a0a;
+    --ink-dim: #52525b;
+    --border: #e4e4e7;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { width: 1200px; height: 1200px; }
   body {
     font-family: 'Inter', sans-serif;
     font-feature-settings: 'ss01' on, 'cv11' on;
-    background: var(--bg); color: var(--ink);
+    background: var(--surface); color: var(--ink);
     padding: 96px;
     display: flex; flex-direction: column; justify-content: space-between;
   }
   .chip {
-    display: inline-block; font-size: 13px; font-weight: 600;
+    display: inline-block; font-size: 13px; font-weight: 700;
     letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--accent); background: #fff;
-    border: 1px solid var(--border); padding: 8px 16px; border-radius: 9999px;
+    color: #fff; background: var(--accent);
+    padding: 8px 16px; border-radius: 9999px;
   }
   .setup { font-size: 26px; font-weight: 500; color: var(--ink-dim); line-height: 1.35; margin-top: 40px; max-width: 900px; }
   .claim {
     font-size: 112px; font-weight: 900; letter-spacing: -0.04em; line-height: 0.96;
     color: var(--ink); margin-top: 24px; max-width: 1000px;
   }
-  .claim .hero { color: var(--accent); }
+  .claim .hero {
+    color: var(--hero);
+    position: relative;
+    display: inline-block;
+  }
+  .claim .hero::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: 8px;
+    height: 10px; background: var(--accent); opacity: 0.85;
+    z-index: -1;
+  }
   .proof { font-size: 20px; font-weight: 500; color: var(--ink-dim); line-height: 1.5; margin-top: 40px; max-width: 880px; }
   .proof strong { color: var(--ink); font-weight: 700; }
   .footer {
     border-top: 1px solid var(--border); padding-top: 22px;
-    display: flex; justify-content: space-between; font-size: 14px; color: var(--ink-dim);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 14px; color: var(--ink-dim);
   }
-  .footer strong { color: var(--ink); font-weight: 600; }
+  .handle { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 500; color: var(--ink); }
+  .li-icon { display: inline-block; vertical-align: middle; }
 </style>
 </head>
 <body>
@@ -48,7 +66,12 @@
     <p class="proof">The moat isn't the model. It isn't the compute. It's what you build on top. Memory. Context. Application layer.</p>
   </div>
   <div class="footer">
-    <span><strong>@aayush-maheshwari</strong> · presidential briefing</span>
+    <span class="handle">
+      <svg class="li-icon" width="20" height="20" viewBox="0 0 24 24" fill="#0a66c2" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+      aayush-maheshwari
+    </span>
     <span>2026-04-19</span>
   </div>
 </body>
