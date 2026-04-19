@@ -375,12 +375,21 @@ jobs:
           fi
 
           # --- Slack via n8n webhook ---
-          GITHUB_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/posts.md"
+          POSTS_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/posts.md"
+          BRIEF_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/brief.md"
           POSTS_JSON=$(jq -c '[.options[] | .post]' "${WS}/posts.json")
           PAYLOAD=$(jq -n \
-            --arg url "$GITHUB_URL" \
+            --arg title "$LEAD_TITLE" \
+            --arg brief_url "$BRIEF_URL" \
+            --arg posts_url "$POSTS_URL" \
             --argjson posts "$POSTS_JSON" \
-            '{type:"daily_brief", briefing_url:$url, posts:$posts}')
+            '{
+              type: "daily_brief",
+              title: $title,
+              briefing_url: $brief_url,
+              posts_url: $posts_url,
+              posts: $posts
+            }')
 
           if [ "$DRY_RUN" == "1" ]; then
             echo "[DRY_RUN] would POST to n8n: $(echo "$PAYLOAD" | jq -c .)"
