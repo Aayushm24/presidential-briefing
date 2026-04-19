@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>stat-card.example</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-canvas: #f8f9fb;
+    --bg-card: #ffffff;
+    --ink-primary: #0a0b0c;
+    --ink-secondary: #52525b;
+    --accent: #4338ca;
+    --accent-soft: #eef2ff;
+    --border-subtle: #e4e4e7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 1200px; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-feature-settings: 'ss01' on, 'cv11' on;
+    background: var(--bg-canvas);
+    color: var(--ink-primary);
+    padding: 96px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .chip {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 8px 16px;
+    border-radius: 9999px;
+  }
+  .hero {
+    font-size: 240px;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    color: var(--accent);
+    margin-top: 40px;
+  }
+  .hero-currency {
+    font-size: 120px;
+    vertical-align: top;
+    font-weight: 800;
+  }
+  .claim {
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--ink-primary);
+    max-width: 900px;
+    margin-top: 40px;
+  }
+  .caption {
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--ink-secondary);
+    max-width: 850px;
+    margin-top: 32px;
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 15px;
+    color: var(--ink-secondary);
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 24px;
+  }
+  .footer strong { color: var(--ink-primary); font-weight: 600; }
+</style>
+</head>
+<body>
+  <div>
+    <span class="chip">Apr 18 · before ipo</span>
+    <div class="hero"><span class="hero-currency">$</span>10B</div>
+    <h1 class="claim">Cerebras locks in OpenAI before going public.</h1>
+    <p class="caption">AWS adopts Cerebras in its data centers the same week. Every AI lab betting on single-vendor compute just got a cautionary tale.</p>
+  </div>
+  <div class="footer">
+    <span><strong>@aayush-maheshwari</strong> · presidential briefing</span>
+    <span>2026-04-19</span>
+  </div>
+</body>
+</html>

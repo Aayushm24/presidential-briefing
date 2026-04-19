@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>architecture.example</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-canvas: #f8f9fb;
+    --bg-card: #ffffff;
+    --ink-primary: #0a0b0c;
+    --ink-secondary: #52525b;
+    --accent: #4338ca;
+    --accent-deep: #3730a3;
+    --accent-soft: #eef2ff;
+    --border-subtle: #e4e4e7;
+    --border-mid: #d4d4d8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 1200px; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-feature-settings: 'ss01' on, 'cv11' on;
+    background: var(--bg-canvas);
+    color: var(--ink-primary);
+    padding: 72px;
+    display: flex;
+    flex-direction: column;
+  }
+  header { margin-bottom: 40px; }
+  h1 {
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+  }
+  .subtitle {
+    font-size: 20px;
+    color: var(--ink-secondary);
+    margin-top: 12px;
+    max-width: 780px;
+    line-height: 1.4;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 220px 1fr 220px;
+    grid-template-rows: auto auto auto;
+    gap: 20px;
+    flex: 1;
+  }
+  .col-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-secondary);
+    margin-bottom: 10px;
+  }
+  .side-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .side-card .card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink-primary);
+    margin-bottom: 4px;
+  }
+  .side-card .card-desc {
+    font-size: 12px;
+    color: var(--ink-secondary);
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .side-pill {
+    background: #f4f4f5;
+    border: 1px solid var(--border-subtle);
+    border-radius: 9px;
+    padding: 7px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-primary);
+  }
+  .hero-block {
+    background: var(--accent);
+    color: #fff;
+    border-radius: 28px;
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .hero-block h2 {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .hero-block p {
+    font-size: 14px;
+    opacity: 0.85;
+    line-height: 1.45;
+  }
+  .hero-block .panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .hero-block .panel-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.85;
+    margin-bottom: 10px;
+  }
+  .hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .hero-pill {
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 11px;
+    border-radius: 9px;
+  }
+  .agents-row {
+    grid-column: 1 / 4;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .agent-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 18px;
+    padding: 18px 22px;
+  }
+  .agent-name {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .agent-desc {
+    font-size: 12px;
+    color: var(--ink-secondary);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+  .infra-row {
+    grid-column: 1 / 4;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .infra-cell {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 16px 18px;
+  }
+  .infra-label { font-size: 14px; font-weight: 700; }
+  .infra-desc { font-size: 12px; color: var(--ink-secondary); margin-top: 4px; }
+  .footer {
+    border-top: 1px solid var(--border-subtle);
+    margin-top: 24px;
+    padding-top: 18px;
+    font-size: 13px;
+    color: var(--ink-secondary);
+    display: flex;
+    justify-content: space-between;
+  }
+  .footer strong { color: var(--ink-primary); font-weight: 600; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Presidential Briefing</h1>
+    <p class="subtitle">Daily AI knowledge system. 41 sources into one brief + 3 LinkedIn options every morning at 5:30 IST.</p>
+  </header>
+  <div class="grid">
+    <div>
+      <div class="col-label">Sources</div>
+      <div class="side-card">
+        <div class="card-title">Web</div>
+        <div class="card-desc">36 RSS feeds · 4 sitemap-scraped newsletters · 24h window</div>
+        <span class="side-pill">Karpathy</span>
+        <span class="side-pill">Simon Willison</span>
+        <span class="side-pill">Ethan Mollick</span>
+        <span class="side-pill">OpenAI / DeepMind</span>
+      </div>
+      <div class="side-card" style="margin-top:16px;">
+        <div class="card-title">X / Twitter</div>
+        <div class="card-desc">8 AI accounts · Grok via llmproxy</div>
+        <span class="side-pill">@karpathy</span>
+        <span class="side-pill">@garrytan</span>
+        <span class="side-pill">@swyx</span>
+      </div>
+    </div>
+    <div class="hero-block">
+      <div>
+        <h2>Context layer</h2>
+        <p>Shared, version-controlled memory. Every skill reads and writes through it. Compounding — day 100 knows what day 1 didn't.</p>
+      </div>
+      <div class="panels">
+        <div>
+          <div class="panel-label">Skills</div>
+          <div class="hero-pills">
+            <span class="hero-pill">scan</span>
+            <span class="hero-pill">score</span>
+            <span class="hero-pill">themes</span>
+            <span class="hero-pill">brain</span>
+            <span class="hero-pill">write-briefing</span>
+            <span class="hero-pill">write-posts</span>
+            <span class="hero-pill">council</span>
+            <span class="hero-pill">publish</span>
+          </div>
+        </div>
+        <div>
+          <div class="panel-label">Knowledge</div>
+          <div class="hero-pills">
+            <span class="hero-pill">conviction</span>
+            <span class="hero-pill">patterns</span>
+            <span class="hero-pill">experiences</span>
+            <span class="hero-pill">brain pages</span>
+            <span class="hero-pill">pickups</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Outputs</div>
+      <div class="side-card">
+        <div class="card-title">Brief</div>
+        <div class="card-desc">Readwise Reader. Helix 3-layer: facts, synthesis, conviction.</div>
+      </div>
+      <div class="side-card" style="margin-top:16px;">
+        <div class="card-title">3 post options</div>
+        <div class="card-desc">Slack DM. Reply 1/2/3 to pick, or edit inline.</div>
+      </div>
+      <div class="side-card" style="margin-top:16px;">
+        <div class="card-title">Audit trail</div>
+        <div class="card-desc">git history · published.jsonl · option-pickups.jsonl</div>
+      </div>
+    </div>
+    <div class="agents-row">
+      <div class="agent-card">
+        <div class="agent-name">Claude Code</div>
+        <div class="agent-desc">Runtime. GitHub Actions headless. 3-job split for budget.</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-name">Council (Opus + Grok + Gemini)</div>
+        <div class="agent-desc">Adversarial review. Voice + fact + attack. Regex preflight.</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-name">Apify</div>
+        <div class="agent-desc">LinkedIn performance scraper. Mon + Fri 11 PM IST.</div>
+      </div>
+    </div>
+    <div class="infra-row">
+      <div class="infra-cell"><div class="infra-label">llmproxy.atlan.dev</div><div class="infra-desc">LiteLLM · model routing</div></div>
+      <div class="infra-cell"><div class="infra-label">Supabase pgvector</div><div class="infra-desc">Brain pages · semantic recall</div></div>
+      <div class="infra-cell"><div class="infra-label">n8n cloud</div><div class="infra-desc">Slack DM router</div></div>
+      <div class="infra-cell"><div class="infra-label">Readwise Reader API</div><div class="infra-desc">Newsletter inbox</div></div>
+    </div>
+  </div>
+  <div class="footer">
+    <span><strong>@aayush-maheshwari</strong> · presidential briefing</span>
+    <span>github.com/Aayushm24/presidential-briefing</span>
+  </div>
+</body>
+</html>
