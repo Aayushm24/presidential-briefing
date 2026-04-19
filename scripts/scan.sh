@@ -53,6 +53,24 @@ FEEDS_TOTAL=$(jq '.feeds_total' "$RSS_STATS")
 echo "[scan] RSS: $RSS_COUNT items from $(jq '.feeds_processed' "$RSS_STATS")/$FEEDS_TOTAL feeds ($FEEDS_FAILED failed)" >&2
 
 # =============================================================
+# STEP 1b: Sitemap-scraped sources (CF-blocked newsletters)
+# =============================================================
+SITEMAP_STATS="$WS/.sitemap-stats.json"
+SITEMAP_ITEMS_FILE="$WS/.sitemap-items.jsonl"
+echo "[scan] running parse_sitemap_feed.py for sitemap sources" >&2
+if ! python3 scripts/parse_sitemap_feed.py --csv config/sources.csv --stats-json "$SITEMAP_STATS" \
+  > "$SITEMAP_ITEMS_FILE" 2> "$WS/.sitemap-stderr.log"; then
+  echo "::warning::parse_sitemap_feed.py failed — continuing without sitemap sources" >&2
+  echo "[]" > "$SITEMAP_STATS".fallback
+  : > "$SITEMAP_ITEMS_FILE"
+fi
+cat "$WS/.sitemap-stderr.log" >&2 || true
+SITEMAP_COUNT=$(wc -l < "$SITEMAP_ITEMS_FILE" | tr -d ' ')
+SITEMAP_SOURCES_OK=$(jq '.sources_ok // 0' "$SITEMAP_STATS" 2>/dev/null || echo 0)
+SITEMAP_SOURCES_TOTAL=$(jq '.sources_total // 0' "$SITEMAP_STATS" 2>/dev/null || echo 0)
+echo "[scan] Sitemap: $SITEMAP_COUNT items from $SITEMAP_SOURCES_OK/$SITEMAP_SOURCES_TOTAL sources" >&2
+
+# =============================================================
 # STEP 2: Grok X search via proxy /responses
 # =============================================================
 # Grok uses `since:YYYY-MM-DD` which is date-granular (up to 48h). We
@@ -162,18 +180,22 @@ GROK_ITEMS=$(echo "$GROK_POSTS" | jq -c '[.[] | {
 }]' 2>/dev/null || echo "[]")
 
 RSS_ITEMS=$(cat "$WS/.rss-items.jsonl" 2>/dev/null | jq -s '.' 2>/dev/null || echo "[]")
+SITEMAP_ITEMS=$(cat "$SITEMAP_ITEMS_FILE" 2>/dev/null | jq -s '.' 2>/dev/null || echo "[]")
 
+# Combined RSS-shaped items (RSS feeds + sitemap-scraped pages share schema)
 jq -n \
   --arg date "$TODAY" \
   --argjson rss "$RSS_ITEMS" \
+  --argjson sitemap "$SITEMAP_ITEMS" \
   --argjson grok "$GROK_ITEMS" \
   '{
     date: $date,
-    items: ($rss + $grok),
+    items: ($rss + $sitemap + $grok),
     stats: {
       rss_items: ($rss | length),
+      sitemap_items: ($sitemap | length),
       x_posts: ($grok | length),
-      total: (($rss + $grok) | length)
+      total: (($rss + $sitemap + $grok) | length)
     }
   }' > "$WS/raw-intake.json"
 
@@ -183,12 +205,15 @@ echo "[scan] combined items: $TOTAL_COUNT" >&2
 # =============================================================
 # STEP 4: scan-summary.json — the committed dashboard
 # =============================================================
+SITEMAP_STATS_JSON=$(cat "$SITEMAP_STATS" 2>/dev/null || echo '{"sources_total":0,"sources_ok":0,"sources_failed":0,"items_total":0,"per_source":[]}')
+
 jq -n \
   --arg date "$TODAY" \
   --arg generated_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
   --arg grok_status "$GROK_STATUS" \
   --arg grok_cutoff "$GROK_CUTOFF" \
   --argjson rss_stats "$(cat "$RSS_STATS")" \
+  --argjson sitemap_stats "$SITEMAP_STATS_JSON" \
   --argjson grok_raw_count "$GROK_RAW_COUNT" \
   --argjson grok_kept "$GROK_COUNT" \
   --argjson grok_dropped "$GROK_DROPPED" \
@@ -204,6 +229,13 @@ jq -n \
       cutoff_utc: $rss_stats.cutoff_utc,
       failing_feeds: [$rss_stats.per_feed[] | select(.status != "ok") | {url, status, error}]
     },
+    sitemap: {
+      sources_total: $sitemap_stats.sources_total,
+      sources_ok: $sitemap_stats.sources_ok,
+      sources_failed: $sitemap_stats.sources_failed,
+      items_total: $sitemap_stats.items_total,
+      per_source: $sitemap_stats.per_source
+    },
     x: {
       grok_status: $grok_status,
       posts_returned_raw: $grok_raw_count,
@@ -214,8 +246,9 @@ jq -n \
     },
     totals: {
       rss_items: $rss_stats.items_returned,
+      sitemap_items: $sitemap_stats.items_total,
       x_posts: $grok_kept,
-      total: ($rss_stats.items_returned + $grok_kept)
+      total: ($rss_stats.items_returned + $sitemap_stats.items_total + $grok_kept)
     }
   }' > "$WS/scan-summary.json"
 
@@ -229,23 +262,30 @@ jq -n \
 REAL_ITEMS=$TOTAL_COUNT
 STATUS="scan-ok"
 REASONS=()
+WEB_ITEMS=$((RSS_COUNT + SITEMAP_COUNT))  # RSS + sitemap share the "web content" bucket
 
 if [ "$REAL_ITEMS" -lt 3 ]; then
   STATUS="scan-quiet"
   REASONS+=("total_items=$REAL_ITEMS (<3)")
 else
-  if [ "$RSS_COUNT" -eq 0 ]; then
+  if [ "$WEB_ITEMS" -eq 0 ]; then
     STATUS="scan-degraded"
-    REASONS+=("rss_items=0")
+    REASONS+=("web_items=0 (rss=$RSS_COUNT, sitemap=$SITEMAP_COUNT)")
   fi
   if [ "$GROK_COUNT" -eq 0 ]; then
     STATUS="scan-degraded"
     REASONS+=("x_posts=0 (grok_status=$GROK_STATUS)")
   fi
-  # Flag if >25% of feeds failed
+  # Flag if >25% of RSS feeds failed
   if [ "$FEEDS_TOTAL" -gt 0 ] && [ "$((FEEDS_FAILED * 100 / FEEDS_TOTAL))" -ge 25 ]; then
     STATUS="scan-degraded"
     REASONS+=("rss_feeds_failed=$FEEDS_FAILED/$FEEDS_TOTAL ($((FEEDS_FAILED * 100 / FEEDS_TOTAL))%)")
+  fi
+  # Flag if any sitemap source failed (all 4 matter)
+  SITEMAP_FAILED=$(jq '.sources_failed // 0' "$SITEMAP_STATS" 2>/dev/null || echo 0)
+  if [ "$SITEMAP_FAILED" -gt 0 ]; then
+    STATUS="scan-degraded"
+    REASONS+=("sitemap_sources_failed=$SITEMAP_FAILED/$SITEMAP_SOURCES_TOTAL")
   fi
 fi
 
@@ -259,7 +299,7 @@ echo "$STATUS" > "$WS/.status"
 echo "[scan] status=$STATUS reasons=${REASONS[*]:-none}" >&2
 
 if [ "$STATUS" = "scan-ok" ]; then
-  echo "[scan] SUCCESS: $TOTAL_COUNT items ($RSS_COUNT RSS + $GROK_COUNT X posts, 24h window)"
+  echo "[scan] SUCCESS: $TOTAL_COUNT items ($RSS_COUNT RSS + $SITEMAP_COUNT sitemap + $GROK_COUNT X, 24h window)"
 elif [ "$STATUS" = "scan-degraded" ]; then
   echo "::warning::Scan degraded — shipping anyway. Reasons: ${REASONS[*]}"
 else

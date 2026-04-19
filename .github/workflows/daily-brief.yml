@@ -438,6 +438,9 @@ jobs:
               rss_feeds_ok: .rss.feeds_processed,
               rss_feeds_total: .rss.feeds_total,
               rss_feeds_failed: .rss.feeds_failed,
+              sitemap_items: (.sitemap.items_total // 0),
+              sitemap_sources_ok: (.sitemap.sources_ok // 0),
+              sitemap_sources_total: (.sitemap.sources_total // 0),
               x_posts: .x.posts_within_24h,
               x_dropped_stale: .x.posts_dropped_stale,
               degraded_reasons: .degraded_reasons
