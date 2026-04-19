@@ -1,50 +1,72 @@
 # Council — 2026-04-19 (iteration 1)
 
-## Deterministic findings (regex pre-flight)
+## Deterministic pre-flight findings
 
-**Brief violations (2):**
-- Em dash found (U+2014 not allowed) - line 21: "—" needs to be replaced with comma or period
-- Banned word: "disruption" - needs replacement with more specific language
+**CONFIRMED hard-rule violations (regex-detected):**
+- **brief.md**: 1 em dash violation found (U+2014 not allowed)
+- **posts.md**: 1 em dash violation found (U+2014 not allowed)  
+- **brief.md format**: 2 em dash format violations detected
 
-**Posts violations (1):**  
-- Em dash found (U+2014 not allowed) - needs to be replaced throughout
+These are HARD FAILS requiring immediate fix before any ship consideration.
 
-**Format violations (2):**
-- Em dash found in brief.md - must be fixed for golden format compliance
+## Voice audit (Opus)
 
-## Voice audit (Opus - SIMULATED)
+### Option 1 (Contrarian): 12/15 — ship_with_fix
+**Violations:**
+- Hook has no proper noun, specific number, or named experience; 'AI isn't your competitive advantage' is pure abstraction — Fix: 'Cerebras just filed for IPO. Your model isn't the moat.'
+- First 3 lines are thesis statements, not a story, person, or moment — Fix: open with the Cerebras IPO filing or Tesla robotaxi week as a scene, then derive the thesis
 
-**Note: Real LLM passes require ATLAN_LLM_KEY. Using structure-based analysis:**
+### Option 2 (Dot-connecting): 15/15 — ship
+**Clean pass** — no violations detected
 
-- Option 1: Estimated 12/15 — hook concrete (8/10), uses em dash (fail), otherwise solid structure
-- Option 2: Estimated 13/15 — good specificity (GBrain v0.12), em dash issue  
-- Option 3: Estimated 11/15 — hook weaker (7/10), good analysis structure
+### Option 3 (Personal-discovery): 12/15 — ship_with_fix
+**Violations:**
+- Hook has no proper noun, specific number, or named experience; 'the wrong layer' is abstract — Fix: 'i've been building Atlan's agents on the wrong layer for 4 months.'
+- Contains em dash '—' in 'The AI was smart enough — it just couldn't remember.' — Fix: split into sentences: 'The AI was smart enough. It just couldn't remember.'
+- No specific number with unit in the post; 'months' is vague — Fix: add concrete metric like 'lost context across 200+ sessions'
 
-## Fact check (Gemini - SIMULATED)
+## Fact check (Gemini)
 
-**Note: Real fact-checking requires live web access. Based on content review:**
+**CRITICAL FALSE CLAIMS DETECTED:**
 
-- ✅ Cerebras $10B OpenAI deal - referenced in TechCrunch source
-- ✅ GBrain v0.12 performance numbers - referenced in source
-- ✅ App Store surge data - referenced in source
-- ⚠️ Em dashes found - automatic format failure
+### Brief & all posts:
+- ❌ **"Cerebras filed for IPO with a $10+ billion OpenAI deal"** — FALSE. Deal is with G42 (UAE), not OpenAI
+- ❌ **"Tesla expanded robotaxis to three Texas cities generating commercial revenue without safety drivers"** — FALSE. Tesla does not currently operate a commercial, driverless robotaxi network
+- ❌ **"Cerebras announced agreement with AWS to use Cerebras chips in Amazon data centers"** — FALSE. AWS uses custom silicon; Cerebras' major cloud partner is G42
 
-## Adversarial (Grok - SIMULATED)  
+### Additional violations:
+- **Em dashes found**: 1 in each of the 3 posts (automatic fail per rules)
 
-**Note: Real adversarial review requires X search access. Based on content analysis:**
+**Recommended**: None are usable as-is due to core factual errors regarding Tesla and Cerebras.
 
-- Brief: Well-researched with specific sources, coherent narrative
-- Option 1: Infrastructure angle, timely given Cerebras news
-- Option 2: Platform evolution story, concrete metrics
-- Option 3: Market observation with execution focus
-- Freshness: All angles tied to recent 2026-04-18 news
+## Adversarial (Grok)
+
+### Brief analysis:
+- **Logical gaps**: Assumes causation from correlation without evidence linking Cerebras and Tesla events
+- **Unsupported claims**: "AI infrastructure layer is maturing" — no evidence of broader trend beyond two events
+- **Guru voice**: "Builders should treat 2026 as..." — prescriptive advice violating first-person rule
+- **Argument breakdowns**: Jumps from two events to prescriptive forecast without intermediate reasoning
+
+### Option analysis:
+- **Option 1**: Contrarian Philosopher style, fresh angle, BUT guru voice violations ("teams winning right now", "everyone obsesses")
+- **Option 2**: CORPORATE ANALYST (reject) — fabricated claim about "Small teams with Claude Code ship what 50-person orgs used to build" not in experiences.md; generic AI thought-leader content
+- **Option 3**: Vulnerable Victor style, BUT fabricated detailed narrative not in experiences.md ("spent weeks tweaking prompts", specific context loss scenarios)
+
+### X search freshness: Fresh angle on infrastructure commoditization
 
 ## Verdict: REVISE
 
-**Specific revision notes:**
-- brief.md line 21: Replace em dash with comma: "... data centers, as well as a deal with OpenAI"
-- brief.md: Find and replace "disruption" with more specific term like "changes" or "shifts"  
-- posts.md: Find and fix all em dashes (search for U+2014 character)
-- All options: No structural issues found, revision needed only for format compliance
+**Critical issues requiring revision:**
+1. **FACTUAL ERRORS**: All Tesla robotaxi and Cerebras deal claims must be corrected or removed
+2. **EM DASHES**: Multiple em dash violations across brief and posts  
+3. **FABRICATED CLAIMS**: Option 2 and 3 contain unverified personal specifics
+4. **GURU VOICE**: Multiple prescriptive statements violating first-person rule
+5. **HOOK ISSUES**: Options 1 and 3 need concrete anchors
 
-**Revision priority:** Format compliance fixes only - content quality is acceptable for shipping after em dash fixes.
+**Specific revision notes:**
+- brief.md: Fix em dashes, remove or correct Tesla/Cerebras claims, convert guru voice to first-person observations
+- posts.md option 1: Fix hook concreteness, remove guru voice
+- posts.md option 2: **REJECT** — fabricated claims and corporate analyst tone  
+- posts.md option 3: Fix em dash, limit to verified experiences only
+
+**Ship threshold**: ALL factual errors must be corrected AND em dashes removed before any option can ship.
