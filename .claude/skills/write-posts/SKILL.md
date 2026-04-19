@@ -18,6 +18,7 @@ Output: `workspace/${TODAY}/posts.md` with 3 options + convictions + preliminary
 - `config/conviction.md`
 - `config/aayush-experiences.md` — verified first-person anchors
 - `config/aayush-linkedin-patterns.md` — **what actually wins for Aayush** (from real performance data)
+- `.claude/skills/write-briefing/references/plain-english-rules.md` — **READ FIRST.** 7 hard rules shared across briefing + posts: no abstract-noun stacks, 22-word sentence cap, banned MBA vocabulary, 5th-grade test.
 - `.claude/skills/write-posts/references/voice.md`
 - `.claude/skills/write-posts/references/kill-list.md`
 - `.claude/skills/write-posts/references/hooks.md`

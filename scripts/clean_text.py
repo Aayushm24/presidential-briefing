@@ -148,6 +148,40 @@ GURU_VOICE_PATTERNS: list[str] = [
 # Trailing hashtag block — auto-strip (user said zero hashtags at end)
 TRAILING_HASHTAG_PATTERN: str = r"\n*^#\w+(?:\s+#\w+)*\s*$"
 
+# Plain-English kill-list from .claude/skills/write-briefing/references/plain-english-rules.md
+# These are MBA/VC jargon that make text hard to read. Any hit = REVISE.
+MBA_VOCABULARY_PATTERNS: list[str] = [
+    r"\bmaturation\b",
+    r"\bmatures\b(?!\s+(?:in|over|through|around|at|on))",  # "markets mature into" but allow "matures in" = ages
+    r"\b(?:market|ecosystem|industry)\s+maturity\b",
+    r"\bcommoditi[sz]ation\b",
+    r"\bcommoditi[sz]e[sd]?\b",
+    r"\btable\s+stakes\b",
+    r"\bmoat\b(?!\s+(?:castle|digging|wall))",  # let "digging a moat" etc through literal uses
+    r"\bdifferentiation\b",
+    r"\b(?:move|moves|moving|moved|shift|shifts|shifting|shifted)\s+up\s+the\s+stack\b",
+    r"\bup\s+the\s+stack\b",
+    r"\bunderlying\s+market\b",
+    r"\b(?:vendor|infrastructure|model|platform)\s+dependency\b",
+    r"\bsignals?\s+(?:market\s+)?maturi(?:ty|zation)\b",
+    r"\bgenerating\s+(?:real|scale|commercial)\s+revenue\b",
+    r"\bproduction\s+workloads?\s+at\s+scale\b",
+    r"\benterprise\s+customers?\b",
+    r"\becosystem\b(?!\s+of\s+\w)",  # allow "ecosystem of tools" (concrete), block bare "the ecosystem"
+    r"\bparadigm\s+shift\b",
+    r"\bdisruption\b",
+    r"\bleverage(?:s|d|ing)?\b(?!\s+ratio)",  # block "leverage" verb, allow "leverage ratio" financial
+    r"\butiliz(?:e|es|ed|ing|ation)\b",
+    r"\bseamless(?:ly)?\b",
+    r"\brevolutionary\b",
+    r"\bgame[\s-]?changing\b",
+    r"\bcutting[\s-]?edge\b",
+    r"\bcompounds?\s+monthly\b",
+]
+
+# Sentence-length check: flag any sentence > 22 words
+LONG_SENTENCE_THRESHOLD: int = 22
+
 # LLM connective tells (specific patterns from shipped output)
 LLM_CONNECTIVE_PATTERNS: list[str] = [
     r"[Tt]hese\s+(?:two|three|several)\s+(?:numbers|facts|stories)\s+landed\s+in\s+the\s+same\s+(?:week|day|month)",
@@ -279,6 +313,17 @@ def clean_file(path: Path) -> dict:
     flags["fabrication_candidates"] = count_matches(text, FABRICATION_FLAG_PATTERNS)
     flags["neat_bows"] = count_matches(text, NEAT_BOW_PATTERNS)
     flags["guru_voice"] = count_matches(text, GURU_VOICE_PATTERNS)
+    flags["mba_vocabulary"] = count_matches(text, MBA_VOCABULARY_PATTERNS)
+
+    # Long-sentence detector (>22 words)
+    long_sentences: list[str] = []
+    for raw in re.split(r"(?<=[.!?])\s+", text):
+        # strip markdown formatting before counting
+        cleaned = re.sub(r"[*_#>\-\[\]()]", " ", raw).strip()
+        words = cleaned.split()
+        if len(words) > LONG_SENTENCE_THRESHOLD:
+            long_sentences.append(f"{len(words)}w: {' '.join(words[:12])}...")
+    flags["long_sentences"] = long_sentences
 
     counts["llm_structural_flags"] = len(flags["llm_structural_labels"])
     counts["not_x_its_y_count"] = len(flags["not_x_its_y"])
@@ -286,6 +331,8 @@ def clean_file(path: Path) -> dict:
     counts["fabrication_flags"] = len(flags["fabrication_candidates"])
     counts["neat_bow_flags"] = len(flags["neat_bows"])
     counts["guru_voice_flags"] = len(flags["guru_voice"])
+    counts["mba_vocabulary_flags"] = len(flags["mba_vocabulary"])
+    counts["long_sentence_flags"] = len(long_sentences)
 
     # Hard rule: >1 "[Not X, it's Y]" in a document = anti-slop violation
     counts["not_x_its_y_violation"] = 1 if len(flags["not_x_its_y"]) > 1 else 0
@@ -293,6 +340,10 @@ def clean_file(path: Path) -> dict:
     counts["neat_bow_violation"] = 1 if counts["neat_bow_flags"] > 0 else 0
     # Hard rule: any guru voice > 0 (posts must be first-person take, not third-person advice)
     counts["guru_voice_violation"] = 1 if counts["guru_voice_flags"] > 2 else 0
+    # Hard rule: >2 MBA-vocab hits = plain-english violation
+    counts["mba_vocabulary_violation"] = 1 if counts["mba_vocabulary_flags"] > 2 else 0
+    # Hard rule: >3 sentences over 22 words = plain-english violation
+    counts["long_sentence_violation"] = 1 if counts["long_sentence_flags"] > 3 else 0
 
     if text != original:
         path.write_text(text, encoding="utf-8")

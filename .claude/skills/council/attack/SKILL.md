@@ -22,6 +22,7 @@ Outputs decide whether `/revise` runs next, or pipeline proceeds to `/publish`.
 
 - `workspace/${TODAY}/brief.md`
 - `workspace/${TODAY}/posts.md`
+- `.claude/skills/write-briefing/references/plain-english-rules.md` — the 7 hard language rules. Every flagged sentence must be quoted in council-notes with a rewrite suggestion.
 - `.claude/skills/write-posts/references/review.md` (15-point audit rubric)
 - `.claude/skills/write-posts/references/kill-list.md`
 
@@ -60,7 +61,7 @@ Specific revision notes:
 
 ### Step 0: Deterministic kill-list pre-flight (MANDATORY — runs every time)
 
-Run the existing regex script against both brief and posts:
+Run the existing regex scripts + clean_text plain-english check against both brief and posts:
 
 ```bash
 # Capture violations from each file
@@ -68,14 +69,19 @@ Run the existing regex script against both brief and posts:
 ./tests/kill-list-regex.sh workspace/${TODAY}/posts.md > workspace/${TODAY}/.posts-violations.log 2>&1 || true
 ./tests/golden-format.sh workspace/${TODAY}/brief.md > workspace/${TODAY}/.brief-format.log 2>&1 || true
 
+# clean_text.py now also flags mba_vocabulary + long_sentence hits
+python3 scripts/clean_text.py workspace/${TODAY}/brief.md workspace/${TODAY}/posts.md > workspace/${TODAY}/.plain-english.log 2>&1 || true
+
 BRIEF_VIOL=$(grep -c '^  - ' workspace/${TODAY}/.brief-violations.log || echo 0)
 POSTS_VIOL=$(grep -c '^  - ' workspace/${TODAY}/.posts-violations.log || echo 0)
 FORMAT_VIOL=$(grep -c '^  - ' workspace/${TODAY}/.brief-format.log || echo 0)
+MBA_VOCAB=$(grep -oE 'mba_vocabulary_violation..: [01]' workspace/${TODAY}/.plain-english.log | grep -oE '[01]$' | head -1 || echo 0)
+LONG_SENTENCE=$(grep -oE 'long_sentence_violation..: [01]' workspace/${TODAY}/.plain-english.log | grep -oE '[01]$' | head -1 || echo 0)
 
-echo "[attack] pre-flight: brief=${BRIEF_VIOL}, posts=${POSTS_VIOL}, format=${FORMAT_VIOL}"
+echo "[attack] pre-flight: brief=${BRIEF_VIOL}, posts=${POSTS_VIOL}, format=${FORMAT_VIOL}, mba_vocab=${MBA_VOCAB}, long_sentence=${LONG_SENTENCE}"
 ```
 
-If total violations > 0, these are CONFIRMED hard-rule failures (em dashes, kill-list words, missing sections). Write them verbatim to the top of `council-notes.md` as "Deterministic findings". Set the verdict to REVISE — no LLM interpretation required.
+If total violations > 0 OR mba_vocab/long_sentence violations exist, these are CONFIRMED hard-rule failures. Write them verbatim to the top of `council-notes.md` as "Deterministic findings". Set the verdict to REVISE — no LLM interpretation required. Include the specific MBA words found (from `.plain-english.log`) and the specific long sentences verbatim in the notes.
 
 LLM passes (steps 1-3) still run after this, but pre-flight findings take priority.
 
@@ -104,6 +110,19 @@ Kill list (regex-scan each post for violations):
 <kill_list>
 ${KILL_LIST_CONTENTS}
 </kill_list>
+
+PLAIN ENGLISH RULES — also audit against these (hard rules Aayush cares about):
+<plain_english>
+${PLAIN_ENGLISH_RULES_CONTENTS}
+</plain_english>
+
+For each post, additionally report:
+- mba_vocabulary_hits: [words from the kill-list in plain-english-rules.md, if any]
+- long_sentences: [any sentence >22 words, verbatim]
+- abstract_noun_stacks: [sentences with 3+ abstract nouns, verbatim]
+- fifth_grade_fail: [sentences a smart 16-year-old couldn't parse in one read, verbatim]
+
+If ANY post has >2 mba_vocabulary_hits OR >3 long_sentences OR >1 abstract_noun_stack, verdict = REVISE with plain-english fixes as the top priority.
 
 Posts to audit:
 <posts>
