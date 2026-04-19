@@ -22,6 +22,7 @@ When the user's request matches, invoke the skill by running `/{skill-name}` in 
 | Adversarial review | `/attack` | `.claude/skills/council/attack/SKILL.md` |
 | Apply council fixes | `/revise` | `.claude/skills/council/revise/SKILL.md` |
 | Commit + deliver | `/publish` | `.claude/skills/publish/SKILL.md` |
+| Sunday conviction candidates | `/weekly-feedback` | `.claude/skills/weekly-feedback/SKILL.md` |
 
 ---
 
