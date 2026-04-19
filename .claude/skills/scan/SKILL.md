@@ -5,7 +5,17 @@ description: Pull last 24h of AI posts from X/Twitter (via Grok) + 41 RSS feeds.
 
 # /scan — Ingestion
 
+**In CI this runs as `scripts/scan.sh` (deterministic bash) BEFORE any Claude Code step.** Instructions below are for local/manual runs or debugging — they mirror what the script does.
+
 Reads `config/sources.csv`. Outputs a combined list of all candidate items from the last 24 hours to `workspace/${TODAY}/raw-intake.json`.
+
+## Fast path (preferred)
+
+```bash
+TODAY=2026-04-19 ATLAN_LLM_KEY=sk-... ./scripts/scan.sh
+```
+
+This handles RSS (all 44 feeds), Grok X search via proxy, merging, and the anti-fabrication gate in one go. Writes `.status=scan-ok` or `scan-failed`.
 
 ## Outputs
 

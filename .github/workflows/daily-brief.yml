@@ -81,22 +81,32 @@ jobs:
           sudo apt-get install -y -qq jq curl python3 python3-pip
           python3 -m pip install --quiet feedparser requests
 
-      - name: Run intake pipeline via Claude Code
+      # Deterministic scan: RSS (all 44 feeds) + Grok via proxy + merge.
+      # No LLM involvement — bash does this much faster than Claude Code
+      # (Claude burned ~8 min on bash escaping issues before).
+      - name: Scan (deterministic — RSS + Grok)
+        env:
+          TODAY: ${{ steps.today.outputs.today }}
+          ATLAN_LLM_KEY: ${{ secrets.ATLAN_LLM_KEY }}
+          LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
+        run: ./scripts/scan.sh
+
+      - name: Run score + theme + brain via Claude Code
         uses: anthropics/claude-code-base-action@v0.0.63
         with:
           prompt: |
-            Execute the intake phase of the daily-brief pipeline. Follow these skills in order, stop after brain-connect:
-              1. .claude/skills/scan/SKILL.md
-              2. .claude/skills/score/SKILL.md
-              3. .claude/skills/theme-detect/SKILL.md
-              4. .claude/skills/brain-connect/SKILL.md
+            Intake bash step already produced workspace/${{ steps.today.outputs.today }}/raw-intake.json
+            with scan-ok status. Continue with these skills:
+              1. .claude/skills/score/SKILL.md          → scored.json + research.md
+              2. .claude/skills/theme-detect/SKILL.md   → themes.json
+              3. .claude/skills/brain-connect/SKILL.md  → brain.md + Supabase upserts
 
             TODAY=${{ steps.today.outputs.today }}
             DRY_RUN=${{ steps.dry.outputs.dry_run }}
 
-            Write all artifacts to workspace/${{ steps.today.outputs.today }}/.
-            Do NOT proceed to write-briefing/write-posts/publish — those run in a separate job.
-            Do NOT fabricate. If scan produces 0 items, exit 1.
+            Write all outputs under workspace/${{ steps.today.outputs.today }}/.
+            If raw-intake.json has <3 items, jump straight to exit — orchestrator handles quiet-day.
+            Do NOT proceed to write-briefing/write-posts/publish — those run in separate jobs.
           settings: .claude/settings.json
           anthropic_api_key: ${{ secrets.ATLAN_LLM_KEY }}
           claude_args: "--max-turns 40 --dangerously-skip-permissions"
