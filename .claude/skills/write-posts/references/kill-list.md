@@ -79,6 +79,49 @@ breathtaking, extraordinary, unparalleled, remarkable, game-changing, game chang
 - "leverage AI to seamlessly [verb]" — triple stacked
 - "cutting-edge, game-changing, revolutionary" — any two of these in one post
 
+## 1N: LLM-tell connectives (observed in shipped 2026-04-18 posts)
+These are the specific patterns the LLM reaches for when trying to sound like a human narrator. Regex-flagged by `scripts/clean_text.py`.
+
+- "these two [numbers/facts/things] landed in the same week"
+- "everyone treated them as separate stories"
+- "i think they're the same story"
+- "here's what i've seen firsthand"
+- "here's what that looks like in practice"
+- "the pattern is so consistent it's almost boring"
+- "what's happening is more specific than"
+- "the parallel to [X] is almost exact"
+- "the details are thin but the direction is clear"
+- "the risk is not [X]. the risk is [Y]"
+- "the difference is not [X]. the difference is [Y]"
+- "X is a junior engineer. a very fast one."
+- "tokenmaxxing" and similar forced LLM coinages
+
+## 1O: Fabricated first-person specifics (CRITICAL)
+These MUST trace to a verified entry in `config/aayush-experiences.md`. If no matching entry → rewrite as a take, not a story.
+
+- Specific team sizes of people Aayush doesn't lead: "a 14-person team", "a 3-person team I work with"
+- Specific code/work volumes: "i deleted about 40% of what the AI generated. roughly 1,200 lines"
+- Specific durations on specific projects: "i had been building a new internal tool for about three weeks"
+- Specific client coaching claims: "i talked to an engineering lead last month"
+- Specific dollar amounts: "their cost per feature dropped meaningfully"
+- Specific invented metrics: "i started tracking a rough metric with one team i advise — tokens per merged feature"
+
+## 1P: Structural / rhetorical cliches
+- **Three short sentences in a row** — sounds like a list, not a person thinking
+- **Same word repeated twice in one post** — other than conjunctions + proper nouns
+- **[Not X, it's Y] inversions** — "this isn't about compliance. it's about competitive advantage." Max 1 per post.
+- **"Why now?" structural labels** — "what's happening is", "here's why this matters", "here's the thing"
+- **Neat bow closers** — "the founders who see this will win. the ones who don't will retrofit."
+- **Parallel-structure triplets** — rule of three forcing ("more shipping doesn't mean better shipping")
+- **Feature-first framing** — "Claude provides X" → lead with problem/outcome instead
+
+## 1Q: Anti-slop tests (must pass all 5 — see `anti-slop-checklist.md`)
+- Substitution Test: replace the specific name with generic. If post still works → too generic.
+- Specificity Count: ≥3 named entities/numbers per post
+- Jargon Scan: 0 matches for kill-list words
+- Stat-Stat-Reframe-Metaphor Check: no "X%/Y%/reframe/metaphor" scaffolding
+- "So What?" Test: every sentence must answer "so what for the reader?"
+
 ## Enforcement
 
 During `/attack` review:

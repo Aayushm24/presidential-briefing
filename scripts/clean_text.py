@@ -85,6 +85,46 @@ TRANSITION_PATTERNS: list[str] = [
     r"(^|\.\s+)Ultimately,\s*",
 ]
 
+# LLM "Why now?" structural labels (Helix rule: real writers don't announce rhetorical moves).
+# Match the full sentence containing them — flag via counting, don't auto-rewrite (LLM needed).
+LLM_STRUCTURAL_LABEL_PATTERNS: list[str] = [
+    r"[Ww]hat(?:'|\u2019)?s\s+happening\s+is\b",
+    r"[Hh]ere(?:'|\u2019)?s\s+why\s+this\s+matters\b",
+    r"[Hh]ere(?:'|\u2019)?s\s+the\s+thing\b",
+    r"[Hh]ere(?:'|\u2019)?s\s+what\s+(?:i|I)(?:'|\u2019)?ve\s+seen\s+firsthand\b",
+    r"[Hh]ere(?:'|\u2019)?s\s+what\s+that\s+looks\s+like\s+in\s+practice\b",
+    r"[Tt]he\s+parallel\s+to\s+.{1,50}?\s+is\s+(?:almost\s+)?exact\b",
+    r"[Tt]he\s+details\s+are\s+thin,?\s+but\s+the\s+direction\s+is\s+clear\b",
+    r"[Tt]he\s+pattern\s+is\s+so\s+consistent\s+it(?:'|\u2019)?s\s+almost\s+boring\b",
+]
+
+# LLM "[Not X, it's Y]" inversion patterns (Helix rule: max 1 per document).
+# Count occurrences, flag if > 1.
+NOT_X_ITS_Y_PATTERNS: list[str] = [
+    r"(?:[Tt]his|[Tt]hat|[Tt]hese)\s+(?:isn(?:'|\u2019)?t|aren(?:'|\u2019)?t)\s+\w+.{0,80}?[.—,]\s*(?:[Ii]t(?:'|\u2019)?s|[Tt]hey(?:'|\u2019)?re)\s+\w+",
+    r"[Tt]he\s+\w+\s+is\s+not\s+\w+.{0,60}?\.\s*(?:[Tt]he\s+\w+\s+is|[Ii]t(?:'|\u2019)?s)\s+\w+",
+    r"[Tt]he\s+risk\s+is\s+not\s+\w+.{0,60}?\.\s*[Tt]he\s+risk\s+is\s+\w+",
+    r"[Tt]he\s+difference\s+is\s+not\s+\w+.{0,60}?\.\s*[Tt]he\s+difference\s+is\s+\w+",
+]
+
+# LLM connective tells (specific patterns from shipped output)
+LLM_CONNECTIVE_PATTERNS: list[str] = [
+    r"[Tt]hese\s+(?:two|three|several)\s+(?:numbers|facts|stories)\s+landed\s+in\s+the\s+same\s+(?:week|day|month)",
+    r"everyone\s+treated\s+them\s+as\s+separate\s+stories",
+    r"(?:i|I)\s+think\s+they(?:'|\u2019)?re\s+the\s+same\s+story",
+    r"\btokenmaxxing\b",  # forced LLM coinage
+    r"the\s+token\s+bill\s+says\s+you(?:'|\u2019)?re\s+working\s+hard",
+]
+
+# Fabricated first-person specifics — regex flag (don't auto-remove, flag for LLM review)
+# Matches patterns like "i talked to an engineering lead last month", "a 14-person team I advise"
+FABRICATION_FLAG_PATTERNS: list[str] = [
+    r"\b(?:i|I)\s+(?:advise|work\s+with|coach|talked\s+to|reviewed|deleted|tracked|built)\s+(?:a|an|the|\d+)\s+(?:\d+[-\s]?person\s+team|team\s+of\s+\d+|engineering\s+lead|\d+,?\d*\s+lines)",
+    r"\ba\s+\d+[-\s]?person\s+team\s+(?:i|I)\s+(?:advise|advised|work\s+with|worked\s+with)",
+    r"(?:i|I)\s+deleted\s+(?:about\s+)?\d+%?\s+of",
+    r"(?:i|I)(?:'|\u2019)?ve\s+been\s+(?:tracking|building|running)\s+(?:a|an|rough)\s+(?:metric|tool|system)\s+(?:with|for)\s+(?:one|a)\s+team",
+]
+
 # Cliche openers (1F) — delete the whole phrase including trailing space.
 OPENER_PATTERNS: list[str] = [
     r"\bHere's what I learned\b[,:.]?\s*",
@@ -144,10 +184,20 @@ def apply_patterns(
     return text, total
 
 
-def clean_file(path: Path) -> dict[str, int]:
+def count_matches(text: str, patterns: list[str]) -> list[str]:
+    """Return list of matched strings (for flag-only detection — no rewrite)."""
+    matches = []
+    for pattern in patterns:
+        for m in re.finditer(pattern, text, flags=re.IGNORECASE):
+            matches.append(m.group(0)[:120])
+    return matches
+
+
+def clean_file(path: Path) -> dict:
     original = path.read_text(encoding="utf-8")
     text = original
-    counts: dict[str, int] = {}
+    counts: dict = {}
+    flags: dict = {}
 
     text, counts["em_dash"] = fix_em_dashes(text)
     text, counts["bullet"] = fix_bullets(text)
@@ -160,12 +210,27 @@ def clean_file(path: Path) -> dict[str, int]:
         text, OPENER_PATTERNS, replacement=""
     )
 
+    # Flag-only detections (not auto-rewritten — LLM must fix)
+    flags["llm_structural_labels"] = count_matches(text, LLM_STRUCTURAL_LABEL_PATTERNS)
+    flags["not_x_its_y"] = count_matches(text, NOT_X_ITS_Y_PATTERNS)
+    flags["llm_connectives"] = count_matches(text, LLM_CONNECTIVE_PATTERNS)
+    flags["fabrication_candidates"] = count_matches(text, FABRICATION_FLAG_PATTERNS)
+
+    counts["llm_structural_flags"] = len(flags["llm_structural_labels"])
+    counts["not_x_its_y_count"] = len(flags["not_x_its_y"])
+    counts["llm_connective_flags"] = len(flags["llm_connectives"])
+    counts["fabrication_flags"] = len(flags["fabrication_candidates"])
+
+    # Hard rule: >1 "[Not X, it's Y]" in a document = anti-slop violation
+    counts["not_x_its_y_violation"] = 1 if len(flags["not_x_its_y"]) > 1 else 0
+
     if text != original:
         path.write_text(text, encoding="utf-8")
         counts["file_changed"] = 1
     else:
         counts["file_changed"] = 0
 
+    counts["_flags"] = flags  # detailed flags for caller inspection
     return counts
 
 
@@ -182,16 +247,29 @@ def main() -> None:
             continue
 
         counts = clean_file(path)
+        flags = counts.pop("_flags", {})
         print(
             f"[clean] {path}: em_dash={counts['em_dash']} bullet={counts['bullet']} "
             f"kill_word={counts['kill_word']} audience_phrase={counts['audience_phrase']} "
             f"transition={counts['transition']} cliche_opener={counts['cliche_opener']} "
+            f"llm_structural_flags={counts['llm_structural_flags']} "
+            f"not_x_its_y_count={counts['not_x_its_y_count']} "
+            f"llm_connective_flags={counts['llm_connective_flags']} "
+            f"fabrication_flags={counts['fabrication_flags']} "
             f"changed={counts['file_changed']}",
             file=sys.stderr,
         )
 
+        # Verbose flag output for human inspection
+        for flag_type, matches in flags.items():
+            if matches:
+                print(f"[clean]   {flag_type}:", file=sys.stderr)
+                for match in matches[:5]:
+                    print(f"[clean]     - {match}", file=sys.stderr)
+
         for k, v in counts.items():
-            grand_total[k] = grand_total.get(k, 0) + v
+            if isinstance(v, int):
+                grand_total[k] = grand_total.get(k, 0) + v
 
     print(f"[clean] TOTAL: {grand_total}", file=sys.stderr)
 

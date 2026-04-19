@@ -176,32 +176,56 @@ ${POSTS_MD_CONTENTS}
 
 Call via proxy with `gemini-3.1-pro-preview`, temperature 0.1.
 
-### Step 4: Adversarial attack (Grok, parallel)
+### Step 4: Adversarial attack (Grok — uses exact Helix prompt + freshness check)
+
+Canonical adversarial prompt at `config/council-prompts/grok-adversarial.md`. Combines Helix's 4 failure modes with anti-slop pattern detection + freshness search.
 
 Prompt:
 
 ```
-Attack this briefing and 3 LinkedIn posts. Find:
-1. Logical gaps between claims and evidence
-2. Sections where the argument breaks down
-3. Straw-man arguments — claims dismissed without engaging the strongest counter-version
-4. Missing context that would change the conclusion
-5. FRESHNESS: search X for similar takes in the last 7 days. Is this angle fresh or saturated?
+Review this briefing and 3 LinkedIn posts critically. Find:
 
-For EACH post option: is this fresh, saturated, or already dead? Would a CTO forward it, or would they recognize it as recycled?
+(1) Logical gaps between sections
+(2) Claims not supported by the research brief (check against research.md)
+(3) Straw-man arguments or unfair framing — claims dismissed without engaging the strongest counter-version
+(4) Sections where the argument breaks down
 
-Also: does each post pass the "relevance to builders" test? Flag anything that's only interesting to ML researchers.
+Anti-slop pattern detection — hunt specifically for:
+(5) Stat-Stat-Reframe-Metaphor scaffolding ("X% did Y. Z% failed. The reframe is... [metaphor]")
+(6) "[Not X, it's Y]" rhetorical inversions ("these aren't unrelated stories. they're the same story.")
+(7) "Why now?" / "what's happening is" / "here's why this matters" / "the parallel to X is almost exact" structural labels
+(8) Neat bow closers (drum-roll summary like "the founders who see this will win. the ones who don't will retrofit.")
+(9) Fabricated first-person specifics (any "i [verb] [specific past event/number/team]" without matching entry in aayush-experiences.md)
+
+Post-specific freshness:
+(10) Search X for similar takes in the last 7 days — is this angle fresh, saturated, or already dead?
+(11) Builder relevance — would a founder/CTO forward this, or only an ML researcher?
+
+For each finding, be specific — cite the exact sentences with problems and propose the specific fix.
 
 Return JSON:
 {
-  "brief_attacks": [
-    {"section": "...", "issue": "...", "suggested_fix": "..."},
-    ...
-  ],
-  "option_1": {"freshness": "fresh|saturated|dead", "founder_relevant": bool, "strongest_critique": "...", "suggested_fix": "..."},
+  "brief": {
+    "logical_gaps": [{"section": "...", "quote": "...", "fix": "..."}],
+    "unsupported_claims": [...],
+    "straw_men": [...],
+    "argument_breakdowns": [...],
+    "stat_stat_reframe": [{"quote": "...", "fix": "..."}],
+    "not_x_its_y": [...],
+    "structural_labels": [...],
+    "neat_bows": [...],
+    "verdict": "ship" | "revise" | "reject"
+  },
+  "option_1": {
+    "freshness": "fresh|saturated|dead",
+    "builder_relevant": bool,
+    "fabricated_claims": [...],
+    "strongest_critique": "...",
+    "verdict": "ship" | "revise" | "reject"
+  },
   "option_2": {...},
   "option_3": {...},
-  "recommended": "option a founder would share"
+  "recommended": "option a builder would share (by name, e.g. option_2)"
 }
 
 Briefing:
@@ -213,6 +237,16 @@ Posts:
 <posts>
 ${POSTS_MD_CONTENTS}
 </posts>
+
+Research (to verify claims against):
+<research>
+${RESEARCH_FIRST_2000_CHARS}
+</research>
+
+Aayush's verified experiences (for fabrication detection):
+<experiences>
+${AAYUSH_EXPERIENCES_CONTENTS}
+</experiences>
 ```
 
 Call `/responses` through the Atlan proxy (NOT `api.x.ai` directly — the key only works via proxy):

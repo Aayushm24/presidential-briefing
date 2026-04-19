@@ -57,7 +57,71 @@ Scoring: 1 = clean pass, 0 = violation. Total out of 15. Each violation requires
 - 15/15 — ship immediately
 - 13–14/15 — ship with note on minor fix
 - 12/15 — ship threshold. Fix one violation, re-check.
-- <12/15 — revise. Return specific revision notes per failed dimension.
+- <12/15 — **HARD REJECT** the whole option. Regenerate with a different template angle. Do NOT patch-revise below threshold.
+
+## Anti-Slop 5 Tests (second pass — runs AFTER 15-point audit)
+
+Every post MUST pass all 5 before ship. Council `/attack` checks via LLM + `scripts/clean_text.py` regex.
+
+### Test 1: Substitution
+Replace the specific named company/person in the hook with a generic one ("another AI tool"). If the post still works → it's too generic. Rewrite until it can only be about THIS specific thing.
+
+### Test 2: Specificity Count
+≥3 specific items per post: named companies, real numbers, named people, linked repos. Zero specifics = reject.
+
+### Test 3: Jargon Scan
+Zero matches for categories 1A–1F of kill-list.md. Auto-fixed by `clean_text.py` unless LLM introduced a new variant.
+
+### Test 4: Stat-Stat-Reframe-Metaphor Check
+No "X company did Y. Z company did W. The reframe is..." scaffolding. Stats must weave into the argument, not bullet-stack. If the post has this pattern → reject and rewrite with one clear argument line.
+
+### Test 5: "So What?" Test
+For every sentence, answer: "so what does this mean for the reader?" in one sentence. If can't answer → cut the sentence.
+
+## Post-Specific Tests (additional)
+
+### Test 6: First-Person Verification
+Every `i [verb] [specific event/number/team/client]` claim must trace to a verified entry in `config/aayush-experiences.md`. If no match → the claim is fabricated → reject the whole post option and rewrite as a take (opinion), not a story (experience).
+
+### Test 7: 3 Distinct Angles
+The 3 shipped post options MUST use 3 different structures:
+- Option 1: **Commentary take** — pure opinion on the news, zero personal story claimed
+- Option 2: **Data-point expansion** — leads with ONE verifiable number from research.md, unpacks implication
+- Option 3: **Pattern observation** — connects 2+ verified stories from research.md
+
+If 2+ options use the same "problem → fake personal story → workflow list → CTA" mold → reject the whole set, regenerate.
+
+### Test 8: Hook Gate (hard fail <7)
+Hooks scored 1–10 per `hooks.md` rubric (scroll-stop + specificity + tension + voice-match). If ANY hook scores <7 → reject that option and regenerate with a different template, don't patch-revise the hook.
+
+## Output format (for /attack)
+
+```json
+{
+  "option_1": {
+    "scores": { ...15 dimensions... },
+    "voice_audit_total": 14,
+    "anti_slop_tests": {
+      "substitution": "pass" | "fail: quoted sentence",
+      "specificity": "pass" | "fail: only 1 specific found",
+      "jargon": "pass" | "fail: 'leverage' in line 7",
+      "stat_stat_reframe": "pass" | "fail: paragraph 3 matches pattern",
+      "so_what": "pass" | "fail: line 12 has no reader outcome"
+    },
+    "first_person_verification": "pass" | "fail: claim 'i deleted 1,200 lines' has no entry in aayush-experiences.md",
+    "hook_score": 8,
+    "hook_pattern": "B",
+    "verdict": "ship" | "ship_with_fix" | "reject_and_regenerate"
+  },
+  "option_2": { ... },
+  "option_3": { ... },
+  "angles_distinct": true | false,
+  "recommended_option": 1,
+  "overall_verdict": "ship" | "regenerate"
+}
+```
+
+If `angles_distinct` is false OR any option has `verdict: reject_and_regenerate` OR hook_score <7 → the council returns `overall_verdict: regenerate` and `/write-posts` runs again with a prompt noting which angles to avoid.
 
 ## Output format (for /attack)
 

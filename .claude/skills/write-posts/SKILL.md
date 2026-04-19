@@ -124,7 +124,29 @@ ${VOICE_PROFILE_CONTENTS}
 ${HOOKS_MD_CONTENTS}
 </hooks>
 
-Target hook score: 7+ per the scoring rubric in hooks.md. Reject anything scoring below 7.
+Target hook score: 7+ per the scoring rubric in hooks.md. **HARD RULE: if your self-scored hook is <7, you MUST pick a different angle/template and write a new hook — do not ship a hook below 7. Do not patch-revise a 6 into a 7.**
+
+=== ANTI-SLOP (must pass all 5) ===
+
+<anti_slop>
+${ANTI_SLOP_CHECKLIST_CONTENTS}
+</anti_slop>
+
+Every post must pass the 5 Tests (Substitution, Specificity, Jargon, Stat-Stat-Reframe, "So What?"). /attack council enforces.
+
+=== AAYUSH EXPERIENCES (first-person source of truth) ===
+
+<experiences>
+${AAYUSH_EXPERIENCES_CONTENTS}
+</experiences>
+
+**HARD RULE: any sentence of the form `i [verb] [specific past event / number / team / client / code]` MUST trace to a verified entry above. If no matching entry → rewrite that option as a TAKE (opinion) instead of a STORY (experience). Fabricated first-person claims = automatic reject.**
+
+Examples of banned claims (because they can't be verified):
+- "a 14-person team I work with" (not in experiences)
+- "i deleted 1,200 lines of Cursor code" (not in experiences)
+- "i've been tracking tokens per merged feature with one team I advise" (not in experiences)
+- Any "across X teams I've seen" where X > 0 and not documented
 
 === POST TEMPLATES ===
 
@@ -132,7 +154,15 @@ Target hook score: 7+ per the scoring rubric in hooks.md. Reject anything scorin
 ${POST_TEMPLATES_CONTENTS}
 </templates>
 
-Each of the 3 options MUST use a different template.
+**The 3 options MUST be 3 distinct ANGLE TYPES, not 3 variations of the same structure:**
+
+- **Option 1: Commentary Take** — pure opinion on today's news. Zero first-person experience claimed. Hook pattern: A (Contrarian) or F (Direct Challenge). Structure: sharp claim → 2-3 source facts → implication → open question CTA.
+
+- **Option 2: Data-Point Expansion** — lead with ONE verifiable number from research.md. Hook pattern: E (Specific Number + Surprise). Structure: the number → what the number actually means → who this changes things for → action.
+
+- **Option 3: Pattern Observation** — connects 2+ verified stories from research.md (cross-source). Hook pattern: G (Dot-Connecting) or H (Pattern Reveal). Structure: the pattern → 2-3 named companies as evidence → why this matters → what to watch.
+
+If Aayush has a verified experience from `aayush-experiences.md` that matches today's content, ONE option MAY use template `personal-discovery` with that real story. But this requires an explicit match — never fabricate.
 
 === CONVICTION (this week's POV) ===
 
@@ -167,10 +197,10 @@ ${IF PATTERN_DAY}
 THEME: ${THEME_TITLE}
 THEME_CONVICTION: ${THEME_CONVICTION}
 
-Suggested template routing for pattern day:
-- OPTION 1: personal-discovery (Aayush's real experience connecting to the theme)
-- OPTION 2: dot-connecting (two seemingly unrelated facts from the theme)
-- OPTION 3: contrarian OR pattern-reveal
+Fixed template routing (3 distinct angles — NO fabrication):
+- OPTION 1: commentary-take (Aayush's opinion on the theme, zero personal story)
+- OPTION 2: data-point (lead with one verifiable number from supporting stories)
+- OPTION 3: pattern-observation (dot-connect 2+ supporting stories)
 
 Supporting stories:
 <stories>
@@ -182,10 +212,10 @@ LEAD STORY:
 ${LEAD_STORY_JSON}
 </story>
 
-Suggested template routing for single-story day:
-- OPTION 1: personal-discovery
-- OPTION 2: news-take
-- OPTION 3: contrarian OR specific-number
+Fixed template routing (3 distinct angles — NO fabrication):
+- OPTION 1: commentary-take (sharp opinion on the lead story)
+- OPTION 2: data-point (specific number from the source, unpacked)
+- OPTION 3: contrarian (the consensus view, why it's wrong, what's actually going on)
 ${END}
 
 === BRIEFING CONTEXT ===
@@ -249,13 +279,19 @@ Parse 3 OPTION blocks from output. For each:
 - Extract `template`, `hook_pattern`, `conviction`, `hook_score`, and the post body
 - Validate:
   - Hook line is ≤70 characters
-  - All 3 options use DIFFERENT templates
-  - `hook_score ≥ 7` (else flag for rewrite)
+  - **All 3 options use 3 DIFFERENT angle types** (commentary-take / data-point / pattern-observation — not 3 variations of personal-discovery)
+  - **`hook_score ≥ 7` (hard fail — regenerate the option with a different template, don't patch)**
   - Post is 900–1,500 characters
   - No em dashes (hard regex)
   - No kill-list violations (regex pre-filter)
+  - **No fabricated first-person specifics** (regex-flag sentences starting with "i " + past-tense verb + specific number/team/company not in aayush-experiences.md)
 
-If any option fails validation: rewrite ONCE with specific fix in the prompt. If still failing, tag option with `[NEEDS-REVISE]` and let `/attack` council handle.
+**If any option fails validation or hook <7:**
+- Regenerate ONLY that option with the prompt noting which angle to use and what to avoid
+- Max 1 regeneration per option
+- If still failing → tag option with `[NEEDS-REVISE]` and let `/attack` council decide final verdict
+
+**If all 3 options share the same template/angle:** HARD FAIL, regenerate all three with explicit angle routing.
 
 ### Step 5: Write posts.md + posts.json
 

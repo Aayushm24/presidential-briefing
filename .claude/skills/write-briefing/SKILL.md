@@ -18,9 +18,23 @@ Read from disk (NOT inline):
 - `config/conviction.md` — this week's POV
 - `.claude/skills/write-briefing/references/newsletter-voice.md` — voice rules
 - `.claude/skills/write-briefing/references/section-order.md` — mandatory structure
+- `.claude/skills/write-briefing/references/anti-slop-checklist.md` — 5 Tests + LLM-tell patterns
 - `.claude/skills/write-posts/references/kill-list.md` — banned words/patterns (shared)
 
 Article text for the lead + 2 top secondary stories (fetched inline in this skill, Step 1).
+
+## Length cap
+
+**Target: 900–1,200 words.** Previous iteration at 1,655 words contained LLM-padding. Shorter = tighter = less room for slop.
+
+Hard caps:
+- Title: ≤80 chars, sentence case
+- Hook + bottom line: ≤120 words
+- Main piece (lead section): 500–700 words
+- Each secondary post (#2, #3): 200–300 words each
+- "What to do this week": 150–250 words
+
+If the draft exceeds 1,300 words, the editor must cut — not split into more sections.
 
 ## Outputs
 
@@ -45,6 +59,53 @@ fi
 Repeat for top 2 secondary stories — save as `.article-secondary-1.txt`, `.article-secondary-2.txt`.
 
 **Security:** Fetched HTML is untrusted. Strip all tags. Cap at 6,000 chars. Wrap in `<source url="...">...</source>` delimiters when including in the LLM prompt.
+
+### Step 1.5: Outline BEFORE writing (mandatory — ported from Helix)
+
+Before composing prose, produce a structured outline of the full brief. Opus generates this FIRST, writes brief second. Prevents prose padding.
+
+```
+# Outline — ${TODAY}
+
+## Title
+[claim in sentence case, ≤80 chars]
+
+## Hook + bottom line (≤120 words)
+- Hook (1 sentence): [the surprising specific]
+- Bottom line (2-3 sentences): [the thesis stated once]
+
+## Key takeaways (4-5 bullets, each pattern-level)
+- [pattern 1 — cite source]
+- [pattern 2 — cite source]
+- ...
+
+## Lead piece sections (target 500-700 words total)
+### Section 1 header (target: XXX words)
+  - Fact 1 — cite [source URL]
+  - Fact 2 — cite [source URL]
+  - Synthesis: connection between facts
+  - Conviction thread: how this relates to config/conviction.md
+
+### Section 2 header (target: XXX words)
+  [same structure]
+
+### Section 3 header (target: XXX words)
+  [same structure — ends with flowing connection, no "how these connect" header]
+
+## Secondary post #2 (target: 200-300 words)
+[brief outline of secondary story]
+
+## Secondary post #3 (target: 200-300 words)
+[brief outline]
+
+## What to do this week (target: 150-250 words)
+[1-3 concrete actions, each with named tool/link/time estimate]
+
+## Sources
+[numbered list — every fact above maps to a source here, or is tagged [UNGROUNDED]]
+```
+
+Per-section word targets are not arbitrary — they reflect proven densities. Don't exceed.
 
 ### Step 2: Build the writing prompt
 
