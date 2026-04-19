@@ -183,9 +183,23 @@ Explain what things DO and why businesses care, not how they are implemented int
 === THE THREE LAYERS (apply explicitly) ===
 
 Every paragraph is one of:
-1. FACT — cited claim. Must name a source (article, company, number). Unverified claims get tagged [UNGROUNDED] at the end of the sentence.
-2. SYNTHESIS — connection between 2+ facts. "These aren't alternatives, they're layers." What makes this worth reading.
+1. FACT — cited claim. Must name a source (article, company, number). **Unverified claims MUST be tagged `[UNGROUNDED]` inline at sentence end** — the editor pass resolves each (find source, remove, or approve).
+2. SYNTHESIS — connection between 2+ facts. "These aren't alternatives, they're layers." What makes this worth reading. Real causal/structural connections, NOT facile metaphors.
 3. CONVICTION — POV from the conviction file below. Thread it through. Never state explicitly ("as I believe..."). Demonstrate through what gets emphasized.
+
+=== ANTI-SLOP (run 5 Tests on every paragraph) ===
+
+1. **Substitution Test** — replace the named thing in this paragraph with generic. If it still works → too generic. Rewrite until it can only be about this specific thing.
+2. **Specificity Count** — ≥3 named entities or concrete numbers per section. Zero specifics = rewrite.
+3. **Jargon Scan** — zero kill-list words (leverage, seamless, cutting-edge, unlock, empower, robust, harness).
+4. **Stat-Stat-Reframe-Metaphor Check** — #1 AI tell. NO "X% did Y. Z% failed. The reframe is... [clever metaphor]" scaffolding. Weave stats in, don't bullet-stack.
+5. **"So What?" Test** — every sentence answers "so what for the reader?" in one sentence. If not → cut.
+
+ALSO BANNED (regex-enforced by clean_text.py):
+- **"[Not X, it's Y]" inversions** — "these aren't unrelated stories. they're the same story." Max 1 per brief.
+- **"Why now?" structural labels** — "what's happening is", "here's why this matters", "the parallel to X is almost exact". Zero allowed.
+- **Neat bow closers** — "the founders who see this will win. the ones who don't will retrofit." End on open question or grounded closer.
+- **Fabricated specifics** — no invented numbers, company names, quotes. If you don't have a source, tag `[UNGROUNDED]` and let editor resolve.
 
 === CONVICTION (thread this through) ===
 
