@@ -2,8 +2,11 @@ name: LinkedIn Performance
 
 on:
   schedule:
-    # 11:00 PM IST = 17:30 UTC
-    - cron: '30 17 * * *'
+    # 11:00 PM IST = 17:30 UTC — Mondays + Fridays only.
+    # Logic: Mon catches weekend engagement settling on prior posts; Fri catches
+    # mid-week post performance before weekend drop. Each post gets ~2 snapshots
+    # over its 2-week engagement lifecycle. Cost ~$4/mo vs $15/mo if daily.
+    - cron: '30 17 * * 1,5'
   workflow_dispatch:
     inputs:
       dry_run:
