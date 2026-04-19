@@ -192,6 +192,131 @@ def merge_by_url(csv_entries: list[dict[str, Any]], perf_entries: list[dict[str,
     return list(seen.values())
 
 
+def load_pickups(path: Path) -> dict[str, dict[str, Any]]:
+    """Return {normalized_url: pickup_entry}. Latest-wins if duplicates."""
+    out: dict[str, dict[str, Any]] = {}
+    if not path.is_file():
+        return out
+    with path.open(encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                entry = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            url = entry.get("post_url", "")
+            if url:
+                out[normalize_url(url)] = entry
+    return out
+
+
+def count_generated_options(workspace_dir: Path) -> dict[str, dict[str, int]]:
+    """Walk workspace/*/posts.json; return counts by source_template and source_hook."""
+    by_template: dict[str, int] = {}
+    by_hook: dict[str, int] = {}
+    if not workspace_dir.is_dir():
+        return {"by_template": by_template, "by_hook": by_hook}
+    for day_dir in workspace_dir.iterdir():
+        posts_path = day_dir / "posts.json"
+        if not posts_path.is_file():
+            continue
+        try:
+            data = json.loads(posts_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            continue
+        for opt in data.get("options", []):
+            t = opt.get("template", "") or "unlabeled"
+            h = opt.get("hook_pattern", "") or "unlabeled"
+            by_template[t] = by_template.get(t, 0) + 1
+            by_hook[h] = by_hook.get(h, 0) + 1
+    return {"by_template": by_template, "by_hook": by_hook}
+
+
+def render_pickup_section(merged: list[dict[str, Any]], pickups: dict[str, dict[str, Any]], generated: dict[str, dict[str, int]]) -> str:
+    """Render the 'option pickup rates' section appended to the patterns markdown."""
+    # Index merged entries by normalized url for engagement lookup
+    by_url = {normalize_url(e["url"]): e for e in merged if e.get("url")}
+
+    # Aggregate pickups by source_template
+    tmpl_picks: dict[str, list[int]] = {}  # template → list of composite_engagement
+    hook_picks: dict[str, list[int]] = {}
+    attribution_counts = {"variant_of": 0, "inspired_by": 0, "organic": 0}
+
+    for norm_url, pick in pickups.items():
+        attribution_counts[pick.get("attribution", "organic")] = attribution_counts.get(pick.get("attribution", "organic"), 0) + 1
+        if pick.get("attribution") not in ("variant_of", "inspired_by"):
+            continue
+        entry = by_url.get(norm_url)
+        if not entry:
+            continue
+        eng = entry.get("metrics", {}).get("composite_engagement", 0)
+        t = pick.get("source_template", "") or "unlabeled"
+        h = pick.get("source_hook", "") or "unlabeled"
+        tmpl_picks.setdefault(t, []).append(eng)
+        hook_picks.setdefault(h, []).append(eng)
+
+    lines = [
+        "## Option pickup rates (since tracking started)",
+        "",
+        f"**Attribution summary:** variant_of={attribution_counts['variant_of']} · "
+        f"inspired_by={attribution_counts['inspired_by']} · "
+        f"organic={attribution_counts['organic']}",
+        "",
+        "*Pickup* = published post matched a generated option (Jaccard ≥ 0.25 on first 3 lines' 3-grams).",
+        "",
+    ]
+
+    gen_by_template = generated.get("by_template", {})
+    if gen_by_template:
+        lines.extend([
+            "### By source template",
+            "",
+            "| Template | Generated | Picked | Pickup rate | Avg engagement when picked |",
+            "|---|---|---|---|---|",
+        ])
+        all_tmpls = sorted(set(list(gen_by_template.keys()) + list(tmpl_picks.keys())))
+        for t in all_tmpls:
+            gen_n = gen_by_template.get(t, 0)
+            picks = tmpl_picks.get(t, [])
+            pick_n = len(picks)
+            rate = f"{(pick_n / gen_n * 100):.0f}%" if gen_n else "n/a"
+            avg_eng = f"{sum(picks) / pick_n:.0f}" if picks else "n/a"
+            flag = " ← never shipped" if gen_n > 0 and pick_n == 0 else ""
+            lines.append(f"| **{t}** | {gen_n} | {pick_n} | {rate} | {avg_eng} |{flag}")
+        lines.append("")
+
+    gen_by_hook = generated.get("by_hook", {})
+    if gen_by_hook:
+        lines.extend([
+            "### By source hook pattern",
+            "",
+            "| Hook | Generated | Picked | Pickup rate | Avg engagement when picked |",
+            "|---|---|---|---|---|",
+        ])
+        all_hooks = sorted(set(list(gen_by_hook.keys()) + list(hook_picks.keys())))
+        for h in all_hooks:
+            gen_n = gen_by_hook.get(h, 0)
+            picks = hook_picks.get(h, [])
+            pick_n = len(picks)
+            rate = f"{(pick_n / gen_n * 100):.0f}%" if gen_n else "n/a"
+            avg_eng = f"{sum(picks) / pick_n:.0f}" if picks else "n/a"
+            lines.append(f"| **{h}** | {gen_n} | {pick_n} | {rate} | {avg_eng} |")
+        lines.append("")
+
+    lines.extend([
+        "### How to use this in /write-posts",
+        "",
+        "1. **Bias toward templates with high pickup + high engagement.** If Aayush keeps adapting a template AND those posts hit, it's his voice.",
+        "2. **Phase out templates with 0 pickup after n≥10 generations.** He's telling you he doesn't believe in that angle.",
+        "3. **Organic attribution is the most honest signal.** It's what Aayush writes unprompted — study first-line patterns there for voice anchor.",
+        "",
+    ])
+
+    return "\n".join(lines)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--csv", help="Optional LinkedIn analytics CSV export path")
@@ -231,6 +356,22 @@ def main() -> None:
     # Sort newest first
     merged.sort(key=lambda e: e.get("date", ""), reverse=True)
 
+    # Load pickup attributions + enrich each merged entry with its pickup (if any)
+    pickups = load_pickups(history_dir / "option-pickups.jsonl")
+    for e in merged:
+        norm = normalize_url(e.get("url", ""))
+        if norm in pickups:
+            e["pickup"] = {
+                "attribution": pickups[norm].get("attribution"),
+                "source_template": pickups[norm].get("source_template"),
+                "source_hook": pickups[norm].get("source_hook"),
+                "jaccard": pickups[norm].get("jaccard"),
+            }
+    print(f"[merge] pickup attributions loaded: {len(pickups)}", file=sys.stderr)
+
+    # Count how many options we've generated per template/hook (for pickup-rate denominators)
+    generated_counts = count_generated_options(repo / "workspace")
+
     # Write JSONL
     jsonl_path = history_dir / "linkedin-posts-history.jsonl"
     with jsonl_path.open("w", encoding="utf-8") as out:
@@ -242,9 +383,11 @@ def main() -> None:
     json_path = config_dir / "linkedin-patterns.json"
     json_path.write_text(json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8")
 
-    # Write markdown for /write-posts prompt
+    # Write markdown for /write-posts prompt (base patterns + pickup section appended)
     md_path = config_dir / "aayush-linkedin-patterns.md"
-    md_path.write_text(render_markdown(summary, merged), encoding="utf-8")
+    base_md = render_markdown(summary, merged)
+    pickup_md = render_pickup_section(merged, pickups, generated_counts)
+    md_path.write_text(base_md + "\n---\n\n" + pickup_md, encoding="utf-8")
 
     print(f"[merge] wrote {jsonl_path}")
     print(f"[merge] wrote {json_path}")

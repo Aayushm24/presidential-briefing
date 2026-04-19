@@ -63,6 +63,10 @@ jobs:
           fi
           python3 scripts/linkedin_performance.py $DRY_FLAG
 
+      - name: Attribute published posts to generated options
+        if: github.event.inputs.dry_run != 'true'
+        run: python3 scripts/match_published_to_options.py
+
       - name: Rebuild patterns from merged history
         if: github.event.inputs.dry_run != 'true'
         run: python3 scripts/rebuild_linkedin_history.py
@@ -77,6 +81,7 @@ jobs:
             case "$FILE" in
               performance-data/*) ;;
               history/linkedin-posts-history.jsonl) ;;
+              history/option-pickups.jsonl) ;;
               config/linkedin-patterns.json) ;;
               config/aayush-linkedin-patterns.md) ;;
               *)
@@ -100,7 +105,7 @@ jobs:
             exit 0
           fi
           COUNT=$(git status --porcelain performance-data/ | wc -l | tr -d ' ')
-          git add performance-data/ history/linkedin-posts-history.jsonl config/linkedin-patterns.json config/aayush-linkedin-patterns.md
-          git commit -m "perf: snapshot $TODAY ($COUNT posts) + rebuilt patterns"
+          git add performance-data/ history/linkedin-posts-history.jsonl history/option-pickups.jsonl config/linkedin-patterns.json config/aayush-linkedin-patterns.md
+          git commit -m "perf: snapshot $TODAY ($COUNT posts) + attributions + rebuilt patterns"
           git pull --rebase origin main
           git push origin HEAD:main

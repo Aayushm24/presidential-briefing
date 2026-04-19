@@ -153,3 +153,35 @@ p.p.s First day at the Vipassana center 👇🏻
 3. **Match Aayush's top CTA styles** — permission-giving + direct-question win for him. Challenges win less.
 4. **Length:** medium (1000-2000 chars) is Aayush's sweet spot based on the data.
 5. **Voice anchor:** read the reference post above. Match that rhythm + vulnerability + specificity. Do NOT copy specific claims — copy the structure + tone.
+
+---
+
+## Option pickup rates (since tracking started)
+
+**Attribution summary:** variant_of=0 · inspired_by=0 · organic=25
+
+*Pickup* = published post matched a generated option (Jaccard ≥ 0.25 on first 3 lines' 3-grams).
+
+### By source template
+
+| Template | Generated | Picked | Pickup rate | Avg engagement when picked |
+|---|---|---|---|---|
+| **contrarian** | 2 | 0 | 0% | n/a | ← never shipped
+| **dot-connecting** | 2 | 0 | 0% | n/a | ← never shipped
+| **news-take** | 1 | 0 | 0% | n/a | ← never shipped
+| **personal-discovery** | 1 | 0 | 0% | n/a | ← never shipped
+
+### By source hook pattern
+
+| Hook | Generated | Picked | Pickup rate | Avg engagement when picked |
+|---|---|---|---|---|
+| **A** | 2 | 0 | 0% | n/a |
+| **B** | 1 | 0 | 0% | n/a |
+| **G** | 2 | 0 | 0% | n/a |
+| **I** | 1 | 0 | 0% | n/a |
+
+### How to use this in /write-posts
+
+1. **Bias toward templates with high pickup + high engagement.** If Aayush keeps adapting a template AND those posts hit, it's his voice.
+2. **Phase out templates with 0 pickup after n≥10 generations.** He's telling you he doesn't believe in that angle.
+3. **Organic attribution is the most honest signal.** It's what Aayush writes unprompted — study first-line patterns there for voice anchor.
