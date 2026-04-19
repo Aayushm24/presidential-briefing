@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f9fb; --ink: #0a0b0c; --ink-dim: #52525b;
+    --accent: #0f172a; --border: #e4e4e7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 1200px; }
+  body {
+    font-family: 'Inter', sans-serif;
+    font-feature-settings: 'ss01' on, 'cv11' on;
+    background: var(--bg); color: var(--ink);
+    padding: 96px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .chip {
+    display: inline-block; width: fit-content; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); background: #fff;
+    border: 1px solid var(--border); padding: 8px 16px; border-radius: 9999px;
+  }
+  .prelude {
+    font-size: 24px; font-weight: 500; color: var(--ink-dim); line-height: 1.4;
+    margin-top: 36px; max-width: 880px;
+  }
+  .quote-mark {
+    font-size: 180px; font-weight: 900; letter-spacing: -0.04em;
+    color: var(--accent); line-height: 0.7; opacity: 0.14;
+    margin-top: 48px; margin-bottom: -40px;
+  }
+  .pull {
+    font-size: 84px; font-weight: 900; letter-spacing: -0.035em; line-height: 1.04;
+    color: var(--ink); max-width: 1000px;
+  }
+  .pull em { color: var(--accent); font-style: normal; text-decoration: underline; text-decoration-thickness: 6px; text-underline-offset: 10px; }
+  .attribution {
+    font-size: 22px; font-weight: 500; color: var(--ink-dim); line-height: 1.5;
+    margin-top: 40px; max-width: 900px;
+  }
+  .footer {
+    display: flex; justify-content: space-between; font-size: 14px; color: var(--ink-dim);
+    border-top: 1px solid var(--border); padding-top: 22px;
+  }
+  .footer strong { color: var(--ink); font-weight: 600; }
+</style>
+</head>
+<body>
+  <div>
+    <span class="chip">Apr 19 · on constraint</span>
+    <p class="prelude">Tesla didn't launch robotaxis everywhere. They picked Texas. Austin, then Dallas, then Houston. Three cities, similar regulations, real revenue.</p>
+    <div class="quote-mark">"</div>
+    <h1 class="pull">Smart <em>constraint</em> beats perfect general solution.</h1>
+    <p class="attribution">Find your Texas. The constrained context where your AI use case actually works today. Scale from there.</p>
+  </div>
+  <div class="footer">
+    <span><strong>@aayush-maheshwari</strong> · presidential briefing</span>
+    <span>2026-04-19</span>
+  </div>
+</body>
+</html>

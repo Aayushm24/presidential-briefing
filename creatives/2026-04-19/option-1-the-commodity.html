@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f9fb; --ink: #0a0b0c; --ink-dim: #52525b;
+    --accent: #0f172a; --border: #e4e4e7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 1200px; }
+  body {
+    font-family: 'Inter', sans-serif;
+    font-feature-settings: 'ss01' on, 'cv11' on;
+    background: var(--bg); color: var(--ink);
+    padding: 96px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .chip {
+    display: inline-block; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); background: #fff;
+    border: 1px solid var(--border); padding: 8px 16px; border-radius: 9999px;
+  }
+  .setup { font-size: 26px; font-weight: 500; color: var(--ink-dim); line-height: 1.35; margin-top: 40px; max-width: 900px; }
+  .claim {
+    font-size: 112px; font-weight: 900; letter-spacing: -0.04em; line-height: 0.96;
+    color: var(--ink); margin-top: 24px; max-width: 1000px;
+  }
+  .claim .hero { color: var(--accent); }
+  .proof { font-size: 20px; font-weight: 500; color: var(--ink-dim); line-height: 1.5; margin-top: 40px; max-width: 880px; }
+  .proof strong { color: var(--ink); font-weight: 700; }
+  .footer {
+    border-top: 1px solid var(--border); padding-top: 22px;
+    display: flex; justify-content: space-between; font-size: 14px; color: var(--ink-dim);
+  }
+  .footer strong { color: var(--ink); font-weight: 600; }
+</style>
+</head>
+<body>
+  <div>
+    <span class="chip">Apr 19 · thesis</span>
+    <p class="setup">Cerebras filed for IPO with a $10B OpenAI deal. Tesla scaled robotaxis to three Texas cities. Same week.</p>
+    <h1 class="claim">AI isn't your competitive advantage. It's a <span class="hero">commodity.</span></h1>
+    <p class="proof">The moat isn't the model. It isn't the compute. It's what you build on top. Memory. Context. Application layer.</p>
+  </div>
+  <div class="footer">
+    <span><strong>@aayush-maheshwari</strong> · presidential briefing</span>
+    <span>2026-04-19</span>
+  </div>
+</body>
+</html>
