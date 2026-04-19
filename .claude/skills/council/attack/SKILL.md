@@ -192,14 +192,33 @@ Review this briefing and 3 LinkedIn posts critically. Find:
 
 Anti-slop pattern detection — hunt specifically for:
 (5) Stat-Stat-Reframe-Metaphor scaffolding ("X% did Y. Z% failed. The reframe is... [metaphor]")
-(6) "[Not X, it's Y]" rhetorical inversions ("these aren't unrelated stories. they're the same story.")
+(6) "[Not X, it's Y]" rhetorical inversions — ANY form including:
+    "this isn't X. it's Y" / "the shift isn't about X. it's about Y" / "the constraint isn't X. it's Y"
+    "Claude Code stopped being X. it's becoming Y" / "X is not Y. X is Z"
 (7) "Why now?" / "what's happening is" / "here's why this matters" / "the parallel to X is almost exact" structural labels
-(8) Neat bow closers (drum-roll summary like "the founders who see this will win. the ones who don't will retrofit.")
-(9) Fabricated first-person specifics (any "i [verb] [specific past event/number/team]" without matching entry in aayush-experiences.md)
+(8) Neat bow closers — ANY winner/loser or "the ones who..." pivot at the close:
+    "the founders winning X combine Y. the ones losing Z ship fast to nowhere"
+    "builders who invest now get compound returns. the ones still treating it like IDE will retrofit"
+    "X is where the real race is" / "the ones who see this will build on it. the ones who don't will retrofit"
+(9) Fabricated first-person specifics — any "i [verb] [specific past event/number/team]" not in aayush-experiences.md
+(10) GURU/ADVICE VOICE (per Aayush's explicit instructions — Zero tolerance):
+    "founders should plan for X" / "builders who invest now get Y" / "teams need to Z"
+    "if you're a founder/builder/CTO" / "for founders: ..."
+    Any third-person prescription to an imagined audience. Aayush writes first-person observations, never prescriptions.
+(11) Hashtags at end — user rule: ZERO hashtags allowed anywhere in post. Flag any `#word` occurrences.
+(12) Corporate/webinar language — "excited to announce", "looking forward to sharing", "we're thrilled", "stay tuned"
 
 Post-specific freshness:
-(10) Search X for similar takes in the last 7 days — is this angle fresh, saturated, or already dead?
-(11) Builder relevance — would a founder/CTO forward this, or only an ML researcher?
+(13) Search X for similar takes in the last 7 days — is this angle fresh, saturated, or already dead?
+(14) Builder relevance — would a practitioner forward this, or does it read as generic AI-thought-leader content?
+
+Blueprint style check (LinkedIn posts only):
+(15) Does the post fit one of the 4 Blueprint winning styles?
+    - Vulnerable Victor (personal struggle, requires verified experience)
+    - Contrarian Philosopher (challenges conventional wisdom)
+    - Absurdist Truth-Teller (humor disarms, hidden truth in comedy)
+    - Relatable Human ("average" positioning, universal struggles)
+    If a post reads like "Corporate Analyst" — flag it.
 
 For each finding, be specific — cite the exact sentences with problems and propose the specific fix.
 
@@ -214,18 +233,23 @@ Return JSON:
     "not_x_its_y": [...],
     "structural_labels": [...],
     "neat_bows": [...],
+    "guru_voice": [...],
     "verdict": "ship" | "revise" | "reject"
   },
   "option_1": {
+    "blueprint_style": "Vulnerable Victor" | "Contrarian Philosopher" | "Absurdist Truth-Teller" | "Relatable Human" | "Corporate Analyst (REJECT)",
     "freshness": "fresh|saturated|dead",
     "builder_relevant": bool,
     "fabricated_claims": [...],
+    "guru_voice_lines": [...],
+    "hashtag_violations": [...],
     "strongest_critique": "...",
     "verdict": "ship" | "revise" | "reject"
   },
   "option_2": {...},
   "option_3": {...},
-  "recommended": "option a builder would share (by name, e.g. option_2)"
+  "angle_diversity_check": "all 3 use DIFFERENT Blueprint styles" | "FAIL: N options use same style",
+  "recommended": "option a practitioner would share (by name, e.g. option_2)"
 }
 
 Briefing:

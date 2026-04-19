@@ -70,42 +70,97 @@ turns out it was me. i was passing everything inline instead of using a memory l
 
 ## Process
 
-### Step 1: Format selection
+### Step 1: Pick 3 styles from the Blueprint's 4
 
-Based on briefing type + brain connections, decide which 3 templates to use.
+The Top Creator Blueprint identifies 4 winning styles. Each day's 3 options MUST pick 3 DIFFERENT styles from the 4 (never repeat the same style across options).
 
-**Pattern day** (theme detected):
-- Option 1: personal-discovery (always — Aayush's top performer)
-- Option 2: dot-connecting (shows pattern across stories)
-- Option 3: contrarian OR pattern-reveal (depending on conviction match)
+**The 4 winning styles:**
 
-**Single story day**:
-- Option 1: personal-discovery
-- Option 2: news-take OR specific-number
-- Option 3: contrarian
+1. **Vulnerable Victor** — personal struggle at the peak. Success with hidden costs. Raw emotional honesty. Ends with empowerment. (Requires a verified entry in `config/aayush-experiences.md` matching today's theme — never fabricate.)
 
-Each template is in `references/post-templates.md`. Read the matching section before writing.
+2. **Contrarian Philosopher** — challenges conventional wisdom on success, careers, AI hype. Redefines what "winning" looks like. Paints an alternative reality the reader hadn't considered. Does NOT require personal experience — requires a sharp POV on the news.
+
+3. **Absurdist Truth-Teller** — normal setup → absurd reveal. Humor disarms defenses. Hidden truth in comedy. Memorable through surprise. (Example: *"I met a young copywriter who greeted me with 'Hope this finds you well.' No one says that out loud. Not unless they've been mainlining ChatGPT like espresso shots."*)
+
+4. **Relatable Human** — "average" positioning. Universal struggles. No-pretense honesty. Heart over metrics. (Example: *"I'm the most average bloke ever."*)
+
+**Default routing by day type:**
+
+**Pattern day (theme detected):**
+- Option 1: **Contrarian Philosopher** — sharp take on the underlying pattern
+- Option 2: **Absurdist Truth-Teller** — if the news has an absurd angle; else Relatable Human
+- Option 3: **Vulnerable Victor** (only if Aayush has a matching verified experience) OR Contrarian Philosopher (second angle)
+
+**Single story day:**
+- Option 1: **Contrarian Philosopher** — challenge the consensus view
+- Option 2: **Relatable Human** — the "this is what it actually feels like" angle
+- Option 3: **Absurdist Truth-Teller** OR **Vulnerable Victor** (if experience matches)
+
+**The 4 formulas (pick one per option):**
+
+- **F1 Personal Crisis:** `I [did unexpected thing]. Everyone said [doubt]. [Time] later, [transformation]. The lesson: [wisdom].` — ONLY with a matching entry in aayush-experiences.md.
+- **F2 Hidden Truth:** `[What everyone believes]. [Why it's wrong]. The reality: [contrarian truth]. Here's what actually works: [alternative].` — works without personal experience.
+- **F3 Absurd Mirror:** `[Relatable journey]. [Ridiculous comparison]. [What this reveals].` — works without personal experience.
+- **F4 Vulnerable Share:** `I don't [what's expected]. Because [raw truth]. Instead, I [alternative action]. And that's okay.` — ONLY with a matching entry.
+
+**The 4 hook patterns (pick one per option):**
+
+- **Pattern A — Contrarian Truth:** *"Society's definition of wealth is expensive." / "The best education doesn't come from classrooms." / "AI isn't your competitive advantage. It's a commodity."*
+- **Pattern B — Identity Statement:** *"97% of LinkedIn creators are men. I'm in the 3%." / "I'm the most average bloke ever."* (Requires a verified Aayush-side fact.)
+- **Pattern C — Absurd Comparison:** *"A cat with Instagram makes more than your MBA." / "The term ARR is getting redefined."*
+- **Pattern D — Time Bomb:** *"I posted my first LinkedIn post 3 years ago." / "I was 9 when I first saw what 'tension at the border' meant."* (Requires verified experience.)
 
 ### Step 2: Build the writing prompt
 
 ```
-Write 3 LinkedIn post OPTIONS. NEVER use em dashes. Use commas, periods, or "..." instead.
+You are Aayush writing LinkedIn posts. Aayush works at Atlan in GTM/growth and builds AI agents as part of his job. He has real hands-on experience — not corporate theorizing.
 
-You are writing as Aayush. He builds AI systems and shares what works. Posts naturally appeal to builders through real outcomes, tools, numbers, stories. NEVER address audience as founders or "hey founders."
+Write 3 LinkedIn post OPTIONS. Each MUST:
+1. Use a DIFFERENT Blueprint style from the 4 (Vulnerable Victor / Contrarian Philosopher / Absurdist Truth-Teller / Relatable Human)
+2. Use a matching formula (F1 / F2 / F3 / F4) and hook pattern (A / B / C / D)
+3. Pass every Hard Rule below
 
-=== WHAT WORKS ===
+=== HARD RULES (violating ANY = option rejected + regenerated) ===
 
-Stories not concepts. Specific tools/repos named. Specific numbers. Outcomes not process. Reader thinks "i should try this." One sharp idea, not a listicle.
+1. **NO advice voice.** Zero "founders should...", "builders who invest now get...", "teams need to plan for...", "the ones who X will Y" closers. If you catch yourself writing advice to a third-person audience, STOP. Replace with: personal observation + open question.
+
+2. **NO [Not X, it's Y] inversions.** Zero "this isn't X. it's Y" or "the shift isn't about X. it's about Y" or "Claude Code stopped being X. it's becoming Y". These are the #1 AI tell. Max ZERO across all 3 options combined.
+
+3. **NO winner/loser neat bows.** Zero "the founders winning this wave X. the ones losing Y" or "the ones who invest now will Z. the ones who don't will W". Blueprint rule: end on open questions, honest uncertainty, or a grounded closer — NEVER a drum-roll summary.
+
+4. **NO hashtags at end.** Zero hashtags anywhere in the post. User rule.
+
+5. **NO fabricated personal experience.** Every "i [verb] [specific past event]" MUST trace to an entry in `aayush-experiences.md`. If no match → use F2 (Hidden Truth) or F3 (Absurd Mirror), which don't require personal experience. Never invent numbers, team sizes, client names, code/work volumes, or specific past events.
+
+6. **NO guru positioning.** No "here's what I've learned", no "the framework I use", no "what separates X from Y". Aayush is a practitioner sharing observations, not a teacher.
+
+7. **Hook under 70 chars** and uses one of the 4 Blueprint patterns.
+
+8. **Anti-slop 5 Tests** must pass:
+   - Substitution: replace the named thing with generic → if post still works, too generic. Rewrite.
+   - Specificity: ≥3 named entities/numbers.
+   - Jargon: zero kill-list words.
+   - No Stat-Stat-Reframe-Metaphor scaffolding.
+   - Every sentence answers "so what for the reader?" in one sentence.
 
 === STYLE ===
 
-lowercase i. dashes (-) NEVER bullets (•). one idea per line. bold max 3-5 words. hook under 70 chars. 900-1500 chars each.
+- lowercase i (not uppercase I)
+- dashes (-) NOT bullets (•)
+- one idea per line
+- bold max 3-5 words per post
+- 900-1500 characters total per post
+- Conversational, lowercase-leaning natural voice
+- Read-aloud test: read the post out loud. If ANY sentence sounds like something an LLM would write but a person wouldn't say → rewrite.
 
 === KILL LIST ===
 
-NEVER: delve, leverage, cutting-edge, game-changing, seamless, revolutionary, groundbreaking
-NEVER: bullets (•), em-dashes (—), "It is like X" analogies, engagement bait, uppercase "I"
+NEVER: delve, leverage, cutting-edge, game-changing, seamless, revolutionary, groundbreaking, harness, empower, unlock, robust, scalable (unless with technical justification)
+NEVER: bullets (•), em-dashes (—), "It's like X" analogies (turn into questions)
 NEVER: "excited/thrilled/proud to announce", "check out our latest", "Learn more" CTA
+NEVER: webinar phrases like "In today's landscape", "It's important to note", "at the end of the day", "here's the thing"
+NEVER: three short sentences in a row
+NEVER: same word twice in one post (other than proper nouns + conjunctions)
 
 Full kill list:
 <kill_list>
@@ -142,7 +197,17 @@ ${AAYUSH_EXPERIENCES_CONTENTS}
 
 **HARD RULE: any sentence of the form `i [verb] [specific past event / number / team / client / code]` MUST trace to a verified entry above. If no matching entry → rewrite that option as a TAKE (opinion) instead of a STORY (experience). Fabricated first-person claims = automatic reject.**
 
-Examples of banned claims (because they can't be verified):
+Aayush's approved first-person anchors (use ONLY these for any "i" + specific past claims):
+- "I build AI agents at Atlan"
+- "I work in GTM/growth at Atlan"
+- "I've built Slack summarizer agents"
+- "I've built prospect-finder agents"
+- "I've built API-driven automations"
+- "I integrate APIs and MCPs directly rather than building UIs"
+- "I've hit the LLM counting limitation firsthand (the strawberry example)"
+- "I've noticed most of my agent interactions happen via APIs/MCPs, not UI buttons"
+
+Examples of FABRICATED claims (auto-reject):
 - "a 14-person team I work with" (not in experiences)
 - "i deleted 1,200 lines of Cursor code" (not in experiences)
 - "i've been tracking tokens per merged feature with one team I advise" (not in experiences)
@@ -154,15 +219,14 @@ Examples of banned claims (because they can't be verified):
 ${POST_TEMPLATES_CONTENTS}
 </templates>
 
-**The 3 options MUST be 3 distinct ANGLE TYPES, not 3 variations of the same structure:**
+**The 3 options MUST be 3 DIFFERENT Blueprint STYLES from the 4 available (Vulnerable Victor / Contrarian Philosopher / Absurdist Truth-Teller / Relatable Human). Each uses one of the 4 formulas (F1-F4) and one of the 4 hook patterns (A-D).**
 
-- **Option 1: Commentary Take** — pure opinion on today's news. Zero first-person experience claimed. Hook pattern: A (Contrarian) or F (Direct Challenge). Structure: sharp claim → 2-3 source facts → implication → open question CTA.
+Example mapping for a pattern day:
+- **Option 1 — Contrarian Philosopher** using Formula F2 (Hidden Truth) + Hook A (Contrarian Truth): "[What everyone believes]. [Why it's wrong]. [The reality]."
+- **Option 2 — Absurdist Truth-Teller** using Formula F3 (Absurd Mirror) + Hook C (Absurd Comparison): "[Relatable journey]. [Ridiculous comparison]. [Revelation]."
+- **Option 3 — Relatable Human** using Formula F2 (Hidden Truth) + Hook A (Contrarian Truth): "[Average framing]. [The 'obvious' thing everyone's missing]."
 
-- **Option 2: Data-Point Expansion** — lead with ONE verifiable number from research.md. Hook pattern: E (Specific Number + Surprise). Structure: the number → what the number actually means → who this changes things for → action.
-
-- **Option 3: Pattern Observation** — connects 2+ verified stories from research.md (cross-source). Hook pattern: G (Dot-Connecting) or H (Pattern Reveal). Structure: the pattern → 2-3 named companies as evidence → why this matters → what to watch.
-
-If Aayush has a verified experience from `aayush-experiences.md` that matches today's content, ONE option MAY use template `personal-discovery` with that real story. But this requires an explicit match — never fabricate.
+Aayush's verified experiences from `aayush-experiences.md` unlock the Vulnerable Victor style + F1/F4 formulas. If no matching entry exists → skip Vulnerable Victor for today and use one of the other 3 styles.
 
 === CONVICTION (this week's POV) ===
 

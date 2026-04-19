@@ -99,13 +99,54 @@ LLM_STRUCTURAL_LABEL_PATTERNS: list[str] = [
 ]
 
 # LLM "[Not X, it's Y]" inversion patterns (Helix rule: max 1 per document).
-# Count occurrences, flag if > 1.
+# Broader coverage — matches ANY subject, not just "This/That/These".
+# Examples caught: "the shift isn't about X. it's about Y" / "Claude stopped being X. it's becoming Y" /
+# "the constraint isn't coding knowledge. it's knowing what to build" / "This isn't about X. It's about Y"
 NOT_X_ITS_Y_PATTERNS: list[str] = [
-    r"(?:[Tt]his|[Tt]hat|[Tt]hese)\s+(?:isn(?:'|\u2019)?t|aren(?:'|\u2019)?t)\s+\w+.{0,80}?[.—,]\s*(?:[Ii]t(?:'|\u2019)?s|[Tt]hey(?:'|\u2019)?re)\s+\w+",
-    r"[Tt]he\s+\w+\s+is\s+not\s+\w+.{0,60}?\.\s*(?:[Tt]he\s+\w+\s+is|[Ii]t(?:'|\u2019)?s)\s+\w+",
-    r"[Tt]he\s+risk\s+is\s+not\s+\w+.{0,60}?\.\s*[Tt]he\s+risk\s+is\s+\w+",
-    r"[Tt]he\s+difference\s+is\s+not\s+\w+.{0,60}?\.\s*[Tt]he\s+difference\s+is\s+\w+",
+    # "<anything> isn't/aren't/is not/are not <X>. It's/They're <Y>"
+    r"\b(?:isn(?:'|\u2019)?t|aren(?:'|\u2019)?t|is\s+not|are\s+not)\s+(?:about\s+)?[\w\s'-]{1,60}?[.\n]+\s*(?:[Ii]t(?:'|\u2019)?s|[Tt]hey(?:'|\u2019)?re)\s+(?:about\s+|becoming\s+|actually\s+)?\w+",
+    # "<anything> stopped being <X>. It's <Y>"  (e.g. "Claude Code stopped being a coding assistant. it's becoming...")
+    r"stopped\s+being\s+[\w\s'-]{1,60}?[.\n]+\s*(?:[Ii]t(?:'|\u2019)?s|[Tt]hey(?:'|\u2019)?re)\s+\w+",
+    # Explicit "The risk/difference/point is not X. The risk/difference/point is Y"
+    r"[Tt]he\s+(?:risk|difference|point|challenge|problem|shift|constraint|answer)\s+is\s+not\s+[\w\s'-]{1,60}?[.\n]+\s*(?:[Tt]he\s+\w+\s+is|[Ii]t(?:'|\u2019)?s)\s+\w+",
+    # Direct declarative contrast: "X is not Y. X is Z" (same-subject reframe)
+    r"\b(\w+)\s+is\s+not\s+[\w\s'-]{1,40}?[.\n]+\s*\1\s+is\s+\w+",
+    # "but correlation isn't strategy. accessibility creates..." — negation + contrasting abstract noun
+    r"\bbut\s+\w+\s+(?:isn(?:'|\u2019)?t|is\s+not)\s+[\w\s'-]{1,40}?[.\n]+\s*\w+\s+(?:creates|requires|means|is|makes)",
 ]
+
+# Winner/loser neat-bow closers — banned by Blueprint.
+# "the founders who X ... the ones who don't Y" — the "the ones" pivot is the tell.
+NEAT_BOW_PATTERNS: list[str] = [
+    # "the founders/builders/teams/ones winning/who X (sentence). the ones losing/who don't/still Y"
+    r"[Tt]he\s+(?:founders?|builders?|teams?|companies|startups?|engineers?|ones)\s+(?:who|that|winning|losing)\s+[\w\s,'-]{2,120}?\.\s*[Tt]he\s+ones\s+(?:who|still|losing|don(?:'|\u2019)?t|not)\s+",
+    # Simpler: consecutive "the ones who/winning/losing" statements
+    r"[Tt]he\s+ones\s+(?:winning|losing|who|still|don(?:'|\u2019)?t|not)\s+[\w\s,'-]{2,80}?(?:ship|will|retrofit|lose|miss|win)",
+    # "winners X. losers Y."
+    r"(?:winners|winning\s+teams|the\s+winners)\s+[\w\s,'-]{2,60}?[.\n]+\s*(?:losers|the\s+losers|the\s+ones\s+losing)\s+",
+    # "X is/are where the real race is / X is where value accrues"
+    r"\b(?:is|are)\s+where\s+the\s+(?:real\s+)?(?:race|value|game|opportunity|money)\s+(?:is|accrues|happens|lives|sits)\b",
+    # "X will compound / X compounds productivity advantages" closures
+    r"\b(?:compound(?:ing)?|stacked?|stacking)\s+(?:productivity\s+)?advantages?\s+(?:as|over|while)",
+]
+
+# Guru/advice voice — third-person prescriptions banned per user instructions.
+# Allow up to 60 chars between the subject noun and the modal verb ("founders building X should plan...").
+GURU_VOICE_PATTERNS: list[str] = [
+    # "founders/builders/teams [any words] should/need to/must [verb]"
+    r"\b(?:founders?|builders?|teams?|engineers?|companies|startups?|developers?)\s+[\w\s,'-]{0,60}?\s+(?:should|need\s+to|must|ought\s+to|have\s+to|want\s+to)\s+\w+",
+    # "if you're a founder/builder/CTO..."
+    r"\bif\s+you(?:'|\u2019)?re\s+(?:a|an)\s+(?:founder|builder|engineer|CTO|CEO|developer)\b",
+    # "for founders/builders: ..." direct-address form
+    r"(?:^|\.\s+)[Ff]or\s+(?:founders?|builders?|teams?|engineers?|CTOs?|CEOs?)\s*[,:]",
+    # "X is a junior engineer. a very fast one." anthropomorphized advice setup
+    r"\b(?:the\s+)?AI\s+is\s+a\s+junior\s+\w+",
+    # "builders who X will compound returns" / "the ones who invest now"
+    r"\b(?:builders?|founders?|teams?|engineers?)\s+who\s+(?:invest|use|build|adopt|ship)\s+[\w\s]{1,40}?\s+(?:now|today|early)\s+(?:will|get|compound|stack)",
+]
+
+# Trailing hashtag block — auto-strip (user said zero hashtags at end)
+TRAILING_HASHTAG_PATTERN: str = r"\n*^#\w+(?:\s+#\w+)*\s*$"
 
 # LLM connective tells (specific patterns from shipped output)
 LLM_CONNECTIVE_PATTERNS: list[str] = [
@@ -193,6 +234,26 @@ def count_matches(text: str, patterns: list[str]) -> list[str]:
     return matches
 
 
+def strip_trailing_hashtags(text: str) -> tuple[str, int]:
+    """Remove any trailing hashtag-only lines from a post or brief.
+    User requirement: zero hashtags at end of post.
+    Matches end-of-document lines like '#AI #infrastructure #startups'."""
+    count = 0
+    # Work on lines from the end backwards
+    lines = text.rstrip().split("\n")
+    while lines:
+        last = lines[-1].strip()
+        if re.fullmatch(r"#\w+(?:\s+#\w+)*", last):
+            lines.pop()
+            count += 1
+            # Also strip any blank line immediately above
+            while lines and not lines[-1].strip():
+                lines.pop()
+        else:
+            break
+    return "\n".join(lines) + "\n", count
+
+
 def clean_file(path: Path) -> dict:
     original = path.read_text(encoding="utf-8")
     text = original
@@ -209,20 +270,29 @@ def clean_file(path: Path) -> dict:
     text, counts["cliche_opener"] = apply_patterns(
         text, OPENER_PATTERNS, replacement=""
     )
+    text, counts["trailing_hashtags"] = strip_trailing_hashtags(text)
 
     # Flag-only detections (not auto-rewritten — LLM must fix)
     flags["llm_structural_labels"] = count_matches(text, LLM_STRUCTURAL_LABEL_PATTERNS)
     flags["not_x_its_y"] = count_matches(text, NOT_X_ITS_Y_PATTERNS)
     flags["llm_connectives"] = count_matches(text, LLM_CONNECTIVE_PATTERNS)
     flags["fabrication_candidates"] = count_matches(text, FABRICATION_FLAG_PATTERNS)
+    flags["neat_bows"] = count_matches(text, NEAT_BOW_PATTERNS)
+    flags["guru_voice"] = count_matches(text, GURU_VOICE_PATTERNS)
 
     counts["llm_structural_flags"] = len(flags["llm_structural_labels"])
     counts["not_x_its_y_count"] = len(flags["not_x_its_y"])
     counts["llm_connective_flags"] = len(flags["llm_connectives"])
     counts["fabrication_flags"] = len(flags["fabrication_candidates"])
+    counts["neat_bow_flags"] = len(flags["neat_bows"])
+    counts["guru_voice_flags"] = len(flags["guru_voice"])
 
     # Hard rule: >1 "[Not X, it's Y]" in a document = anti-slop violation
     counts["not_x_its_y_violation"] = 1 if len(flags["not_x_its_y"]) > 1 else 0
+    # Hard rule: any neat-bow = violation (they're always closing clichés)
+    counts["neat_bow_violation"] = 1 if counts["neat_bow_flags"] > 0 else 0
+    # Hard rule: any guru voice > 0 (posts must be first-person take, not third-person advice)
+    counts["guru_voice_violation"] = 1 if counts["guru_voice_flags"] > 2 else 0
 
     if text != original:
         path.write_text(text, encoding="utf-8")
@@ -252,10 +322,13 @@ def main() -> None:
             f"[clean] {path}: em_dash={counts['em_dash']} bullet={counts['bullet']} "
             f"kill_word={counts['kill_word']} audience_phrase={counts['audience_phrase']} "
             f"transition={counts['transition']} cliche_opener={counts['cliche_opener']} "
-            f"llm_structural_flags={counts['llm_structural_flags']} "
-            f"not_x_its_y_count={counts['not_x_its_y_count']} "
-            f"llm_connective_flags={counts['llm_connective_flags']} "
-            f"fabrication_flags={counts['fabrication_flags']} "
+            f"trailing_hashtags={counts['trailing_hashtags']} "
+            f"llm_structural={counts['llm_structural_flags']} "
+            f"not_x_its_y={counts['not_x_its_y_count']} "
+            f"neat_bows={counts['neat_bow_flags']} "
+            f"guru_voice={counts['guru_voice_flags']} "
+            f"llm_connectives={counts['llm_connective_flags']} "
+            f"fabrications={counts['fabrication_flags']} "
             f"changed={counts['file_changed']}",
             file=sys.stderr,
         )
