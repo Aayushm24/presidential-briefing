@@ -100,33 +100,33 @@ Before composing prose, produce a structured outline of the full brief. Opus gen
 - [pattern 2 — cite source]
 - ...
 
-## Lead piece sections (target 500-700 words total)
-### Section 1 header (target: XXX words)
-  - Fact 1 — cite [source URL]
-  - Fact 2 — cite [source URL]
-  - Synthesis: connection between facts
+## Lead piece sections (target 900-1,200 words total)
+### Section 1 header (target: 350-450 words)
+  - Fact 1 — cite [Publication](URL)
+  - Fact 2 — cite [Publication](URL)
+  - Synthesis: connection between facts + mechanism (WHY this is happening now)
+  - Causal chain forward: 2-3 steps
   - Conviction thread: how this relates to config/conviction.md
 
-### Section 2 header (target: XXX words)
-  [same structure]
+### Section 2 header (target: 300-400 words)
+  [same structure — every fact linked inline]
 
-### Section 3 header (target: XXX words)
+### Section 3 header (target: 250-350 words)
   [same structure — ends with flowing connection, no "how these connect" header]
 
-## Secondary post #2 (target: 200-300 words)
-[brief outline of secondary story]
+## Secondary post #2 (target: 350-500 words)
+[brief outline of secondary story — at least 1 inline link]
 
-## Secondary post #3 (target: 200-300 words)
-[brief outline]
+## Secondary post #3 (target: 350-500 words)
+[brief outline — at least 1 inline link]
 
-## What to do this week (target: 150-250 words)
+## What to do this week (target: 200-300 words)
 [1-3 concrete actions, each with named tool/link/time estimate]
-
-## Sources
-[numbered list — every fact above maps to a source here, or is tagged [UNGROUNDED]]
 ```
 
-Per-section word targets are not arbitrary — they reflect proven densities. Don't exceed.
+Per-section word targets are floors, not ceilings. Total brief: 1,800-2,200 words. Below 1,500 = the mechanism isn't explained enough.
+
+Every fact in the outline must map to a URL. If no URL exists for a fact, tag `[UNGROUNDED]` in the outline — the revise pass either finds a source or cuts the claim. The old `## Sources` footer is gone; citations live inline with the claim.
 
 ### Step 2: Build the writing prompt
 
@@ -152,6 +152,25 @@ Bold within paragraphs: only on the specific phrase a scanner's eye should catch
 Block quotes: use at least 1-2 per piece. Pull actual quotes from the source articles. Creates visual texture.
 
 Sentence rhythm: 40% short (under 15 words), 50% medium (15-30), 10% long (30+). Vary constantly.
+
+=== CITATIONS — INLINE, MANDATORY, NO FOOTER ===
+
+**Every named company, tool, or person on first mention MUST be a markdown link to a source.** If the source is `${LEAD_URL}`, `${SECONDARY_1_URL}`, `${SECONDARY_2_URL}`, or any URL inside the <story> or <stories> JSON, link to it. Example patterns:
+
+- First mention of a company/product: `[Cerebras](https://techcrunch.com/2026/04/18/ai-chip-startup-cerebras-files-for-ipo/) filed for IPO...`
+- Quote attribution: `> "..." — [Cameron Adams](https://canva.com/blog/ai-2), Canva CPO`
+- Referencing a specific article: `Simon Willison [analyzed the diff](https://simonwillison.net/2026/Apr/18/opus-system-prompt/)...`
+- Number with source: `100M users will get AI in every workflow ([Canva announcement](https://canva.com/blog/ai-2))`
+
+**Minimum: 3 inline `[text](url)` markdown links across the brief.** Five is better. The `## Sources` footer is banned — citations live where the claim lives.
+
+Claims without a URL source get tagged `[UNGROUNDED]` and resolved or killed in the revise pass.
+
+=== LENGTH — 1,800 WORDS IS THE FLOOR ===
+
+Target 1,800-2,200 words. Hard floor 1,200 (below that the ship step aborts). Go deep on the lead piece — explain the mechanism, the precedent, the causal chain forward, the mental-model shift. Secondary stories (#2, #3) get 350-500 words each, not 150. "What to do this week" gets 200-300 words.
+
+If you finish the draft and it's under 1,500 words, you haven't explained the WHY enough. Go back to the lead section, pick the claim with the least mechanism behind it, and teach the reader what's happening underneath.
 
 === STRUCTURE (mandatory) ===
 
