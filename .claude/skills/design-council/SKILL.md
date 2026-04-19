@@ -1,8 +1,17 @@
-# design-council — generate a scroll-stopping visual for a LinkedIn post
+# design-council — Conviction-first visual creative production
 
-Manual invocation. User pastes a LinkedIn post text (or points you at a `.md` / `posts.json` file). You pick the best visual archetype, write custom HTML using the design system below, render it to PNG via Playwright, and show the result.
+Manual skill. You paste a LinkedIn post (or point at a file). The skill runs a lite version of the Double Diamond (Define → Develop → Deliver), pausing for human review between phases, and produces 5 conceptually distinct creative options rendered to PNG.
 
-Target: a visual that matches the Marketing OS aesthetic — precise typography, clean spacing, purposeful color, zero AI-image-model chartjunk. This is HTML+CSS, not a diffusion model.
+This skill is adapted from Atlan's Marketing OS design-council (`atlanhq/atlan-marketing-team@staging:skills/design-council`). Core ideas ported:
+- **Conviction Workshop before pixels.** Position + 3 bets + kill list + success criteria.
+- **5 distinct options, not 1.** Named directions testing different mechanics.
+- **7-dimension design review.** Hierarchy, Contrast, Flow, Layout, Clear Space, CTA, Scroll-Stop.
+- **Human-paced pauses.** Never auto-advance. Human can kill, combine, redirect, restart.
+- **Quality tests.** Logo-swap, 3-second, thumbnail.
+
+Skipped (relative to Atlan's): full Discover phase, state management JSON, Figma handoff, Imagen production generation. The personal LinkedIn use case is one-shot, fast, doesn't need designer handoff.
+
+---
 
 ## Invocation
 
@@ -10,174 +19,269 @@ Target: a visual that matches the Marketing OS aesthetic — precise typography,
 /design-council <post-text-or-file-path>
 ```
 
-If the arg looks like a path, read it. Otherwise treat the entire arg as the post text. If ambiguous, show the user the first 200 chars and ask to confirm.
+If arg is a path (ends in `.md` / `.json` / `.txt`), read it. Otherwise treat as the post text. If it's `posts.json`, ask which option.
 
-## Process (5 steps)
+---
 
-### Step 1: Extract
-From the post, identify:
-- **Hook** (first 1-2 lines — the scroll-stopper)
-- **Key number/stat** (if any — "$10 billion", "400% better", "3x faster")
-- **Structure** (is this: stat-driven / contrarian claim / story / absurd comparison / architecture-explainer?)
-- **Named entities** (Cerebras, Claude, OpenAI — anything concrete)
-- **Core claim** (one sentence summary of the post's argument)
+## Phase 1: Define (Conviction Workshop) — REQUIRED, NON-SKIPPABLE
 
-### Step 2: Pick archetype
-Match structure → archetype:
+**Why this exists:** most creative processes skip straight to "make something pretty" and produce generic output. Locking the conviction first is the difference between "another LinkedIn graphic" and a scroll-stopper. If the human rejects the conviction, we've saved the cost of building 5 wrong options.
 
-| Post structure | Archetype | Dimensions | When |
-|---|---|---|---|
-| Single big stat | **Big-Number Card** | 1200×1200 | "$10B deal", "392 engagement", "500% increase" |
-| Contrarian one-liner | **Pull-Quote Card** | 1200×1200 | "AI chips are not a winner-take-all game" |
-| Before/after or "not X, it's Y" | **Two-Panel Contrast** | 1200×1200 | "everyone thinks X / actually Y" |
-| System with 3+ components | **Architecture Diagram** | 1200×1200 or 1200×1500 | Marketing OS, Helix, context layers |
-| Story / confession / vulnerable | **Story Card** | 1200×1500 | "I quit my job", "last week was a huge win" |
+### What to produce
 
-If multiple fit, pick the one that makes the HOOK land hardest. When in doubt → Big-Number or Pull-Quote (simplest, highest thumb-stop rate).
+Write to `creatives/YYYY-MM-DD/define-<slug>.md`:
 
-### Step 3: Write HTML
-Write complete standalone HTML using the design system (below). Save to `creatives/YYYY-MM-DD/draft-<slug>.html`. Use the 2 reference files in `.claude/skills/design-council/examples/` as structural anchors — don't copy them, but match the aesthetic.
+```markdown
+# Define — <slug>
 
-### Step 4: Render
+## Source post
+<the full post text verbatim>
+
+## Position statement
+One sentence. What should this creative make the viewer **feel** and **do**?
+NOT "show the message." Accomplish something specific.
+
+Example: "Make a founder feel that their AI infrastructure bet is risky, and
+want to forward this post to their CTO."
+
+## 3 conviction bets (specific, falsifiable)
+
+Each bet is a testable belief. If it's generic ("clean and modern"), it's nothing.
+Write bets you could be proved wrong about.
+
+1. **<Named bet>** — <specific claim about what will/won't work visually and why>
+2. **<Named bet>** — <specific claim>
+3. **<Named bet>** — <specific claim>
+
+Examples of good bets:
+- "A 240px hero number will create more scroll-stop than any headline treatment
+  because stats are the highest-trust visual element on LinkedIn"
+- "The indigo-accent-only rule will outperform multi-color because single-accent
+  reads as confident; multi-color reads as template-made"
+- "Leaving 60% negative space below the hero will beat filling with supporting
+  text because it forces the eye to the one thing that matters"
+
+## Kill list (at least 5 explicit "will NOT do" items)
+
+Each item prevents a specific failure mode. Be concrete.
+
+1. Will NOT use gradients on backgrounds (reads as 2015 startup)
+2. Will NOT use emoji as design elements (decoration, not meaning)
+3. Will NOT center-align the hero (F-pattern scan requires top-left anchor)
+4. Will NOT use stock illustrations (immediately marks content as AI-generic)
+5. Will NOT include Aayush's photo (the claim should stand without the person)
+
+## Success criteria (how we know if it works)
+
+Three tests. Every option must pass all three in Deliver phase.
+
+- **3-second test:** <what the viewer must get in 3 seconds — name the 2-3 facts>
+- **Thumbnail test:** <what must still be readable when the image is 400px wide>
+- **Logo-swap test:** if you replaced "@aayush-maheshwari" with a random handle,
+  <what specifically would feel wrong — the voice, the conviction, the angle>
+
+## Design constraints
+
+- **Color palette:** ONE accent from {indigo / violet / emerald / coral / slate}. State your pick and why.
+- **Typography:** Inter only. Hero weight 800-900, body 400-500.
+- **Mandatory elements:** <list — e.g., "the $10B number", "Aayush handle", nothing else>
+- **Forbidden elements:** <list — anything from kill list plus post-specific no-gos>
+- **Dimensions:** 1200×1200 default. 1200×1500 for story/confession posts. Justify if different.
 ```
-python3 scripts/render_creative.py creatives/YYYY-MM-DD/draft-<slug>.html creatives/YYYY-MM-DD/<slug>.png --width 1200 --height 1200
+
+### Phase 1 pause
+
+After writing `define-<slug>.md`, **STOP**. Show the file to the user. Say:
+
+> "Define phase done. Here's the conviction brief. Review the position statement, bets, and kill list. Reply 'approved' to continue to Develop, or point at what to change."
+
+Do not proceed until the human approves. If they push back, iterate on define.md only. The 5 options haven't been built yet — no wasted work.
+
+---
+
+## Phase 2: Develop (5 distinct options)
+
+**Why 5:** one option is fragile. Three is what most people do. Five forces real exploration across different visual mechanics.
+
+### Rules
+
+1. Each option must be **conceptually distinct**, not a variation. Different:
+   - Visual mechanic (stat-focus vs quote-focus vs contrast)
+   - Hierarchy strategy (where the eye lands first)
+   - Entry point (top-left vs center vs bottom-up)
+2. Each option gets a **2-word name** that captures its mechanic: "Quiet Tension", "The Split", "Card Stack", "Bold Claim", "Single Number".
+3. Each option must satisfy the position statement, respect the kill list, and test ≥ 1 conviction bet explicitly.
+4. Use one of the 5 archetypes below OR invent one, as long as it follows the design system.
+
+### Archetype menu (pick 5, can include variations)
+
+| Archetype | Mechanic | Best for |
+|---|---|---|
+| **Big-Number Card** | Massive stat + short claim | Posts with $X or Y% |
+| **Pull-Quote Card** | The sharpest line typeset huge | Contrarian one-liners |
+| **Two-Panel Contrast** | Split: what-everyone-thinks / what-actually | Not-X-it's-Y posts |
+| **Architecture Diagram** | Nested panels, chip-labeled components | System/process posts |
+| **Story Card** | Portrait 1200×1500, bold hook, vulnerable tone | "I quit my job" stories |
+| **Tweet-Style Card** | Long-form body, monospace accents | Dev/engineering posts |
+| **List Card** | 3-5 items stacked with accent numbers | Rule-of-three posts |
+| **Negative-Space Card** | One word/number on mostly empty canvas | Maximum confidence plays |
+
+### What to produce per option
+
+For each of the 5 options, write a complete HTML file to `creatives/YYYY-MM-DD/option-<N>-<name-slug>.html` and render to `option-<N>-<name-slug>.png`.
+
+Document each option in a single `creatives/YYYY-MM-DD/develop-<slug>.md`:
+
+```markdown
+## Option 1: Quiet Tension
+- Archetype: Big-Number Card
+- Conviction bet tested: #1 (the 240px hero)
+- Kill list compliance: no gradients, single accent (indigo), top-left anchor ✓
+- Mechanic: all weight on the stat, no competing elements
+- Files: option-1-quiet-tension.html, option-1-quiet-tension.png
+
+## Option 2: <name>
+...
 ```
 
-If Playwright isn't installed, the script will print install instructions. Pass those to the user.
+### Render loop
 
-### Step 5: Show + iterate
-- Read the PNG back (you can view images via Read tool) and critique it yourself before showing user
-- Self-critique: Does the hook fit in 400ms glance? Text readable at 300×300 thumbnail? First 5 words in top-left quadrant?
-- If it fails any check, regenerate HTML with the fix
-- Show final PNG to user, offer: "ship this, tweak the X, or try a different archetype?"
+```bash
+python3 scripts/render_creative.py \
+  creatives/YYYY-MM-DD/option-<N>-<slug>.html \
+  creatives/YYYY-MM-DD/option-<N>-<slug>.png \
+  --width 1200 --height 1200
+```
 
-## Design system
+Or 1200×1500 for Story archetype.
 
-### Color palette (tech-forward, restrained)
+### Phase 2 pause
+
+Read all 5 rendered PNGs yourself via Read tool. Show them to the user by listing paths + the develop.md. Say:
+
+> "Develop phase done. 5 options in `creatives/YYYY-MM-DD/`. Open them to review. Reply with what to ship, what to kill, what to combine, or what new direction to try."
+
+Do not proceed until user selects ≥ 1 survivor.
+
+---
+
+## Phase 3: Deliver (7-dimension critique + verdict)
+
+For each surviving option (1-3 typically), apply the 7-dimension design review:
+
+### The 7 dimensions
+
+| # | Dimension | What to check |
+|---|---|---|
+| 1 | **Visual Hierarchy** | Does the eye land on the most important thing first? Is the hero 2-3x larger than everything else? |
+| 2 | **Contrast** | Enough contrast between accent and ink? Accessible on small screens? |
+| 3 | **Flow** | Does the eye move through the composition in the intended order (usually F-pattern or Z-pattern)? |
+| 4 | **Layout + Golden Ratio** | Are divisions roughly 1:1.618 or 1:1 or 1:2? Not awkward mid-ratios. |
+| 5 | **Clear Space** | ≥ 80px breathing room on the outer canvas? No elements fighting for the same pixel? |
+| 6 | **CTA Placement** | If there's a CTA, is it in the bottom-third or right-third (where eyes rest)? |
+| 7 | **Engagement / Scroll-Stop** | Would this stop a thumb in 400ms? Blur test: if you blurred all text except the biggest, does that alone make someone pause? |
+
+### Conviction audit
+
+Per option:
+- Does it satisfy the position statement? (yes/no + why)
+- Does it pass all 3 success criteria (3-second, thumbnail, logo-swap)? (yes/no per test)
+- Does it respect the full kill list? (any leaks?)
+- Which conviction bet does it validate? Which does it contradict?
+
+### Verdict
+
+Per option: **Ship** / **Revise** / **Kill**, with specific action points.
+
+Write to `creatives/YYYY-MM-DD/deliver-<slug>.md`. Show user. Offer the winner(s) as final.
+
+---
+
+## Design system (unchanged from v1)
+
+### Colors
 
 ```css
-/* Primary */
---bg-canvas:     #f8f9fb;   /* off-white page bg */
---bg-card:       #ffffff;   /* card / panel bg */
---ink-primary:   #0a0b0c;   /* headlines + body */
---ink-secondary: #52525b;   /* labels + captions */
+/* Canvas */
+--bg-canvas:     #f8f9fb;
+--bg-card:       #ffffff;
+--ink-primary:   #0a0b0c;
+--ink-secondary: #52525b;
+--border-subtle: #e4e4e7;
 
-/* Accent (pick ONE per image — don't mix) */
---accent-indigo: #4338ca;    /* trustworthy, enterprise-feel */
---accent-violet: #7c3aed;    /* premium, creator-feel */
---accent-emerald:#059669;    /* growth, numbers-up */
---accent-coral:  #dc2626;    /* urgency, contrarian */
---accent-slate:  #0f172a;    /* understated, philosophical */
-
-/* Support */
---border-subtle: #e4e4e7;    /* dividers, card edges */
---bg-accent-soft:#eef2ff;    /* pale accent bg (matches indigo) */
+/* Accents — pick ONE per image */
+--accent-indigo: #4338ca;   /* trustworthy, enterprise */
+--accent-violet: #7c3aed;   /* premium, creator */
+--accent-emerald:#059669;   /* growth, numbers-up */
+--accent-coral:  #dc2626;   /* urgency, contrarian */
+--accent-slate:  #0f172a;   /* understated, philosophical */
+--accent-soft:   #eef2ff;   /* pale accent bg — indigo variant */
 ```
 
 ### Typography
 
-Load Inter (variable) via Google Fonts. Use its weights aggressively.
+Inter via Google Fonts. Weights: 400/500/600/700/800/900. Use them aggressively.
 
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-```
-
-| Element | Size (px) | Weight | Tracking |
+| Element | Size | Weight | Tracking |
 |---|---|---|---|
-| Hero number / headline | 96-140 | 800-900 | -0.03em |
-| Section H1 | 48-64 | 700-800 | -0.02em |
-| Subhead | 24-32 | 600 | -0.01em |
-| Body | 18-22 | 400-500 | 0 |
-| Label / chip | 12-14 | 600 | +0.05em, uppercase |
+| Hero number | 140-240px | 800-900 | -0.03 to -0.05em |
+| Headline | 48-72px | 700-800 | -0.02em |
+| Subhead | 24-32px | 600 | -0.01em |
+| Body | 18-22px | 400-500 | 0 |
+| Chip/label | 12-14px | 600 | +0.05em, UPPERCASE |
 
-### Layout
+### Grid
 
-- **Canvas:** always start with `padding: 80px` on the outer container. Breathing room is free quality.
-- **Grid:** 8-point system. Margins, gaps, radii all multiples of 8 (8, 16, 24, 40, 64, 80).
-- **Cards:** `border-radius: 24px`, `background: var(--bg-card)`, subtle border `1px solid var(--border-subtle)`, avoid shadows (too decorative).
-- **Chips/pills:** `border-radius: 9999px`, padding `6px 14px`, font-size 12-14, uppercase, weight 600.
-- **Accent usage:** accent color on ONE element only — the number, the headline, or a single chip. Never multiple accents.
+8-point system. All margins, gaps, radii as multiples of 8.
+Canvas padding: 80-96px minimum on 1200px canvas.
+Card radii: 16-24px (never > 32px, looks toy-like).
+Chip radii: 9999px (full pill).
 
-### Anti-patterns (reject)
+### Anti-patterns (hard rejects)
 
-- 🚫 Gradients on backgrounds (reads as 2015 startup)
-- 🚫 Stock illustrations or generic iconography (Heroicons ok if one, single-color, 32px max)
-- 🚫 Emojis as design elements (one in a label is fine; don't decorate with them)
-- 🚫 Drop shadows (except 1 on hero card if needed, max `0 1px 2px rgb(0 0 0 / 0.05)`)
-- 🚫 Rainbow text or multiple accent colors
-- 🚫 Rounded corners bigger than 32px (looks toy-like)
-- 🚫 Any text smaller than 14px (unreadable on mobile)
-- 🚫 Centered layouts for architecture diagrams (use left-align + grid)
-- 🚫 AI-stylized elements ("AI-powered" badges, neural net swooshes)
+- 🚫 Gradients on backgrounds
+- 🚫 Stock illustrations or generic iconography
+- 🚫 Emojis as design elements (max 1 in a label)
+- 🚫 Drop shadows (exception: 1 hero card, max `0 1px 2px rgb(0 0 0 / 0.05)`)
+- 🚫 Multiple accent colors
+- 🚫 Rounded corners > 32px
+- 🚫 Text < 14px
+- 🚫 Centered everything (use left-align + grid)
+- 🚫 AI-stylized decoration (neural swooshes, "AI" badges)
 
-### Archetype templates
+---
 
-**Big-Number Card** — one massive number, accent color, supporting label + caption:
-```
-[small uppercase label chip in accent-soft bg]
-[massive hero number — 140px, accent color]
-[one-line claim — 32px bold, ink-primary]
-[caption — 18px, ink-secondary, max 2 lines]
-[tiny footer: source / @aayush-maheshwari]
-```
+## LLM model routing (simple version)
 
-**Pull-Quote Card** — the post's sharpest line, typeset huge:
-```
-[decorative quote mark or thin accent bar at top-left]
-[the quote — 56-72px bold, ink-primary, max 3 lines]
-[attribution — 18px ink-secondary: "— Aayush" or context]
-[tiny footer]
-```
+Aayush's use case is manual single-shot, so all 3 phases run in the main Claude Code context (Opus). No external model calls needed for v1.
 
-**Two-Panel Contrast** — split vertically or horizontally:
-```
-LEFT panel: light bg,  ink-primary text, label "WHAT EVERYONE THINKS"
-RIGHT panel: accent bg, white text,      label "WHAT ACTUALLY HAPPENS"
-Each with a 1-line claim + optional supporting detail
-```
+Upgrade path (future):
+| Phase | Model | Source |
+|---|---|---|
+| Define | Claude Opus | main context |
+| Develop SVG | Claude Opus | main context |
+| Deliver critique | Claude Opus | main context |
+| Competitive visual scan (optional) | Gemini 3.1 Pro + Google grounding | llmproxy.atlan.dev |
+| Image gen (optional photographic) | Imagen 4 Ultra | llmproxy.atlan.dev |
 
-**Architecture Diagram** — nested rectangles, Marketing-OS-style:
-```
-Outer container: bg-canvas, 80px padding
-Section headers: 14px uppercase labels above each block
-Big blocks (Context Layer, Agents, etc.): bg-card, 24px radius, 32-40px inner padding
-Sub-items inside blocks: small chips/pills, 6-8 per row, flex-wrap
-Arrows: thin accent lines with arrowheads (use SVG inline, not text symbols)
-Keep everything left-aligned and grid-snapped.
-```
+If ever added, keep the routing in a separate `council.json` alongside this SKILL.md, same pattern as `config/council.json` at the project root.
 
-**Story Card** — vertical 1200×1500, portrait:
-```
-Top: tiny chip with the theme ("I QUIT MY JOB")
-Middle: big bold headline (the hook) — 64-80px
-Below: 1-2 supporting sentences — 24px, generous line-height 1.4
-Bottom: Aayush's handle + a small date chip
-```
-
-### Quality checklist (run before shipping)
-
-1. Does the hook hit in < 400ms? (Ask: if you blurred everything except the biggest text, does that text alone make someone stop?)
-2. Does it read at 300×300 thumbnail (LinkedIn feed preview size)? Open the PNG, resize mentally, confirm readability.
-3. Top-left quadrant carries the point? (Readers scan F-pattern.)
-4. Max 7 words in the hero text. If more, it's a quote card not a big-number card.
-5. ONE accent color used, nothing else competing.
-6. All text ≥ 14px.
-7. Generous margins (80px+ around content on 1200px canvas).
-8. No gradients on main surfaces. Flat or near-flat only.
-
-## Output
-
-After the render step:
-1. File paths to the draft HTML and final PNG
-2. Brief explanation: "I picked [archetype] because [reason]. Accent: [color]."
-3. Offer next steps: "Ship this as-is, tweak the [element], or try a different archetype?"
+---
 
 ## Reference examples
 
-Two complete HTML files live in `.claude/skills/design-council/examples/`:
-- `stat-card.example.html` — Big-Number Card for a funding stat
-- `architecture.example.html` — Architecture Diagram in Marketing-OS style
+Two reference HTML files in `examples/`:
+- `stat-card.example.html` — Big-Number Card (Cerebras $10B)
+- `architecture.example.html` — Architecture Diagram (system map)
 
-Read those first when invoked to calibrate your aesthetic. Match the quality bar, don't copy the content.
+These were hand-built to match the Marketing OS aesthetic. Match this quality bar — don't copy content.
+
+---
+
+## Summary of process
+
+1. **Define** (Conviction Workshop) → pause for human approval
+2. **Develop** (5 distinct options, rendered PNGs) → pause for human selection
+3. **Deliver** (7-dim critique + verdict on survivors) → ship winner(s)
+
+Three pauses. No phase skips itself. Define is where quality is won or lost — if convictions are wrong, 5 options will all be wrong.
