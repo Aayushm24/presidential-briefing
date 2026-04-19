@@ -16,10 +16,13 @@ Output: `workspace/${TODAY}/posts.md` with 3 options + convictions + preliminary
 - `workspace/${TODAY}/themes.json`
 - `workspace/${TODAY}/brain.md`
 - `config/conviction.md`
+- `config/aayush-experiences.md` — verified first-person anchors
+- `config/aayush-linkedin-patterns.md` — **what actually wins for Aayush** (from real performance data)
 - `.claude/skills/write-posts/references/voice.md`
 - `.claude/skills/write-posts/references/kill-list.md`
 - `.claude/skills/write-posts/references/hooks.md`
 - `.claude/skills/write-posts/references/post-templates.md`
+- `.claude/skills/write-posts/references/anti-slop-checklist.md`
 
 ## Outputs
 
@@ -188,6 +191,18 @@ ${ANTI_SLOP_CHECKLIST_CONTENTS}
 </anti_slop>
 
 Every post must pass the 5 Tests (Substitution, Specificity, Jargon, Stat-Stat-Reframe, "So What?"). /attack council enforces.
+
+=== AAYUSH'S LINKEDIN PERFORMANCE DATA (what actually wins — weight heavily) ===
+
+<linkedin_patterns>
+${AAYUSH_LINKEDIN_PATTERNS_CONTENTS}
+</linkedin_patterns>
+
+**Read the performance data first. Use it to weight today's 3 options:**
+- Bias toward the top 3 hook patterns + top 3 styles by avg engagement
+- Match Aayush's winning CTA styles (permission-giving + direct-question outperform)
+- Use the reference "top performer" post at the end of the patterns file as a voice anchor — match its rhythm + vulnerability + specificity. Do NOT copy claims, copy structure + tone.
+- **The strongest signal:** Aayush's Vulnerable Victor posts (Personal Crisis formula + Time Bomb hooks) dramatically outperform analytical takes. If today's content has any angle that connects to a VERIFIED experience + vulnerability → lead with that.
 
 === AAYUSH EXPERIENCES (first-person source of truth) ===
 
