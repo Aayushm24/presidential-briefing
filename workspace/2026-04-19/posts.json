@@ -1,0 +1,31 @@
+{
+  "date": "2026-04-19",
+  "lead_title": "Cerebras validates the AI chip wave with a $10 billion OpenAI deal before IPO",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian",
+      "hook_pattern": "A",
+      "hook_score": 8,
+      "conviction": "Alternative compute infrastructure beats general GPUs when market signals align with real usage patterns.",
+      "post": "AI chips are not a winner-take-all game.\n\neveryone thinks NVIDIA owns AI infrastructure forever.\n\nbut Cerebras just landed a $10 billion OpenAI deal before even going public. AWS added Cerebras to their data centers. the same pattern hits robotaxis now scaling from Austin to Dallas and Houston.\n\nthe shift isn't about better chips. it's about supply chain control.\n\nwhen your AI lab depends on one vendor's roadmap for compute, you pay premium prices for alternatives. OpenAI paying $10 billion to reduce NVIDIA dependence tells every AI founder what infrastructure planning looks like in 2026.\n\nfounders building production AI systems should plan for compute diversity. single-vendor strategies carry more risk than most teams price in.\n\nwhat alternatives are you testing before you need them?\n\n#AI #infrastructure #startups"
+    },
+    {
+      "option": 2,
+      "template": "dot-connecting",
+      "hook_pattern": "G",
+      "hook_score": 8,
+      "conviction": "Teams who treat Claude Code as platform infrastructure compound productivity advantages as the ecosystem matures.",
+      "post": "GBrain v0.12 ships 53% fewer noisy results. GStack adds context saving for Claude Code workflows.\n\ntwo tools launching the same week with Claude Code integration.\n\nthis isn't coordination. it's convergence.\n\nClaude Code stopped being a coding assistant months ago. it's becoming the execution layer other tools build on. the teams recognizing this shift are stacking advantages:\n\n- context management across projects\n- knowledge graph integration for decision support  \n- org-wide sharing patterns that scale beyond individual developers\n\nbuilders who invest in Claude Code workflows now get compound returns as the ecosystem matures. the ones still treating it like an enhanced IDE will retrofit later at higher switching costs.\n\nhow is your team thinking about Claude Code as infrastructure versus tooling?\n\n#claudecode #productivity #AI"
+    },
+    {
+      "option": 3,
+      "template": "news-take",
+      "hook_pattern": "I",
+      "hook_score": 7,
+      "conviction": "AI tooling accessibility creates mobile app surge but founders need focused execution strategies.",
+      "post": "App Store sees surge in new launches for 2026. AI tooling gets the credit.\n\nAppfigures data shows correlation between AI developer tools and mobile app creation rates.\n\nbut correlation isn't strategy. accessibility creates noise, not signal.\n\nthe constraint isn't coding knowledge anymore. it's knowing what to build. AI tools make it trivial to ship cross-platform apps in weeks. they don't solve product-market fit, user acquisition, or competitive positioning.\n\nthe founders winning this wave combine AI development speed with sharp focus on specific user problems. the ones losing it ship fast to nowhere.\n\nmobile development barriers dropping means execution quality matters more, not less.\n\nwhat problem are you solving that others are missing?\n\n#mobileapps #AI #startups"
+    }
+  ]
+}
