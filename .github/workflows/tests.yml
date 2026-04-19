@@ -82,7 +82,7 @@ jobs:
       - name: Validate sources.csv header
         run: |
           HEADER=$(head -1 config/sources.csv)
-          EXPECTED="name,url,feed_url,type,access_method,what_they_share"
+          EXPECTED="name,url,feed_url,type,access_method,what_they_share,feed_filter,feed_ua"
           if [ "$HEADER" != "$EXPECTED" ]; then
             echo "::error::sources.csv header mismatch. Got: $HEADER"
             exit 1
