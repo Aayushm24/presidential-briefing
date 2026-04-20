@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>option-4-absorbed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --surface:   #fafaf9;
+    --card:      #ffffff;
+    --hero:      #dc2626;
+    --hero-soft: #fecaca;
+    --accent:    #f59e0b;
+    --ink:       #0a0a0a;
+    --ink-dim:   #52525b;
+    --border:    #e4e4e7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 1200px; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-feature-settings: 'ss01' on, 'cv11' on;
+    background: var(--surface);
+    color: var(--ink);
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--hero);
+    background: var(--hero-soft);
+    padding: 10px 16px;
+    border-radius: 9999px;
+  }
+  .chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--hero); }
+  header h1 {
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    margin-top: 20px;
+    max-width: 960px;
+  }
+  header .sub {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink-dim);
+    margin-top: 14px;
+    line-height: 1.45;
+  }
+  .panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    flex: 1;
+    margin-top: 40px;
+  }
+  .panel {
+    border-radius: 28px;
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-left {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--ink-dim);
+  }
+  .panel-right {
+    background: var(--ink);
+    color: #fff;
+  }
+  .panel-kicker {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .panel-left .panel-kicker { color: var(--hero); }
+  .panel-right .panel-kicker { color: var(--accent); }
+  .panel-headline {
+    font-size: 44px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    margin-top: 14px;
+  }
+  .panel-left .panel-headline {
+    color: #a1a1aa;
+    text-decoration: line-through;
+    text-decoration-color: var(--hero);
+    text-decoration-thickness: 4px;
+  }
+  .panel-body {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-top: 20px;
+  }
+  .panel-left .panel-body { color: var(--ink-dim); }
+  .panel-right .panel-body { color: #d4d4d8; }
+  .panel-list {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .panel-right .panel-list {
+    border-top: 1px dashed rgba(255,255,255,0.18);
+  }
+  .panel-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+  .panel-left .panel-item { color: #a1a1aa; }
+  .panel-right .panel-item { color: #fff; }
+  .panel-left .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--hero);
+  }
+  .panel-right .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent);
+  }
+  .closer {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-top: 28px;
+    max-width: 980px;
+  }
+  .closer em {
+    font-style: normal;
+    color: var(--hero);
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    color: var(--ink-dim);
+    border-top: 1px solid var(--border);
+    padding-top: 22px;
+    margin-top: 24px;
+  }
+  .footer-handle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .li-icon { display: inline-block; vertical-align: middle; }
+</style>
+</head>
+<body>
+  <header>
+    <span class="chip"><span class="chip-dot"></span>absorbed vs. uncopyable</span>
+    <h1>Everything else is a feature waiting to be absorbed.</h1>
+  </header>
+  <div class="panels">
+    <div class="panel panel-left">
+      <div class="panel-kicker">gets absorbed</div>
+      <div class="panel-headline">AI wrappers.</div>
+      <div class="panel-body">Small team ships a clever feature. Six months later, OpenAI ships it natively. The startup pivots or dies quietly.</div>
+      <div class="panel-list">
+        <div class="panel-item"><span class="dot"></span>"we added AI to our app"</div>
+        <div class="panel-item"><span class="dot"></span>support logs from 2023</div>
+        <div class="panel-item"><span class="dot"></span>model access as the edge</div>
+      </div>
+    </div>
+    <div class="panel panel-right">
+      <div class="panel-kicker">platforms can't copy</div>
+      <div class="panel-headline">Real moats.</div>
+      <div class="panel-body">Switching means rebuilding the whole workflow from scratch. The audience is already there. The data keeps flowing.</div>
+      <div class="panel-list">
+        <div class="panel-item"><span class="dot"></span>Distribution · Canva, 100M users</div>
+        <div class="panel-item"><span class="dot"></span>Proprietary data · power users who can't leave</div>
+        <div class="panel-item"><span class="dot"></span>Deep integration · Notion rebuilt 5×</div>
+      </div>
+    </div>
+  </div>
+  <p class="closer">"Build the feature, they'll come" is a 2023 strategy running on <em>2026 timelines.</em></p>
+  <div class="footer">
+    <span class="footer-handle">
+      <svg class="li-icon" width="20" height="20" viewBox="0 0 24 24" fill="#0a66c2" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+      <span>aayush-maheshwari</span>
+    </span>
+    <span>2026-04-20</span>
+  </div>
+</body>
+</html>

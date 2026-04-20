@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>option-5-the-final-question</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --surface:   #fafaf9;
+    --card:      #ffffff;
+    --hero:      #dc2626;
+    --hero-soft: #fecaca;
+    --accent:    #f59e0b;
+    --ink:       #0a0a0a;
+    --ink-dim:   #52525b;
+    --border:    #e4e4e7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 1200px; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-feature-settings: 'ss01' on, 'cv11' on;
+    background: var(--surface);
+    color: var(--ink);
+    padding: 96px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+  .grid-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(to right, rgba(10, 10, 10, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(10, 10, 10, 0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--hero);
+    background: var(--hero-soft);
+    padding: 10px 18px;
+    border-radius: 9999px;
+    position: relative;
+  }
+  .chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--hero); }
+  .top-line {
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ink-dim);
+    margin-top: 18px;
+    letter-spacing: 0.01em;
+  }
+  .question-wrap {
+    position: relative;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-top: 60px;
+  }
+  .question {
+    font-size: 128px;
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+    color: var(--ink);
+    max-width: 1040px;
+  }
+  .question .lower { text-transform: none; }
+  .question .you {
+    color: var(--hero);
+    position: relative;
+    display: inline-block;
+  }
+  .question .you::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -6px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 4px;
+  }
+  .question-meta {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink-dim);
+    margin-top: 40px;
+    line-height: 1.5;
+    max-width: 780px;
+  }
+  .question-meta em {
+    font-style: normal;
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    color: var(--ink-dim);
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    position: relative;
+  }
+  .footer-handle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .li-icon { display: inline-block; vertical-align: middle; }
+</style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div style="position:relative;">
+    <span class="chip"><span class="chip-dot"></span>the closing line</span>
+    <div class="top-line">That war is over. Model access isn't the edge anymore.</div>
+  </div>
+  <div class="question-wrap">
+    <h1 class="question"><span class="lower">what are you building that only</span> <span class="you">YOU</span> <span class="lower">can build?</span></h1>
+    <p class="question-meta">IMO, it's about <em>who owns the user</em> when the feature becomes commodity. Small teams can still win — but not by building what OpenAI ships next quarter.</p>
+  </div>
+  <div class="footer">
+    <span class="footer-handle">
+      <svg class="li-icon" width="20" height="20" viewBox="0 0 24 24" fill="#0a66c2" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+      <span>aayush-maheshwari</span>
+    </span>
+    <span>2026-04-20</span>
+  </div>
+</body>
+</html>

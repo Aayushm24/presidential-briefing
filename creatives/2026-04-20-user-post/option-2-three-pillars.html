@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>option-2-three-pillars</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --surface:   #fafaf9;
+    --card:      #ffffff;
+    --hero:      #dc2626;
+    --hero-soft: #fecaca;
+    --accent:    #f59e0b;
+    --ink:       #0a0a0a;
+    --ink-dim:   #52525b;
+    --border:    #e4e4e7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 1200px; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-feature-settings: 'ss01' on, 'cv11' on;
+    background: var(--surface);
+    color: var(--ink);
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--hero);
+    background: var(--hero-soft);
+    padding: 10px 16px;
+    border-radius: 9999px;
+  }
+  .chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--hero); }
+  header { margin-bottom: 36px; }
+  h1 {
+    font-size: 64px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+    margin-top: 20px;
+    max-width: 960px;
+  }
+  h1 .accent-under {
+    border-bottom: 6px solid var(--accent);
+    padding-bottom: 2px;
+  }
+  .subtitle {
+    font-size: 20px;
+    color: var(--ink-dim);
+    margin-top: 16px;
+    max-width: 880px;
+    line-height: 1.45;
+    font-weight: 500;
+  }
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    flex: 1;
+    margin-top: 8px;
+  }
+  .pillar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 32px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .pillar::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 6px;
+    background: var(--hero);
+  }
+  .pillar-num {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--hero);
+    letter-spacing: 0.04em;
+  }
+  .pillar-title {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-top: 10px;
+  }
+  .pillar-desc {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink-dim);
+    line-height: 1.5;
+    margin-top: 14px;
+    flex: 1;
+  }
+  .pillar-proof {
+    margin-top: 22px;
+    border-top: 1px dashed var(--border);
+    padding-top: 16px;
+  }
+  .pillar-proof-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+  .pillar-proof-text {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-top: 6px;
+    line-height: 1.35;
+  }
+  .pillar-proof-text span.name {
+    color: var(--hero);
+  }
+  .closer {
+    margin-top: 32px;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+    max-width: 980px;
+  }
+  .closer em {
+    font-style: normal;
+    background: #fef3c7;
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    color: var(--ink-dim);
+    border-top: 1px solid var(--border);
+    padding-top: 22px;
+    margin-top: 32px;
+  }
+  .footer-handle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .li-icon { display: inline-block; vertical-align: middle; }
+</style>
+</head>
+<body>
+  <header>
+    <span class="chip"><span class="chip-dot"></span>three moats that still hold</span>
+    <h1>The ones who survive are building <span class="accent-under">moats the platforms can't copy.</span></h1>
+    <p class="subtitle">Everything else is a feature waiting to be absorbed.</p>
+  </header>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-title">Distribution</div>
+      <div class="pillar-desc">When a platform decides your AI feature belongs in their workflow, you're not competing against their product. You're competing against their audience.</div>
+      <div class="pillar-proof">
+        <div class="pillar-proof-label">proof</div>
+        <div class="pillar-proof-text"><span class="name">Canva</span> · 100M users</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-title">Proprietary data</div>
+      <div class="pillar-desc">Customer support logs from 2023 aren't a moat. Real-time workflow data from power users who can't leave is.</div>
+      <div class="pillar-proof">
+        <div class="pillar-proof-label">proof</div>
+        <div class="pillar-proof-text">power users <span class="name">who can't leave</span></div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <div class="pillar-title">Deep integration</div>
+      <div class="pillar-desc">Going so far into the job that switching means rebuilding the whole workflow from scratch. Not "we added AI to our app."</div>
+      <div class="pillar-proof">
+        <div class="pillar-proof-label">proof</div>
+        <div class="pillar-proof-text"><span class="name">Notion</span> · rebuilt 5 times</div>
+      </div>
+    </div>
+  </div>
+  <p class="closer">It's about who <em>owns the user</em> when the feature becomes commodity.</p>
+  <div class="footer">
+    <span class="footer-handle">
+      <svg class="li-icon" width="20" height="20" viewBox="0 0 24 24" fill="#0a66c2" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+      <span>aayush-maheshwari</span>
+    </span>
+    <span>2026-04-20</span>
+  </div>
+</body>
+</html>
