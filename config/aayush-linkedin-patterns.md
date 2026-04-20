@@ -4,7 +4,7 @@
 
 Read by `/write-posts` when generating the 3 daily options. Use this to weight which Blueprint style/hook/CTA to pick for today's content based on what's actually worked for Aayush.
 
-**Total posts analyzed:** 25
+**Total posts analyzed:** 26
 
 ---
 
@@ -37,8 +37,8 @@ Read by `/write-posts` when generating the 3 daily options. Use this to weight w
 
 ## Bottom 3 (what underperforms)
 
-- 2026-04-17 | Hook: **other** | Style: **Unclassified** | Engagement: 7
-  *"Every SaaS is shipping an AI button right now. Most of them are going to look ridiculous in 18 months."*
+- 2026-04-20 | Hook: **other** | Style: **Unclassified** | Engagement: 7
+  *"AI startups have 12 months before they die…"*
 - 2025-01-28 | Hook: **other** | Style: **Unclassified** | Engagement: 1
   *"Any obsidian users in my network? "*
 - 2024-09-20 | Hook: **other** | Style: **Unclassified** | Engagement: 1
@@ -49,7 +49,7 @@ Read by `/write-posts` when generating the 3 daily options. Use this to weight w
 | Pattern | Count | Avg engagement |
 |---|---|---|
 | **D** Time Bomb | 1 | 392.0 |
-| **other** Other/Unclassified | 17 | 55.6 |
+| **other** Other/Unclassified | 18 | 53.0 |
 | **A** Contrarian Truth | 2 | 47.5 |
 | **C** Absurd Comparison | 1 | 41.0 |
 | **B** Identity / Confession | 4 | 33.8 |
@@ -61,7 +61,7 @@ Read by `/write-posts` when generating the 3 daily options. Use this to weight w
 | **Vulnerable Victor** | 3 | 145.0 |
 | **Contrarian Philosopher** | 2 | 69.5 |
 | **Relatable Human** | 1 | 67.0 |
-| **Unclassified** | 17 | 52.2 |
+| **Unclassified** | 18 | 49.7 |
 | **Absurdist Truth-Teller** | 2 | 40.5 |
 
 ## CTA type performance
@@ -69,7 +69,7 @@ Read by `/write-posts` when generating the 3 daily options. Use this to weight w
 | CTA | Count | Avg engagement |
 |---|---|---|
 | soft-close | 8 | 98.5 |
-| direct-question | 4 | 58.0 |
+| direct-question | 5 | 47.8 |
 | community | 1 | 41.0 |
 | permission-giving | 0 | 0 |
 | challenge | 0 | 0 |
@@ -146,42 +146,19 @@ p.p.s First day at the Vipassana center 👇🏻
 
 ---
 
-## Voice reference — 2026-04-20 "AI startups have 12 months"
-
-**Primary voice anchor for every /write-posts generation.** Read first:
-`config/aayush-reference-posts/2026-04-20-ai-startups-12-months.md`
-
-This post is ~1,900 chars, Contrarian Philosopher style, D-ellipsis hook.
-Rhythm devices Aayush used (all documented in the fixture):
-- ellipsis hook ("…")
-- short fragment paragraphs ("That's the third.")
-- inline 3-pillar list with `-` hyphens (never `•`)
-- "That's X." recap tags (3x)
-- era-reframe ("2023 strategy running on 2026 timelines")
-- personal-voice markers ("I doubt", "IMO") — 2 total
-- lowercase rhetorical question closer ("what are you building…")
-- ALL-CAPS YOU once for emphasis
-- word "moat" used 4x — allowed in POSTS only
-
-A /write-posts option that hits 5+ of these devices is on-voice.
-An option that hits 2 or fewer needs a rewrite.
-
----
-
 ## Rules for using this data in /write-posts
 
 1. **Bias toward the top 3 hook patterns by avg engagement** — write at least 1 option in that style per day.
 2. **Avoid bottom-3 patterns** — unless today's content strongly demands it, skip the underperforming angles.
 3. **Match Aayush's top CTA styles** — permission-giving + direct-question win for him. Challenges win less.
-4. **Length:** Aayush's sweet spot is 1,200-1,900 chars based on his top 5 + the 2026-04-20 reference. Floor 1,100, cap 2,000 (enforced by posts-gate.sh).
-5. **Voice anchor:** read the 2026-04-20 reference fixture AND the reference post above. Match rhythm + vulnerability + specificity. Do NOT copy specific claims — copy the structure + tone.
-6. **MBA vocabulary allowed in POSTS:** `moat` is fine. `differentiation`, `commoditization`, `table stakes` still banned. See `tests/posts-gate.sh` for the authoritative list.
+4. **Length:** medium (1000-2000 chars) is Aayush's sweet spot based on the data.
+5. **Voice anchor:** read the reference post above. Match that rhythm + vulnerability + specificity. Do NOT copy specific claims — copy the structure + tone.
 
 ---
 
 ## Option pickup rates (since tracking started)
 
-**Attribution summary:** variant_of=0 · inspired_by=0 · organic=25
+**Attribution summary:** variant_of=0 · inspired_by=0 · organic=26
 
 *Pickup* = published post matched a generated option (Jaccard ≥ 0.25 on first 3 lines' 3-grams).
 
@@ -189,19 +166,21 @@ An option that hits 2 or fewer needs a rewrite.
 
 | Template | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
-| **contrarian** | 2 | 0 | 0% | n/a | ← never shipped
+| **absurdist** | 1 | 0 | 0% | n/a | ← never shipped
+| **contrarian** | 3 | 0 | 0% | n/a | ← never shipped
 | **dot-connecting** | 2 | 0 | 0% | n/a | ← never shipped
-| **news-take** | 1 | 0 | 0% | n/a | ← never shipped
-| **personal-discovery** | 1 | 0 | 0% | n/a | ← never shipped
+| **personal-discovery** | 2 | 0 | 0% | n/a | ← never shipped
+| **relatable** | 1 | 0 | 0% | n/a | ← never shipped
 
 ### By source hook pattern
 
 | Hook | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
-| **A** | 2 | 0 | 0% | n/a |
-| **B** | 1 | 0 | 0% | n/a |
+| **A** | 3 | 0 | 0% | n/a |
+| **B** | 2 | 0 | 0% | n/a |
+| **C** | 1 | 0 | 0% | n/a |
+| **F** | 1 | 0 | 0% | n/a |
 | **G** | 2 | 0 | 0% | n/a |
-| **I** | 1 | 0 | 0% | n/a |
 
 ### How to use this in /write-posts
 

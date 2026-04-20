@@ -1,5 +1,5 @@
 {
-  "total_posts": 25,
+  "total_posts": 26,
   "top_5_by_engagement": [
     {
       "date": "2025-05-26",
@@ -61,8 +61,8 @@
   ],
   "bottom_3_by_engagement": [
     {
-      "date": "2026-04-17",
-      "first_line": "Every SaaS is shipping an AI button right now. Most of them are going to look ridiculous in 18 months.",
+      "date": "2026-04-20",
+      "first_line": "AI startups have 12 months before they die…",
       "hook_pattern": "other",
       "style": "Unclassified",
       "composite_engagement": 7
@@ -100,8 +100,8 @@
       "avg_engagement": 392.0
     },
     "other": {
-      "count": 17,
-      "avg_engagement": 55.6
+      "count": 18,
+      "avg_engagement": 53.0
     }
   },
   "style_stats": {
@@ -122,8 +122,8 @@
       "avg_engagement": 67.0
     },
     "Unclassified": {
-      "count": 17,
-      "avg_engagement": 52.2
+      "count": 18,
+      "avg_engagement": 49.7
     }
   },
   "cta_stats": {
@@ -132,8 +132,8 @@
       "avg_engagement": 0
     },
     "direct-question": {
-      "count": 4,
-      "avg_engagement": 58.0
+      "count": 5,
+      "avg_engagement": 47.8
     },
     "challenge": {
       "count": 0,
@@ -159,6 +159,7 @@
       17
     ],
     "medium (1000-2000)": [
+      7,
       12,
       40,
       8,
@@ -177,7 +178,7 @@
       73
     ],
     "long (>=2000)": [
-      7,
+      8,
       67
     ]
   }
