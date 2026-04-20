@@ -1,13 +1,13 @@
-# Post Templates — 6 types
+# Post Templates — 7 types
 
 Each post follows Hook → Proof → Implication → CTA. Templates vary the proof+implication structure by story type.
 
-Length: 900–1,500 characters per post. Hook under 70 chars.
+Length: 1,200–1,900 characters per post (floor 1,100, cap 2,000). Hook under 70 chars.
 
 When writing 3 options, each must use a different template. Default weighting:
 1. Personal-discovery (default, top performer)
 2. Contrarian OR dot-connecting (depending on brain connections)
-3. News-take OR specific-number (depending on lead significance)
+3. News-take OR three-pillar (depending on lead significance + conviction clarity)
 
 ---
 
@@ -165,6 +165,74 @@ Never fabricate the count. If it's "across 10 founder conversations," it must ac
 
 ---
 
+## 7. three-pillar
+
+**When:** Aayush has a 2-4 concept list he wants to name + prove with concrete
+examples. Typical shape: make a claim → list the 3 things → spend the rest of
+the post cashing each one out with a named company + "That's X." recap tag →
+close with era-reframe + lowercase rhetorical question.
+
+**Hook pattern:** A (Contrarian Truth) or D-ellipsis (Time Bomb with trailing …).
+
+Template:
+```
+[hook — usually with trailing ellipsis, 60-70 chars]
+
+[1-2 line observation: pattern you keep seeing]
+
+[4-6 line narrative: the mechanism — what happens, who ships what, how it ends]
+
+[pivot line: "the ones who survive are [doing X]"]
+
+There are only three that [hold / matter / work]:
+
+- [pillar 1]
+- [pillar 2]
+- [pillar 3]
+
+[2-3 sentences: concrete example for pillar 1, named company/number]
+That's [pillar 1 name].
+
+[2-3 sentences: concrete example for pillar 2]
+That's [pillar 2 name].
+
+[2-3 sentences: concrete example for pillar 3]
+That's [pillar 3 name].
+
+[1-line tag that closes the argument]
+
+[optional short named story — 2-3 lines, a company that lived the lesson]
+
+[IMO / I doubt / I think line — personal-voice POV anchor]
+
+[era-reframe line: "X is a [old year] [playbook] running on [new year] [timelines]"]
+
+[lowercase rhetorical question — closer]
+```
+
+Example opening (Aayush 2026-04-20):
+```
+AI startups have 12 months before they die…
+
+Every week I watch a category shrink.
+The pattern is always the same.
+Small team ships a clever AI wrapper.
+Founders raise a round.
+Six months later, Anthropic or OpenAI ships the same thing natively.
+The startup pivots or dies quietly.
+```
+
+Rules:
+- **Bullets use `-` (hyphen) NEVER `•`.** Hyphen-bullets in LinkedIn posts read
+  as clean clickable lines; the unicode bullet reads as corporate slop.
+- The 3 pillars MUST each get a "That's [pillar]." recap tag later in the post.
+- Don't use more than 4 "That's X." recap tags in one post — past that, it
+  becomes a tic.
+- Era-reframe line (pattern 8 below) belongs near the close, one line before
+  the question.
+
+---
+
 ## 6. evolution
 
 **When:** Aayush's thinking has genuinely shifted. Or lead story extends a past thread.
@@ -198,7 +266,7 @@ Never manufacture an evolution that didn't happen. If Aayush hasn't actually cha
 - [ ] No em dashes. Commas/periods/ellipses only.
 - [ ] Lowercase "i"
 - [ ] Bold 3–5 words max
-- [ ] 900–1,500 characters total
+- [ ] 1,200–1,900 characters total (floor 1,100, cap 2,000)
 - [ ] At least 2 specific numbers OR named tools/companies
 - [ ] CTA is not "Learn more" or a question the algorithm flags as engagement bait
 - [ ] Max 1 emoji

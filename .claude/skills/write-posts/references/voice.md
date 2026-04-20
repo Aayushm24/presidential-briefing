@@ -93,6 +93,96 @@ Open with something the audience has *experienced*, not the paper title. Technic
 ### Pattern 3: Stories > explanations
 "An ex-OpenAI engineer walked up to me" beats "SPPO addresses core PPO limitations." Discovery narratives (someone showed me → i tried it → here's what happened) outperform concept explanations every time.
 
+---
+
+## ALLOWED voice markers (personal-voice anchors, not guru-speak)
+
+These first-person hedges read as Aayush thinking out loud. They do NOT count as
+advice voice or guru positioning. Use them freely, one-at-a-time, when the
+claim is opinion rather than fact.
+
+- **"IMO"** — most personal. "IMO, current stakes aren't about model access."
+- **"tbh"** — honest confession tone. "tbh i don't know if this holds in 2027."
+- **"fwiw"** — lightweight POV tag. "fwiw, most founders i talk to are wrong about this."
+- **"ngl"** — casual admission. "ngl this surprised me."
+- **"I doubt"** — soft contrarian. "I doubt current stakes are about model access anymore."
+- **"I think"** — soft opinion. "I think the war is over."
+- **"we'll"** / **"ie"** — contraction + abbreviation register.
+
+Cap: max 2 of these markers across a single post. More than that reads as hedging.
+Aayush's 2026-04-20 post uses "I doubt" once and "IMO" once — that's the target.
+
+## Rhythm device: short fragment paragraph
+
+Paragraphs of 3-8 words, standing alone on their own line, are a deliberate
+rhythm tool. They carry weight because they break the prose cadence.
+
+Examples from Aayush's 2026-04-20 post:
+- *"That's distribution."*
+- *"That's proprietary data."*
+- *"That's the third."*
+- *"Everything else is a feature waiting to be absorbed."*
+
+Rule: use 2-4 fragment paragraphs per long post (1,500c+). Each one should
+land AFTER a concrete example or claim — it's the tag-line that names the
+idea you just proved. See "Recap-tag pattern" below.
+
+## Rhythm device: recap-tag ("That's X.")
+
+After a 2-3 sentence concrete example, close the beat with a short "That's
+[the-concept]." line. This recap-tags what the reader just absorbed and
+builds the skeleton of the post's argument.
+
+Template:
+```
+[concrete named example, 2-3 sentences with specifics]
+That's [the-abstract-concept-this-example-proves].
+
+[next concrete example]
+That's [concept 2].
+
+[third example]
+That's [concept 3].
+```
+
+Aayush's 2026-04-20 post uses this 3 times. It gives a post coherence without
+listicle feel. Do NOT use "That's X." more than 4 times per post — past that,
+it becomes a tic.
+
+## Rhythm device: era-reframe (naming a strategy by its vintage year)
+
+Aayush labels outdated strategies by the year they worked. Pattern:
+
+`[strategy name] is a [old year] [playbook/strategy/bet] running on [new year] [timelines/wages/stakes].`
+
+Examples:
+- *"'build the feature, they'll come' is a 2023 strategy running on 2026 timelines."*
+- *"hiring 50 engineers is a 2021 playbook on 2026 wages."*
+- *"land-and-expand at 3x ARR is a 2022 bet on 2026 stakes."*
+
+Use this as the implication line of a post. It compresses a long argument
+("this strategy used to work, the environment changed, it no longer works")
+into one sentence. Max 1 per post — it's a hammer, not a screwdriver.
+
+## Case + emphasis rules
+
+- **Lowercase i** (not uppercase I) as pronoun — always.
+- **Opening a question with lowercase** ("what are you building that only YOU can build?") is allowed when the question is rhetorical or personal. Reserve uppercase for formal framing questions. Aayush's 2026-04-20 post closes with lowercase "what" intentionally — it reads like he's thinking aloud, not interviewing you.
+- **ALL-CAPS one word per post max** for emphasis (e.g. "only YOU can build", "40 have the same BUG"). More than once = screaming, kills the device.
+- Proper nouns still capitalize (Anthropic, OpenAI, Notion, Canva).
+
+## Ellipsis ("...") for suspense
+
+Trailing ellipsis on a hook adds stakes without a full sentence.
+
+Example (Aayush 2026-04-20): *"AI startups have 12 months before they die…"*
+
+Use the unicode ellipsis `…` or three periods `...` — either reads fine on
+LinkedIn. Do NOT use ellipsis mid-sentence as a pause; that's AI-tell. Only
+at the end of a hook or a suspense-building fragment.
+
 ## Few-shot examples
 
-See `workspace/2026-04-13/aayush-edited-post.md` for the edited SPPO post (voice reference). Also `workspace/2026-04-15/linkedin-posts.md` for recent 3-option sets.
+- `config/aayush-reference-posts/2026-04-20-ai-startups-12-months.md` — **voice-matching fixture (primary anchor).** Read this before composing every post. Match its rhythm: ellipsis hook, 3-pillar inline list, "That's X." recap tags, era-reframe implication, lowercase rhetorical close.
+- `workspace/2026-04-13/aayush-edited-post.md` — the edited SPPO post (earlier voice reference).
+- `workspace/2026-04-15/linkedin-posts.md` — recent 3-option sets.

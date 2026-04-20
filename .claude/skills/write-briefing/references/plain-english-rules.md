@@ -56,7 +56,7 @@ Reject these words. Their presence = auto-revise.
 | maturation / matures / maturity (of markets) | "real companies pay real money for X" |
 | commoditization / commoditize(s) | "everyone can buy X now" / "X is cheap now" |
 | table stakes | "everyone has it" / "it's not special anymore" |
-| moat (metaphorical) | "the thing competitors can't copy" / name it concretely |
+| moat (metaphorical) | "the thing competitors can't copy" / name it concretely — **BRIEF only; POSTS allow "moat"** (see note below) |
 | differentiation | "what makes you different" / "what your competitor can't do" |
 | the stack / up the stack / move up the stack | "apps" / "the product layer" / "the part customers touch" |
 | underlying market | "the market" / "customers" |
@@ -151,6 +151,24 @@ The first version could be anyone. The second version tells you who, what, and w
 2. **clean_text.py** has regex checks for the Rule 3 kill-list — hits get flagged.
 3. **council/attack** runs a "plain English pass" that quotes any sentence violating Rules 1, 2, 5, 6.
 4. **revise** step must fix every flagged sentence before shipping.
+
+---
+
+## Surface-specific exceptions (BRIEF vs POSTS)
+
+The BRIEF and POSTS surfaces have different audiences and different voice rules.
+
+- **BRIEF** — newsletter read by non-AI builders. Strict plain-English. `moat`,
+  `differentiation`, `commoditization`, `table stakes`, `up the stack` all BANNED.
+  Enforced by `tests/golden-format.sh`.
+- **POSTS** — LinkedIn, Aayush's own voice to founders. `moat` / `moats` is
+  **ALLOWED** in posts (Aayush uses the word 4 times in his 2026-04-20 "AI
+  startups have 12 months" post). `differentiation`, `commoditization`, and
+  `table stakes` remain banned in posts. Enforced by `tests/posts-gate.sh`.
+
+When writing a BRIEF: treat the full Rule 3 kill-list as hard-banned.
+When writing POSTS: treat Rule 3 kill-list as banned EXCEPT `moat/moats`,
+which Aayush uses comfortably and which reads as his voice, not MBA-speak.
 
 ---
 

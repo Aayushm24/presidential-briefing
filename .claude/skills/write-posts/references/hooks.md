@@ -50,6 +50,22 @@ Examples:
 
 **When to use:** lead story extends a past thread, or the news has a deadline/window quality.
 
+### Pattern D-ellipsis: Time Bomb with trailing ellipsis — score 8
+Variant of D. End the hook with `…` (or `...`) instead of a period. The trail
+creates suspense — the reader has to keep scrolling to resolve the stake.
+
+Examples:
+- *"AI startups have 12 months before they die…"* (Aayush 2026-04-20)
+- *"the next OpenAI release breaks half your product…"*
+- *"six months until every agent team faces this choice…"*
+
+**When to use:** hook names a countdown, threshold, or looming shift. The
+ellipsis must be at the END of the hook line only, never mid-sentence. Do
+not stack ellipsis with a question mark or exclamation — one mark only.
+
+**Do NOT use** for factual claims ("Notion shipped X…") — the ellipsis only
+works when the tension is about what happens NEXT, not what already did.
+
 ## Pattern E: Specific Number + Surprise — score 8
 Data creates authority. Surprise creates clicks.
 

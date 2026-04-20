@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 # Hard gate for posts.json — validates:
 #   1. Exactly 3 options present
-#   2. Each option.post is 1,100–1,800 characters
+#   2. Each option.post is 1,100–2,000 characters
 #   3. Zero "[Not X, it's Y]" patterns across all 3 options combined
+#      (tight: same-subject inversion only — parallel comparisons with a
+#      different subject are allowed. See regex below.)
 #   4. Zero "It's like X" analogies
 #   5. Zero trailing-hashtag blocks
+#
+# MBA-vocab ban (posts only): differentiation, commoditization, table stakes.
+# "moat/moats" is ALLOWED in posts per 2026-04-20 voice calibration — Aayush
+# uses it comfortably in his own posts. It stays BANNED in briefs via
+# tests/golden-format.sh (different surface, different audience).
 #
 # Ship step calls this after revise. Fails = abort delivery.
 # Runs against workspace/*/posts.json.
@@ -12,7 +19,7 @@
 set -uo pipefail
 
 MIN_CHARS=1100
-MAX_CHARS=1800
+MAX_CHARS=2000
 FAIL=0
 CHECKED=0
 
@@ -54,10 +61,19 @@ check_posts() {
   done
 
   # [Not X, it's Y] — zero tolerance across all options combined
+  # TIGHT pattern: only flag when the SECOND clause re-claims the SAME subject
+  # with "It's/They're + abstract pivot word" (about/just/becoming/actually/the).
+  # This catches AI-tells like:
+  #   "The survivors aren't building better models. They're building better distribution."
+  #   "This isn't about model access. It's about who owns the user."
+  # But ALLOWS parallel comparisons where the subject changes, e.g.:
+  #   "Customer support logs aren't a moat. Real-time workflow data is."
+  # (Aayush uses this pattern — second sentence introduces a NEW noun subject,
+  #  not "it's/they're" pointing back at the first.)
   local all_posts
   all_posts=$(jq -r '.options[].post' "$file")
   local not_x_its_y
-  not_x_its_y=$(printf '%s' "$all_posts" | grep -ciE "(isn'?t|aren'?t|is\s+not|are\s+not)[^.!?]*\.[^.!?]*(it'?s|they'?re)[[:space:]]+(about|just|becoming|actually|the)" || true)
+  not_x_its_y=$(printf '%s' "$all_posts" | grep -ciE "(isn'?t|aren'?t|is\s+not|are\s+not)[^.!?]*\.[[:space:]]*(it'?s|they'?re)[[:space:]]+(about|just|becoming|actually|the)" || true)
   if [ "$not_x_its_y" -gt 0 ]; then
     errors+=("not_x_its_y_hits=${not_x_its_y} (expect 0)")
   fi
@@ -76,8 +92,12 @@ check_posts() {
     errors+=("trailing_hashtag_block_hits=${trailing_hashtags} (expect 0)")
   fi
 
-  # MBA vocabulary — ZERO tolerance in posts too
-  for word_pattern in "moats?" "differentiation|differentiator" "commoditi[sz]ation|commoditi[sz]es?" "table\s+stakes"; do
+  # MBA vocabulary — ZERO tolerance in posts.
+  # NOTE: "moats?" was REMOVED from this loop on 2026-04-20. Aayush uses
+  # "moat" 4x in his own top-performing post (2026-04-20 "AI startups have
+  # 12 months"). Posts can carry his industry vocab. Briefs cannot (see
+  # tests/golden-format.sh — moat still banned there for a different audience).
+  for word_pattern in "differentiation|differentiator" "commoditi[sz]ation|commoditi[sz]es?" "table\s+stakes"; do
     local hits
     hits=$(printf '%s' "$all_posts" | grep -ciwE "$word_pattern" || true)
     if [ "$hits" -gt 0 ]; then

@@ -18,6 +18,7 @@ Output: `workspace/${TODAY}/posts.md` with 3 options + convictions + preliminary
 - `config/conviction.md`
 - `config/aayush-experiences.md` — verified first-person anchors
 - `config/aayush-linkedin-patterns.md` — **what actually wins for Aayush** (from real performance data)
+- `config/aayush-reference-posts/*.md` — **voice-matching fixtures.** Read all of these before composing. Latest (2026-04-20 "AI startups have 12 months") is the primary anchor: match its rhythm devices (ellipsis hook, "That's X." recap tags, inline 3-pillar list with hyphens, era-reframe, lowercase rhetorical closer). See the fixture's own "Rhythm devices used" section for the full list.
 - `.claude/skills/write-briefing/references/plain-english-rules.md` — **READ FIRST.** 7 hard rules shared across briefing + posts: no abstract-noun stacks, 22-word sentence cap, banned MBA vocabulary, 5th-grade test.
 - `.claude/skills/write-posts/references/voice.md`
 - `.claude/skills/write-posts/references/kill-list.md`
@@ -126,7 +127,7 @@ Write 3 LinkedIn post OPTIONS. Each MUST:
 
 === HARD RULES (SHIP STEP REJECTS BELOW THRESHOLDS — these are automated gates, not suggestions) ===
 
-**0. LENGTH FLOOR — EACH option MUST be 1,200-1,700 chars. Below 1,100 = posts-gate.sh rejects.** Aayush's top 5 posts by engagement average 1,384 chars. Short posts underperform dramatically. Count characters before submitting. If an option is 950 chars, it is not finished — add another specific beat from the brief, another named fact, or a deeper personal observation. Never pad with filler.
+**0. LENGTH — EACH option MUST be 1,200-1,900 chars. Floor 1,100, cap 2,000 (posts-gate.sh rejects outside that range).** Aayush's top 5 posts by engagement average 1,384 chars, his 2026-04-20 "12 months" post is ~1,900 chars. Short posts underperform dramatically. Count characters before submitting. If an option is 950 chars, it is not finished — add another specific beat from the brief, another named fact, or a deeper personal observation. Never pad with filler.
 
 **1. NO [Not X, it's Y] inversions — ZERO across all 3 options combined.** This is the #1 AI tell. The ship step's posts-gate.sh scans every option for patterns like "isn't X. It's Y", "aren't A. They're B", "this isn't about X. it's about Y", "stopped being X. it's becoming Y". Any hit = option rejected. Today's failure (2026-04-20) had 2 hits in posts: "The survivors aren't building better models. They're building better distribution" and "This isn't about model access anymore. It's about who already has the users." Both would fail the new gate. Replace with direct parallel claims ("Same pricing. Less per token.") or open questions ("what are you actually paying for?").
 
@@ -157,7 +158,7 @@ Write 3 LinkedIn post OPTIONS. Each MUST:
 - dashes (-) NOT bullets (•)
 - one idea per line
 - bold max 3-5 words per post
-- 1,200-1,700 characters per post (HARD FLOOR: 1,100. If your draft is under 1,100 chars the entire option is REJECTED. Aim for 1,400.)
+- 1,200-1,900 characters per post (floor 1,100, cap 2,000. If your draft is under 1,100 or over 2,000 chars the entire option is REJECTED. Aim for 1,400-1,700. Aayush's own 2026-04-20 "12 months" post is ~1,900 chars — long posts work when every beat earns its line.)
 - Conversational, lowercase-leaning natural voice
 - Read-aloud test: read the post out loud. If ANY sentence sounds like something an LLM would write but a person wouldn't say → rewrite.
 
@@ -407,7 +408,7 @@ Also save raw LLM output to `.posts-raw.json` for debugging.
 
 ## Kill list
 
-- NEVER write a post shorter than 1,100 chars — Aayush's top 5 by engagement average 1,384 chars (range 1,100-1,790). Short posts underperform for his audience. Sweet spot: 1,200-1,700 chars. Hard cap: 1,800 chars.
+- NEVER write a post shorter than 1,100 chars or longer than 2,000 chars — Aayush's top 5 by engagement average 1,384 chars (range 1,100-1,900). His 2026-04-20 "12 months" post lands at ~1,900. Sweet spot: 1,200-1,900 chars. Hard floor 1,100, hard cap 2,000.
 - NEVER use the same template twice across options
 - NEVER fabricate Aayush's experience ("i built X" only when verifiable from workspace history)
 - NEVER address the audience directly ("for founders", "hey founders")
