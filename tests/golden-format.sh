@@ -77,6 +77,19 @@ check_brief() {
   not_x_its_y=$(grep -cE "(isn'?t|aren'?t|is[[:space:]]+not|are[[:space:]]+not)[^.!?]*\.[[:space:]]*(It'?s|They'?re|It[[:space:]]+is|They[[:space:]]+are)[[:space:]]+(about|just|becoming|actually|the|changing|building|adding|really|where)" "$file" || true)
   [ "$not_x_its_y" -eq 0 ] || errors+=("not_x_its_y_hits=$not_x_its_y (expect 0)")
 
+  # MBA vocabulary — ZERO tolerance for these specific words (2026-04-20 feedback: "moat" appeared 4x)
+  # These words are banned in plain-english-rules.md. If they appear in shipped brief, something is broken.
+  local mba_moat; mba_moat=$(grep -ciwE "moats?" "$file" || true)
+  [ "$mba_moat" -eq 0 ] || errors+=("mba_vocab_moat_hits=$mba_moat (expect 0 — use 'the thing competitors can't copy' or name it concretely)")
+  local mba_diff; mba_diff=$(grep -ciwE "differentiation|differentiator" "$file" || true)
+  [ "$mba_diff" -eq 0 ] || errors+=("mba_vocab_differentiation_hits=$mba_diff (expect 0 — use 'what makes you different' or name the specific)")
+  local mba_commod; mba_commod=$(grep -ciwE "commoditi[sz]ation|commoditi[sz]es?" "$file" || true)
+  [ "$mba_commod" -eq 0 ] || errors+=("mba_vocab_commoditization_hits=$mba_commod (expect 0 — use 'gets cheap' / 'everyone has it')")
+  local mba_stakes; mba_stakes=$(grep -ciwE "table\s+stakes" "$file" || true)
+  [ "$mba_stakes" -eq 0 ] || errors+=("mba_vocab_table_stakes_hits=$mba_stakes (expect 0 — use 'everyone has it')")
+  local mba_stack; mba_stack=$(grep -ciE "(up|move.*up|moves.*up|moving.*up|shift.*up)\s+the\s+stack" "$file" || true)
+  [ "$mba_stack" -eq 0 ] || errors+=("mba_vocab_up_the_stack_hits=$mba_stack (expect 0 — use 'to apps' / 'to the product')")
+
   # Word count: FLOOR raised from 1200 to 1500 per 2026-04-20 feedback — brief at 1227 felt thin
   local wc=$(wc -w < "$file")
   [ "$wc" -ge 1500 ] && [ "$wc" -le 2800 ] || errors+=("word_count=$wc (expect 1500-2800)")

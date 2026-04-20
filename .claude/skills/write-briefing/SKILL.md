@@ -153,6 +153,19 @@ Block quotes: use at least 1-2 per piece. Pull actual quotes from the source art
 
 Sentence rhythm: 40% short (under 15 words), 50% medium (15-30), 10% long (30+). Vary constantly.
 
+=== ZERO-TOLERANCE BANNED WORDS (ship step rejects brief on sight) ===
+
+The following words appearing ANYWHERE in the brief = automatic rejection. There is no "max 1" or "okay in context." Zero means zero. These failed today (2026-04-20: "moat" appeared 4 times, "differentiator" 1, "[Not X, it's Y]" 4 times):
+
+- **moat** / **moats** → write "the thing competitors can't copy" OR name it concretely ("Canva's 100M user base", "Tesla's Texas-only focus")
+- **differentiator** / **differentiation** / **differentiate** → write "what makes you different" OR name the specific thing ("owning the design tools", "having the distribution")
+- **commoditization** / **commoditizes** / **commoditize** → write "everyone can buy/use it now" / "it's cheap now"
+- **table stakes** → write "everyone has it" / "it's not special anymore"
+- **up the stack** / **move up the stack** / **moves up the stack** → write "to the app layer" / "to the product" / "to what the user touches"
+- **[Not X, it's Y]** inversions ("isn't X. It's Y" / "aren't A. They're B" / "stopped being X. It's becoming Y") → use direct declarative ("AI is a commodity now.") or parallel structure ("Chips are cheap. Products aren't.")
+
+If you catch yourself writing any of these while composing, STOP and rewrite the sentence. The regex gate at ship time is deterministic; the brief will fail to ship with any hit.
+
 === CITATIONS — INLINE, MANDATORY, NO FOOTER ===
 
 **Every named company, tool, or person on first mention MUST be a markdown link to a source.** If the source is `${LEAD_URL}`, `${SECONDARY_1_URL}`, `${SECONDARY_2_URL}`, or any URL inside the <story> or <stories> JSON, link to it. Example patterns:

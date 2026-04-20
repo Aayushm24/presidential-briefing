@@ -76,6 +76,15 @@ check_posts() {
     errors+=("trailing_hashtag_block_hits=${trailing_hashtags} (expect 0)")
   fi
 
+  # MBA vocabulary — ZERO tolerance in posts too
+  for word_pattern in "moats?" "differentiation|differentiator" "commoditi[sz]ation|commoditi[sz]es?" "table\s+stakes"; do
+    local hits
+    hits=$(printf '%s' "$all_posts" | grep -ciwE "$word_pattern" || true)
+    if [ "$hits" -gt 0 ]; then
+      errors+=("mba_vocab_hits[${word_pattern}]=${hits} (expect 0)")
+    fi
+  done
+
   if [ ${#errors[@]} -gt 0 ]; then
     echo "FAIL: $file"
     for e in "${errors[@]}"; do echo "  - $e"; done

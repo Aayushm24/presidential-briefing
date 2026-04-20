@@ -88,15 +88,21 @@ RULES FOR REVISION:
 - Preserve conviction statements unless council flagged them as false/unverifiable
 - Hook revisions: new hook must still follow same hook pattern (A-J) unless council said pattern itself was wrong
 
-DETERMINISTIC HARD BLOCKERS — rewrite every sentence containing these, no exceptions:
-- em dashes (U+2014) → use commas, periods, or "..."
-- "It's like X" / "Think of it as Y" / any analogy-as-declaration → replace with a direct parallel claim ("Same sticker price. What you get for it changed.") or a rhetorical question ("what are you actually paying for?"). NEVER keep the analogy.
-- MBA vocabulary (moat, stack, commoditization, differentiation, application layer, enterprise customers, underlying market, etc.) → concrete plain-English substitute
-- "[Not X, it's Y]" inversions — max 1 per document
-- Long sentences (>22 words) — split into 2+ sentences
-- Guru voice ("founders should", "builders who", "teams who want to win") → first-person observation
-- Hashtags at end of post → remove entirely
-- Uppercase "I" in posts → lowercase "i" (voice rule)
+DETERMINISTIC HARD BLOCKERS — rewrite every sentence containing these, ZERO tolerance. The ship step's regex gates WILL reject the brief/posts if ANY remain:
+
+- **em dashes (U+2014)** → use commas, periods, or "..."
+- **"It's like X"** / "Think of it as Y" / any analogy-as-declaration → replace with a direct parallel claim ("Same sticker price. What you get for it changed.") or a rhetorical question ("what are you actually paying for?"). NEVER keep the analogy.
+- **"moat" / "moats"** → name the specific thing ("Canva's 100M user base", "Tesla's Texas-only focus", "their distribution") or use "the thing competitors can't copy". If you can't name it specifically, the claim probably isn't defensible and should be cut.
+- **"differentiator" / "differentiation" / "differentiate"** → "what makes you different" OR name the specific advantage ("owning the design tools", "having the users")
+- **"commoditization" / "commoditize"** → "everyone can buy it now" / "it's cheap now"
+- **"table stakes"** → "everyone has it" / "it's not special anymore"
+- **"up the stack" / "moves up the stack"** → "to apps" / "to the product" / "to what the user touches"
+- **"[Not X, it's Y]" inversions** — ZERO (not max 1). Patterns: "isn't X. It's Y" / "aren't A. They're B" / "stopped being X. It's becoming Y". Use direct declarative or parallel structure.
+- **Long sentences (>22 words)** — split into 2+ sentences
+- **Guru voice** ("founders should", "builders who", "teams who want to win") → first-person observation
+- **Hashtags at end of post** → remove entirely
+- **Uppercase "I" in posts** → lowercase "i" (voice rule)
+- **Posts under 1,100 chars** — expand with one more specific fact, named number, or personal beat. NEVER pad with filler. If you can't add real substance, the post isn't ready.
 
 After rewriting, mentally re-check each deterministic finding. If you can't mark all as fixed, rewrite again before returning. The ship step runs the exact same regex tests and aborts delivery if any remain.
 
