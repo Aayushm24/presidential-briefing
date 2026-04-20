@@ -18,13 +18,15 @@ Output: `workspace/${TODAY}/posts.md` with 3 options + convictions + preliminary
 - `config/conviction.md`
 - `config/aayush-experiences.md` — verified first-person anchors
 - `config/aayush-linkedin-patterns.md` — **what actually wins for Aayush** (from real performance data)
-- `config/aayush-reference-posts/*.md` — **voice-matching fixtures.** Read all of these before composing. Latest (2026-04-20 "AI startups have 12 months") is the primary anchor: match its rhythm devices (ellipsis hook, "That's X." recap tags, inline 3-pillar list with hyphens, era-reframe, lowercase rhetorical closer). See the fixture's own "Rhythm devices used" section for the full list.
-- `.claude/skills/write-briefing/references/plain-english-rules.md` — **READ FIRST.** 7 hard rules shared across briefing + posts: no abstract-noun stacks, 22-word sentence cap, banned MBA vocabulary, 5th-grade test.
-- `.claude/skills/write-posts/references/voice.md`
-- `.claude/skills/write-posts/references/kill-list.md`
-- `.claude/skills/write-posts/references/hooks.md`
-- `.claude/skills/write-posts/references/post-templates.md`
-- `.claude/skills/write-posts/references/anti-slop-checklist.md`
+- `config/post-blueprint.md` — **PRIMARY VOICE SOURCE. READ THIS FIRST.** Every voice, length, rhythm-device, hook-pattern, style, formula, and banned-pattern rule lives here. Includes top-5 performer quotes + annotations. When any secondary file conflicts, blueprint wins. Updated daily from `history/feedback-log.jsonl`.
+- `history/feedback-log.jsonl` — audit trail. Read recent entries for latest direction.
+- `config/aayush-reference-posts/*.md` — voice-matching fixtures. Latest (2026-04-20 "AI startups have 12 months") is the primary anchor.
+- `.claude/skills/write-briefing/references/plain-english-rules.md` — secondary (now subordinate to post-blueprint)
+- `.claude/skills/write-posts/references/voice.md` — secondary
+- `.claude/skills/write-posts/references/kill-list.md` — secondary
+- `.claude/skills/write-posts/references/hooks.md` — secondary
+- `.claude/skills/write-posts/references/post-templates.md` — secondary
+- `.claude/skills/write-posts/references/anti-slop-checklist.md` — secondary
 
 ## Outputs
 

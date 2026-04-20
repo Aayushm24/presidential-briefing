@@ -19,13 +19,18 @@ Write everything to `workspace/$TODAY/conviction-candidates.md`. The Slack step 
 
 | File | What to pull from it |
 |---|---|
+| **`config/brief-blueprint.md`** | **Current brief voice rules.** Read in full. Primary source for "does the week's output match intended voice?" |
+| **`config/post-blueprint.md`** | **Current post voice rules.** Same — read in full. |
+| **`history/feedback-log.jsonl`** | **Every feedback event this week.** Each entry has `surface`, `what`, `why`, `outcome`. These drive the blueprint edit proposals. |
 | `config/conviction.md` | Current 2-3 convictions. Baseline. |
-| `config/aayush-linkedin-patterns.md` | Latest patterns including the "Option pickup rates" section. Which styles picked up, which never ship. |
+| `config/aayush-linkedin-patterns.md` | Latest patterns including the "Option pickup rates" section. |
 | `history/option-pickups.jsonl` | Last 7 days of attributions. Filter by `published_date >= (TODAY - 7 days)`. |
-| `performance-data/*.md` | Engagement for posts published in the last 14 days. Posts older than 2 weeks have settled; newer ones are still moving. |
-| `workspace/YYYY-MM-DD/posts.json` | Every day's 3 options for the last 7 days. What we proposed. |
-| `workspace/YYYY-MM-DD/brief.md` | Every day's brief for the last 7 days. Themes we covered + which convictions we threaded. |
+| `performance-data/*.md` | Engagement for posts published in the last 14 days. |
+| `workspace/YYYY-MM-DD/posts.json` | Every day's 3 options for the last 7 days. |
+| `workspace/YYYY-MM-DD/brief.md` | Every day's brief for the last 7 days. |
 | `history/published.jsonl` | What actually shipped each day (lead title). |
+
+**Primary job shift (2026-04-20):** This skill now proposes **blueprint edits** (additions, removals, tightenings), not just conviction candidates. Conviction candidates remain a secondary output.
 
 ## Processing
 

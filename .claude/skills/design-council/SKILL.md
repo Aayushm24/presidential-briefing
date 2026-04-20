@@ -13,8 +13,11 @@ This skill is adapted from Atlan's Marketing OS design-council (`atlanhq/atlan-m
 
 ## Before writing ANY copy — mandatory reads
 
-1. `.claude/skills/write-briefing/references/plain-english-rules.md` — 7 hard language rules. Apply to every chip, headline, body line, footer. No exceptions. If a word is on the banned list (commodity, moat, stack, differentiation, application layer, etc.), pick a concrete replacement.
-2. `.claude/skills/design-council/references/color-theory.md` — pick mood based on post archetype.
+1. `config/post-blueprint.md` — **PRIMARY voice source.** If the creative is for a LinkedIn post, every chip, headline, body line, and footer follows this blueprint. Latest-of-latest voice direction lives here. Allowed vocabulary (moat, IMO, I doubt) and banned patterns (It's like X, [Not X it's Y]) are defined here.
+2. `config/brief-blueprint.md` — if the creative accompanies a brief, use this instead.
+3. `history/feedback-log.jsonl` — recent feedback entries.
+4. `.claude/skills/design-council/references/color-theory.md` — pick mood based on post archetype.
+5. `.claude/skills/write-briefing/references/plain-english-rules.md` — secondary (now subordinate to blueprints).
 
 The copy on the creative is held to the SAME plain-English bar as the brief and the LinkedIn posts. A creative with "commoditization" on it is REVISE, no matter how pretty it looks.
 

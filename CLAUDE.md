@@ -6,6 +6,24 @@ Runs on **GitHub Actions cron** (5:30 AM IST daily + Sunday feedback pass). All 
 
 ---
 
+## Voice truth — single source
+
+Every skill that produces or evaluates writing reads these files FIRST:
+
+| Surface | Blueprint | Purpose |
+|---|---|---|
+| Newsletter brief | `config/brief-blueprint.md` | 2,500+ words, plain English, inline citations, no MBA vocab (banned for briefs), explain-the-mechanism rule |
+| LinkedIn posts | `config/post-blueprint.md` | 1,300-2,000 char bounds (target 1,400-1,800), Aayush's voice (moat allowed, IMO/tbh hedges, unicode-bold signature, P.S./P.P.S. closers, short fragment paragraphs) |
+| Both | `history/feedback-log.jsonl` | Append-only feedback audit trail. Most recent entries = latest voice direction |
+
+When secondary reference files (voice.md, plain-english-rules.md, post-templates.md, hooks.md, kill-list.md) conflict with the blueprint, **blueprint wins**.
+
+Blueprints evolve weekly via `/weekly-feedback` reading `history/feedback-log.jsonl` and proposing edits.
+
+Hard gates (`tests/golden-format.sh`, `tests/posts-gate.sh`, `scripts/clean_text.py`) catch universal failures (em dashes, "It's like X", absurd length) but do NOT enforce voice nuance — that's the blueprint's job.
+
+---
+
 ## Routing table
 
 When the user's request matches, invoke the skill by running `/{skill-name}` in Claude Code — or the orchestrator calls them via Read + follow instructions.

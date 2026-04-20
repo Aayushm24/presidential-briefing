@@ -22,9 +22,12 @@ Outputs decide whether `/revise` runs next, or pipeline proceeds to `/publish`.
 
 - `workspace/${TODAY}/brief.md`
 - `workspace/${TODAY}/posts.md`
-- `.claude/skills/write-briefing/references/plain-english-rules.md` — the 7 hard language rules. Every flagged sentence must be quoted in council-notes with a rewrite suggestion.
-- `.claude/skills/write-posts/references/review.md` (15-point audit rubric)
-- `.claude/skills/write-posts/references/kill-list.md`
+- `config/brief-blueprint.md` — **PRIMARY voice source for briefs.** Every flagged sentence must cite which blueprint rule it violates. Use the blueprint's rewrite suggestions when proposing fixes.
+- `config/post-blueprint.md` — **PRIMARY voice source for posts.** Same — cite blueprint sections in council-notes.
+- `history/feedback-log.jsonl` — recent entries surface what Aayush most recently flagged. Highest signal for "does this sound like him."
+- `.claude/skills/write-briefing/references/plain-english-rules.md` — secondary
+- `.claude/skills/write-posts/references/review.md` (15-point audit rubric) — secondary
+- `.claude/skills/write-posts/references/kill-list.md` — secondary
 
 ## Outputs
 

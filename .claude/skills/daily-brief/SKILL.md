@@ -7,6 +7,13 @@ description: Orchestrator for the full daily pipeline. Scans sources, scores, cl
 
 Master recipe. Reads each sub-skill and executes it in sequence. Writes intermediate artifacts to `workspace/YYYY-MM-DD/` so steps are independently testable and failed runs can resume.
 
+**Voice truth (read before any writing step):**
+- `config/brief-blueprint.md` — brief voice source of truth
+- `config/post-blueprint.md` — post voice source of truth
+- `history/feedback-log.jsonl` — latest feedback entries
+
+Every sub-skill that produces or evaluates writing reads these. The blueprint is primary; legacy reference files are secondary.
+
 ---
 
 ## Environment

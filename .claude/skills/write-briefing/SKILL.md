@@ -17,10 +17,12 @@ Read from disk (NOT inline):
 - `workspace/${TODAY}/brain.md` — past theme/story connections
 - `config/conviction.md` — this week's POV
 - `.claude/skills/write-briefing/references/newsletter-voice.md` — voice rules
-- `.claude/skills/write-briefing/references/plain-english-rules.md` — **READ FIRST.** 7 hard rules: no abstract-noun stacks, 22-word sentence cap, banned MBA vocabulary, 5th-grade test, concrete-before-abstract, active verbs, name things.
-- `.claude/skills/write-briefing/references/section-order.md` — mandatory structure
-- `.claude/skills/write-briefing/references/anti-slop-checklist.md` — 5 Tests + LLM-tell patterns
-- `.claude/skills/write-posts/references/kill-list.md` — banned words/patterns (shared)
+- `config/brief-blueprint.md` — **PRIMARY VOICE SOURCE. READ THIS FIRST.** Every voice, length, structure, citation, and banned-vocab rule lives here. When any secondary file conflicts with this blueprint, the blueprint wins. Updated daily from `history/feedback-log.jsonl`.
+- `history/feedback-log.jsonl` — audit trail of every feedback entry. Read recent entries for latest-of-latest voice direction.
+- `.claude/skills/write-briefing/references/plain-english-rules.md` — secondary (now subordinate to blueprint)
+- `.claude/skills/write-briefing/references/section-order.md` — secondary (structure details)
+- `.claude/skills/write-briefing/references/anti-slop-checklist.md` — secondary (5 Tests + LLM-tell patterns)
+- `.claude/skills/write-posts/references/kill-list.md` — secondary (banned words/patterns)
 
 Article text for the lead + 2 top secondary stories (fetched inline in this skill, Step 1).
 

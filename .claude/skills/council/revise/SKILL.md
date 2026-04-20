@@ -88,6 +88,11 @@ RULES FOR REVISION:
 - Preserve conviction statements unless council flagged them as false/unverifiable
 - Hook revisions: new hook must still follow same hook pattern (A-J) unless council said pattern itself was wrong
 
+**PRIMARY SOURCES (read before fixing):**
+- `config/brief-blueprint.md` — voice truth for briefs. Every rewrite serves a specific blueprint rule. Cite the rule when explaining the fix.
+- `config/post-blueprint.md` — voice truth for posts. Same.
+- `history/feedback-log.jsonl` — most recent feedback entries surface latest direction.
+
 DETERMINISTIC HARD BLOCKERS — rewrite every sentence containing these, ZERO tolerance. The ship step's regex gates WILL reject the brief/posts if ANY remain:
 
 - **em dashes (U+2014)** → use commas, periods, or "..."
