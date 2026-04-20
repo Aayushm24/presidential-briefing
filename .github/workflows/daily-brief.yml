@@ -345,15 +345,20 @@ jobs:
             already exist in workspace/${{ needs.intake.outputs.today }}/.
 
             1. Follow .claude/skills/council/attack/SKILL.md — writes council-notes.md
-            2. If council verdict is REVISE AND iter<1: follow .claude/skills/council/revise/SKILL.md
+            2. If council verdict is REVISE AND iter<1: follow .claude/skills/council/revise/SKILL.md (iter-1)
             3. Run: python3 scripts/clean_text.py workspace/${{ needs.intake.outputs.today }}/brief.md workspace/${{ needs.intake.outputs.today }}/posts.md
             4. Run: ./tests/kill-list-regex.sh workspace/${{ needs.intake.outputs.today }}/brief.md
             5. Run: ./tests/kill-list-regex.sh workspace/${{ needs.intake.outputs.today }}/posts.md
             6. Run: ./tests/golden-format.sh workspace/${{ needs.intake.outputs.today }}/brief.md
 
-            STOP after step 6. DO NOT commit, email, or Slack — those happen in the next workflow step.
+            IF STEP 4 or 5 FAILS AFTER iter-1 (kill-list still flags violations):
+              a. Re-run .claude/skills/council/attack/SKILL.md to get fresh council-notes (deterministic findings only — skip LLM voice/fact/attack passes to save budget)
+              b. If iter<2: follow revise SKILL.md AGAIN (iter-2) with explicit instruction to rewrite every sentence containing the remaining violations
+              c. Re-run steps 3, 4, 5, 6
 
-            If any gate (4, 5, 6) fails, write `rejected-kill-list` or `rejected-format` to workspace/TODAY/.status and exit 1.
+            STOP after gates all pass OR iter-2 still failing. DO NOT commit, email, or Slack — those happen in the next workflow step.
+
+            If any gate (4, 5, 6) fails after iter-2, write `rejected-kill-list` or `rejected-format` to workspace/TODAY/.status and exit 1.
             If all pass, write `gates-ok` to workspace/TODAY/.status.
 
             TODAY=${{ needs.intake.outputs.today }}

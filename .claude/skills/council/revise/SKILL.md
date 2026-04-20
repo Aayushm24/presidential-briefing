@@ -54,14 +54,27 @@ This handles:
 After clean, re-run kill-list regex to confirm hard rules are now clean:
 
 ```bash
-./tests/kill-list-regex.sh workspace/${TODAY}/brief.md && \
-./tests/kill-list-regex.sh workspace/${TODAY}/posts.md || {
-  echo "[revise] CRITICAL: kill-list violations remain after cleaner. Pattern likely not covered in clean_text.py." >&2
-  exit 1
-}
+BRIEF_CLEAN=0; POSTS_CLEAN=0
+./tests/kill-list-regex.sh workspace/${TODAY}/brief.md > workspace/${TODAY}/.brief-killlist-post-clean.log 2>&1 && BRIEF_CLEAN=1
+./tests/kill-list-regex.sh workspace/${TODAY}/posts.md > workspace/${TODAY}/.posts-killlist-post-clean.log 2>&1 && POSTS_CLEAN=1
+
+if [ $BRIEF_CLEAN -eq 0 ] || [ $POSTS_CLEAN -eq 0 ]; then
+  echo "[revise] kill-list violations remain after cleaner — LLM revise MUST remove them manually." >&2
+  cat workspace/${TODAY}/.brief-killlist-post-clean.log workspace/${TODAY}/.posts-killlist-post-clean.log >&2
+fi
 ```
 
-### Step 2: LLM revise (only for issues regex can't fix)
+**Do not exit here.** If violations remain, the LLM revise in Step 3+ is where they get fixed by hand. The ship step's final pre-delivery gate is the non-negotiable check; this one is a signal to the LLM to focus.
+
+### Step 2: LLM revise (MANDATORY when pre-flight found violations)
+
+**If council/attack flagged ANY deterministic violations (em dashes, kill-list words, analogy patterns, MBA vocab, long sentences, `[Not X, it's Y]` patterns, missing inline links, Sources footer, H2 in body), the LLM revise MUST remove every single one of them. No exceptions.**
+
+When Step 3/4/5 builds the revise prompt, include the specific council-notes violations verbatim and tell the LLM:
+
+> "The items below are DETERMINISTIC HARD BLOCKERS. The ship step runs the same regex checks at delivery time and will abort the whole run if ANY of these remain. Your job is to rewrite the specific sentences that contain them, preserving the post/brief's argument. Do NOT return the draft until every listed violation is gone. After your rewrite, re-check mentally against each rule."
+
+Then re-run `kill-list-regex.sh` locally after the LLM finishes. **If it still fails, run a second LLM revision iteration** — the skill can iterate until clean, up to `max_iter=2`. If iter-2 still fails, mark `.status=rejected-kill-list` and let ship step abort — that's a surfacing mechanism so we know the pattern needs a clean_text.py fix.
 
 ### Step 3: Build revise prompt for posts
 
@@ -74,6 +87,18 @@ RULES FOR REVISION:
 - NEVER use em dashes. Use commas, periods, or "..." instead.
 - Preserve conviction statements unless council flagged them as false/unverifiable
 - Hook revisions: new hook must still follow same hook pattern (A-J) unless council said pattern itself was wrong
+
+DETERMINISTIC HARD BLOCKERS — rewrite every sentence containing these, no exceptions:
+- em dashes (U+2014) → use commas, periods, or "..."
+- "It's like X" / "Think of it as Y" / any analogy-as-declaration → replace with a direct parallel claim ("Same sticker price. What you get for it changed.") or a rhetorical question ("what are you actually paying for?"). NEVER keep the analogy.
+- MBA vocabulary (moat, stack, commoditization, differentiation, application layer, enterprise customers, underlying market, etc.) → concrete plain-English substitute
+- "[Not X, it's Y]" inversions — max 1 per document
+- Long sentences (>22 words) — split into 2+ sentences
+- Guru voice ("founders should", "builders who", "teams who want to win") → first-person observation
+- Hashtags at end of post → remove entirely
+- Uppercase "I" in posts → lowercase "i" (voice rule)
+
+After rewriting, mentally re-check each deterministic finding. If you can't mark all as fixed, rewrite again before returning. The ship step runs the exact same regex tests and aborts delivery if any remain.
 
 Score 5 dimensions (1-10) per option after revision: novelty, insight_density, voice_match, hook_strength, teachability.
 
