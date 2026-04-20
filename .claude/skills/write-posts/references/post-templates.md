@@ -266,11 +266,25 @@ Never manufacture an evolution that didn't happen. If Aayush hasn't actually cha
 - [ ] No em dashes. Commas/periods/ellipses only.
 - [ ] Lowercase "i"
 - [ ] Bold 3–5 words max
-- [ ] 1,200–1,900 characters total (floor 1,100, cap 2,000)
+- [ ] 1,200–1,800 characters total (floor 1,100, cap 2,000). Sweet spot 1,400-1,700 (matches top-5 avg).
 - [ ] At least 2 specific numbers OR named tools/companies
 - [ ] CTA is not "Learn more" or a question the algorithm flags as engagement bait
-- [ ] Max 1 emoji
+- [ ] Max 1 emoji in body (excluding the 👇🏻 in p.p.s. pointer)
 - [ ] 0 em dashes (hard-regex enforced)
-- [ ] Max 3 hashtags at end, topic-exact
+- [ ] 0 hashtags anywhere (top performers have zero; bottom performers often have blocks)
 - [ ] No kill-list violations (see `kill-list.md`)
 - [ ] Passes 15-point voice audit (see `review.md`)
+
+## Reach-for (from top-5 performance data, 2026-04-20)
+
+At least TWO of these should appear in each post to match top-performer rhythm:
+
+- [ ] **Unicode-bold** on 1-2 specific words/numbers (𝟰𝟬%, 𝗜𝗦) — the Aayush signature that survives LinkedIn's lack of markdown. See voice.md "Unicode-bold formatting" section.
+- [ ] **P.S. closer** (lowercase, friendly directive or personal confession)
+- [ ] **P.P.S. with image pointer** (`👇🏻`) when an image is attached — present in top-1 and top-5 posts
+- [ ] **Parallel-imperative** (two short imperatives, same structure, different object) — "Kill the constraint. Kill the process."
+- [ ] **Contrast labels** (short labeled pair + one-line payoff) — "AI First: X / AI Native: Y"
+- [ ] **Named specifics with $ or scale** ($15 Bn VC, 100M users, $10 billion deal)
+- [ ] **Two-question closer** OR **line-broken poetic closer** — top posts split the final question across 2-3 lines for weight
+- [ ] **ALL-CAPS one-word emphasis** (once per post max) — "Don't get me WRONG", "what only YOU can build"
+- [ ] **Negative-space paragraphs** (2-3 word standalone paragraphs for emphasis)

@@ -181,8 +181,133 @@ Use the unicode ellipsis `…` or three periods `...` — either reads fine on
 LinkedIn. Do NOT use ellipsis mid-sentence as a pause; that's AI-tell. Only
 at the end of a hook or a suspense-building fragment.
 
+## Performance-data-derived rhythm devices (2026-04-20 calibration)
+
+Aayush's top 5 performing posts (392, 267, 117, 99, 87 composite engagement) share specific rhythm devices the system was missing. Each one below is now a first-class voice pattern.
+
+### Unicode-bold formatting (the Aayush signature)
+
+LinkedIn strips markdown. Aayush uses **unicode-bold characters** to emphasize specific numbers and words. These render bold in the LinkedIn feed and survive copy-paste.
+
+Examples from top posts:
+- *"My savings dropped 𝟰𝟬%. But, my anxiety dropped 𝟵𝟬%."* (392 engagement post)
+- *"Sometimes not knowing 𝗜𝗦 the plan."* (392 engagement post)
+
+Map: use the Mathematical Bold block (U+1D400–U+1D7FF) for letters and the Bold Digit block (U+1D7CE–U+1D7FF) for numbers. Example:
+- `40%` → `𝟰𝟬%`
+- `IS` → `𝗜𝗦`
+- `WRONG` → no — keep as ASCII ALL-CAPS when mid-sentence ("WRONG")
+
+Use 1-2 unicode-bold hits per post max. Apply to: percentages in the pivot, the thesis word, a key verb. Never to entire sentences.
+
+### P.S. + P.P.S. closer (top-post signature)
+
+The top-1 and top-5 posts both end with P.S. / P.P.S. pattern:
+
+> p.s. Take this post as your sign to take a break from work :)
+> p.p.s First day at the Vipassana center 👇🏻
+
+- **p.s.** = friendly reader directive or personal confession
+- **p.p.s.** = image/asset pointer using 👇🏻 emoji (arrow pointing down at the attached image)
+- Keep both lowercase ("p.s."), two words max each
+- Only use p.p.s. when an image is actually attached
+
+This pattern is present in 2 of the top 5 posts. Worth reaching for on vulnerability/contrarian posts.
+
+### Two-question closer
+
+Top performers often end with TWO questions:
+1. A specific question to the reader ("What would you delete if AI had always existed?")
+2. A dramatic open-ended consequence ("Or your biggest threat if someone else figures it out first.")
+
+Or stacked rhetoricals with line-breaks:
+```
+What does it say about us
+when our machines can't dream
+of anything but nightmares?
+```
+
+Line-break-per-phrase in the final question adds weight. Use sparingly — 1 post in 5 should use this.
+
+### Parallel-imperative rhythm
+
+Two short imperative sentences in a row, mirrored:
+- *"Kill the constraint. Kill the process."*
+- *"One optimizes. One eliminates."*
+- *"Smart companies. Great founders. Wrong approach."* (3-beat)
+
+Pattern: same verb or structure, different object. Delivers a punch with zero filler. Use 1-2x per post max, in the implication section.
+
+### Contrast labels pattern
+
+Short labels for opposing concepts, colon-separated:
+```
+AI First: "How can we add AI to improve X?"
+AI Native: "Why does X exist at all?"
+```
+
+Works for any binary framing: Old/New, X/Y, Before/After. 2-4 words per label max. Follow with a one-sentence payoff ("One optimizes. One eliminates.").
+
+### Named-specifics-with-dollar-signs
+
+Top posts name specific companies with dollar figures or scale: *"Khosla Ventures (the $15 Bn VC)"*, *"Canva has 100 million users"*, *"Cerebras just sold chips to OpenAI for $10 billion"*.
+
+Rule: every substantial claim should be anchored by a named entity + a specific number (dollars, users, percentages, timeframe). No unnamed "some companies" or "many founders."
+
+### ALL-CAPS one-word emphasis
+
+Used sparingly for single-word emphasis:
+- *"Don't get me WRONG"*
+- *"what are you building that only YOU can build?"*
+
+Max once per post. Never on common function words. Reserve for the beat that deserves a vocal stress.
+
+---
+
+## Length reality check — top performers land 1,100-1,800 chars
+
+Performance data from 25-post history:
+- Top 5 avg: 1,111 chars (weighted by engagement)
+- Top 5 range: 1,100-1,736 chars
+- Bottom 3: one at 2,606 chars (too long, lost readers) + two under 300 chars (too short for any thesis to develop)
+
+**Sweet spot: 1,200-1,800 chars.** Above 2,000 = engagement drops. Below 1,100 = no room for hook + proof + implication + closer. Stay in range.
+
+The 2,606-char post had strong content but lost attention mid-scroll. Length discipline matters more than length ambition.
+
+---
+
+## What kills engagement (from bottom 3 posts)
+
+These posts each scored ≤7 engagement vs. the 392 top. Specific anti-patterns:
+
+### Anti-pattern 1: No personal stakes
+
+> "Any obsidian users in my network? I'm working on a plugin and would love for you to test it out..." (1 engagement)
+
+A tool-specific call-to-action with no narrative stake. The reader has no reason to care unless they're an Obsidian user. Compare to the 392-eng post which opened with *"I quit my job with zero backup plan"* — universal stakes everyone relates to. **Rule: every post needs a stake the broad audience can feel in the first 2 lines.**
+
+### Anti-pattern 2: Too long (>2,000 chars kills attention)
+
+> "Every SaaS is shipping an AI button..." (2,606 chars, 7 engagement)
+
+Structurally well-written. Strong hook. Good framework. But past 2,000 chars LinkedIn readers drop off. The brilliant closer never gets seen. **Rule: 1,800 chars cap. If you have more to say, save for the next post.**
+
+### Anti-pattern 3: Niche technical asks
+
+Plugin-testing requests, specific-tool questions, and "anyone use X?" prompts consistently underperform. Broader audience = more engagement. **Rule: if only 5% of your audience can answer a question, don't ask it on LinkedIn.**
+
+### Anti-pattern 4: Hashtag blocks at end
+
+The obsidian post ends with `#notes #obsidian`. Trailing hashtag blocks correlate with low engagement in the data AND are banned by the kill-list. Zero hashtags at end of any post.
+
+---
+
 ## Few-shot examples
 
 - `config/aayush-reference-posts/2026-04-20-ai-startups-12-months.md` — **voice-matching fixture (primary anchor).** Read this before composing every post. Match its rhythm: ellipsis hook, 3-pillar inline list, "That's X." recap tags, era-reframe implication, lowercase rhetorical close.
+- Top performer: https://www.linkedin.com/posts/aayush-maheshwari_i-quit-my-job-with-zero-backup-plan-everyone-activity-7332663947885543427-9mJ6 — 392 engagement. Vulnerable Victor, unicode-bold 𝟰𝟬%/𝟵𝟬%, P.S./P.P.S. closer, Vipassana sub-list, negative-space paragraphs.
+- Top performer: https://www.linkedin.com/posts/aayush-maheshwari_every-startup-says-theyre-ai-powered-now-activity-7333371090846560256-X5jH — 87 engagement. Contrarian Philosopher, contrast-labels (AI First / AI Native), parallel imperatives, two-question close, p.s./p.p.s. with image.
+- Top performer: https://www.linkedin.com/posts/aayush-maheshwari_i-asked-ai-one-simple-question-about-our-activity-7352955849625001985-PQex — 117 engagement. Ellipsis hook, poetic line-break closer, specific-in-quotes prompt setup.
 - `workspace/2026-04-13/aayush-edited-post.md` — the edited SPPO post (earlier voice reference).
 - `workspace/2026-04-15/linkedin-posts.md` — recent 3-option sets.
