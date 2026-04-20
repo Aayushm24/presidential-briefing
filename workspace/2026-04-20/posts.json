@@ -1,0 +1,31 @@
+{
+  "date": "2026-04-20",
+  "lead_title": "AI startups have 12 months before platform providers absorb their categories",
+  "best_option": 1,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian",
+      "hook_pattern": "A",
+      "hook_score": 8,
+      "conviction": "Most AI startups are building the feature, not the business.",
+      "post": "AI startups have 12 months before they become features.\n\nTechCrunch said it. I believe it.\n\nMost founders I talk to are building the same thing OpenAI will ship next quarter. They just don't realize it yet.\n\nThe survivors aren't building better models. They're building better distribution.\n\n[Canva](https://www.therundown.ai/p/exclusive-inside-canva-ai-2-0-with-cpo-cameron-adams) has 100 million users. When they add your AI feature to their workflow, you're not competing against their product. You're competing against their audience.\n\nThe clock started when o1 proved reasoning scales with compute. Every platform can see the path from here to there now.\n\nNotion rebuilt their agent system five times. Platform providers started shipping those features while they were rebuilding.\n\nThis isn't about model access anymore. It's about who already has the users.\n\nSmall teams can still win. But the window for \"build it and they'll come\" AI startups is closing fast.\n\nwhat are you building that only you can build?"
+    },
+    {
+      "option": 2,
+      "template": "absurdist",
+      "hook_pattern": "C",
+      "hook_score": 7,
+      "conviction": "API pricing isn't transparent anymore — teams budgeting on sticker prices will get burned.",
+      "post": "[Claude 4.7 costs 46% more than 4.6](https://x.com/simonw/status/2046029612820594962) for the same text.\n\nSame per-token pricing. Hidden inflation.\n\nThe sticker price didn't change. What you get for it did.\n\nAny team budgeting Claude usage based on the advertised pricing is about to get a surprise bill.\n\n[Simon Willison built a tool](https://simonwillison.net/2026/Apr/20/claude-token-counts/#atom-everything) to compare actual token usage across models. Takes 5 minutes to check your real costs.\n\nThe pattern is everywhere. Google has better models but worse tooling. Anthropic has better tooling but surprise token inflation. OpenAI has consistent pricing but expanding scope.\n\nEvery platform provider is optimizing for different metrics. None of them are optimizing for your budget predictability.\n\nTeams that audit their AI vendor costs monthly beat teams that trust the sticker price.\n\nwhat's your actual Claude bill looking like these days?"
+    },
+    {
+      "option": 3,
+      "template": "relatable",
+      "hook_pattern": "F",
+      "hook_score": 7,
+      "conviction": "Security is becoming the new AI differentiator.",
+      "post": "the [Vercel security breach](https://x.com/swyx/status/2046030085237432573) happened through an AI platform.\n\nNot their core infrastructure. Not a phishing attack. An AI vendor got compromised and it cascaded to every developer who integrated with them.\n\nContext.ai got breached. Vercel users got hit.\n\nThis is the new attack surface. AI platforms are the supply chain risk nobody's auditing properly.\n\nI build AI agents at Atlan. The first question our security team asks now isn't \"how does the model work?\" It's \"what happens when the vendor gets compromised?\"\n\nEnterprise buyers are starting to ask harder questions about your AI stack than your core stack.\n\nThe teams building security reviews into their AI vendor selection win deals against teams that integrate first and ask questions later.\n\nhow many AI vendors do you trust with your users' data?"
+    }
+  ]
+}

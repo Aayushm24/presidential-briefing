@@ -64,7 +64,7 @@ check_brief() {
   if grep -q '^## Sources' "$file"; then
     errors+=("sources_footer_present_should_be_inline_only")
   fi
-  local inline_links=$(grep -oE '\[[^\]]+\]\(https?://[^)]+\)' "$file" | wc -l | tr -d ' ')
+  local inline_links=$(grep -oE '\[[^]]+\]\(https?://[^)]+\)' "$file" | wc -l | tr -d ' ')
   [ "$inline_links" -ge 3 ] || errors+=("inline_links=$inline_links (expect >=3)")
 
   # No H2 anywhere

@@ -160,7 +160,7 @@ Write 3 LinkedIn post OPTIONS. Each MUST:
 === KILL LIST ===
 
 NEVER: delve, leverage, cutting-edge, game-changing, seamless, revolutionary, groundbreaking, harness, empower, unlock, robust, scalable (unless with technical justification)
-NEVER: bullets (•), em-dashes (—), "It's like X" analogies (turn into questions)
+NEVER: bullets (•), em-dashes (—), "It's like X" analogies (BANNED — today's 2026-04-20 run failed because Option 2 included: "It's like buying a coffee for $5, but they use a smaller cup". This is the #1 LLM tell. Replace with a direct parallel-structure claim: "Same sticker price. Less for your money." or a rhetorical question: "what are you actually paying for?")
 NEVER: "excited/thrilled/proud to announce", "check out our latest", "Learn more" CTA
 NEVER: webinar phrases like "In today's landscape", "It's important to note", "at the end of the day", "here's the thing"
 NEVER: three short sentences in a row
