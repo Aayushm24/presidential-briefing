@@ -350,15 +350,16 @@ jobs:
             4. Run: ./tests/kill-list-regex.sh workspace/${{ needs.intake.outputs.today }}/brief.md
             5. Run: ./tests/kill-list-regex.sh workspace/${{ needs.intake.outputs.today }}/posts.md
             6. Run: ./tests/golden-format.sh workspace/${{ needs.intake.outputs.today }}/brief.md
+            7. Run: ./tests/posts-gate.sh workspace/${{ needs.intake.outputs.today }}/posts.json
 
-            IF STEP 4 or 5 FAILS AFTER iter-1 (kill-list still flags violations):
+            IF STEP 4, 5, 6 or 7 FAILS AFTER iter-1 (kill-list / format / posts-gate still flags violations):
               a. Re-run .claude/skills/council/attack/SKILL.md to get fresh council-notes (deterministic findings only — skip LLM voice/fact/attack passes to save budget)
-              b. If iter<2: follow revise SKILL.md AGAIN (iter-2) with explicit instruction to rewrite every sentence containing the remaining violations
-              c. Re-run steps 3, 4, 5, 6
+              b. If iter<2: follow revise SKILL.md AGAIN (iter-2) with explicit instruction to rewrite every sentence containing the remaining violations AND pad any option <1100 chars by expanding the proof/implication section with one more specific fact or personal beat (NEVER filler)
+              c. Re-run steps 3, 4, 5, 6, 7
 
             STOP after gates all pass OR iter-2 still failing. DO NOT commit, email, or Slack — those happen in the next workflow step.
 
-            If any gate (4, 5, 6) fails after iter-2, write `rejected-kill-list` or `rejected-format` to workspace/TODAY/.status and exit 1.
+            If any gate (4, 5, 6, 7) fails after iter-2, write `rejected-kill-list`, `rejected-format`, or `rejected-posts-gate` to workspace/TODAY/.status and exit 1.
             If all pass, write `gates-ok` to workspace/TODAY/.status.
 
             TODAY=${{ needs.intake.outputs.today }}
@@ -411,6 +412,10 @@ jobs:
           }
           ./tests/golden-format.sh "${WS}/brief.md" || {
             echo "::error::brief.md failed golden format. Aborting."
+            exit 1
+          }
+          ./tests/posts-gate.sh "${WS}/posts.json" || {
+            echo "::error::posts.json failed posts-gate (char count, [Not X it's Y], analogy, or hashtag). Aborting."
             exit 1
           }
           echo "pre-delivery gates: all clean"

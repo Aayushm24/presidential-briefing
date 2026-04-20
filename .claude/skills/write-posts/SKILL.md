@@ -124,11 +124,15 @@ Write 3 LinkedIn post OPTIONS. Each MUST:
 2. Use a matching formula (F1 / F2 / F3 / F4) and hook pattern (A / B / C / D)
 3. Pass every Hard Rule below
 
-=== HARD RULES (violating ANY = option rejected + regenerated) ===
+=== HARD RULES (SHIP STEP REJECTS BELOW THRESHOLDS — these are automated gates, not suggestions) ===
 
-1. **NO advice voice.** Zero "founders should...", "builders who invest now get...", "teams need to plan for...", "the ones who X will Y" closers. If you catch yourself writing advice to a third-person audience, STOP. Replace with: personal observation + open question.
+**0. LENGTH FLOOR — EACH option MUST be 1,200-1,700 chars. Below 1,100 = posts-gate.sh rejects.** Aayush's top 5 posts by engagement average 1,384 chars. Short posts underperform dramatically. Count characters before submitting. If an option is 950 chars, it is not finished — add another specific beat from the brief, another named fact, or a deeper personal observation. Never pad with filler.
 
-2. **NO [Not X, it's Y] inversions.** Zero "this isn't X. it's Y" or "the shift isn't about X. it's about Y" or "Claude Code stopped being X. it's becoming Y". These are the #1 AI tell. Max ZERO across all 3 options combined.
+**1. NO [Not X, it's Y] inversions — ZERO across all 3 options combined.** This is the #1 AI tell. The ship step's posts-gate.sh scans every option for patterns like "isn't X. It's Y", "aren't A. They're B", "this isn't about X. it's about Y", "stopped being X. it's becoming Y". Any hit = option rejected. Today's failure (2026-04-20) had 2 hits in posts: "The survivors aren't building better models. They're building better distribution" and "This isn't about model access anymore. It's about who already has the users." Both would fail the new gate. Replace with direct parallel claims ("Same pricing. Less per token.") or open questions ("what are you actually paying for?").
+
+**2. NO "It's like X" analogies — ZERO tolerance.** Today's failure included "It's like buying a coffee for $5, but they use a smaller cup." This is a declarative analogy. Replace with parallel structure or rhetorical question. NEVER keep "it's like...".
+
+**3. NO advice voice.** Zero "founders should...", "builders who invest now get...", "teams need to plan for...", "the ones who X will Y" closers. Replace with: personal observation + open question.
 
 3. **NO winner/loser neat bows.** Zero "the founders winning this wave X. the ones losing Y" or "the ones who invest now will Z. the ones who don't will W". Blueprint rule: end on open questions, honest uncertainty, or a grounded closer — NEVER a drum-roll summary.
 
@@ -153,7 +157,7 @@ Write 3 LinkedIn post OPTIONS. Each MUST:
 - dashes (-) NOT bullets (•)
 - one idea per line
 - bold max 3-5 words per post
-- 900-1500 characters total per post
+- 1,200-1,700 characters per post (HARD FLOOR: 1,100. If your draft is under 1,100 chars the entire option is REJECTED. Aim for 1,400.)
 - Conversational, lowercase-leaning natural voice
 - Read-aloud test: read the post out loud. If ANY sentence sounds like something an LLM would write but a person wouldn't say → rewrite.
 
@@ -314,7 +318,7 @@ hook_pattern: [A | B | C | D | E | F | G | H | I | J]
 conviction: [one sentence — the take this post expresses]
 hook_score: [1-10]
 
-[the post itself — 900-1500 characters, following template structure]
+[the post itself — 1,200-1,700 chars (floor 1,100), following template structure]
 
 OPTION 2:
 template: [...]

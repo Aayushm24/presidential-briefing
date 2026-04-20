@@ -71,9 +71,15 @@ check_brief() {
   local bad_h2=$(grep -cE '^## ' "$file" || true)
   [ "$bad_h2" -eq 0 ] || errors+=("h2_in_body=$bad_h2")
 
-  # Word count: depth target is 1500-2500, gate 1200-2800 to allow slack
+  # [Not X, it's Y] inversions — ZERO tolerance (2026-04-20 feedback: 4 in brief was unacceptable)
+  # Matches "X isn't Y. It's/They're Z" pattern across sentence boundaries
+  local not_x_its_y
+  not_x_its_y=$(grep -cE "(isn'?t|aren'?t|is[[:space:]]+not|are[[:space:]]+not)[^.!?]*\.[[:space:]]*(It'?s|They'?re|It[[:space:]]+is|They[[:space:]]+are)[[:space:]]+(about|just|becoming|actually|the|changing|building|adding|really|where)" "$file" || true)
+  [ "$not_x_its_y" -eq 0 ] || errors+=("not_x_its_y_hits=$not_x_its_y (expect 0)")
+
+  # Word count: FLOOR raised from 1200 to 1500 per 2026-04-20 feedback — brief at 1227 felt thin
   local wc=$(wc -w < "$file")
-  [ "$wc" -ge 1200 ] && [ "$wc" -le 2800 ] || errors+=("word_count=$wc (expect 1200-2800)")
+  [ "$wc" -ge 1500 ] && [ "$wc" -le 2800 ] || errors+=("word_count=$wc (expect 1500-2800)")
 
   if [ ${#errors[@]} -gt 0 ]; then
     echo "FAIL: $file"
