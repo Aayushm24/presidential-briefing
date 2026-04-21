@@ -152,7 +152,8 @@ jobs:
             Do NOT proceed to write-briefing/write-posts — those run in separate parallel jobs.
           settings: .claude/settings.json
           anthropic_api_key: ${{ secrets.ATLAN_LLM_KEY }}
-          claude_args: "--max-turns 40 --dangerously-skip-permissions"
+          max_turns: 40
+          timeout_minutes: 13
         env:
           ANTHROPIC_AUTH_TOKEN: ${{ secrets.ATLAN_LLM_KEY }}
           ANTHROPIC_BASE_URL: https://llmproxy.atlan.dev
@@ -260,7 +261,8 @@ jobs:
             Do NOT run council or publish.
           settings: .claude/settings.json
           anthropic_api_key: ${{ secrets.ATLAN_LLM_KEY }}
-          claude_args: "--max-turns 30 --dangerously-skip-permissions"
+          max_turns: 30
+          timeout_minutes: 10
         env:
           ANTHROPIC_AUTH_TOKEN: ${{ secrets.ATLAN_LLM_KEY }}
           ANTHROPIC_BASE_URL: https://llmproxy.atlan.dev
@@ -323,7 +325,8 @@ jobs:
             Do NOT run council or publish.
           settings: .claude/settings.json
           anthropic_api_key: ${{ secrets.ATLAN_LLM_KEY }}
-          claude_args: "--max-turns 30 --dangerously-skip-permissions"
+          max_turns: 30
+          timeout_minutes: 10
         env:
           ANTHROPIC_AUTH_TOKEN: ${{ secrets.ATLAN_LLM_KEY }}
           ANTHROPIC_BASE_URL: https://llmproxy.atlan.dev
@@ -442,7 +445,8 @@ jobs:
             Council MUST run real LLM passes. Never mock.
           settings: .claude/settings.json
           anthropic_api_key: ${{ secrets.ATLAN_LLM_KEY }}
-          claude_args: "--max-turns 50 --dangerously-skip-permissions"
+          max_turns: 50
+          timeout_minutes: 13
         env:
           ANTHROPIC_AUTH_TOKEN: ${{ secrets.ATLAN_LLM_KEY }}
           ANTHROPIC_BASE_URL: https://llmproxy.atlan.dev
