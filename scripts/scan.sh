@@ -81,7 +81,7 @@ GROK_PROMPT="Today's date = ${TODAY}. Search X/Twitter for posts from the last 2
 GROK_STATUS="ok"
 GROK_FAIL_REASON=""
 GROK_REQUEST_BODY="$(jq -n --arg p "$GROK_PROMPT" '{
-  model: "grok-4-1",
+  model: "grok-4",
   input: [{role:"user", content:$p}],
   tools: [{type:"x_search"}],
   temperature: 0.2
@@ -94,7 +94,7 @@ GROK_ATTEMPT=0
 GROK_SUCCESS=false
 while [ $GROK_ATTEMPT -lt $GROK_MAX_ATTEMPTS ]; do
   GROK_ATTEMPT=$((GROK_ATTEMPT + 1))
-  echo "[scan] Grok attempt $GROK_ATTEMPT/$GROK_MAX_ATTEMPTS via ${LLM_PROXY_BASE_URL}/responses (model=grok-4-1, timeout=180s)" >&2
+  echo "[scan] Grok attempt $GROK_ATTEMPT/$GROK_MAX_ATTEMPTS via ${LLM_PROXY_BASE_URL}/responses (model=grok-4, timeout=180s)" >&2
   GROK_HTTP_CODE=0
   GROK_CURL_EXIT=0
   GROK_HTTP_CODE=$(curl -sS --max-time 180 -o "$WS/.grok-raw.json" -w "%{http_code}" \
