@@ -155,6 +155,23 @@ Return for each option:
 **Gate: if ANY option scores < 8/10, verdict for that option = REVISE.**
 Include the `fix` field verbatim in council-notes so revise knows exactly what to change.
 
+### Step 1.75: Writing audit (Sonnet, both brief + posts)
+
+Runs on BOTH `brief.md` and `posts.md`. Uses `claude-sonnet-4-6` — this is compliance checking, not creative judgment. Flag-only: findings go into council-notes and into the revise prompt, but do NOT independently trigger a revise verdict.
+
+```bash
+curl -sS -X POST "${LLM_PROXY_BASE_URL}/v1/chat/completions" \
+  -H "Authorization: Bearer ${ATLAN_LLM_KEY}" \
+  -H "Content-Type: application/json" \
+  -d "$(jq -n \
+    --arg model "claude-sonnet-4-6" \
+    --arg brief "${BRIEF_CONTENTS}" \
+    --arg posts "${POSTS_MD_CONTENTS}" \
+    '{model: $model, messages: [{role: "user", content: ("Writing audit. Check BOTH the brief and the 3 LinkedIn posts below against this checklist. Flag every violation with: file (brief/post_N), line quote, violation type, and one-line fix.\n\nCHECKLIST:\n1. EM DASHES — zero tolerance. Any (—) = flag.\n2. NOT X. Y. NEGATION — sentences starting with \"Not [the/a/for/because/just/one/in/at]\" = flag. Say what it IS.\n3. SENTENCE CASE — every sentence must start with capital letter. Exception: \"i\" is always lowercase. Flag any sentence starting with lowercase that is not \"i\".\n4. VAGUE GENERICS — \"many companies\", \"most teams\", \"the AI space\", \"various founders\", \"some people\", \"a lot of teams\" = flag. Replace with named entity or specific number.\n5. UNSOURCED STATS — any percentage or number without a named source = flag.\n6. PASSIVE VOICE — \"was built\", \"is being done\", \"has been shown\" = flag. Rewrite active.\n7. PADDING — any sentence that restates the prior sentence without adding new information = flag.\n8. CONVICTION MISSING — if a section ends without a stated take or question, flag as \"no conviction\".\n\nBRIEF:\n" + $brief + "\n\nPOSTS:\n" + $posts + "\n\nReturn JSON:\n{\"brief_violations\": [{\"line\": \"quote\", \"type\": \"violation_type\", \"fix\": \"one-line fix\"}], \"post_violations\": {\"option_1\": [...], \"option_2\": [...], \"option_3\": [...]}, \"total_violations\": N, \"summary\": \"one sentence\"}")}]}')"
+```
+
+Parse the JSON response. Write findings to council-notes under `## Writing Audit`. If `total_violations` > 3, prepend `⚠️ WRITING AUDIT: N violations found` to the revise prompt so the revise pass addresses them first.
+
 ### Step 2: Voice audit (Opus, parallel)
 
 Prompt:

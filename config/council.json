@@ -51,6 +51,12 @@
       "why": "Finding the most surprising line in a draft. Pattern matching, not creative.",
       "used_by": ["post"]
     },
+    "writing_audit": {
+      "model": "claude-sonnet-4-6",
+      "temperature": 0.1,
+      "why": "Compliance check: em dashes, Not X.Y., sentence case, vague generics, unsourced stats, passive voice, padding. Runs on both brief + posts. Flag-only — doesn't independently trigger revise.",
+      "used_by": ["review"]
+    },
     "review_structure": {
       "model": "claude-sonnet-4-6",
       "temperature": 0.2,

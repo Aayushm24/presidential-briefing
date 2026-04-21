@@ -88,9 +88,15 @@ Top example (voice direction): "I'm the most average bloke ever."
 
 ## Voice — what Aayush sounds like
 
-### Lowercase "i"
+### Sentence case — with one exception
 
-Always. Voice rule from the beginning.
+Every sentence starts with a capital letter. Proper nouns capitalized (Claude Code, Intercom, OpenAI, Atlan).
+
+**One exception: `i` is always lowercase.** Never "I". That's Aayush's signature. Everything else follows normal sentence case.
+
+Closing rhetorical questions: sentence case too. "What does your team's AI memory look like after 12 months?" — not "what does your team's...".
+
+**What changed:** earlier posts used all-lowercase throughout ("every team i talk to..."). That was performing casualness, not being casual. Sentence case with lowercase `i` reads more natural.
 
 ### Allowed hedge markers (first-person voice anchors)
 
@@ -286,9 +292,10 @@ Briefs are for Aayush's learning (broad-audience newsletter voice). Posts are Aa
 ## Format checklist (all templates)
 
 - [ ] Hook under 70 chars, fits before the "see more" fold
-- [ ] Lowercase "i" everywhere
+- [ ] Sentence case throughout — every sentence starts with capital letter
+- [ ] Lowercase "i" everywhere (the one exception to sentence case)
 - [ ] No em dashes
-- [ ] 1,400-1,800 chars target (floor 1,300, cap 2,000)
+- [ ] 1,300c floor, no cap — write as long as the content earns
 - [ ] At least 3 specific numbers OR named tools/companies
 - [ ] CTA is not "Learn more" or engagement bait
 - [ ] Max 1 emoji in body (👇🏻 in p.p.s. pointer doesn't count)

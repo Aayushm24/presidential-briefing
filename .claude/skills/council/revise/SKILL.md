@@ -85,6 +85,13 @@ RULES FOR REVISION:
 - Keep each option's core template + angle (if it was personal-discovery, keep it personal-discovery)
 - Fix ONLY what council flagged — don't re-write good parts
 - NEVER use em dashes. Use commas, periods, or "..." instead.
+- SENTENCE CASE: every sentence starts with a capital letter. Only "i" stays lowercase.
+- NO "Not X. Y." sentence-start negations — rewrite as positive claims.
+
+**WRITING AUDIT FINDINGS (from Step 1.75) — fix these first:**
+<writing_audit>
+${WRITING_AUDIT_FINDINGS}
+</writing_audit>
 - Preserve conviction statements unless council flagged them as false/unverifiable
 - Hook revisions: new hook must still follow same hook pattern (A-J) unless council said pattern itself was wrong
 

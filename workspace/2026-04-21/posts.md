@@ -9,15 +9,15 @@
 
 **Conviction:** Teams with institutional AI memory compound every sprint. Teams without tools start fresh.
 
-every team i talk to says they deployed Claude Code.
+Every team i talk to says they deployed Claude Code.
 
-almost none built the infrastructure to compound it.
+Almost none built the infrastructure to compound it.
 
 Intercom's Brian Scanlan did something different.
 
 He built telemetry that logs every Claude Code interaction. Every pattern analyzed. Every skill saved to a shared repository. Every engineer, designer, and PM in the same system.
 
-9 months later: 2x velocity. Zero regression. Designers and PMs merged PRs.
+9 Months later: 2x velocity. Zero regression. Designers and PMs merged PRs.
 
 The tools were identical. Everyone has Claude Code. The infrastructure was different.
 
@@ -39,9 +39,9 @@ IMO, the question isn't whether your team uses Claude Code. It's whether your Cl
 
 i doubt most teams have asked that question yet.
 
-the ones who have are already 9 months ahead.
+The ones who have are already 9 months ahead.
 
-what does your team's AI memory look like after 12 months of compounding?
+What does your team's AI memory look like after 12 months of compounding?
 
 p.s. the number that hit me hardest: 100% of Intercom's engineers, designers, and PMs ship through Claude Code now. The telemetry changed who could ship. 👇🏻
 
@@ -86,7 +86,7 @@ IMO, the teams figuring this out first aren't replacing engineers.
 They're replacing the variance.
 That's a 2x gain before anyone ships a single new feature.
 
-what does consistent median performance do to how you run a quarter?
+What does consistent median performance do to how you run a quarter?
 
 p.s. the Mollick study is worth reading in full. it shows exactly where AI is reliable and where human judgment still wins. that boundary is more specific than most people think. 👇🏻
 
@@ -96,7 +96,7 @@ p.s. the Mollick study is worth reading in full. it shows exactly where AI is re
 
 **Conviction:** Memory is the hard part now, not the model. 2026 moat = what your system learned, not what it can access.
 
-three stories landed this week.
+Three stories landed this week.
 
 Intercom doubled engineering velocity by building telemetry that remembers every Claude Code interaction. 9 months of logged patterns.
 
@@ -125,7 +125,7 @@ Intercom's advantage isn't Claude Code. It's 9 months of institutional knowledge
 IMO, that's the thing that doesn't copy.
 And it's the thing almost nobody is investing in right now.
 
-how much of your AI budget goes to memory vs. processing?
+How much of your AI budget goes to memory vs. processing?
 
 p.s. most teams i talk to have it backwards. upgrading models every quarter while barely investing in the context layer that makes those models useful over time. 👇🏻
 
