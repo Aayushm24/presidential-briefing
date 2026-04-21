@@ -1,121 +1,131 @@
-# LinkedIn posts — 2026-04-21 (v2 — voice corrected)
+# LinkedIn posts — 2026-04-21 (v3 — examples-first)
 
 **Lead:** AI coding agents just proved they can 2x engineering velocity with real companies
 **Best option:** 1
 
 ---
 
-## OPTION 1 — contrarian (hook score: 8)
+## OPTION 1 — contrarian (hook score: 9)
 
-**Conviction:** Small teams with AI beat 50-person orgs because coordination costs collapse when agents handle the workflows
+**Conviction:** Teams with institutional AI memory compound every sprint. Teams without tools start fresh.
 
-every startup says they're using AI to ship faster.
+every team i talk to says they deployed Claude Code.
 
-Intercom just showed what "faster" actually means.
+almost none built the infrastructure to compound it.
 
-100% of engineers on Claude Code.
-2x velocity in 9 months.
-Designers and PMs merged PRs.
-Not because they learned to code.
-Because agents handled the translation layer.
+Intercom's Brian Scanlan did something different.
 
-That's not AI-powered. That's AI Native.
+He built telemetry that logs every Claude Code interaction. Every pattern analyzed. Every skill saved to a shared repository. Every engineer, designer, and PM in the same system.
 
-the gap isn't about access. Cursor, Claude Code, Copilot, everyone has the same tools now.
+9 months later: 2x velocity. Zero regression. Designers and PMs merged PRs.
 
-The gap is instrumentation.
+Not because they got better tools than everyone else.
+Because they built memory on top of the tools.
 
-Intercom didn't just install Claude Code. Brian Scanlan built telemetry that logs every interaction. Every pattern analyzed. Every skill saved to a shared repository.
+There are only two AI engineering orgs now:
 
-After 9 months, their agents know their codebase. Their standards. Their deployment patterns. Their team's edge cases.
+- Teams with tools
+- Teams with tools + institutional memory
 
-A new team signing up for Claude Code today starts at zero.
-Intercom's agents start at 9 months of institutional memory.
+Teams with tools start fresh every sprint.
+Teams with institutional memory compound every sprint.
 
-That's the thing competitors can't copy by signing up.
+That's the gap.
 
-IMO, most teams are still treating AI like a tool upgrade.
-Intercom treated it like an operating system change.
-That's a different bet entirely.
+Notion rebuilt their agent system five times before shipping. Every time a platform provider shipped the same feature underneath them. They only won by going deeper into context, not wider into features.
 
-Every week I watch teams run the same pattern: add Claude Code, see a speed bump, declare success, stop there. The compounding advantage is in the infrastructure you build on top, not the tool itself.
+Same pattern. Different company. Different decade.
 
-what does your team's institutional AI memory look like 9 months from now?
+IMO, the question isn't whether your team uses Claude Code. It's whether your Claude Code usage teaches your organization anything after the session closes.
 
-p.s. the stat that hit me hardest: designers and PMs are now in the PR queue. agents didn't just speed up engineers. they changed who ships. 👇🏻
+i doubt most teams have asked that question yet.
+
+the ones who have are already 9 months ahead.
+
+what does your team's AI memory look like after 12 months of compounding?
+
+p.s. the number that hit me hardest: 100% of Intercom's engineers, designers, and PMs ship through Claude Code now. Not just devs. The telemetry changed who could ship. 👇🏻
 
 ---
 
-## OPTION 2 — data-point (hook score: 7)
+## OPTION 2 — data-point (hook score: 8)
 
-**Conviction:** Economics research proves AI agents deliver consistent performance with less variance than human teams
+**Conviction:** AI agents replace variance, not engineers. That's a 2x gain before shipping anything new.
 
-Claude Code performs at human median. 76% less variance.
+76% less variance.
 
-Not a benchmark. Not a demo. Economics research replicating classic multi-team studies, same tasks, controlled experiments.
+That's what Claude Code delivers vs. human dev teams. From actual economics research replicating classic multi-team studies. Not a vendor benchmark. Controlled experiments with real tasks.
 
-Most people look at the median and shrug.
-I think the variance number is the whole story.
+Most people hear "near human median" and shrug.
 
-Human teams swing hard.
-Your 10x engineer carries the sprint.
-Junior devs have good weeks and terrible ones.
-Estimates are guesses wearing a number.
+i think they're reading it backwards.
 
-Agents don't swing. Consistent median. Every sprint.
+Human teams swing constantly.
+Your best engineer carries the sprint.
+Junior devs have unpredictable weeks.
+Your Q2 estimate is basically a guess wearing a number.
 
-Intercom saw this live: 2x velocity with maintained quality metrics. No regression. No bug spikes. Predictable delivery at higher throughput, quarter after quarter.
+Agents don't swing. Consistent median. Every sprint. Every quarter.
 
-I've been thinking about what this means for how we hire.
+Intercom validated this in production: 2x velocity, maintained code quality, no regression spikes across 9 months. Not one lucky sprint. Compounding consistency.
 
-Most orgs hire for ceiling.
-The 10x engineer. The creative problem solver. The senior who figures it out under pressure.
+i've been thinking about what this does to how you plan.
 
-But if agents hold the floor, and hold it consistently, you're not hiring for raw output anymore.
-You're hiring for judgment and taste.
-The ability to ask better questions than the agent can answer on its own.
+Most engineering orgs budget for variance. Buffer weeks. Contingency sprints. Senior devs to carry when things go wrong.
 
-That's a completely different profile than what most engineering job descriptions look for right now.
+If agents hold the floor consistently, you're not planning around variance anymore.
+You're planning around throughput.
+
+That's a different model entirely.
+
+- What if you could bank on consistent output per sprint?
+- What if "unpredictable Q2" became a planning problem, not a people problem?
+- What if your next hire didn't need to be exceptional to matter?
 
 IMO, the teams figuring this out first aren't replacing engineers.
 They're replacing the variance.
-That's a 2x gain before anyone writes a single new feature.
+That's a 2x gain before anyone ships a single new feature.
 
-what does consistent median performance do to how you plan a quarter?
+what does consistent median performance do to how you run a quarter?
 
-p.s. the Mollick study is worth reading in full. not because AI beats humans. because it shows exactly where the ceiling is, and what reliable performance looks like when you plan around it. 👇🏻
+p.s. the Mollick study is worth reading in full. it shows exactly where AI is reliable and where human judgment still wins. that boundary is more specific than most people think. 👇🏻
 
 ---
 
 ## OPTION 3 — pattern-observation (hook score: 8)
 
-**Conviction:** Most AI products fail because they skip memory, not because of the model
+**Conviction:** Memory is the hard part now, not the model. 2026 moat = what your system learned, not what it can access.
 
-three stories landed this week that all point at the same thing.
+three stories landed this week.
 
-Intercom 2xd engineering velocity. Not by giving engineers Claude Code. By building telemetry that logs and learns from every Claude Code interaction. 9 months of institutional memory baked in.
+Intercom doubled engineering velocity by building telemetry that remembers every Claude Code interaction. 9 months of logged patterns, not 9 months of access.
 
-OpenAI acquired Skybysoftware. Not for computer use demos. For persistent state. Agents that remember your environment across sessions.
+OpenAI acquired Skybysoftware to solve state persistence. Agents that remember your environment across sessions, not just within them.
 
-Noetik is applying transformers to cancer trials. The problem isn't drug efficacy. 95% of trials fail not because the drug doesn't work, but because the wrong patients enrolled. The fix is accumulated pattern matching across every trial ever run.
+Noetik is applying transformers to cancer trial matching. 95% of trials fail not because the drugs don't work — but because the wrong patients enrolled. Their fix: accumulated pattern matching across every trial ever run.
 
-The pattern: memory is the hard part now. Not the model.
+Three different problems. Three different companies. The same underlying bet.
 
-Every team I talk to is racing to pick the best model.
-That race is over. Models are good enough. Everyone has access to the same ceiling.
+Memory is the hard part now. Not the model.
 
-The new race is: who builds the context layer?
+Every team i talk to is racing to upgrade their foundation model. Anthropic ships something new. Everyone switches. OpenAI ships. Everyone switches again.
 
-Most AI products demo brilliantly. Full context in session, agent looks sharp. Then users churn because it forgets everything the next day.
+But i watch the teams that actually compound — and none of them are winning on model selection.
 
-Intercom's real win wasn't 2x. It was 9 months of compounding memory.
-OpenAI's real buy wasn't computer use. It was state persistence.
-Noetik's real thesis isn't the model. It's accumulated clinical context.
+They're winning on what they built to remember.
 
-I think we're 12 months from the market realizing that raw inference is cheap and accumulated context is the moat worth building.
+The moat has shifted:
 
-how much of your AI budget is going to memory vs. processing?
+- 2023: which model you access
+- 2024: how fast you ship on top of it  
+- 2026: what your system learned that competitors can't replicate overnight
 
-p.s. most teams i talk to have it backwards. upgrading models every quarter, barely investing in the context layer that makes the model actually useful over time. 👇🏻
+Intercom's advantage isn't Claude Code. It's 9 months of institutional knowledge their agents carry. A competitor can sign up for the same tool tomorrow. They can't fast-forward 9 months of compounding context.
+
+That's the thing that doesn't copy.
+
+how much of your AI budget goes to memory vs. processing?
+
+p.s. most teams i talk to have it backwards. upgrading models every quarter while barely investing in the context layer that makes those models useful over time. 👇🏻
 
 ---

@@ -1,98 +1,112 @@
 # AI coding agents just proved they can 2x engineering velocity with real companies
 
-[Intercom](https://www.lennysnewsletter.com/p/how-intercom-2xd-their-engineering) doubled their engineering throughput in 9 months using Claude Code skills and telemetry.
+[Intercom](https://www.lennysnewsletter.com/p/how-intercom-2xd-their-engineering) doubled engineering throughput in 9 months. 100% of engineers, designers, and PMs. Full telemetry. Documented methodology. Public numbers.
 
-This isn't a demo or a benchmark. It's 100% of their engineers, plus designers and PMs, shipping measurable output gains with full quality tracking. The methodology is documented, the metrics are public, and the toolchain is available to any team. When a 500-person engineering org publishes specific velocity gains with named tools, that's the signal smart builders have been waiting for.
+This isn't a benchmark. It's a 500-person org that built the instrumentation to measure AI impact, ran it for three quarters, and published exactly what they found. The signal smart builders have been waiting for landed on a Tuesday.
 
 **Key takeaways:**
-- AI coding agents now deliver consistent 2x productivity gains when implemented with proper telemetry and workflow structure (not just autocomplete)
-- Economics research shows Claude Code and other agents produce near-human median results with less variance, giving founders calibration data for reliable performance expectations
-- OpenAI's Codex acquisition proves real computer-use automation is shipping now, moving beyond coding into full system interaction
-- Model cost patterns follow a sawtooth curve where efficiency gains get reset by accuracy improvements, making financial planning more complex
-- Small teams with AI infrastructure can now outperform large traditional engineering organizations
+- Intercom's 2x gain came from building memory infrastructure on top of Claude Code, not from Claude Code alone
+- Ethan Mollick's economics research shows Claude Code performs near human median with 76% less variance, giving founders real calibration data
+- OpenAI's Skybysoftware acquisition signals that state persistence, not computer use, is the prize
+- Model costs follow a sawtooth pattern: Opus 4.7's new tokenizer added 46% more tokens while improving accuracy, breaking simple cost forecasts
+- Noetik is applying transformers to cancer trial matching, betting that 95% of trial failures are a matching problem, not a drug problem
+
+---
 
 ### The measurement problem is solved
 
-What I keep coming back to is how [Brian Scanlan](https://www.lennysnewsletter.com/p/how-intercom-2xd-their-engineering) at Intercom built telemetry that actually tracks AI impact. They didn't guess at productivity. They measured merged PRs per R&D employee month over month. They built hooks that enforce engineering standards automatically. They created a skills repository where every Claude Code interaction gets logged and analyzed.
+Brian Scanlan, VP of Engineering at Intercom, spent nine months building infrastructure most teams skip entirely.
 
-The result: 2x throughput with maintained code quality across their entire engineering org.
+Not plugins. Not autocomplete. Telemetry.
 
-This solves the biggest blocker to enterprise AI adoption. CTOs couldn't justify the investment because they couldn't measure the return. Intercom just published the playbook. They instrumented everything, built culture around agent-first workflows, and gave every technical role access to shipping tools. Not just engineers, designers, PMs, and TPMs all cut code through Claude Code now.
+Every Claude Code interaction logged. Every pattern analyzed. Every engineering standard enforced through hooks. A shared skills repository where the team's workflows, preferences, and edge cases compound into something no new install can replicate.
 
-The methodology matters more than the metric. Anyone can claim 2x velocity. Intercom showed their work. They tracked individual developer adoption rates, quality metrics, and output consistency. They built infrastructure that makes AI coding a skill, not a lucky accident.
+The result: [2x throughput with maintained code quality](https://www.lennysnewsletter.com/p/how-intercom-2xd-their-engineering). Not in a controlled experiment. Across their entire engineering org, measured in merged PRs per R&D employee per month.
 
-This changes the game because you now have benchmarking data from a real company with real scale. No more guessing whether Claude Code will work at 100+ engineers. No more wondering if quality holds up under agent assistance. The evidence is public and replicable.
+What makes Intercom's case worth studying is the methodology, not just the number. They tracked individual adoption rates. They measured quality metrics alongside velocity. They gave designers and PMs access to Claude Code skills, not just engineers, and found those roles started merging PRs too. That expansion only happens when the tooling is instrumented well enough that non-engineers can operate it safely.
 
-### Economics shows what agents reliably deliver
+The thing most teams miss: Intercom didn't get lucky with a smart sprint. They built infrastructure that teaches itself. A competitor who signs up for Claude Code today gets the same tool. They don't get nine months of logged patterns, calibrated workflows, and institutional knowledge baked into every agent interaction. That gap doesn't close by paying for the subscription.
 
-The [Ethan Mollick study](https://x.com/emollick/status/2046362044786458648) that replicated classic economics experiments with AI agents gives us even better calibration data. Claude Code and other coding agents consistently perform near the median of human teams, with lower variance in outcomes.
+What I keep coming back to: CTOs have been asking for months whether AI coding tools actually work at scale. Brian Scanlan just published the answer. The methodology is documented. The metrics are real. Any engineering leader who reads this piece and doesn't start building telemetry this week is making a deliberate choice to fall behind.
 
-What that means in practice: if your human engineering team has wide performance spreads, AI agents compress that to more predictable delivery. If you have superstar 10x engineers, agents probably won't beat them. But if you have a normal distribution of talent, agents bring your floor up and your ceiling down to something more manageable.
+### 76% less variance, and why that number matters more than the median
 
-The variance reduction is the real story. Human teams have unpredictable performance swings. Agents deliver consistent median performance. More predictable sprint planning, more reliable delivery estimates, fewer surprises in quarterly reviews.
+[Ethan Mollick's study](https://x.com/emollick/status/2046362044786458648) replicated classic multi-team economics experiments with AI agents. Claude Code and other coding agents consistently perform near the median of human teams. With 76% less variance in outcomes.
 
-Combined with Intercom's 2x velocity data, you get the full picture: agents don't just make good developers faster, they make all developers more consistent. That's a different kind of productivity gain than most founders expect.
+The variance number is the story. Not the median.
 
-### Real computer use is shipping now
+Human engineering teams are inherently unpredictable. Your 10x engineer has off weeks. Junior devs have good months and bad ones. Sprint estimates carry wide error bars because the humans carrying them carry wide error bars. You budget for variance as a constant cost of doing business.
 
-[OpenAI's Codex acquisition](https://x.com/swyx/status/2046362691606855700) of Skybysoftware signals that computer-use automation is moving from research to production. Not just coding, full system interaction. Agents that click through UIs, manage databases, deploy infrastructure.
+Agents don't have off weeks. Consistent median performance. Every sprint. That predictability, compounded over quarters, changes how you plan, how you hire, and what you optimize for.
 
-Swyx called this one of OpenAI's best deals of the year because it solves the "real computer use" problem that's been stuck in demos. When ChatGPT App gets computer vision plus system control, that's not just better coding assistance. That's agents that can manage your entire dev environment.
+Intercom's 2x velocity gain didn't come from random acceleration. It came with zero regression and no quality spikes. Month-over-month predictability at higher throughput. That's what 76% less variance looks like in production.
 
-This connects directly to what Intercom discovered. Their biggest velocity gains came from agents handling deployment, testing, and integration tasks beyond writing code. When agents can interact with every tool in your stack, not just your IDE, that's when the 2x multiplier becomes possible.
+The implication for how you build: if you're currently structuring your team to compensate for variance (buffer sprints, senior dev coverage, contingency planning), those structures assume the human performance distribution is your baseline. As agents hold the floor more consistently, that assumption needs updating.
 
-The timing matters. Small teams with AI infrastructure can now compete with large engineering organizations. A 3-person team with Claude Code plus computer-use agents can potentially ship what took 25 engineers in 2022. The coordination cost collapse is real, and founders who see this early will build tomorrow's cost structure advantage.
+### Real computer use is shipping, and the acquisition that explains it
 
-What founders should update in their heads: the question is no longer whether AI will help with coding. It's whether your team will adopt agent-first workflows before your competitors do. The tools are proven, the methodology is documented, and the competitive advantage is available to whoever moves first.
+[Swyx's read on OpenAI's Skybysoftware acquisition](https://x.com/swyx/status/2046362691606855700): "one of OpenAI's best deals of the year."
 
----
+The framing you'll see everywhere is "computer use." That's the wrapper. What OpenAI actually paid for is state persistence. Agents that carry context between sessions, that remember your codebase, your deployment preferences, your environment configuration, operate fundamentally differently than agents that reset with every conversation.
 
-### #2 Model costs follow a sawtooth pattern that breaks financial planning
+Swyx flagged this clearly: the "real computer use" problem has been stuck in demos for 18 months. What unlocks it isn't better vision models. It's memory. An agent that can click through your CI dashboard and knows what it saw last Tuesday is a different product than an agent that starts fresh every time.
 
-[Tomasz Tunguz's analysis](https://x.com/ttunguz/status/2046277504797974700) of Opus 4.7's new tokenizer reveals why AI cost predictions keep failing. Model upgrades don't always reduce spend. They follow a sawtooth pattern where efficiency gains get erased by accuracy improvements.
+This connects directly to what Intercom found. Their biggest velocity gains came from agents handling deployment, testing, and integration tasks outside the IDE. When an agent can interact with every tool in your stack and remember what it did last time, the 2x multiplier becomes achievable. Without memory, computer use is a party trick.
 
-When Opus 4.5 shipped, it was 40% cheaper to use than Sonnet despite being 67% more expensive per token. The smarter model used 76% fewer tokens to reach the same outcome. Every founder building on Claude got an instant cost reduction.
-
-Then Opus 4.7 launched with a new tokenizer that breaks text into smaller pieces, forcing the model to pay closer attention to each word. Better instruction following, fewer coding mistakes, but 46% more tokens for the same content. The efficiency gain vanished.
-
-This creates real financial planning problems. Founders budgeting AI costs can't assume that model upgrades will reduce spend. Sometimes they do, sometimes they make your bill 40% higher overnight. The pattern repeats across vendors: resolution improvements increase costs, efficiency improvements reduce them, in a sawtooth cycle.
-
-What builders need to know: budget for cost volatility, not steady decreases. Track your token usage by task type, not just total spend. When a new model ships, test your highest-volume use cases immediately to understand the financial impact before it hits production scale.
+The timing: ChatGPT App plus computer vision plus state persistence is a meaningful near-term unlock. Teams that have already built the context layer will be positioned to use it. Teams waiting for the tools to mature first are building that disadvantage in real time.
 
 ---
 
-### #3 Transformers tackle cancer trials with 95% failure rates
+### #2 Model costs follow a sawtooth pattern, Opus 4.7 just proved it
 
-[Noetik's approach](https://www.latent.space/p/noetik) to clinical trial matching shows autoregressive transformers solving real-world problems with massive markets and quantified failure rates. 95% of cancer treatments fail to pass clinical trials, but Ron Alfa and Daniel Bear think it's a matching problem, not a drug problem.
+[Tomasz Tunguz's analysis](https://x.com/ttunguz/status/2046277504797974700) of Opus 4.7's new tokenizer is the most useful financial signal this week.
 
-They're applying the same transformer architecture that powers coding agents to match patients with trials more effectively. If clinical trial failure is mostly about finding the right patients for the right treatments, transformers trained on medical data can potentially flip those odds.
+Model upgrades don't compress your AI budget. They follow a sawtooth: efficiency gains get erased by accuracy improvements in alternating cycles.
 
-The business model is clear: pharmaceutical companies spend billions on failed trials. If Noetik can improve success rates by even 10 percentage points, the value is massive. This isn't abstract AI research, it's applying proven architectures to a market with clear demand and measurable outcomes.
+When Opus 4.5 shipped, it ran 40% cheaper than Sonnet despite higher per-token pricing, because it used 76% fewer tokens to reach the same outcome. Every team building on Claude got an immediate bill reduction. That felt like a permanent trend.
 
-What makes this relevant for builders: it shows how transformers trained for one domain (language, code) transfer to completely different problems (medical matching). The architecture is becoming a general-purpose problem-solving tool, not just a coding assistant.
+Then Opus 4.7 landed with a tokenizer that breaks text into smaller pieces. Better instruction following. Fewer coding errors. But 46% more tokens for the same content. The efficiency gain vanished.
+
+The pattern across vendors: resolution improvements increase costs, efficiency improvements reduce them, in alternating waves. Tunguz's conclusion: budget for cost volatility, not steady compression. A model upgrade can take your bill 40% higher overnight.
+
+Practical implication: track token usage by task type, not just total spend. When Opus 4.8 or GPT-5 ships, you want to understand the financial impact on your highest-volume use cases within days, not weeks.
+
+---
+
+### #3 Transformers tackle cancer trials with a 95% failure rate
+
+[Noetik](https://www.latent.space/p/noetik), founded by Ron Alfa and Daniel Bear, is applying autoregressive transformers to clinical trial matching. Their thesis: 95% of cancer treatments fail to pass clinical trials not because the drugs don't work, but because the wrong patients enrolled.
+
+It's a matching problem, not an efficacy problem.
+
+The same transformer architecture powering Claude Code can be trained on patient records and trial criteria to match patients to trials more accurately than current methods. If clinical trial failure is primarily a matching problem, transformers trained on enough data can flip those odds.
+
+The business model is direct: pharmaceutical companies spend billions on failed trials. A 10-percentage-point improvement in success rates is worth more than most software businesses ever generate. Noetik doesn't need to invent new science, they need to apply proven architecture to a domain with clearer failure modes and more patient capital than most startup markets.
+
+What this illustrates for builders: transformer models trained for language transfer to pattern-matching problems in other domains. Clinical matching, materials science, supply chain optimization, the architecture is becoming a general-purpose problem-solving tool. The question is whether the training data and domain expertise exist to calibrate it.
 
 ---
 
 ### The thread connecting all three stories
 
-Zoom out and today's three leading stories share one mechanism: context that persists and compounds.
+All three leading stories this week share the same underlying mechanism: **context that persists and compounds**.
 
-Intercom's 2x velocity came from building a skills repository that logs every Claude Code interaction. The agent doesn't forget what worked. Each run is informed by the last 9 months of the team's patterns. That's not just faster coding, it's a learning system.
+Intercom built a skills repository so agents learn from every interaction. The value isn't Claude Code access, it's nine months of logged patterns their agents carry forward. Competitors can't buy that with a subscription.
 
-OpenAI acquired Skybysoftware specifically for state persistence. Computer use was already possible in research settings. The acquisition was about making it real in production, meaning agents that carry context between sessions. An agent that remembers your preferences and your history operates fundamentally differently than one starting fresh each time.
+OpenAI paid for state persistence. The computer-use acquisition is about agents that remember your environment across sessions, not just within them.
 
-Noetik's core thesis is that 95% of cancer trials fail not because the drugs don't work, but because they can't find the right patients. The fix is contextual matching: transformer models trained to connect patient records with trial criteria at scale. Again, the value is in retained, accumulated knowledge, not raw inference speed.
+Noetik's thesis is that 95% of trial failures come from missing accumulated context about which patients match which treatments. Their transformer learns from every trial ever run.
 
-The pattern matters for anyone building on AI infrastructure right now. Model quality is a commodity. Every competitor has access to the same foundation models. What compounds over time is the context layer: what your system has seen, remembered, and learned from users. Intercom's advantage after 9 months isn't Claude Code access. It's 9 months of logged interactions that made their agents smarter than a fresh install. That's the thing competitors can't copy by signing up for the same tool.
+Model quality is a commodity. Every competitor has access to the same foundation models. What compounds over time is the context layer: what your system has seen, remembered, and learned. Intercom's advantage after nine months has nothing to do with which tool they use. Competitors can sign up tomorrow. They can't buy nine months of logged patterns and institutional memory. That gap compounds.
 
-If you're building an AI product and you don't have a memory architecture, you're starting over every session. That's the ceiling.
+If you're building an AI product and you don't have a memory architecture, you're starting from zero every session. That's the ceiling.
 
 ---
 
 ### What to do this week
 
-**Test agent workflows in your dev environment.** Don't wait for perfect tools. Start with Claude Code and document everything you automate. Intercom's 2x gains came from building culture around agent-first workflows, not from having better tools than everyone else. Time investment: 4-6 hours to set up basic telemetry and team access.
+**Build the telemetry layer, not just the tool layer.** Start small: log every Claude Code interaction your team makes this week. What patterns repeat? What edge cases come up? Intercom's playbook is public, read the Lenny's piece, identify which of their instrumentation steps you can implement in a sprint. [Start here](https://www.lennysnewsletter.com/p/how-intercom-2xd-their-engineering).
 
-**Budget for model cost volatility.** Review your AI spend by use case and model. Create cost alerts for 40% monthly increases. When Opus 4.8 or GPT-5 ships, you want to know the financial impact within days, not weeks. Time investment: 2-3 hours to set up tracking dashboards.
+**Audit your model costs by task, not total spend.** Open your LLM cost dashboard and break out spend by use case (generation vs. summarization vs. classification vs. coding). When Opus 4.8 ships, you'll know exactly which workflows to test first. Takes 2 hours to set up, saves you from a surprise 40% bill increase.
 
-**Hire for agent collaboration, not just coding skill.** The next technical hire should be comfortable with AI pair programming and agent-assisted workflows. Traditional coding interviews miss this entirely. Consider adding an agent collaboration exercise to your technical interviews. Time investment: 1 hour to design the interview component.
+**Read the Mollick study before your next sprint planning.** It gives you the clearest calibration data available on what AI-assisted performance actually looks like, where it's reliable, where it varies, and what that means for how you estimate. [The original thread is here](https://x.com/emollick/status/2046362044786458648). Take 20 minutes before you set Q2 targets.
