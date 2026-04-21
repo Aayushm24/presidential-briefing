@@ -1,7 +1,7 @@
-# LinkedIn posts — 2026-04-21
+# LinkedIn posts — 2026-04-21 (v2 — voice corrected)
 
 **Lead:** AI coding agents just proved they can 2x engineering velocity with real companies
-**Best option:** 3
+**Best option:** 1
 
 ---
 
@@ -9,23 +9,40 @@
 
 **Conviction:** Small teams with AI beat 50-person orgs because coordination costs collapse when agents handle the workflows
 
-AI isn't your competitive advantage. It's a commodity.
+every startup says they're using AI to ship faster.
 
-Intercom just published the data: 100% of their engineers use Claude Code. 2x velocity in 9 months. Full telemetry, measured merged PRs, maintained code quality.
+Intercom just showed what "faster" actually means.
 
-But here's what they really discovered: agents don't just make developers faster. They eliminate coordination overhead.
+100% of engineers on Claude Code.
+2x velocity in 9 months.
+Designers and PMs merged PRs.
+Not because they learned to code.
+Because agents handled the translation layer.
 
-When your deployment pipeline runs through Claude Code skills, when your testing gets automated by agents, when code reviews happen through LLM-assisted workflows, suddenly a 3-person team ships what took 25 engineers in 2022.
+That's not AI-powered. That's AI Native.
 
-The founders winning this wave aren't building better models. They're building agent-first workflows. The ones still hiring like it's 2022 are building tomorrow's cost structure problem.
+the gap isn't about access. Cursor, Claude Code, Copilot, everyone has the same tools now.
 
-The Intercom number that hit hardest: designers and PMs ship code now, not just engineers. When agents handle the translation layer between idea and deployed feature, your headcount math changes completely.
+The gap is instrumentation.
 
-The moat isn't AI access. It's how fast your org learns to work with agents. Intercom spent 9 months building culture and tooling infrastructure, not just plugging in Claude Code. Every interaction logged, analyzed, fed back into better workflows.
+Intercom didn't just install Claude Code. Brian Scanlan built telemetry that logs every interaction. Every pattern analyzed. Every skill saved to a shared repository.
 
-what are you actually paying for when you hire engineer #26?
+After 9 months, their agents know their codebase. Their standards. Their deployment patterns. Their team's edge cases.
 
-P.S. The most underrated part of the Intercom case study: they built their own telemetry to measure AI impact. Every Claude Code interaction tracked. That's the infrastructure play everyone's missing. 👇🏻
+A new team signing up for Claude Code today starts at zero.
+Intercom's agents start at 9 months of institutional memory.
+
+That's the thing competitors can't copy by signing up.
+
+IMO, most teams are still treating AI like a tool upgrade.
+Intercom treated it like an operating system change.
+That's a different bet entirely.
+
+Every week I watch teams run the same pattern: add Claude Code, see a speed bump, declare success, stop there. The compounding advantage is in the infrastructure you build on top, not the tool itself.
+
+what does your team's institutional AI memory look like 9 months from now?
+
+p.s. the stat that hit me hardest: designers and PMs are now in the PR queue. agents didn't just speed up engineers. they changed who ships. 👇🏻
 
 ---
 
@@ -33,25 +50,40 @@ P.S. The most underrated part of the Intercom case study: they built their own t
 
 **Conviction:** Economics research proves AI agents deliver consistent performance with less variance than human teams
 
-Claude Code performs near human median with 76% less variance.
+Claude Code performs at human median. 76% less variance.
 
-That's from actual economics research replicating classic multi-team studies. Not marketing claims. Not demos. Controlled experiments where agents completed the same tasks as human groups.
+Not a benchmark. Not a demo. Economics research replicating classic multi-team studies, same tasks, controlled experiments.
 
-The variance reduction matters more than the median performance. Human teams swing wild, your 10x engineer crushes it one sprint, struggles the next. Junior devs have good days and terrible days.
+Most people look at the median and shrug.
+I think the variance number is the whole story.
 
-Agents deliver consistent median output. Every. Single. Sprint.
+Human teams swing hard.
+Your 10x engineer carries the sprint.
+Junior devs have good weeks and terrible ones.
+Estimates are guesses wearing a number.
 
-Intercom saw this firsthand: their 2x velocity gain came with maintained quality metrics. No regression. No bug spikes. Just predictable delivery at higher throughput.
+Agents don't swing. Consistent median. Every sprint.
 
-For planning, this changes everything. You can bank on consistent execution instead of hoping your team hits estimates. You optimize for throughput instead of managing variance.
+Intercom saw this live: 2x velocity with maintained quality metrics. No regression. No bug spikes. Predictable delivery at higher throughput, quarter after quarter.
 
-The question isn't whether AI makes developers better. It's whether you want predictable velocity or unpredictable genius.
+I've been thinking about what this means for how we hire.
 
-Most teams are still hiring for genius and getting variance. The smarter bet now: instrument your workflows so agents handle the consistent parts, and let your humans own the creative and architectural decisions where variance actually adds value.
+Most orgs hire for ceiling.
+The 10x engineer. The creative problem solver. The senior who figures it out under pressure.
 
-what does consistent median performance do to your roadmap confidence?
+But if agents hold the floor, and hold it consistently, you're not hiring for raw output anymore.
+You're hiring for judgment and taste.
+The ability to ask better questions than the agent can answer on its own.
 
-P.S. The Mollick study is worth reading in full. It's the clearest calibration data we have for what AI agents can reliably deliver vs. where human judgment still wins. 👇🏻
+That's a completely different profile than what most engineering job descriptions look for right now.
+
+IMO, the teams figuring this out first aren't replacing engineers.
+They're replacing the variance.
+That's a 2x gain before anyone writes a single new feature.
+
+what does consistent median performance do to how you plan a quarter?
+
+p.s. the Mollick study is worth reading in full. not because AI beats humans. because it shows exactly where the ceiling is, and what reliable performance looks like when you plan around it. 👇🏻
 
 ---
 
@@ -59,26 +91,31 @@ P.S. The Mollick study is worth reading in full. It's the clearest calibration d
 
 **Conviction:** Most AI products fail because they skip memory, not because of the model
 
-three stories dropped this week that connect:
+three stories landed this week that all point at the same thing.
 
-Intercom doubled engineering velocity by building telemetry that remembers every Claude Code interaction.
+Intercom 2xd engineering velocity. Not by giving engineers Claude Code. By building telemetry that logs and learns from every Claude Code interaction. 9 months of institutional memory baked in.
 
-OpenAI acquired Skybysoftware for real computer-use capability that persists state between sessions.
+OpenAI acquired Skybysoftware. Not for computer use demos. For persistent state. Agents that remember your environment across sessions.
 
-Noetik is applying transformers to cancer trials, and the 95% failure rate isn't about drugs, it's about matching patients to the right treatments based on accumulated context.
+Noetik is applying transformers to cancer trials. The problem isn't drug efficacy. 95% of trials fail not because the drug doesn't work, but because the wrong patients enrolled. The fix is accumulated pattern matching across every trial ever run.
 
-The pattern: memory is the hard part now, not the model.
+The pattern: memory is the hard part now. Not the model.
 
-Most teams building AI products spend on model upgrades instead of context systems. They demo brilliantly, then users churn because the system forgets everything between sessions.
+Every team I talk to is racing to pick the best model.
+That race is over. Models are good enough. Everyone has access to the same ceiling.
 
-The founders who get this early are building gbrain-style local knowledge bases, persistent agent states, session memory that compounds learning across interactions.
+The new race is: who builds the context layer?
 
-What Intercom actually built wasn't just Claude Code access. It was a skills repository where every interaction gets logged and analyzed. Agents that remember what worked last time. That's the compounding advantage, not the model itself.
+Most AI products demo brilliantly. Full context in session, agent looks sharp. Then users churn because it forgets everything the next day.
 
-OpenAI paid for Skybysoftware to solve one problem: agents that persist state. Computer use was the wrapper. Persistent memory was the prize. An agent that remembers your codebase, your preferences, your deployment history, operates completely differently than one that starts fresh each session.
+Intercom's real win wasn't 2x. It was 9 months of compounding memory.
+OpenAI's real buy wasn't computer use. It was state persistence.
+Noetik's real thesis isn't the model. It's accumulated clinical context.
 
-The LLM conversation is over. The memory conversation just started.
+I think we're 12 months from the market realizing that raw inference is cheap and accumulated context is the moat worth building.
 
-how much of your AI budget goes to remembering vs. processing?
+how much of your AI budget is going to memory vs. processing?
+
+p.s. most teams i talk to have it backwards. upgrading models every quarter, barely investing in the context layer that makes the model actually useful over time. 👇🏻
 
 ---
