@@ -170,32 +170,32 @@ echo "[scan] Grok: $GROK_COUNT posts within 24h ($GROK_DROPPED dropped as stale,
 # =============================================================
 # STEP 3: Combine RSS + Grok into raw-intake.json
 # =============================================================
-GROK_ITEMS=$(echo "$GROK_POSTS" | jq -c '[.[] | {
+echo "$GROK_POSTS" | jq -c '[.[] | {
   title: (.key_claims // (.text // "")[:100]),
   url: (.url // ""),
   summary: (.full_post // .text // ""),
   source: ("x/" + ((.author // "unknown") | gsub("^@"; ""))),
   type: "x_post",
   date_posted: (.date_of_post // "")
-}]' 2>/dev/null || echo "[]")
+}]' > "$WS/.grok-items.json" 2>/dev/null || echo "[]" > "$WS/.grok-items.json"
 
-RSS_ITEMS=$(cat "$WS/.rss-items.jsonl" 2>/dev/null | jq -s '.' 2>/dev/null || echo "[]")
-SITEMAP_ITEMS=$(cat "$SITEMAP_ITEMS_FILE" 2>/dev/null | jq -s '.' 2>/dev/null || echo "[]")
+cat "$WS/.rss-items.jsonl" 2>/dev/null | jq -s '.' > "$WS/.rss-items.json" 2>/dev/null || echo "[]" > "$WS/.rss-items.json"
+cat "$SITEMAP_ITEMS_FILE" 2>/dev/null | jq -s '.' > "$WS/.sitemap-items.json" 2>/dev/null || echo "[]" > "$WS/.sitemap-items.json"
 
-# Combined RSS-shaped items (RSS feeds + sitemap-scraped pages share schema)
+# Combined RSS-shaped items — use --slurpfile to avoid "Argument list too long" on large feeds
 jq -n \
   --arg date "$TODAY" \
-  --argjson rss "$RSS_ITEMS" \
-  --argjson sitemap "$SITEMAP_ITEMS" \
-  --argjson grok "$GROK_ITEMS" \
+  --slurpfile rss "$WS/.rss-items.json" \
+  --slurpfile sitemap "$WS/.sitemap-items.json" \
+  --slurpfile grok "$WS/.grok-items.json" \
   '{
     date: $date,
-    items: ($rss + $sitemap + $grok),
+    items: ($rss[0] + $sitemap[0] + $grok[0]),
     stats: {
-      rss_items: ($rss | length),
-      sitemap_items: ($sitemap | length),
-      x_posts: ($grok | length),
-      total: (($rss + $sitemap + $grok) | length)
+      rss_items: ($rss[0] | length),
+      sitemap_items: ($sitemap[0] | length),
+      x_posts: ($grok[0] | length),
+      total: (($rss[0] + $sitemap[0] + $grok[0]) | length)
     }
   }' > "$WS/raw-intake.json"
 
