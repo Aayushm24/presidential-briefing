@@ -19,7 +19,7 @@
 set -uo pipefail
 
 MIN_CHARS=1300
-MAX_CHARS=2000
+MAX_CHARS=99999  # no cap — top posts go to 2,161c. content determines length.
 FAIL=0
 CHECKED=0
 

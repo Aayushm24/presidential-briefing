@@ -145,7 +145,7 @@ Write 3 LinkedIn post OPTIONS. Each MUST:
 
 === HARD RULES (SHIP STEP REJECTS BELOW THRESHOLDS — these are automated gates, not suggestions) ===
 
-**0. LENGTH — EACH option MUST be 1,300-2,000 chars. Floor 1,300, cap 2,000 (posts-gate.sh rejects outside that range).** Aayush's top 5 posts by engagement average 1,384 chars (floor 1,300, range 1,300-1,900). His 2026-04-20 "12 months" post is ~1,900 chars. Short posts underperform dramatically. Count characters BEFORE submitting — if an option is under 1,300 chars, it is NOT FINISHED. Add another specific beat from the brief, a named fact, a personal observation, or a P.S. closer. NEVER submit under 1,300 chars. Never pad with filler.
+**0. LENGTH — EACH option MUST be at least 1,300 chars. No cap — write as long as the content needs. Top posts range 1,100-2,161c. If the concept needs 2,000+ chars, use them. Floor 1,300 (posts-gate.sh rejects under that).** Aayush's top 5 posts by engagement average 1,384 chars (floor 1,300, range 1,300-1,900). His 2026-04-20 "12 months" post is ~1,900 chars. Short posts underperform dramatically. Count characters BEFORE submitting — if an option is under 1,300 chars, it is NOT FINISHED. Add another specific beat from the brief, a named fact, a personal observation, or a P.S. closer. NEVER submit under 1,300 chars. Never pad with filler.
 
 **1. NO [Not X, it's Y] inversions — ZERO across all 3 options combined.** This is the #1 AI tell. The ship step's posts-gate.sh scans every option for patterns like "isn't X. It's Y", "aren't A. They're B", "this isn't about X. it's about Y", "stopped being X. it's becoming Y". Any hit = option rejected. Today's failure (2026-04-20) had 2 hits in posts: "The survivors aren't building better models. They're building better distribution" and "This isn't about model access anymore. It's about who already has the users." Both would fail the new gate. Replace with direct parallel claims ("Same pricing. Less per token.") or open questions ("what are you actually paying for?").
 
@@ -176,7 +176,7 @@ Write 3 LinkedIn post OPTIONS. Each MUST:
 - dashes (-) NOT bullets (•)
 - one idea per line
 - bold max 3-5 words per post
-- 1,300-2,000 characters per post (floor 1,300, cap 2,000. If your draft is under 1,300 chars the entire option is REJECTED. Aim for 1,400-1,800. Aayush's own 2026-04-20 "12 months" post is ~1,900 chars. Long posts work when every beat earns its line.)
+- At least 1,300 characters per post, no cap. If a concept earns 2,000+ words, use them. Floor 1,300 — under that, option is REJECTED. Sweet spot based on top posts: 1,400-1,800c, but longer is fine when every line earns it.
 - Conversational, lowercase-leaning natural voice
 - Read-aloud test: read the post out loud. If ANY sentence sounds like something an LLM would write but a person wouldn't say → rewrite.
 
@@ -384,7 +384,7 @@ Parse 3 OPTION blocks from output. For each:
   - Hook line is ≤70 characters
   - **All 3 options use 3 DIFFERENT angle types** (commentary-take / data-point / pattern-observation — not 3 variations of personal-discovery)
   - **`hook_score ≥ 7` (hard fail — regenerate the option with a different template, don't patch)**
-  - Post is 1,300-2,000 characters (floor 1,300 — if under 1,300, treat same as hook<7: regenerate)
+  - Post is 1,300+ characters, no cap (floor 1,300 — if under 1,300, regenerate)
   - No em dashes (hard regex)
   - No kill-list violations (regex pre-filter)
   - **No fabricated first-person specifics** (regex-flag sentences starting with "i " + past-tense verb + specific number/team/company not in aayush-experiences.md)
@@ -426,7 +426,7 @@ Also save raw LLM output to `.posts-raw.json` for debugging.
 
 ## Kill list
 
-- NEVER write a post shorter than 1,300 chars or longer than 2,000 chars — posts-gate.sh rejects under 1,300 and the run fails. Aayush's top 5 by engagement average 1,384 chars. His 2026-04-20 "12 months" post lands at ~1,900. Sweet spot: 1,400-1,800 chars. Hard floor 1,300, hard cap 2,000.
+- NEVER write a post shorter than 1,300 chars. No cap — write as long as the concept needs. Top posts range 1,100-2,161c. Length is earned by content, not padded to hit a ceiling.
 - NEVER use the same template twice across options
 - NEVER fabricate Aayush's experience ("i built X" only when verifiable from workspace history)
 - NEVER address the audience directly ("for founders", "hey founders")

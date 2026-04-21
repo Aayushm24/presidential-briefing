@@ -1,18 +1,6 @@
 # Aayush's Verified Experiences
 
-**Purpose.** Background context that shapes HOW Aayush writes — not stories to retell or copy directly.
-
-These entries tell the pipeline: this is who Aayush is, what he's built, what he's lived through. That context makes posts feel specific and earned rather than generic. A post about AI agents reads differently when written by someone who actually built Jake and fought context management bugs for months vs. someone who read a TechCrunch article.
-
-**How to use:**
-- Let this inform the POV, the specificity, the confidence level
-- Do NOT retell these stories verbatim in posts
-- Do NOT open with "when i built Jake..." or "when i quit my job..." unless the day's brief directly connects to that exact experience
-- DO write with the accumulated knowledge and perspective of someone who has done all of this
-
-**What this replaces:** Generic AI commentary that could have been written by anyone. Posts should feel like they come from someone who has skin in the game.
-
-**Hard rule:** never fabricate specifics (numbers, names, details) that aren't in an entry below.
+Background on what Aayush has actually built and done. Use as context when writing. Don't make up things that aren't here. Don't retell these stories directly — they're reference, not copy.
 
 ---
 

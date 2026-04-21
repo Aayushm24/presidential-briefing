@@ -92,7 +92,7 @@ check_brief() {
 
   # Word count: FLOOR raised from 1200 to 1500 per 2026-04-20 feedback — brief at 1227 felt thin
   local wc=$(wc -w < "$file")
-  [ "$wc" -ge 1500 ] && [ "$wc" -le 2800 ] || errors+=("word_count=$wc (expect 1500-2800)")
+  [ "$wc" -ge 1500 ] || errors+=("word_count=$wc (expect 1500+)")
 
   if [ ${#errors[@]} -gt 0 ]; then
     echo "FAIL: $file"
