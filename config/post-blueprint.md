@@ -26,21 +26,37 @@ If a draft comes in at 1,000 chars, it's not finished. Add another specific beat
 
 ---
 
-## The 4 winning styles (pick 1 per option, 3 different per day)
+## Style tier system — pick based on data, not preference
 
-### Vulnerable Victor
+**25-post performance data (2026-04-21):**
+- Personal-story hooks: **83 avg engagement** (TIER 1)
+- Personal-I hooks: **48 avg engagement** (TIER 2)
+- Contrarian/data hooks: **35-37 avg engagement** (TIER 3)
+
+Personal story is 3x contrarian. Always attempt TIER 1 first.
+
+### TIER 1 — Vulnerable Victor (personal story)
 Personal struggle at the peak. Success with hidden costs. Raw emotional honesty. Ends with empowerment.
+
+**Performance: avg 83 eng. Top post: 305 eng ("I quit my job with zero backup plan.").**
 
 Requires a verified entry in `config/aayush-experiences.md` matching today's theme. Never fabricate.
 
-Top example: "I quit my job with zero backup plan" (392 eng, 1,497c).
+**Daily brief instruction:** Before writing 3 options, check `config/aayush-experiences.md`. If ANY entry connects to today's lead theme — even loosely (building AI at Atlan, managing a team, watching competitors, shipping a product, making a career bet) — one option MUST use TIER 1. Do not skip to contrarian because it's easier.
 
-### Contrarian Philosopher
-Challenges conventional wisdom. Redefines what winning looks like. Paints an alternative reality the reader hadn't considered.
+### TIER 2 — Personal-I Observer
+First-person present-tense observation of the news. Not a story arc, but Aayush in the frame.
 
-Does NOT require personal experience — requires a sharp POV on the news.
+**Performance: avg 48 eng.** Signature phrases: "Every week I watch...", "Every team I talk to...", "I've been thinking about...", "Most people I know are..."
 
-Top example: "every startup says they're 'ai-powered' now" (87 eng, 1,736c).
+Every option that isn't TIER 1 should have at least one TIER 2 moment — a sentence where Aayush is observing, not just describing.
+
+### TIER 3 — Contrarian Philosopher
+Challenges conventional wisdom. Redefines what winning looks like. Paints an alternative reality.
+
+**Performance: avg 37 eng.** Does NOT require personal experience — requires a sharp POV.
+
+Top example: "every startup says they're 'ai-powered' now" (87 eng, 1,736c). Note: this is the ceiling for pure contrarian without personal story.
 
 ### Absurdist Truth-Teller
 Normal setup → absurd reveal. Humor disarms defenses. Hidden truth in comedy.
