@@ -97,6 +97,64 @@ jq -Rs '...' workspace/${TODAY}/posts.md  # or awk-based parser
 
 For each option capture: template, hook_pattern, conviction, hook_score, post body.
 
+### Step 1.5: Aayush voice score (10-point, gate at 8)
+
+Before the full 15-point audit, run this focused 5-dimension check. Score each dimension 0-2. Total out of 10.
+
+```
+Score each of the 3 posts on these 5 dimensions. 0 = missing, 1 = weak/one instance, 2 = clearly present.
+
+1. FIRST-PERSON OBSERVER (0-2)
+   Does Aayush appear in the post as a present-tense observer?
+   Look for: "every week i watch...", "i've been thinking about...", "every team i talk to...", "i watch...", "i notice..."
+   0 = no first-person at all, post is entirely third-person
+   1 = one weak "i think" type hedge
+   2 = genuine present-tense observation that places Aayush in the story
+
+2. HEDGE MARKERS (0-2)
+   Does the post have at least one of: IMO, i think, i doubt, tbh, fwiw, ngl
+   0 = none
+   1 = one, feels forced
+   2 = one or two, placed naturally where opinion shifts to fact
+
+3. CONTRAST LABELS (0-2)
+   Does the post use "That's X." recap tags or "That's not X. That's Y." contrast labels?
+   Reference: "That's distribution.", "That's the thing competitors can't copy.", "That's a different model entirely."
+   0 = no contrast labels, all paragraph-length explanations
+   1 = one weak version
+   2 = clear contrast labels anchoring the key insight
+
+4. FRAGMENT PARAGRAPHS (0-2)
+   Does the post use one-idea-per-line rhythm instead of long compound sentences?
+   0 = majority are multi-clause sentences, reads like an essay
+   1 = mixed, some fragments some long
+   2 = clear fragment rhythm throughout — short punchy lines, single ideas per line
+
+5. SPECIFIC NAMED DETAILS (0-2)
+   Does the post name specific companies, people, numbers, dates — not categories?
+   0 = generic ("companies are doing this", "many founders")
+   1 = some specifics but padded with generics
+   2 = every claim has a named entity or number (Brian Scanlan, 2x velocity, 9 months, 47 meetings)
+
+Return for each option:
+{
+  "aayush_voice_score": N,  // total out of 10
+  "dimensions": {
+    "first_person_observer": N,
+    "hedge_markers": N,
+    "contrast_labels": N,
+    "fragment_paragraphs": N,
+    "specific_named_details": N
+  },
+  "voice_verdict": "SHIP" | "REVISE",  // REVISE if score < 8
+  "lowest_dimension": "name of the lowest-scoring dimension",
+  "fix": "one sentence — what to add/change to raise score by 2+"
+}
+```
+
+**Gate: if ANY option scores < 8/10, verdict for that option = REVISE.**
+Include the `fix` field verbatim in council-notes so revise knows exactly what to change.
+
 ### Step 2: Voice audit (Opus, parallel)
 
 Prompt:
@@ -313,9 +371,13 @@ Combine all three pass outputs into human-readable markdown. Include:
 - Brief-level fact issues + adversarial critiques
 - Specific revision notes (file:line — issue — fix)
 
-**Ship threshold:** ALL 3 options must score ≥12/15 voice audit AND 0 fact-check `false` findings AND no "dead" freshness flags.
+**Ship threshold:** ALL 3 options must meet BOTH:
+1. **Aayush voice score ≥8/10** (Step 1.5) — any option < 8 = REVISE
+2. **Format voice audit ≥12/15** (Step 2) — any option < 12 = REVISE
 
-If ANY fails → verdict = REVISE.
+Plus: 0 fact-check `false` findings AND no "dead" freshness flags.
+
+If ANY fails → verdict = REVISE. The voice score gate (Step 1.5) is checked first — it's the primary quality signal. The 15-point format check is secondary.
 
 If iteration counter at 2 already, auto-promote to SHIP_WITH_FIX tagged `[UNREVIEWED]` — do not trigger another revise loop.
 

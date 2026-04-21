@@ -28,15 +28,15 @@
       "used_by": ["briefing", "post"]
     },
     "briefing_writing": {
-      "model": "claude-opus-4-6",
+      "model": "claude-opus-4-7",
       "temperature": 0.6,
-      "why": "Long-form teaching with first-principles explanations. Opus for quality and depth.",
+      "why": "Opus 4.7 has better instruction following (new tokenizer pays closer attention per word) — critical for following newsletter style rules precisely. Keep temp 0.6 for factual accuracy.",
       "used_by": ["briefing"]
     },
     "post_writing": {
-      "model": "claude-opus-4-6",
-      "temperature": 0.6,
-      "why": "Voice, nuance, originality. The post must sound like a human with opinions.",
+      "model": "claude-opus-4-7",
+      "temperature": 0.8,
+      "why": "Opus 4.7 for better voice-rule compliance. Higher temp (0.8 vs 0.6) for personality and variation — posts need creative energy, not safe output.",
       "used_by": ["post"]
     },
     "format_selection": {

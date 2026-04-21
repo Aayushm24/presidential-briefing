@@ -88,6 +88,14 @@ RULES FOR REVISION:
 - Preserve conviction statements unless council flagged them as false/unverifiable
 - Hook revisions: new hook must still follow same hook pattern (A-J) unless council said pattern itself was wrong
 
+**AAYUSH VOICE SCORE (check council-notes for per-option score and lowest_dimension)**
+If any option scored < 8/10 on the Aayush voice score, the `lowest_dimension` field tells you exactly what to fix. Apply these fixes first, before any other revision:
+- first_person_observer low → add "Every week i watch..." or "i've been thinking about..." or "Every team i talk to..." somewhere natural
+- hedge_markers low → add one IMO, i think, or i doubt where Aayush shifts from fact to opinion
+- contrast_labels low → add "That's X." after the key insight, or "That's not X. That's Y." to flip the frame
+- fragment_paragraphs low → break compound sentences into one-idea-per-line rhythm
+- specific_named_details low → replace any generic "companies" or "founders" with actual names and numbers from the brief
+
 **PRIMARY SOURCES (read before fixing):**
 - `config/brief-blueprint.md` — voice truth for briefs. Every rewrite serves a specific blueprint rule. Cite the rule when explaining the fix.
 - `config/post-blueprint.md` — voice truth for posts. Same.
@@ -171,7 +179,7 @@ Rewrite now.
 curl -sS -X POST "${LLM_PROXY_BASE_URL}/v1/chat/completions" \
   -H "Authorization: Bearer ${ATLAN_LLM_KEY}" \
   -H "Content-Type: application/json" \
-  -d "$(jq -n --arg model "claude-opus-4-6" --arg prompt "$REVISE_PROMPT" \
+  -d "$(jq -n --arg model "claude-opus-4-7" --arg prompt "$REVISE_PROMPT" \
     '{model: $model, messages: [{role: "user", content: $prompt}], temperature: 0.4, max_tokens: 4000}')"
 ```
 

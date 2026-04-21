@@ -371,9 +371,9 @@ curl -sS -X POST "${LLM_PROXY_BASE_URL}/v1/chat/completions" \
   -H "Authorization: Bearer ${ATLAN_LLM_KEY}" \
   -H "Content-Type: application/json" \
   -d "$(jq -n \
-    --arg model "claude-opus-4-6" \
+    --arg model "claude-opus-4-7" \
     --arg prompt "$FULL_PROMPT" \
-    '{model: $model, messages: [{role: "user", content: $prompt}], temperature: 0.6, max_tokens: 4000}')"
+    '{model: $model, messages: [{role: "user", content: $prompt}], temperature: 0.8, max_tokens: 4000}')"
 ```
 
 ### Step 4: Parse + validate structure
