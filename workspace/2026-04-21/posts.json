@@ -1,0 +1,31 @@
+{
+  "date": "2026-04-21",
+  "lead_title": "AI coding agents just proved they can 2x engineering velocity with real companies",
+  "best_option": 3,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian",
+      "hook_pattern": "A",
+      "hook_score": 8,
+      "conviction": "Small teams with AI beat 50-person orgs because coordination costs collapse when agents handle the workflows",
+      "post": "AI isn't your competitive advantage. It's a commodity.\n\nIntercom just published the data: 100% of their engineers use Claude Code. 2x velocity in 9 months. Full telemetry, measured merged PRs, maintained code quality.\n\nBut here's what they really discovered: agents don't just make developers faster. They eliminate coordination overhead.\n\nWhen your deployment pipeline runs through Claude Code skills, when your testing gets automated by agents, when code reviews happen through LLM-assisted workflows, suddenly a 3-person team ships what took 25 engineers in 2022.\n\nThe founders winning this wave aren't building better models. They're building agent-first workflows. The ones still hiring like it's 2022 are building tomorrow's cost structure problem.\n\nThe Intercom number that hit hardest: designers and PMs ship code now, not just engineers. When agents handle the translation layer between idea and deployed feature, your headcount math changes completely.\n\nThe moat isn't AI access. It's how fast your org learns to work with agents. Intercom spent 9 months building culture and tooling infrastructure, not just plugging in Claude Code. Every interaction logged, analyzed, fed back into better workflows.\n\nwhat are you actually paying for when you hire engineer #26?\n\nP.S. The most underrated part of the Intercom case study: they built their own telemetry to measure AI impact. Every Claude Code interaction tracked. That's the infrastructure play everyone's missing. \ud83d\udc47\ud83c\udffb"
+    },
+    {
+      "option": 2,
+      "template": "data-point",
+      "hook_pattern": "E",
+      "hook_score": 7,
+      "conviction": "Economics research proves AI agents deliver consistent performance with less variance than human teams",
+      "post": "Claude Code performs near human median with 76% less variance.\n\nThat's from actual economics research replicating classic multi-team studies. Not marketing claims. Not demos. Controlled experiments where agents completed the same tasks as human groups.\n\nThe variance reduction matters more than the median performance. Human teams swing wild, your 10x engineer crushes it one sprint, struggles the next. Junior devs have good days and terrible days.\n\nAgents deliver consistent median output. Every. Single. Sprint.\n\nIntercom saw this firsthand: their 2x velocity gain came with maintained quality metrics. No regression. No bug spikes. Just predictable delivery at higher throughput.\n\nFor planning, this changes everything. You can bank on consistent execution instead of hoping your team hits estimates. You optimize for throughput instead of managing variance.\n\nThe question isn't whether AI makes developers better. It's whether you want predictable velocity or unpredictable genius.\n\nMost teams are still hiring for genius and getting variance. The smarter bet now: instrument your workflows so agents handle the consistent parts, and let your humans own the creative and architectural decisions where variance actually adds value.\n\nwhat does consistent median performance do to your roadmap confidence?\n\nP.S. The Mollick study is worth reading in full. It's the clearest calibration data we have for what AI agents can reliably deliver vs. where human judgment still wins. \ud83d\udc47\ud83c\udffb"
+    },
+    {
+      "option": 3,
+      "template": "pattern-observation",
+      "hook_pattern": "C",
+      "hook_score": 8,
+      "conviction": "Most AI products fail because they skip memory, not because of the model",
+      "post": "three stories dropped this week that connect:\n\nIntercom doubled engineering velocity by building telemetry that remembers every Claude Code interaction.\n\nOpenAI acquired Skybysoftware for real computer-use capability that persists state between sessions.\n\nNoetik is applying transformers to cancer trials, and the 95% failure rate isn't about drugs, it's about matching patients to the right treatments based on accumulated context.\n\nThe pattern: memory is the hard part now, not the model.\n\nMost teams building AI products spend on model upgrades instead of context systems. They demo brilliantly, then users churn because the system forgets everything between sessions.\n\nThe founders who get this early are building gbrain-style local knowledge bases, persistent agent states, session memory that compounds learning across interactions.\n\nWhat Intercom actually built wasn't just Claude Code access. It was a skills repository where every interaction gets logged and analyzed. Agents that remember what worked last time. That's the compounding advantage, not the model itself.\n\nOpenAI paid for Skybysoftware to solve one problem: agents that persist state. Computer use was the wrapper. Persistent memory was the prize. An agent that remembers your codebase, your preferences, your deployment history, operates completely differently than one that starts fresh each session.\n\nThe LLM conversation is over. The memory conversation just started.\n\nhow much of your AI budget goes to remembering vs. processing?"
+    }
+  ]
+}

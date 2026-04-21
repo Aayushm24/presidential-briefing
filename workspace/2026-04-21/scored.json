@@ -1,0 +1,147 @@
+{
+  "date": "2026-04-21",
+  "total_scored": 31,
+  "top_10": [
+    {
+      "title": "How Intercom 2x'd their engineering velocity in 9 months with Claude Code | Brian Scanlan",
+      "url": "https://www.lennysnewsletter.com/p/how-intercom-2xd-their-engineering",
+      "scores": {
+        "significance": 8,
+        "business_impact": 9,
+        "practitioner_value": 9,
+        "discussion_heat": 8,
+        "story_potential": 10
+      },
+      "combined_score": 8.8,
+      "verdict": "breakthrough",
+      "one_line_reason": "Concrete case study with a named company, specific metric (2x velocity in 9 months), and replicable methodology using Claude Code skills and telemetry — exactly what CTOs need to justify AI tooling investment."
+    },
+    {
+      "title": "Anthropic takes $5B from Amazon and pledges $100B in cloud spending in return",
+      "url": "https://techcrunch.com/2026/04/20/anthropic-takes-5b-from-amazon-and-pledges-100b-in-cloud-spending-in-return/",
+      "scores": {
+        "significance": 9,
+        "business_impact": 9,
+        "practitioner_value": 6,
+        "discussion_heat": 9,
+        "story_potential": 8
+      },
+      "combined_score": 8.2,
+      "verdict": "breakthrough",
+      "one_line_reason": "A $5B investment tied to $100B in AWS spend is a landmark circular deal that locks in Anthropic's cloud infrastructure for years and signals AWS as the dominant enterprise AI platform — every founder building on Anthropic needs to understand this dependency."
+    },
+    {
+      "title": "Codex acquisition of Skybysoftware is a top OpenAI deal — real computer use with AI is now rolling out",
+      "url": "https://x.com/swyx/status/2046362691606855700",
+      "scores": {
+        "significance": 8,
+        "business_impact": 8,
+        "practitioner_value": 7,
+        "discussion_heat": 8,
+        "story_potential": 8
+      },
+      "combined_score": 7.8,
+      "verdict": "notable",
+      "one_line_reason": "OpenAI acquiring real computer-use capability through Codex x Skybysoftware signals the next wave of agentic automation is shipping now, not in a roadmap — builders should be watching this closely."
+    },
+    {
+      "title": "Smarter AI models use fewer tokens reducing costs, but Opus 4.7's new tokenizer raises costs — sawtooth pattern in model pricing",
+      "url": "https://x.com/ttunguz/status/2046277504797974700",
+      "scores": {
+        "significance": 7,
+        "business_impact": 9,
+        "practitioner_value": 8,
+        "discussion_heat": 7,
+        "story_potential": 7
+      },
+      "combined_score": 7.6,
+      "verdict": "notable",
+      "one_line_reason": "Founders budgeting AI costs need to know that model upgrades don't always reduce spend — the sawtooth cost pattern is a real financial planning insight with immediate P&L implications."
+    },
+    {
+      "title": "Training Transformers to solve 95% failure rate of Cancer Trials — Ron Alfa & Daniel Bear, Noetik",
+      "url": "https://www.latent.space/p/noetik",
+      "scores": {
+        "significance": 8,
+        "business_impact": 8,
+        "practitioner_value": 6,
+        "discussion_heat": 7,
+        "story_potential": 9
+      },
+      "combined_score": 7.6,
+      "verdict": "notable",
+      "one_line_reason": "Noetik is applying autoregressive transformers to the clinical trial matching problem — a massive market with a quantified failure rate, making this a compelling AI-for-healthcare business story with real stakes."
+    },
+    {
+      "title": "AI agents produce results near human median with less variance in economics study — Claude Code & Codex tested",
+      "url": "https://x.com/emollick/status/2046362044786458648",
+      "scores": {
+        "significance": 7,
+        "business_impact": 8,
+        "practitioner_value": 7,
+        "discussion_heat": 7,
+        "story_potential": 8
+      },
+      "combined_score": 7.4,
+      "verdict": "notable",
+      "one_line_reason": "Replication of a classic multi-team economics study with AI agents shows consistent near-median performance with lower variance — a credible, specific outcome that helps founders calibrate what AI agents can reliably deliver."
+    },
+    {
+      "title": "Open weight models can fast-follow closed labs until training paradigm changes — no evidence open models are falling behind",
+      "url": "https://x.com/natolambert/status/2046299148883046450",
+      "scores": {
+        "significance": 7,
+        "business_impact": 8,
+        "practitioner_value": 7,
+        "discussion_heat": 7,
+        "story_potential": 7
+      },
+      "combined_score": 7.2,
+      "verdict": "notable",
+      "one_line_reason": "A credible researcher's framework for when open vs closed models diverge is directly actionable for founders deciding whether to build on proprietary APIs or open weights — affects build vs buy decisions today."
+    },
+    {
+      "title": "Kimi K2.6: world's leading open model refreshes to catch up to Opus 4.6",
+      "url": "https://www.latent.space/p/ainews-moonshot-kimi-k26-the-worlds",
+      "scores": {
+        "significance": 7,
+        "business_impact": 7,
+        "practitioner_value": 8,
+        "discussion_heat": 7,
+        "story_potential": 6
+      },
+      "combined_score": 7.0,
+      "verdict": "notable",
+      "one_line_reason": "A new open-weight model competitive with Opus 4.6 is immediately deployable for cost-sensitive builders who need frontier-class performance without API dependency — worth testing today."
+    },
+    {
+      "title": "NSA spies are reportedly using Anthropic's Mythos, despite Pentagon feud",
+      "url": "https://techcrunch.com/2026/04/20/nsa-spies-are-reportedly-using-anthropics-mythos-despite-pentagon-feud/",
+      "scores": {
+        "significance": 7,
+        "business_impact": 7,
+        "practitioner_value": 5,
+        "discussion_heat": 8,
+        "story_potential": 8
+      },
+      "combined_score": 7.0,
+      "verdict": "notable",
+      "one_line_reason": "Government intelligence agencies adopting Anthropic's restricted model signals a serious enterprise/gov-tech market opening and validates Anthropic's security positioning — relevant for founders targeting regulated sectors."
+    },
+    {
+      "title": "TSMC Earnings, New N3 Fabs, The Nvidia Ramp — TSMC leadership not fully bought into AI growth story",
+      "url": "https://stratechery.com/2026/tsmc-earnings-new-n3-fabs-the-nvidia-ramp/",
+      "scores": {
+        "significance": 7,
+        "business_impact": 8,
+        "practitioner_value": 5,
+        "discussion_heat": 7,
+        "story_potential": 7
+      },
+      "combined_score": 6.8,
+      "verdict": "notable",
+      "one_line_reason": "If TSMC's own leadership is skeptical of AI demand sustainability, that's a contrarian signal worth tracking for anyone advising founders on infrastructure bets and AI capex cycles."
+    }
+  ],
+  "quiet_day": false
+}

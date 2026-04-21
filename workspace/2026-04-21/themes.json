@@ -1,0 +1,49 @@
+{
+  "date": "2026-04-21",
+  "briefing_type": "pattern",
+  "lead_theme": {
+    "theme_title": "AI coding agents are delivering measurable, replicable productivity gains that justify enterprise adoption now",
+    "conviction": "Builders who instrument AI coding tools with telemetry and structured workflows (not just autocomplete) can credibly target 2x velocity improvements — the methodology is documented and the benchmark data from economics studies gives you a calibration floor for what agents reliably deliver",
+    "supporting_stories": [
+      "How Intercom 2x'd their engineering velocity in 9 months with Claude Code | Brian Scanlan",
+      "AI agents produce results near human median with less variance in economics study — Claude Code & Codex tested",
+      "Codex acquisition of Skybysoftware is a top OpenAI deal — real computer use with AI is now rolling out"
+    ],
+    "theme_strength": 72
+  },
+  "standalone_stories": [
+    "Smarter AI models use fewer tokens reducing costs, but Opus 4.7's new tokenizer raises costs — sawtooth pattern in model pricing",
+    "Training Transformers to solve 95% failure rate of Cancer Trials — Ron Alfa & Daniel Bear, Noetik",
+    "TSMC Earnings, New N3 Fabs, The Nvidia Ramp — TSMC leadership not fully bought into AI growth story"
+  ],
+  "all_themes": [
+    {
+      "theme_title": "AI coding agents are delivering measurable, replicable productivity gains that justify enterprise adoption now",
+      "conviction": "Builders who instrument AI coding tools with telemetry and structured workflows (not just autocomplete) can credibly target 2x velocity improvements — the methodology is documented and the benchmark data from economics studies gives you a calibration floor for what agents reliably deliver",
+      "supporting_stories": [
+        "How Intercom 2x'd their engineering velocity in 9 months with Claude Code | Brian Scanlan",
+        "AI agents produce results near human median with less variance in economics study — Claude Code & Codex tested",
+        "Codex acquisition of Skybysoftware is a top OpenAI deal — real computer use with AI is now rolling out"
+      ],
+      "theme_strength": 72
+    },
+    {
+      "theme_title": "The open-weight model tier is closing the gap on closed frontier models, creating a viable alternative stack for cost-sensitive builders",
+      "conviction": "Founders building on proprietary APIs should re-evaluate their dependency risk today — Kimi K2.6 matching Opus 4.6 combined with evidence that open models are not falling behind means the open-weight path is now a credible production choice, not just a research option",
+      "supporting_stories": [
+        "Open weight models can fast-follow closed labs until training paradigm changes — no evidence open models are falling behind",
+        "Kimi K2.6: world's leading open model refreshes to catch up to Opus 4.6"
+      ],
+      "theme_strength": 28.4
+    },
+    {
+      "theme_title": "Anthropic is consolidating its position through deep institutional lock-in — with AWS infrastructure and government intelligence adoption signaling enterprise moat formation",
+      "conviction": "Founders building on Anthropic's APIs are now implicitly building on AWS infrastructure; the NSA adoption signals that Anthropic's security and compliance positioning is winning regulated sectors — both are durable moats that make Anthropic a safer long-term platform bet than its startup origins suggest",
+      "supporting_stories": [
+        "Anthropic takes $5B from Amazon and pledges $100B in cloud spending in return",
+        "NSA spies are reportedly using Anthropic's Mythos, despite Pentagon feud"
+      ],
+      "theme_strength": 30.4
+    }
+  ]
+}

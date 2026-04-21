@@ -107,7 +107,7 @@ DETERMINISTIC HARD BLOCKERS — rewrite every sentence containing these, ZERO to
 - **Guru voice** ("founders should", "builders who", "teams who want to win") → first-person observation
 - **Hashtags at end of post** → remove entirely
 - **Uppercase "I" in posts** → lowercase "i" (voice rule)
-- **Posts under 1,100 chars** — expand with one more specific fact, named number, or personal beat. NEVER pad with filler. If you can't add real substance, the post isn't ready.
+- **Posts under 1,300 chars** — expand with one more specific fact, named number, or personal beat. NEVER pad with filler. If you can't add real substance, the post isn't ready. posts-gate.sh hard floor is 1,300 — under that, the run fails.
 
 After rewriting, mentally re-check each deterministic finding. If you can't mark all as fixed, rewrite again before returning. The ship step runs the exact same regex tests and aborts delivery if any remain.
 
