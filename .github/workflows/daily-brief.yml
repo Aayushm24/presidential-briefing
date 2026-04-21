@@ -23,32 +23,34 @@ concurrency:
   group: daily-brief-${{ github.event.inputs.today_override || github.run_id }}
   cancel-in-progress: false
 
-# Pipeline split into 3 sequential jobs so each Claude Code invocation stays
-# under the action's 600-sec internal cap. State flows between jobs via the
-# workspace-<date> artifact.
+# 5-job pipeline — each step on its own runner with its own timeout budget.
 #
-#   intake  → scan + score + theme-detect + brain-connect   (~4-5 min)
-#   write   → write-briefing + write-posts                   (~5-6 min)
-#   ship    → council/attack + publish                       (~3-5 min)
+#   scan        → bash only: RSS + Grok + merge          (~3 min)
+#   analyze     → Claude Code: score + theme + brain     (~12 min)
+#   write-brief → Claude Code: brief only                (~8 min)  ─┐ parallel
+#   write-posts → Claude Code: posts only                (~6 min)  ─┘
+#   ship        → Claude Code: council + publish         (~12 min)
+#
+# Benefits vs 3-job: scan failure is cheap (no Claude Code wasted),
+# write-brief + write-posts run in parallel saving ~6 min, each step
+# has a fresh independent timeout.
 
 jobs:
   # ============================================================
-  # JOB 1: INTAKE — scan, score, theme-detect, brain-connect
+  # JOB 1: SCAN — deterministic bash only. No Claude Code.
+  # Fails fast and cheap if feeds are broken.
   # ============================================================
-  intake:
-    name: Intake (scan + score + theme + brain)
+  scan:
+    name: Scan (RSS + Grok)
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 8
 
     outputs:
       today: ${{ steps.today.outputs.today }}
       dry_run: ${{ steps.dry.outputs.dry_run }}
-      quiet_day: ${{ steps.classify.outputs.quiet_day }}
-      degraded: ${{ steps.classify.outputs.degraded }}
 
     env:
       LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
-      SUPABASE_URL: https://xbatqlzrtijdmicoakaq.supabase.co
       GITHUB_REPO: Aayushm24/presidential-briefing
       TZ: Asia/Kolkata
 
@@ -80,124 +82,15 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq jq curl python3 python3-pip
-          # --break-system-packages defends against PEP 668 if the runner image tightens.
-          # Failing loud here is better than feedparser silently missing downstream.
           python3 -m pip install --break-system-packages --quiet feedparser requests markdown
           python3 -c "import feedparser, requests, markdown; print('deps ok')"
 
-      # Deterministic scan: RSS (all 44 feeds) + Grok via proxy + merge.
-      # No LLM involvement — bash does this much faster than Claude Code
-      # (Claude burned ~8 min on bash escaping issues before).
-      - name: Scan (deterministic — RSS + Grok)
+      - name: Scan (RSS + Grok)
         env:
           TODAY: ${{ steps.today.outputs.today }}
           ATLAN_LLM_KEY: ${{ secrets.ATLAN_LLM_KEY }}
           LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
         run: ./scripts/scan.sh
-
-      - name: Run score + theme + brain via Claude Code
-        uses: anthropics/claude-code-base-action@v0.0.63
-        with:
-          prompt: |
-            Intake bash step already produced workspace/${{ steps.today.outputs.today }}/raw-intake.json
-            with scan-ok status. Continue with these skills:
-              1. .claude/skills/score/SKILL.md          → scored.json + research.md
-              2. .claude/skills/theme-detect/SKILL.md   → themes.json
-              3. .claude/skills/brain-connect/SKILL.md  → brain.md + Supabase upserts
-
-            TODAY=${{ steps.today.outputs.today }}
-            DRY_RUN=${{ steps.dry.outputs.dry_run }}
-
-            Write all outputs under workspace/${{ steps.today.outputs.today }}/.
-            If raw-intake.json has <3 items, jump straight to exit — orchestrator handles quiet-day.
-            Do NOT proceed to write-briefing/write-posts/publish — those run in separate jobs.
-          settings: .claude/settings.json
-          anthropic_api_key: ${{ secrets.ATLAN_LLM_KEY }}
-          claude_args: "--max-turns 40 --dangerously-skip-permissions"
-        env:
-          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ATLAN_LLM_KEY }}
-          ANTHROPIC_BASE_URL: https://llmproxy.atlan.dev
-          ANTHROPIC_MODEL: claude-sonnet-4-6
-          ANTHROPIC_SMALL_FAST_MODEL: claude-sonnet-4-6
-          ATLAN_LLM_KEY: ${{ secrets.ATLAN_LLM_KEY }}
-          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
-          LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
-          SUPABASE_URL: https://xbatqlzrtijdmicoakaq.supabase.co
-          GITHUB_REPO: Aayushm24/presidential-briefing
-          TODAY: ${{ steps.today.outputs.today }}
-          DRY_RUN: ${{ steps.dry.outputs.dry_run }}
-
-      - name: Classify day (quiet vs normal vs degraded)
-        id: classify
-        run: |
-          TODAY=${{ steps.today.outputs.today }}
-          WS="workspace/${TODAY}"
-          QUIET="false"
-          DEGRADED="false"
-
-          # Primary signal: scored.json. If /score classified as quiet OR produced
-          # too few items OR never ran, we're quiet.
-          if [ ! -f "${WS}/scored.json" ]; then
-            echo "no scored.json → quiet"
-            QUIET="true"
-          elif [ "$(jq -r '.quiet_day // false' ${WS}/scored.json)" = "true" ]; then
-            echo "scored.json explicitly says quiet_day=true"
-            QUIET="true"
-          elif [ "$(jq '(.top_10 // []) | length' ${WS}/scored.json)" -lt 3 ]; then
-            TOP_N=$(jq '(.top_10 // []) | length' ${WS}/scored.json)
-            echo "scored.json has only $TOP_N items in top_10 (<3) → quiet"
-            QUIET="true"
-          fi
-
-          # Independent degradation signal from scan.sh
-          if [ -f "${WS}/.status" ] && [ "$(cat ${WS}/.status)" = "scan-degraded" ]; then
-            DEGRADED="true"
-          fi
-
-          # Diagnostics for future debugging
-          echo "---"
-          echo "scored.json exists: $([ -f "${WS}/scored.json" ] && echo yes || echo no)"
-          echo "scored.json quiet_day: $(jq -r '.quiet_day // "missing"' ${WS}/scored.json 2>/dev/null || echo 'unreadable')"
-          echo "scored.json top_10 count: $(jq '(.top_10 // []) | length' ${WS}/scored.json 2>/dev/null || echo 'unreadable')"
-          echo ".status exists: $([ -f "${WS}/.status" ] && echo yes || echo no)"
-          echo ".status value: $(cat ${WS}/.status 2>/dev/null || echo 'missing')"
-          echo "---"
-
-          echo "quiet_day=$QUIET" >> $GITHUB_OUTPUT
-          echo "degraded=$DEGRADED" >> $GITHUB_OUTPUT
-          echo "classified: quiet_day=$QUIET degraded=$DEGRADED"
-
-      - name: Alarm on scan degradation (early warning to Slack)
-        if: steps.classify.outputs.degraded == 'true' && steps.dry.outputs.dry_run == '0'
-        env:
-          N8N_SLACK_WEBHOOK_URL: ${{ secrets.N8N_SLACK_WEBHOOK_URL }}
-          DATE: ${{ steps.today.outputs.today }}
-        run: |
-          WS="workspace/${DATE}"
-          REASONS=$(jq -c '.degraded_reasons' "${WS}/scan-summary.json" 2>/dev/null || echo '[]')
-          RSS_OK=$(jq -r '.rss.feeds_processed' "${WS}/scan-summary.json" 2>/dev/null || echo "?")
-          RSS_TOTAL=$(jq -r '.rss.feeds_total' "${WS}/scan-summary.json" 2>/dev/null || echo "?")
-          X_POSTS=$(jq -r '.x.posts_within_24h' "${WS}/scan-summary.json" 2>/dev/null || echo "?")
-          GH_SUMMARY_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/scan-summary.json"
-          PAYLOAD=$(jq -n \
-            --arg date "$DATE" \
-            --arg rss "${RSS_OK}/${RSS_TOTAL} feeds ok" \
-            --arg x "${X_POSTS} X posts (24h)" \
-            --arg summary_url "$GH_SUMMARY_URL" \
-            --argjson reasons "$REASONS" \
-            '{
-              type: "scan_degraded",
-              date: $date,
-              message: "Scan degraded — brief will still ship",
-              rss_summary: $rss,
-              x_summary: $x,
-              reasons: $reasons,
-              scan_summary_url: $summary_url
-            }')
-          HTTP=$(curl -sS -o /tmp/slack-resp.txt -w "%{http_code}" \
-            -X POST "${N8N_SLACK_WEBHOOK_URL}" \
-            -H "Content-Type: application/json" -d "$PAYLOAD" || echo "000")
-          echo "degraded alarm → n8n HTTP $HTTP"
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -207,15 +100,18 @@ jobs:
           retention-days: 14
 
   # ============================================================
-  # JOB 2: WRITE — briefing + 3 posts
-  # Skipped on quiet days.
+  # JOB 2: ANALYZE — score + theme-detect + brain-connect
+  # Claude Code call. Runs only if scan succeeded.
   # ============================================================
-  write:
-    name: Write (briefing + posts)
-    needs: intake
-    if: needs.intake.outputs.quiet_day != 'true'
+  analyze:
+    name: Analyze (score + theme + brain)
+    needs: scan
     runs-on: ubuntu-latest
     timeout-minutes: 15
+
+    outputs:
+      quiet_day: ${{ steps.classify.outputs.quiet_day }}
+      degraded: ${{ steps.classify.outputs.degraded }}
 
     env:
       LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
@@ -232,58 +128,227 @@ jobs:
       - name: Install deps
         run: sudo apt-get install -y -qq jq curl python3
 
-      - name: Download intake artifacts
+      - name: Download scan artifacts
         uses: actions/download-artifact@v4
         with:
-          name: workspace-${{ needs.intake.outputs.today }}
-          path: workspace/${{ needs.intake.outputs.today }}/
+          name: workspace-${{ needs.scan.outputs.today }}
+          path: workspace/${{ needs.scan.outputs.today }}/
 
-      - name: Run write pipeline via Claude Code
+      - name: Run score + theme + brain via Claude Code
         uses: anthropics/claude-code-base-action@v0.0.63
         with:
           prompt: |
-            Execute the write phase. Inputs from workspace/${{ needs.intake.outputs.today }}/ are already populated.
-            Follow these skills in order:
-              1. .claude/skills/write-briefing/SKILL.md  → produces brief.md
-              2. .claude/skills/write-posts/SKILL.md     → produces posts.md + posts.json
+            workspace/${{ needs.scan.outputs.today }}/raw-intake.json is ready.
+            Run these skills in order:
+              1. .claude/skills/score/SKILL.md          → scored.json + research.md
+              2. .claude/skills/theme-detect/SKILL.md   → themes.json
+              3. .claude/skills/brain-connect/SKILL.md  → brain.md + Supabase upserts
 
-            TODAY=${{ needs.intake.outputs.today }}
-            DRY_RUN=${{ needs.intake.outputs.dry_run }}
+            TODAY=${{ needs.scan.outputs.today }}
+            DRY_RUN=${{ needs.scan.outputs.dry_run }}
 
-            Use workspace/TODAY/research.md, brain.md, themes.json, scored.json as source material.
-            Do NOT continue to council or publish — that runs in a separate job.
-            Do NOT fabricate. If research.md has fewer than 3 stories, exit 1.
+            Write all outputs under workspace/${{ needs.scan.outputs.today }}/.
+            If raw-intake.json has <3 items, write quiet_day=true to scored.json and exit cleanly.
+            Do NOT proceed to write-briefing/write-posts — those run in separate parallel jobs.
           settings: .claude/settings.json
           anthropic_api_key: ${{ secrets.ATLAN_LLM_KEY }}
           claude_args: "--max-turns 40 --dangerously-skip-permissions"
         env:
           ANTHROPIC_AUTH_TOKEN: ${{ secrets.ATLAN_LLM_KEY }}
           ANTHROPIC_BASE_URL: https://llmproxy.atlan.dev
-          ANTHROPIC_MODEL: claude-opus-4-6
+          ANTHROPIC_MODEL: claude-sonnet-4-6
           ANTHROPIC_SMALL_FAST_MODEL: claude-sonnet-4-6
           ATLAN_LLM_KEY: ${{ secrets.ATLAN_LLM_KEY }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
-          TODAY: ${{ needs.intake.outputs.today }}
-          DRY_RUN: ${{ needs.intake.outputs.dry_run }}
+          SUPABASE_URL: https://xbatqlzrtijdmicoakaq.supabase.co
+          TODAY: ${{ needs.scan.outputs.today }}
+          DRY_RUN: ${{ needs.scan.outputs.dry_run }}
+
+      - name: Classify day (quiet vs normal vs degraded)
+        id: classify
+        run: |
+          TODAY=${{ needs.scan.outputs.today }}
+          WS="workspace/${TODAY}"
+          QUIET="false"
+          DEGRADED="false"
+
+          if [ ! -f "${WS}/scored.json" ]; then
+            echo "no scored.json → quiet"
+            QUIET="true"
+          elif [ "$(jq -r '.quiet_day // false' ${WS}/scored.json)" = "true" ]; then
+            QUIET="true"
+          elif [ "$(jq '(.top_10 // []) | length' ${WS}/scored.json)" -lt 3 ]; then
+            QUIET="true"
+          fi
+
+          if [ -f "${WS}/.status" ] && [ "$(cat ${WS}/.status)" = "scan-degraded" ]; then
+            DEGRADED="true"
+          fi
+
+          echo "quiet_day=$QUIET" >> $GITHUB_OUTPUT
+          echo "degraded=$DEGRADED" >> $GITHUB_OUTPUT
+          echo "classified: quiet_day=$QUIET degraded=$DEGRADED"
+
+      - name: Alarm on scan degradation
+        if: steps.classify.outputs.degraded == 'true' && needs.scan.outputs.dry_run == '0'
+        env:
+          N8N_SLACK_WEBHOOK_URL: ${{ secrets.N8N_SLACK_WEBHOOK_URL }}
+          DATE: ${{ needs.scan.outputs.today }}
+        run: |
+          WS="workspace/${DATE}"
+          REASONS=$(jq -c '.degraded_reasons' "${WS}/scan-summary.json" 2>/dev/null || echo '[]')
+          RSS_OK=$(jq -r '.rss.feeds_processed' "${WS}/scan-summary.json" 2>/dev/null || echo "?")
+          RSS_TOTAL=$(jq -r '.rss.feeds_total' "${WS}/scan-summary.json" 2>/dev/null || echo "?")
+          PAYLOAD=$(jq -n \
+            --arg date "$DATE" \
+            --arg rss "${RSS_OK}/${RSS_TOTAL} feeds ok" \
+            --argjson reasons "$REASONS" \
+            '{type:"scan_degraded",date:$date,message:"Scan degraded — brief will still ship",rss_summary:$rss,reasons:$reasons}')
+          curl -sS -X POST "$N8N_SLACK_WEBHOOK_URL" -H "Content-Type: application/json" -d "$PAYLOAD" || true
 
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: workspace-${{ needs.intake.outputs.today }}
-          path: workspace/${{ needs.intake.outputs.today }}/
+          name: workspace-${{ needs.scan.outputs.today }}
+          path: workspace/${{ needs.scan.outputs.today }}/
           retention-days: 14
           overwrite: true
 
   # ============================================================
-  # JOB 3: SHIP — council attack + publish
-  # Runs on both normal AND quiet days.
-  #   Quiet day: POST {"type":"nothing_new"} to n8n, done.
-  #   Normal day: council/attack → publish (commit + email + Slack).
+  # JOB 3: WRITE-BRIEF — briefing only. Parallel with write-posts.
+  # ============================================================
+  write-brief:
+    name: Write brief
+    needs: [scan, analyze]
+    if: needs.analyze.outputs.quiet_day != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    env:
+      LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
+      GITHUB_REPO: Aayushm24/presidential-briefing
+      TZ: Asia/Kolkata
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install deps
+        run: sudo apt-get install -y -qq jq curl python3
+
+      - name: Download workspace artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: workspace-${{ needs.scan.outputs.today }}
+          path: workspace/${{ needs.scan.outputs.today }}/
+
+      - name: Write briefing via Claude Code
+        uses: anthropics/claude-code-base-action@v0.0.63
+        with:
+          prompt: |
+            Write the daily briefing. Inputs are in workspace/${{ needs.scan.outputs.today }}/.
+            Follow .claude/skills/write-briefing/SKILL.md → produces brief.md
+
+            TODAY=${{ needs.scan.outputs.today }}
+            DRY_RUN=${{ needs.scan.outputs.dry_run }}
+
+            Use research.md, brain.md, themes.json, scored.json as source material.
+            Do NOT write posts — that runs in a parallel job.
+            Do NOT run council or publish.
+          settings: .claude/settings.json
+          anthropic_api_key: ${{ secrets.ATLAN_LLM_KEY }}
+          claude_args: "--max-turns 30 --dangerously-skip-permissions"
+        env:
+          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ATLAN_LLM_KEY }}
+          ANTHROPIC_BASE_URL: https://llmproxy.atlan.dev
+          ANTHROPIC_MODEL: claude-opus-4-7
+          ANTHROPIC_SMALL_FAST_MODEL: claude-sonnet-4-6
+          ATLAN_LLM_KEY: ${{ secrets.ATLAN_LLM_KEY }}
+          LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
+          TODAY: ${{ needs.scan.outputs.today }}
+          DRY_RUN: ${{ needs.scan.outputs.dry_run }}
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: workspace-brief-${{ needs.scan.outputs.today }}
+          path: workspace/${{ needs.scan.outputs.today }}/
+          retention-days: 14
+
+  # ============================================================
+  # JOB 4: WRITE-POSTS — 3 LinkedIn options. Parallel with write-brief.
+  # ============================================================
+  write-posts:
+    name: Write posts
+    needs: [scan, analyze]
+    if: needs.analyze.outputs.quiet_day != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    env:
+      LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
+      GITHUB_REPO: Aayushm24/presidential-briefing
+      TZ: Asia/Kolkata
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install deps
+        run: sudo apt-get install -y -qq jq curl python3
+
+      - name: Download workspace artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: workspace-${{ needs.scan.outputs.today }}
+          path: workspace/${{ needs.scan.outputs.today }}/
+
+      - name: Write posts via Claude Code
+        uses: anthropics/claude-code-base-action@v0.0.63
+        with:
+          prompt: |
+            Write 3 LinkedIn post options. Inputs are in workspace/${{ needs.scan.outputs.today }}/.
+            Follow .claude/skills/write-posts/SKILL.md → produces posts.md + posts.json
+
+            TODAY=${{ needs.scan.outputs.today }}
+            DRY_RUN=${{ needs.scan.outputs.dry_run }}
+
+            Use research.md, brain.md, themes.json, scored.json as source material.
+            Do NOT write the briefing — that runs in a parallel job.
+            Do NOT run council or publish.
+          settings: .claude/settings.json
+          anthropic_api_key: ${{ secrets.ATLAN_LLM_KEY }}
+          claude_args: "--max-turns 30 --dangerously-skip-permissions"
+        env:
+          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ATLAN_LLM_KEY }}
+          ANTHROPIC_BASE_URL: https://llmproxy.atlan.dev
+          ANTHROPIC_MODEL: claude-opus-4-7
+          ANTHROPIC_SMALL_FAST_MODEL: claude-sonnet-4-6
+          ATLAN_LLM_KEY: ${{ secrets.ATLAN_LLM_KEY }}
+          LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
+          TODAY: ${{ needs.scan.outputs.today }}
+          DRY_RUN: ${{ needs.scan.outputs.dry_run }}
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: workspace-posts-${{ needs.scan.outputs.today }}
+          path: workspace/${{ needs.scan.outputs.today }}/
+          retention-days: 14
+
+  # ============================================================
+  # JOB 5: SHIP — council + publish
+  # Waits for both write-brief and write-posts. Handles quiet-day too.
   # ============================================================
   ship:
     name: Ship (council + publish)
-    needs: [intake, write]
-    if: always() && needs.intake.result == 'success'
+    needs: [scan, analyze, write-brief, write-posts]
+    if: always() && needs.scan.result == 'success' && needs.analyze.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -307,19 +372,36 @@ jobs:
           git config user.name "presidential-briefing-bot"
           git config user.email "bot@users.noreply.github.com"
 
-      - name: Download workspace artifacts
+      - name: Download brief artifact
+        if: needs.analyze.outputs.quiet_day != 'true'
         uses: actions/download-artifact@v4
         with:
-          name: workspace-${{ needs.intake.outputs.today }}
-          path: workspace/${{ needs.intake.outputs.today }}/
+          name: workspace-brief-${{ needs.scan.outputs.today }}
+          path: workspace/${{ needs.scan.outputs.today }}/
+        continue-on-error: true
+
+      - name: Download posts artifact
+        if: needs.analyze.outputs.quiet_day != 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: workspace-posts-${{ needs.scan.outputs.today }}
+          path: workspace/${{ needs.scan.outputs.today }}/
+        continue-on-error: true
+
+      - name: Download scan artifact (fallback for quiet-day)
+        uses: actions/download-artifact@v4
+        with:
+          name: workspace-${{ needs.scan.outputs.today }}
+          path: workspace/${{ needs.scan.outputs.today }}/
+        continue-on-error: true
 
       - name: Quiet-day fast path
-        if: needs.intake.outputs.quiet_day == 'true'
+        if: needs.analyze.outputs.quiet_day == 'true'
         env:
           N8N_SLACK_WEBHOOK_URL: ${{ secrets.N8N_SLACK_WEBHOOK_URL }}
-          DRY_RUN: ${{ needs.intake.outputs.dry_run }}
+          DRY_RUN: ${{ needs.scan.outputs.dry_run }}
         run: |
-          TODAY=${{ needs.intake.outputs.today }}
+          TODAY=${{ needs.scan.outputs.today }}
           if [ "${DRY_RUN}" == "1" ]; then
             echo "[DRY_RUN] would POST nothing_new for $TODAY"
           elif [ -n "$N8N_SLACK_WEBHOOK_URL" ]; then
@@ -327,42 +409,36 @@ jobs:
               -H "Content-Type: application/json" \
               -d '{"type":"nothing_new"}'
             echo "quiet-day Slack delivered"
-          else
-            echo "N8N_SLACK_WEBHOOK_URL not set — skipping"
           fi
           mkdir -p workspace/$TODAY
           echo "quiet_day" > workspace/$TODAY/.status
 
-      # LLM step: council attack + revise + clean + hard gate ONLY.
-      # Delivery (commit/email/Slack) moved to a plain bash step below to avoid
-      # sharing the 600s Claude Code budget with deterministic I/O work.
       - name: Run council + clean + gates via Claude Code
-        if: needs.intake.outputs.quiet_day != 'true'
+        if: needs.analyze.outputs.quiet_day != 'true'
         uses: anthropics/claude-code-base-action@v0.0.63
         with:
           prompt: |
             Run council + clean + quality gates. brief.md + posts.md + posts.json
-            already exist in workspace/${{ needs.intake.outputs.today }}/.
+            already exist in workspace/${{ needs.scan.outputs.today }}/.
 
             1. Follow .claude/skills/council/attack/SKILL.md — writes council-notes.md
             2. If council verdict is REVISE AND iter<1: follow .claude/skills/council/revise/SKILL.md (iter-1)
-            3. Run: python3 scripts/clean_text.py workspace/${{ needs.intake.outputs.today }}/brief.md workspace/${{ needs.intake.outputs.today }}/posts.md
-            4. Run: ./tests/kill-list-regex.sh workspace/${{ needs.intake.outputs.today }}/brief.md
-            5. Run: ./tests/kill-list-regex.sh workspace/${{ needs.intake.outputs.today }}/posts.md
-            6. Run: ./tests/golden-format.sh workspace/${{ needs.intake.outputs.today }}/brief.md
-            7. Run: ./tests/posts-gate.sh workspace/${{ needs.intake.outputs.today }}/posts.json
+            3. Run: python3 scripts/clean_text.py workspace/${{ needs.scan.outputs.today }}/brief.md workspace/${{ needs.scan.outputs.today }}/posts.md
+            4. Run: ./tests/kill-list-regex.sh workspace/${{ needs.scan.outputs.today }}/brief.md
+            5. Run: ./tests/kill-list-regex.sh workspace/${{ needs.scan.outputs.today }}/posts.md
+            6. Run: ./tests/golden-format.sh workspace/${{ needs.scan.outputs.today }}/brief.md
+            7. Run: ./tests/posts-gate.sh workspace/${{ needs.scan.outputs.today }}/posts.json
 
-            IF STEP 4, 5, 6 or 7 FAILS AFTER iter-1 (kill-list / format / posts-gate still flags violations):
-              a. Re-run .claude/skills/council/attack/SKILL.md to get fresh council-notes (deterministic findings only — skip LLM voice/fact/attack passes to save budget)
-              b. If iter<2: follow revise SKILL.md AGAIN (iter-2) with explicit instruction to rewrite every sentence containing the remaining violations AND pad any option <1100 chars by expanding the proof/implication section with one more specific fact or personal beat (NEVER filler)
+            IF STEP 4, 5, 6 or 7 FAILS AFTER iter-1:
+              a. Re-run attack (deterministic pre-flight only)
+              b. If iter<2: follow revise SKILL.md AGAIN (iter-2)
               c. Re-run steps 3, 4, 5, 6, 7
 
-            STOP after gates all pass OR iter-2 still failing. DO NOT commit, email, or Slack — those happen in the next workflow step.
+            STOP after gates all pass OR iter-2 still failing.
+            If any gate fails after iter-2, write rejected status and exit 1.
+            If all pass, write gates-ok to workspace/TODAY/.status.
 
-            If any gate (4, 5, 6, 7) fails after iter-2, write `rejected-kill-list`, `rejected-format`, or `rejected-posts-gate` to workspace/TODAY/.status and exit 1.
-            If all pass, write `gates-ok` to workspace/TODAY/.status.
-
-            TODAY=${{ needs.intake.outputs.today }}
+            TODAY=${{ needs.scan.outputs.today }}
             Council MUST run real LLM passes. Never mock.
           settings: .claude/settings.json
           anthropic_api_key: ${{ secrets.ATLAN_LLM_KEY }}
@@ -374,15 +450,14 @@ jobs:
           ANTHROPIC_SMALL_FAST_MODEL: claude-sonnet-4-6
           ATLAN_LLM_KEY: ${{ secrets.ATLAN_LLM_KEY }}
           LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
-          TODAY: ${{ needs.intake.outputs.today }}
-          DRY_RUN: ${{ needs.intake.outputs.dry_run }}
+          TODAY: ${{ needs.scan.outputs.today }}
+          DRY_RUN: ${{ needs.scan.outputs.dry_run }}
 
-      # Deterministic delivery — plain bash. No LLM involvement.
       - name: Deliver (commit + Readwise + Slack)
-        if: needs.intake.outputs.quiet_day != 'true'
+        if: needs.analyze.outputs.quiet_day != 'true'
         env:
-          DATE: ${{ needs.intake.outputs.today }}
-          DRY_RUN: ${{ needs.intake.outputs.dry_run }}
+          DATE: ${{ needs.scan.outputs.today }}
+          DRY_RUN: ${{ needs.scan.outputs.dry_run }}
           READWISE_TOKEN: ${{ secrets.READWISE_TOKEN }}
           N8N_SLACK_WEBHOOK_URL: ${{ secrets.N8N_SLACK_WEBHOOK_URL }}
           GITHUB_REPO: Aayushm24/presidential-briefing
@@ -390,7 +465,6 @@ jobs:
           set -euo pipefail
           WS="workspace/${DATE}"
 
-          # Verify required artifacts exist
           for f in "${WS}/brief.md" "${WS}/posts.md" "${WS}/posts.json"; do
             if [ ! -f "$f" ]; then
               echo "::error::missing required artifact: $f"
@@ -398,31 +472,16 @@ jobs:
             fi
           done
 
-          # Deterministic pre-delivery gate — belt-and-braces check.
-          # Claude Code's council step should have cleaned already; this just verifies.
           python3 scripts/clean_text.py "${WS}/brief.md" "${WS}/posts.md" 2>&1 || true
 
-          ./tests/kill-list-regex.sh "${WS}/brief.md" || {
-            echo "::error::brief.md still has kill-list violations after final clean. Aborting."
-            exit 1
-          }
-          ./tests/kill-list-regex.sh "${WS}/posts.md" || {
-            echo "::error::posts.md still has kill-list violations after final clean. Aborting."
-            exit 1
-          }
-          ./tests/golden-format.sh "${WS}/brief.md" || {
-            echo "::error::brief.md failed golden format. Aborting."
-            exit 1
-          }
-          ./tests/posts-gate.sh "${WS}/posts.json" || {
-            echo "::error::posts.json failed posts-gate (char count, [Not X it's Y], analogy, or hashtag). Aborting."
-            exit 1
-          }
+          ./tests/kill-list-regex.sh "${WS}/brief.md" || { echo "::error::brief kill-list fail"; exit 1; }
+          ./tests/kill-list-regex.sh "${WS}/posts.md" || { echo "::error::posts kill-list fail"; exit 1; }
+          ./tests/golden-format.sh "${WS}/brief.md" || { echo "::error::golden-format fail"; exit 1; }
+          ./tests/posts-gate.sh "${WS}/posts.json" || { echo "::error::posts-gate fail"; exit 1; }
           echo "pre-delivery gates: all clean"
 
           LEAD_TITLE=$(head -1 "${WS}/brief.md" | sed 's/^# //' | head -c 200)
 
-          # --- Commit to GitHub ---
           if [ "$DRY_RUN" == "1" ]; then
             echo "[DRY_RUN] would commit ${WS}/brief.md + posts.md + scan-summary.json to main"
           else
@@ -435,38 +494,21 @@ jobs:
             echo "committed to main"
           fi
 
-          # --- Save brief to Readwise Reader via API ---
-          # Title is clean (just the H1), no "PDB — DATE:" prefix.
-          # HTML rendered properly so Reader shows headers, blockquotes, links.
           GITHUB_BRIEF_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/brief.md"
           if [ "$DRY_RUN" == "1" ]; then
-            echo "[DRY_RUN] would save to Readwise Reader: ${GITHUB_BRIEF_URL}"
+            echo "[DRY_RUN] would save to Readwise: ${GITHUB_BRIEF_URL}"
           else
             python3 scripts/send_readwise.py "${WS}/brief.md" "${GITHUB_BRIEF_URL}"
           fi
 
-          # --- Slack via n8n webhook ---
           POSTS_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/posts.md"
           BRIEF_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/brief.md"
           POSTS_JSON=$(jq -c '[.options[] | .post]' "${WS}/posts.json")
 
-          # Scan health — always include so Slack shows what the brief was built from
           if [ -f "${WS}/scan-summary.json" ]; then
-            SCAN_HEALTH=$(jq -c '{
-              status: .status,
-              rss_items: .rss.items_returned,
-              rss_feeds_ok: .rss.feeds_processed,
-              rss_feeds_total: .rss.feeds_total,
-              rss_feeds_failed: .rss.feeds_failed,
-              sitemap_items: (.sitemap.items_total // 0),
-              sitemap_sources_ok: (.sitemap.sources_ok // 0),
-              sitemap_sources_total: (.sitemap.sources_total // 0),
-              x_posts: .x.posts_within_24h,
-              x_dropped_stale: .x.posts_dropped_stale,
-              degraded_reasons: .degraded_reasons
-            }' "${WS}/scan-summary.json")
+            SCAN_HEALTH=$(jq -c '{status:.status,rss_items:.rss.items_returned,rss_feeds_ok:.rss.feeds_processed,rss_feeds_total:.rss.feeds_total,rss_feeds_failed:.rss.feeds_failed,sitemap_items:(.sitemap.items_total//0),x_posts:.x.posts_within_24h,degraded_reasons:.degraded_reasons}' "${WS}/scan-summary.json")
           else
-            SCAN_HEALTH='{"status":"unknown","note":"scan-summary.json missing"}'
+            SCAN_HEALTH='{"status":"unknown"}'
           fi
 
           PAYLOAD=$(jq -n \
@@ -475,34 +517,23 @@ jobs:
             --arg posts_url "$POSTS_URL" \
             --argjson posts "$POSTS_JSON" \
             --argjson scan_health "$SCAN_HEALTH" \
-            '{
-              type: "daily_brief",
-              title: $title,
-              briefing_url: $brief_url,
-              posts_url: $posts_url,
-              posts: $posts,
-              scan_health: $scan_health
-            }')
+            '{type:"daily_brief",title:$title,briefing_url:$brief_url,posts_url:$posts_url,posts:$posts,scan_health:$scan_health}')
 
           if [ "$DRY_RUN" == "1" ]; then
-            echo "[DRY_RUN] would POST to n8n: $(echo "$PAYLOAD" | jq -c .)"
+            echo "[DRY_RUN] Slack payload: $(echo "$PAYLOAD" | jq -c .)"
           else
             HTTP=$(curl -sS -o /tmp/slack-resp.txt -w "%{http_code}" \
               -X POST "${N8N_SLACK_WEBHOOK_URL}" \
-              -H "Content-Type: application/json" \
-              -d "$PAYLOAD")
-            echo "n8n webhook HTTP $HTTP"
+              -H "Content-Type: application/json" -d "$PAYLOAD")
+            echo "n8n HTTP $HTTP"
             cat /tmp/slack-resp.txt
-            [ "$HTTP" == "200" ] || echo "::warning::n8n webhook returned $HTTP (non-fatal)"
+            [ "$HTTP" == "200" ] || echo "::warning::n8n returned $HTTP (non-fatal)"
           fi
 
-          # --- Append history + mark shipped ---
           if [ "$DRY_RUN" != "1" ]; then
-            mkdir -p history
-            touch history/published.jsonl
+            mkdir -p history && touch history/published.jsonl
             jq -n --arg date "$DATE" --arg title "$LEAD_TITLE" \
-              '{date:$date, lead_title:$title, status:"shipped"}' \
-              >> history/published.jsonl
+              '{date:$date,lead_title:$title,status:"shipped"}' >> history/published.jsonl
             git add history/published.jsonl
             git commit -m "history: shipped ${DATE}" --allow-empty || true
             git push origin main
@@ -510,35 +541,10 @@ jobs:
           echo "shipped" > "${WS}/.status"
           echo "DELIVERY COMPLETE"
 
-      - name: Path allowlist enforcement (live runs only)
-        if: needs.intake.outputs.dry_run == '0' && needs.intake.outputs.quiet_day != 'true'
-        run: |
-          DIFF_FILES=$(git log --name-only -1 --format= HEAD 2>/dev/null || true)
-          FAILED=0
-          while IFS= read -r FILE; do
-            [ -z "$FILE" ] && continue
-            case "$FILE" in
-              workspace/*) ;;
-              history/*) ;;
-              config/conviction.md) ;;
-              config/conviction.md.bak.*) ;;
-              .claude/skills/write-posts/references/voice.md) ;;
-              .claude/skills/write-posts/references/hooks.md) ;;
-              *)
-                echo "::error::Path allowlist violation: $FILE"
-                FAILED=1
-                ;;
-            esac
-          done <<< "$DIFF_FILES"
-          if [ $FAILED -eq 1 ]; then
-            echo "::error::Unauthorized paths in last commit — manual revert required"
-            exit 1
-          fi
-
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: workspace-${{ needs.intake.outputs.today }}
-          path: workspace/${{ needs.intake.outputs.today }}/
+          name: workspace-${{ needs.scan.outputs.today }}
+          path: workspace/${{ needs.scan.outputs.today }}/
           retention-days: 14
           overwrite: true
