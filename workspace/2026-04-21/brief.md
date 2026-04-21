@@ -21,13 +21,13 @@ That question produced a telemetry layer that most teams never build. Every Clau
 
 Nine months later: [2x throughput with maintained code quality](https://www.lennysnewsletter.com/p/how-intercom-2xd-their-engineering). Measured in merged PRs per R&D employee per month. Not self-reported. Not estimated. Counted.
 
-The number is secondary. The methodology is what matters. Intercom tracked individual adoption rates alongside output quality. They gave designers and PMs access to Claude Code skills, not just engineers, and found those roles started merging PRs too. That expansion only happens when the infrastructure is good enough that non-engineers can operate it safely without making a mess of the codebase.
+Intercom tracked individual adoption rates alongside output quality. They gave designers and PMs access to Claude Code skills, not just engineers, and found those roles started merging PRs too. That expansion only happens when the infrastructure is good enough that non-engineers can operate it safely without making a mess of the codebase.
 
 What Scanlan built is essentially a teaching system. Agents learn the codebase's patterns because the patterns are logged. They enforce standards because the hooks make enforcement automatic. The team's nine months of decisions compound into the infrastructure rather than sitting in individual engineers' heads.
 
 A competitor who signs up for Claude Code today starts at zero. Intercom's agents start with nine months of institutional memory. That gap doesn't close by paying for the subscription. It closes by doing what Intercom did, nine months ago.
 
-The CTOs who've been skeptical about AI coding tools at scale now have a documented case to evaluate: one company, real numbers, published methodology, reproducible process. The only honest response to this piece is to read it and decide whether to start the telemetry layer now or later.
+The CTOs who've been skeptical about AI coding tools at scale now have a documented case: one company, real numbers, published methodology, reproducible process. The telemetry layer either starts now or it starts later. Later just means the gap keeps growing.
 
 ### Why 76% less variance matters more than the median
 
@@ -41,7 +41,7 @@ Agents don't swing. Consistent median performance. Every sprint. Every quarter.
 
 Intercom's case validates this at production scale. Their 2x velocity gain came with no regression spikes, no quality dips, no bad months. Month-over-month predictability at higher throughput. That's what 76% less variance looks like when it runs for nine months in a real company.
 
-The planning implication is underappreciated. If you're structuring your team to absorb variance, that structure assumes a human performance distribution as the baseline. Buffer weeks, senior coverage, contingency planning, these are all overhead costs to manage unpredictable humans. As agents hold the floor more consistently, those costs can be redirected.
+If you're structuring your team to absorb variance, that structure assumes a human performance distribution as the baseline. Buffer weeks, senior coverage, contingency planning, all overhead costs built around unpredictable humans. As agents hold the floor more consistently, those costs can be redirected.
 
 This isn't about replacing engineers. The teams who've figured this out are doing something more specific: they're using agents to hold the consistent parts of delivery, and freeing their humans for the judgment-intensive work that actually requires taste, architecture, and context.
 
@@ -63,9 +63,7 @@ This connects directly to what Intercom built. Their biggest velocity gains came
 
 As ChatGPT App adds computer vision and state persistence together, the gap between "impressive demo" and "useful production tool" gets much smaller. Teams that have already built the memory and context layer will be positioned to use this capability immediately. Teams waiting for the tools to mature are building that disadvantage in real time.
 
-### The brain connection: memory as the common thread
-
-Today's three leading stories share an underlying mechanism: accumulated context that compounds over time.
+### The common thread: memory compounds, models don't
 
 Intercom's telemetry layer isn't just logging, it's building a memory system. The skills repository accumulates the team's patterns. The hooks encode the standards. Nine months of interactions become institutional knowledge that new team members and new agents inherit.
 
@@ -105,7 +103,7 @@ Noetik is training transformers on the full history of clinical trial data, pati
 
 The business model is clear: pharmaceutical companies spend tens of billions on trials that fail. A 10-percentage-point improvement in trial success rates is worth more to that industry than most software companies generate in a decade. Noetik doesn't need to invent new science. They need to apply a proven architecture, the same transformer design that powers Claude Code, to a domain with well-defined failure modes, abundant data, and an industry that has demonstrated willingness to pay.
 
-What this illustrates more broadly: transformer architectures trained for language transfer to pattern-matching problems in completely different domains. The architecture is general-purpose. The competitive advantage comes from having the domain data and the domain expertise to calibrate it. That combination, proven architecture plus specialized data plus domain knowledge, is exactly the wedge that makes vertical AI applications defensible against horizontal competitors.
+Transformer architectures trained for language transfer to pattern-matching problems in completely different domains. The architecture is general-purpose. The competitive advantage comes from having the domain data and the domain expertise to calibrate it. That combination, proven architecture plus specialized data plus domain knowledge, is exactly the wedge that makes vertical AI applications defensible against horizontal competitors.
 
 ---
 
