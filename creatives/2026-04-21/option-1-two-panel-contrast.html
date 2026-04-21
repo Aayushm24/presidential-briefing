@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>option-1-two-panel-contrast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-canvas: #fafaf9;
+    --bg-card: #ffffff;
+    --ink-primary: #0a0a0a;
+    --ink-secondary: #52525b;
+    --accent: #7c3aed;
+    --accent-soft: #ede9fe;
+    --border-subtle: #e4e4e7;
+    --muted-bg: #f4f4f5;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 1200px; overflow: hidden; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-feature-settings: 'ss01' on, 'cv11' on;
+    background: var(--bg-canvas);
+    color: var(--ink-primary);
+    padding: 88px 88px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Header */
+  .header-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-secondary);
+    margin-bottom: 40px;
+  }
+
+  /* Split title */
+  .split-title {
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.0;
+    color: var(--ink-primary);
+    margin-bottom: 40px;
+  }
+
+  /* Two columns */
+  .panels {
+    display: grid;
+    grid-template-columns: 1fr 1.72fr;
+    gap: 20px;
+    flex: 1;
+  }
+
+  /* Left — tools only (muted, light) */
+  .panel-left {
+    background: var(--muted-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: 24px;
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .panel-left .label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-secondary);
+    margin-bottom: 20px;
+  }
+  .panel-left .panel-heading {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--ink-secondary);
+  }
+  .panel-left .bullets {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .panel-left .bullet {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink-secondary);
+    line-height: 1.4;
+  }
+  .panel-left .verdict {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink-secondary);
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  /* Right — memory (dominant, accent) */
+  .panel-right {
+    background: var(--accent);
+    border-radius: 24px;
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #fff;
+  }
+  .panel-right .label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 20px;
+  }
+  .panel-right .panel-heading {
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: #fff;
+  }
+  .panel-right .bullets {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .panel-right .bullet {
+    font-size: 18px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.4;
+  }
+  .hero-gap {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.25);
+  }
+  .hero-gap .gap-number {
+    font-size: 120px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    color: #fff;
+  }
+  .hero-gap .gap-label {
+    font-size: 22px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    margin-top: 8px;
+    letter-spacing: -0.01em;
+  }
+  .hero-gap .gap-source {
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    margin-top: 6px;
+  }
+
+  /* Footer */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: var(--ink-secondary);
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 22px;
+    margin-top: 28px;
+  }
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer-left svg {
+    flex-shrink: 0;
+  }
+  .footer strong { color: var(--ink-primary); font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="header-label">There are only two kinds of AI engineering orgs</div>
+
+  <h1 class="split-title">Tools run sprints.<br>Memory compounds them.</h1>
+
+  <div class="panels">
+    <div class="panel-left">
+      <div>
+        <div class="label">Tools only</div>
+        <div class="panel-heading">Starts fresh<br>every sprint</div>
+        <div class="bullets">
+          <div class="bullet">Claude Code opens. Sprint starts.</div>
+          <div class="bullet">Work happens. Conversation ends.</div>
+          <div class="bullet">Nothing survives the session.</div>
+          <div class="bullet">Next sprint: same starting point.</div>
+        </div>
+      </div>
+      <div class="verdict">Resets at zero.</div>
+    </div>
+
+    <div class="panel-right">
+      <div>
+        <div class="label">Tools + what your team remembers</div>
+        <div class="panel-heading">Compounds<br>every sprint</div>
+        <div class="bullets">
+          <div class="bullet">Every pattern logged and analyzed.</div>
+          <div class="bullet">Skills saved to a shared repo.</div>
+          <div class="bullet">Engineers, designers, PMs — same system.</div>
+          <div class="bullet">Next sprint: starts where last sprint ended.</div>
+        </div>
+      </div>
+      <div class="hero-gap">
+        <div class="gap-number">9 mo</div>
+        <div class="gap-label">ahead after one year</div>
+        <div class="gap-source">Intercom / Brian Scanlan · 2x velocity, zero regression</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="24" height="24" rx="4" fill="#0A66C2"/>
+        <path d="M6.5 9.5H4V19H6.5V9.5Z" fill="white"/>
+        <circle cx="5.25" cy="6.5" r="1.5" fill="white"/>
+        <path d="M20 13.5C20 11 18.5 9 16 9C14.5 9 13.5 9.7 13 10.5V9.5H10.5V19H13V14C13 12.5 13.8 11.5 15 11.5C16.2 11.5 17 12.3 17 14V19H20V13.5Z" fill="white"/>
+      </svg>
+      <span><strong>aayush-maheshwari</strong></span>
+    </div>
+    <span>2026-04-21</span>
+  </div>
+</body>
+</html>

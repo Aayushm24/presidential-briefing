@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>option-2-big-number-card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-canvas: #fafaf9;
+    --bg-card: #ffffff;
+    --ink-primary: #0a0a0a;
+    --ink-secondary: #52525b;
+    --accent: #7c3aed;
+    --accent-soft: #ede9fe;
+    --border-subtle: #e4e4e7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 1200px; overflow: hidden; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-feature-settings: 'ss01' on, 'cv11' on;
+    background: var(--bg-canvas);
+    color: var(--ink-primary);
+    padding: 88px 96px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Chip */
+  .chip {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 8px 16px;
+    border-radius: 9999px;
+  }
+
+  /* Hero block */
+  .hero-block {
+    margin-top: 40px;
+  }
+  .hero-unit {
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0;
+  }
+  .hero-number {
+    font-size: 260px;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 0.85;
+    color: var(--accent);
+    display: block;
+  }
+  .hero-qualifier {
+    font-size: 80px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+    color: var(--ink-primary);
+    margin-top: 12px;
+  }
+
+  /* Source attribution */
+  .source-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 36px;
+  }
+  .source-bar {
+    width: 4px;
+    height: 52px;
+    background: var(--accent);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .source-text {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink-secondary);
+    line-height: 1.4;
+  }
+  .source-text strong {
+    color: var(--ink-primary);
+    font-weight: 700;
+  }
+
+  /* Contrast pair */
+  .contrast-pair {
+    margin-top: 48px;
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+  }
+  .contrast-item {
+    padding: 32px 32px;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-card);
+  }
+  .contrast-item:first-child {
+    border-radius: 16px 0 0 16px;
+    flex: 1;
+  }
+  .contrast-item:last-child {
+    border-radius: 0 16px 16px 0;
+    flex: 1.5;
+    border-left: none;
+    background: var(--accent-soft);
+    border-color: var(--accent-soft);
+  }
+  .contrast-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-secondary);
+    margin-bottom: 10px;
+  }
+  .contrast-item:last-child .contrast-label {
+    color: var(--accent);
+  }
+  .contrast-text {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink-secondary);
+    line-height: 1.3;
+  }
+  .contrast-item:last-child .contrast-text {
+    color: var(--accent);
+  }
+
+  /* Footer */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: var(--ink-secondary);
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 22px;
+  }
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer strong { color: var(--ink-primary); font-weight: 600; }
+</style>
+</head>
+<body>
+  <div>
+    <span class="chip">The gap is not a metric — it's a calendar</span>
+
+    <div class="hero-block">
+      <div class="hero-number">9</div>
+      <div class="hero-qualifier">months ahead.</div>
+    </div>
+
+    <div class="source-line">
+      <div class="source-bar"></div>
+      <div class="source-text">
+        <strong>Intercom</strong>, Brian Scanlan — telemetry on every Claude Code interaction,<br>
+        skills saved to a shared repo. 2x velocity. Zero regression.
+      </div>
+    </div>
+
+    <div class="contrast-pair">
+      <div class="contrast-item">
+        <div class="contrast-label">Teams with tools</div>
+        <div class="contrast-text">Start fresh every sprint.</div>
+      </div>
+      <div class="contrast-item">
+        <div class="contrast-label">Teams with what your team remembers</div>
+        <div class="contrast-text">Compound every sprint. That's the gap.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="24" height="24" rx="4" fill="#0A66C2"/>
+        <path d="M6.5 9.5H4V19H6.5V9.5Z" fill="white"/>
+        <circle cx="5.25" cy="6.5" r="1.5" fill="white"/>
+        <path d="M20 13.5C20 11 18.5 9 16 9C14.5 9 13.5 9.7 13 10.5V9.5H10.5V19H13V14C13 12.5 13.8 11.5 15 11.5C16.2 11.5 17 12.3 17 14V19H20V13.5Z" fill="white"/>
+      </svg>
+      <span><strong>aayush-maheshwari</strong></span>
+    </div>
+    <span>2026-04-21</span>
+  </div>
+</body>
+</html>

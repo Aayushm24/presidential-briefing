@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>option-4-pull-quote-card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-canvas: #fafaf9;
+    --bg-card: #ffffff;
+    --ink-primary: #0a0a0a;
+    --ink-secondary: #52525b;
+    --accent: #7c3aed;
+    --accent-soft: #ede9fe;
+    --border-subtle: #e4e4e7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 1200px; overflow: hidden; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-feature-settings: 'ss01' on, 'cv11' on;
+    background: var(--bg-canvas);
+    color: var(--ink-primary);
+    padding: 96px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Top context */
+  .context-chip {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 8px 16px;
+    border-radius: 9999px;
+  }
+
+  /* Main quote block */
+  .quote-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 0;
+  }
+
+  .accent-rule {
+    width: 64px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 3px;
+    margin-bottom: 48px;
+  }
+
+  .quote-line-1 {
+    font-size: 80px;
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 0.95;
+    color: var(--ink-secondary);
+  }
+  .quote-line-2 {
+    font-size: 80px;
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 0.95;
+    color: var(--ink-primary);
+    margin-top: 4px;
+  }
+  .quote-line-gap {
+    font-size: 108px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+    color: var(--accent);
+    margin-top: 16px;
+  }
+  .quote-line-3 {
+    font-size: 80px;
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 0.95;
+    color: var(--ink-primary);
+    margin-top: 4px;
+  }
+
+  /* Supporting context */
+  .support-block {
+    display: flex;
+    gap: 32px;
+    margin-top: 52px;
+    padding-top: 36px;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .support-item {
+    flex: 1;
+  }
+  .support-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-secondary);
+    margin-bottom: 6px;
+  }
+  .support-text {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink-primary);
+    line-height: 1.35;
+  }
+  .support-sub {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-secondary);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+  .support-divider {
+    width: 1px;
+    background: var(--border-subtle);
+    flex-shrink: 0;
+  }
+
+  /* Footer */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: var(--ink-secondary);
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 22px;
+  }
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer strong { color: var(--ink-primary); font-weight: 600; }
+</style>
+</head>
+<body>
+  <span class="context-chip">On building AI orgs</span>
+
+  <div class="quote-block">
+    <div class="accent-rule"></div>
+    <div class="quote-line-1">Teams with tools</div>
+    <div class="quote-line-2">start fresh every sprint.</div>
+    <div class="quote-line-gap">9 months</div>
+    <div class="quote-line-3">is the compounding gap.</div>
+  </div>
+
+  <div>
+    <div class="support-block">
+      <div class="support-item">
+        <div class="support-label">The source</div>
+        <div class="support-text">Intercom / Brian Scanlan</div>
+        <div class="support-sub">Telemetry on every Claude Code interaction. Skills saved to shared repo. Engineers, designers, PMs — same system.</div>
+      </div>
+      <div class="support-divider"></div>
+      <div class="support-item">
+        <div class="support-label">The question</div>
+        <div class="support-text">What does your team remember from last sprint?</div>
+        <div class="support-sub">I doubt most teams have asked that yet. The ones who have are already ahead.</div>
+      </div>
+      <div class="support-divider"></div>
+      <div class="support-item">
+        <div class="support-label">Same week</div>
+        <div class="support-text">OpenAI acquired Skybysoftware</div>
+        <div class="support-sub">State persistence for agents. Same bet. Different companies.</div>
+      </div>
+    </div>
+
+    <div class="footer" style="margin-top: 28px;">
+      <div class="footer-left">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" rx="4" fill="#0A66C2"/>
+          <path d="M6.5 9.5H4V19H6.5V9.5Z" fill="white"/>
+          <circle cx="5.25" cy="6.5" r="1.5" fill="white"/>
+          <path d="M20 13.5C20 11 18.5 9 16 9C14.5 9 13.5 9.7 13 10.5V9.5H10.5V19H13V14C13 12.5 13.8 11.5 15 11.5C16.2 11.5 17 12.3 17 14V19H20V13.5Z" fill="white"/>
+        </svg>
+        <span><strong>aayush-maheshwari</strong></span>
+      </div>
+      <span>2026-04-21</span>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>option-3-architecture-diagram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-canvas: #fafaf9;
+    --bg-card: #ffffff;
+    --ink-primary: #0a0a0a;
+    --ink-secondary: #52525b;
+    --accent: #7c3aed;
+    --accent-soft: #ede9fe;
+    --border-subtle: #e4e4e7;
+    --muted-bg: #f4f4f5;
+    --muted-border: #d4d4d8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 1200px; overflow: hidden; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-feature-settings: 'ss01' on, 'cv11' on;
+    background: var(--bg-canvas);
+    color: var(--ink-primary);
+    padding: 72px 80px 64px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: 36px;
+  }
+  .header h1 {
+    font-size: 44px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+  .header .subtitle {
+    font-size: 19px;
+    color: var(--ink-secondary);
+    margin-top: 10px;
+    max-width: 700px;
+    line-height: 1.4;
+  }
+
+  /* Main layout: two stacks side by side */
+  .stacks {
+    display: grid;
+    grid-template-columns: 1fr 1.55fr;
+    gap: 24px;
+    flex: 1;
+  }
+
+  /* Stack labels */
+  .stack-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-secondary);
+    margin-bottom: 12px;
+  }
+  .stack-right .stack-label {
+    color: var(--accent);
+  }
+
+  /* Left stack — muted */
+  .stack-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .stack-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .layer {
+    background: var(--bg-card);
+    border: 1px solid var(--muted-border);
+    padding: 18px 20px;
+    position: relative;
+  }
+  .layer:first-of-type { border-radius: 16px 16px 0 0; }
+  .layer + .layer { border-top: none; }
+  .layer:last-of-type { border-radius: 0 0 16px 16px; }
+
+  .layer-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink-secondary);
+  }
+  .layer-desc {
+    font-size: 13px;
+    color: var(--ink-secondary);
+    margin-top: 4px;
+    opacity: 0.75;
+    line-height: 1.35;
+  }
+  .layer-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .pill {
+    background: var(--muted-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-secondary);
+  }
+
+  /* Right stack accent layers */
+  .layer-accent {
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 22px 24px;
+    position: relative;
+  }
+  .layer-accent:first-of-type { border-radius: 16px 16px 0 0; }
+  .layer-accent + .layer-accent,
+  .layer-accent + .layer {
+    border-top: none;
+  }
+  .layer + .layer-accent { border-top: none; }
+  .layer-accent:last-of-type { border-radius: 0 0 16px 16px; }
+  .layer-accent .layer-name {
+    color: #fff;
+    font-size: 16px;
+  }
+  .layer-accent .layer-desc {
+    color: rgba(255,255,255,0.75);
+    opacity: 1;
+  }
+  .layer-accent .pill {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.25);
+    color: #fff;
+  }
+
+  .layer-accent-soft {
+    background: var(--accent-soft);
+    border: 1px solid #c4b5fd;
+    padding: 18px 20px;
+    position: relative;
+  }
+  .layer-accent-soft:first-of-type { border-radius: 16px 16px 0 0; }
+  .layer-accent-soft + .layer-accent,
+  .layer-accent-soft + .layer,
+  .layer-accent-soft + .layer-accent-soft { border-top: none; }
+  .layer-accent:last-of-type { border-radius: 0 0 16px 16px; }
+  .layer-accent-soft .layer-name { color: var(--accent); }
+  .layer-accent-soft .layer-desc { color: #6d28d9; opacity: 0.85; }
+  .layer-accent-soft .pill {
+    background: rgba(124, 58, 237, 0.12);
+    border-color: #c4b5fd;
+    color: var(--accent);
+  }
+
+  /* Gap callout */
+  .gap-callout {
+    background: var(--ink-primary);
+    border-radius: 16px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .gap-callout .gap-num {
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: #fff;
+    line-height: 1;
+  }
+  .gap-callout .gap-text {
+    font-size: 17px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.4;
+  }
+  .gap-callout .gap-text strong {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  /* Footer */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--ink-secondary);
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 18px;
+    margin-top: 24px;
+  }
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .footer strong { color: var(--ink-primary); font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>What separates a 9-month lead?<br>Not the tools — the layer below them.</h1>
+    <p class="subtitle">Both orgs use Claude Code. One session ends and everything resets. The other session ends and the team gets smarter.</p>
+  </div>
+
+  <div class="stacks">
+    <!-- Left: tools only -->
+    <div class="stack-left">
+      <div class="stack-label">Tools only</div>
+
+      <div class="layer">
+        <div class="layer-name">Claude Code (same)</div>
+        <div class="layer-desc">Identical tooling at every team</div>
+        <div class="layer-pills">
+          <span class="pill">claude code</span>
+          <span class="pill">same models</span>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-name">Task execution</div>
+        <div class="layer-desc">Engineers run prompts. Work ships.</div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-name">Session ends</div>
+        <div class="layer-desc">Conversation closed. Context gone.</div>
+      </div>
+
+      <div class="layer" style="flex:1;">
+        <div class="layer-name">Next sprint</div>
+        <div class="layer-desc">Same starting line. Same base knowledge. No accumulation.</div>
+        <div class="layer-pills">
+          <span class="pill">resets at zero</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: tools + memory -->
+    <div class="stack-right">
+      <div class="stack-label">Tools + what your team remembers</div>
+
+      <div class="layer-accent">
+        <div class="layer-name">Claude Code (same)</div>
+        <div class="layer-desc">Same tooling — but the layer below changes everything</div>
+        <div class="layer-pills">
+          <span class="pill">claude code</span>
+          <span class="pill">same models</span>
+        </div>
+      </div>
+
+      <div class="layer-accent">
+        <div class="layer-name">Telemetry layer</div>
+        <div class="layer-desc">Every interaction logged. Patterns extracted automatically.</div>
+        <div class="layer-pills">
+          <span class="pill">interaction logs</span>
+          <span class="pill">pattern analysis</span>
+        </div>
+      </div>
+
+      <div class="layer-accent">
+        <div class="layer-name">Shared skill repo</div>
+        <div class="layer-desc">Engineers, designers, PMs — same system. Everyone merges PRs through Claude Code.</div>
+        <div class="layer-pills">
+          <span class="pill">engineers</span>
+          <span class="pill">designers</span>
+          <span class="pill">PMs</span>
+        </div>
+      </div>
+
+      <div class="layer-accent" style="flex:1;">
+        <div class="layer-name">Next sprint</div>
+        <div class="layer-desc">Starts where last sprint ended. Everything learned is already there.</div>
+        <div class="layer-pills">
+          <span class="pill">compounds every sprint</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gap-callout">
+    <div class="gap-num">9 mo</div>
+    <div class="gap-text">
+      <strong>The compounding gap at Intercom</strong> — after one year of building this layer.<br>
+      2x velocity. Zero regression. Brian Scanlan.
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="24" height="24" rx="4" fill="#0A66C2"/>
+        <path d="M6.5 9.5H4V19H6.5V9.5Z" fill="white"/>
+        <circle cx="5.25" cy="6.5" r="1.5" fill="white"/>
+        <path d="M20 13.5C20 11 18.5 9 16 9C14.5 9 13.5 9.7 13 10.5V9.5H10.5V19H13V14C13 12.5 13.8 11.5 15 11.5C16.2 11.5 17 12.3 17 14V19H20V13.5Z" fill="white"/>
+      </svg>
+      <span><strong>aayush-maheshwari</strong></span>
+    </div>
+    <span>2026-04-21</span>
+  </div>
+</body>
+</html>

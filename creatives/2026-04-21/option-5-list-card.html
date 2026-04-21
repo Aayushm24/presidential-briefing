@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>option-5-list-card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-canvas: #fafaf9;
+    --bg-card: #ffffff;
+    --ink-primary: #0a0a0a;
+    --ink-secondary: #52525b;
+    --accent: #7c3aed;
+    --accent-soft: #ede9fe;
+    --border-subtle: #e4e4e7;
+    --muted-bg: #f4f4f5;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 1200px; overflow: hidden; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-feature-settings: 'ss01' on, 'cv11' on;
+    background: var(--bg-canvas);
+    color: var(--ink-primary);
+    padding: 88px 88px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Top section */
+  .top {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .headline {
+    font-size: 60px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+    color: var(--ink-primary);
+  }
+  .headline span {
+    color: var(--accent);
+  }
+  .sub-headline {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink-secondary);
+    margin-top: 16px;
+    max-width: 800px;
+    line-height: 1.4;
+  }
+
+  /* Memory layers */
+  .layers-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-secondary);
+    margin-top: 44px;
+    margin-bottom: 16px;
+  }
+
+  .layers {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .layer-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .layer-number {
+    width: 72px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 16px 0 0 16px;
+    line-height: 1;
+  }
+
+  .layer-content {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-left: none;
+    border-radius: 0 16px 16px 0;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .layer-main {
+    flex: 1;
+  }
+
+  .layer-title {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    color: var(--ink-primary);
+    line-height: 1.1;
+  }
+  .layer-desc {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--ink-secondary);
+    margin-top: 5px;
+    line-height: 1.4;
+  }
+
+  .layer-outcome {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 8px 14px;
+    border-radius: 9999px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Bottom callout */
+  .callout {
+    background: var(--ink-primary);
+    border-radius: 20px;
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    margin-top: 28px;
+  }
+  .callout-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.4;
+    max-width: 680px;
+  }
+  .callout-text strong {
+    color: #fff;
+  }
+  .callout-stat {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .callout-stat .big {
+    font-size: 64px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #fff;
+    line-height: 0.9;
+  }
+  .callout-stat .small {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    margin-top: 6px;
+  }
+
+  /* Footer */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: var(--ink-secondary);
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 22px;
+  }
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer strong { color: var(--ink-primary); font-weight: 600; }
+</style>
+</head>
+<body>
+  <div>
+    <div class="top">
+      <div class="eyebrow">The 3-layer memory framework</div>
+      <h1 class="headline">What your team<br>remembers<br><span>is the moat.</span></h1>
+      <p class="sub-headline">The tools are identical. The infrastructure below them is not. Here's what teams with a 9-month lead actually built.</p>
+    </div>
+
+    <div class="layers-label">The three layers</div>
+
+    <div class="layers">
+      <div class="layer-row">
+        <div class="layer-number">1</div>
+        <div class="layer-content">
+          <div class="layer-main">
+            <div class="layer-title">Log every interaction</div>
+            <div class="layer-desc">Telemetry on Claude Code usage. Patterns extracted — not manually, automatically.</div>
+          </div>
+          <div class="layer-outcome">capture</div>
+        </div>
+      </div>
+
+      <div class="layer-row">
+        <div class="layer-number">2</div>
+        <div class="layer-content">
+          <div class="layer-main">
+            <div class="layer-title">Save skills to a shared repo</div>
+            <div class="layer-desc">Engineers, designers, PMs — one system. Anyone can merge. The org learns, not just the individual.</div>
+          </div>
+          <div class="layer-outcome">share</div>
+        </div>
+      </div>
+
+      <div class="layer-row">
+        <div class="layer-number">3</div>
+        <div class="layer-content">
+          <div class="layer-main">
+            <div class="layer-title">Next sprint inherits last sprint</div>
+            <div class="layer-desc">The starting point moves forward every week. You never reset to zero. The gap compounds.</div>
+          </div>
+          <div class="layer-outcome">compound</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-text">
+        <strong>Intercom did this.</strong> Brian Scanlan built the telemetry layer. One year later: 2x velocity, zero regression. Designers and PMs now merge PRs.
+      </div>
+      <div class="callout-stat">
+        <div class="big">9 mo</div>
+        <div class="small">ahead</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="24" height="24" rx="4" fill="#0A66C2"/>
+        <path d="M6.5 9.5H4V19H6.5V9.5Z" fill="white"/>
+        <circle cx="5.25" cy="6.5" r="1.5" fill="white"/>
+        <path d="M20 13.5C20 11 18.5 9 16 9C14.5 9 13.5 9.7 13 10.5V9.5H10.5V19H13V14C13 12.5 13.8 11.5 15 11.5C16.2 11.5 17 12.3 17 14V19H20V13.5Z" fill="white"/>
+      </svg>
+      <span><strong>aayush-maheshwari</strong></span>
+    </div>
+    <span>2026-04-21</span>
+  </div>
+</body>
+</html>
