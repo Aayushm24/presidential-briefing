@@ -2,7 +2,7 @@
 
 Brian Scanlan, VP of Engineering at [Intercom](https://www.lennysnewsletter.com/p/how-intercom-2xd-their-engineering), spent nine months building something most engineering leaders skip entirely: telemetry.
 
-Not the model. Not the plugin. A system that logs every Claude Code interaction, enforces engineering standards through hooks, and compounds everything the team learns into a shared skills repository. Every engineer, designer, and PM in the same loop. The result: 2x throughput, maintained code quality, measured in merged PRs per R&D employee per month over nine months.
+He built telemetry, a system that logs every Claude Code interaction, enforces engineering standards through hooks, and compounds everything the team learns into a shared skills repository. Every engineer, designer, and PM in the same loop. The result: 2x throughput, maintained code quality, measured in merged PRs per R&D employee per month over nine months.
 
 **Key takeaways:**
 - Intercom's 2x came from building institutional memory on top of Claude Code, not just deploying it
@@ -19,7 +19,7 @@ Brian Scanlan didn't start by deploying Claude Code. He started by asking what h
 
 That question produced a telemetry layer that most teams never build. Every Claude Code interaction logged. Every hook enforced. Every skill catalogued in a shared repository where the team's patterns, preferences, and edge cases accumulate into something no fresh installation can replicate.
 
-Nine months later: [2x throughput with maintained code quality](https://www.lennysnewsletter.com/p/how-intercom-2xd-their-engineering). Measured in merged PRs per R&D employee per month. Not self-reported. Not estimated. Counted.
+Nine months later: [2x throughput with maintained code quality](https://www.lennysnewsletter.com/p/how-intercom-2xd-their-engineering). Measured by counting merged PRs per R&D employee per month.
 
 Intercom tracked individual adoption rates alongside output quality. They gave designers and PMs access to Claude Code skills, not just engineers, and found those roles started merging PRs too. That expansion only happens when the infrastructure is good enough that non-engineers can operate it safely without making a mess of the codebase.
 
@@ -73,7 +73,7 @@ Noetik, [founded by Ron Alfa and Daniel Bear](https://www.latent.space/p/noetik)
 
 Model quality is now a commodity. Every serious team has access to the same foundation models. What compounds over time is the context layer, what your system has seen, logged, remembered, and learned. Intercom's advantage after nine months isn't Claude Code access. It's nine months of logged interactions their agents carry forward. A competitor can sign up for the same tool tomorrow and never replicate that context without putting in the same nine months.
 
-This is where the 2026 competitive dynamic plays out. Not at the model layer, that's a subscription. At the context layer, that's accumulated time and institutional investment.
+The model layer is a subscription anyone can buy tomorrow. The context layer is nine months of compounding work that can't be purchased.
 
 ---
 
@@ -97,7 +97,7 @@ The practical implication: track token usage by task type, not just total spend.
 
 [Noetik](https://www.latent.space/p/noetik), founded by Ron Alfa and Daniel Bear, is applying autoregressive transformers to clinical trial matching.
 
-Their thesis: 95% of cancer treatments fail to pass clinical trials. Not because the drugs don't work, because the wrong patients enrolled. Trial sponsors spend billions recruiting patients based on inclusion criteria that rely on structured data like age, diagnosis stage, and specific biomarkers. But the actual matching problem is more complex. Patients who would benefit from a treatment often don't get enrolled because the matching process can't process the unstructured clinical context that would identify them.
+Their thesis: 95% of cancer treatments fail to pass clinical trials because the wrong patients enrolled. The drugs often work. The matching doesn't. Trial sponsors spend billions recruiting patients based on inclusion criteria that rely on structured data like age, diagnosis stage, and specific biomarkers. But the actual matching problem is more complex. Patients who would benefit from a treatment often don't get enrolled because the matching process can't process the unstructured clinical context that would identify them.
 
 Noetik is training transformers on the full history of clinical trial data, patient records, and treatment outcomes to match patients to trials more accurately than current methods.
 

@@ -5,7 +5,7 @@
 
 ---
 
-## OPTION 1 - contrarian (hook score: 9)
+## OPTION 1 - contrarian (1480c)
 
 **Conviction:** Teams with institutional AI memory compound every sprint. Teams without tools start fresh.
 
@@ -19,8 +19,7 @@ He built telemetry that logs every Claude Code interaction. Every pattern analyz
 
 9 months later: 2x velocity. Zero regression. Designers and PMs merged PRs.
 
-Not because they got better tools than everyone else.
-Because they built memory on top of the tools.
+The tools were identical. Everyone has Claude Code. The infrastructure was different.
 
 There are only two AI engineering orgs now:
 
@@ -32,7 +31,7 @@ Teams with institutional memory compound every sprint.
 
 That's the gap.
 
-OpenAI just bought a whole company to solve the same problem. Skybysoftware. Not for the computer use demos. For persistent state. Agents that remember your environment, your preferences, your deployment history across sessions. That's what state persistence means at the product layer.
+OpenAI acquired Skybysoftware this week for state persistence — agents that remember your environment, preferences, and deployment history across sessions. The computer use headline was marketing. The actual prize was memory.
 
 Same bet. Different company. Same week.
 
@@ -44,17 +43,17 @@ the ones who have are already 9 months ahead.
 
 what does your team's AI memory look like after 12 months of compounding?
 
-p.s. the number that hit me hardest: 100% of Intercom's engineers, designers, and PMs ship through Claude Code now. Not just devs. The telemetry changed who could ship. 👇🏻
+p.s. the number that hit me hardest: 100% of Intercom's engineers, designers, and PMs ship through Claude Code now. The telemetry changed who could ship. 👇🏻
 
 ---
 
-## OPTION 2 - data-point (hook score: 8)
+## OPTION 2 - data-point (1729c)
 
 **Conviction:** AI agents replace variance, not engineers. That's a 2x gain before shipping anything new.
 
 76% less variance.
 
-That's what Claude Code delivers vs. human dev teams. From actual economics research replicating classic multi-team studies. Not a vendor benchmark. Controlled experiments with real tasks.
+That's what Claude Code delivers vs. human dev teams. From actual economics research replicating classic multi-team studies. Actual economics research replicating classic multi-team studies. Controlled experiments with real tasks.
 
 Most people hear "near human median" and shrug.
 
@@ -67,7 +66,7 @@ Your Q2 estimate is basically a guess wearing a number.
 
 Agents don't swing. Consistent median. Every sprint. Every quarter.
 
-Intercom validated this in production: 2x velocity, maintained code quality, no regression spikes across 9 months. Not one lucky sprint. Compounding consistency.
+Intercom validated this in production: 2x velocity, maintained code quality, no regression spikes across 9 months. Nine months of compounding consistency.
 
 i've been thinking about what this does to how you plan.
 
@@ -78,9 +77,10 @@ You're planning around throughput.
 
 That's a different model entirely.
 
-- What if you could bank on consistent output per sprint?
-- What if "unpredictable Q2" became a planning problem, not a people problem?
-- What if your next hire didn't need to be exceptional to matter?
+The hiring profile changes too. You're not looking for the person who can carry a bad sprint.
+You're looking for judgment — the ability to ask better questions than the agent answers on its own.
+
+Most companies haven't written that job description yet.
 
 IMO, the teams figuring this out first aren't replacing engineers.
 They're replacing the variance.
@@ -92,21 +92,21 @@ p.s. the Mollick study is worth reading in full. it shows exactly where AI is re
 
 ---
 
-## OPTION 3 - pattern-observation (hook score: 8)
+## OPTION 3 - pattern-observation (1649c)
 
 **Conviction:** Memory is the hard part now, not the model. 2026 moat = what your system learned, not what it can access.
 
 three stories landed this week.
 
-Intercom doubled engineering velocity by building telemetry that remembers every Claude Code interaction. 9 months of logged patterns, not 9 months of access.
+Intercom doubled engineering velocity by building telemetry that remembers every Claude Code interaction. 9 months of logged patterns.
 
-OpenAI acquired Skybysoftware to solve state persistence. Agents that remember your environment across sessions, not just within them.
+OpenAI acquired Skybysoftware to solve state persistence. Agents that remember your environment across sessions.
 
 Noetik is applying transformers to cancer trial matching. 95% of trials fail not because the drugs don't work, but because the wrong patients enrolled. Their fix: accumulated pattern matching across every trial ever run.
 
 Three different problems. Three different companies. The same underlying bet.
 
-Memory is the hard part now. Not the model.
+Memory is the hard part now. The model is a commodity.
 
 Every team i talk to is racing to upgrade their foundation model. Anthropic ships something new. Everyone switches. OpenAI ships. Everyone switches again.
 
@@ -122,7 +122,8 @@ The moat has shifted:
 
 Intercom's advantage isn't Claude Code. It's 9 months of institutional knowledge their agents carry. A competitor can sign up for the same tool tomorrow. They can't fast-forward 9 months of compounding context.
 
-That's the thing that doesn't copy.
+IMO, that's the thing that doesn't copy.
+And it's the thing almost nobody is investing in right now.
 
 how much of your AI budget goes to memory vs. processing?
 

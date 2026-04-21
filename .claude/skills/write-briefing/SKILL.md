@@ -308,6 +308,13 @@ Every paragraph is one of:
 
 ALSO BANNED (regex-enforced by clean_text.py):
 - **"[Not X, it's Y]" inversions** — "these aren't unrelated stories. they're the same story." Max 1 per brief.
+- **"Not X. Y." contrast-through-negation** — ZERO tolerance. This is the #1 AI-writing tell. Every form is banned:
+  - "Not the model. Not the plugin." → say what it IS: "He built telemetry."
+  - "Not for the demos. For persistent state." → "OpenAI acquired Skybysoftware for state persistence."
+  - "Not self-reported. Not estimated. Counted." → "The number came from counting merged PRs per R&D employee."
+  - "Not because X. Because Y." → "Y. X wasn't the reason."
+  - "X. Not Y." as a standalone reveal → cut the "Not Y." line, the point lands without it
+  If you catch yourself writing "Not [word]" to start a sentence, rewrite it as a positive claim.
 - **"Why now?" structural labels** — "what's happening is", "here's why this matters", "the parallel to X is almost exact". Zero allowed.
 - **Neat bow closers** — "the founders who see this will win. the ones who don't will retrofit." End on open question or grounded closer.
 - **Fabricated specifics** — no invented numbers, company names, quotes. If you don't have a source, tag `[UNGROUNDED]` and let editor resolve.

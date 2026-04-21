@@ -85,6 +85,15 @@ check_file() {
     errors+=('analogy_pattern: "It\'"'"'s like X" — turn into a question')
   fi
 
+  # Pattern 1I: "Not X. Y." contrast-through-negation (the AI-tell we keep missing)
+  # Catches: "Not the model.", "Not for the demos.", "Not because X.", "Not just X."
+  # as standalone sentences (not mid-sentence negation which is fine)
+  local not_x_y_count
+  not_x_y_count=$(echo "$content" | grep -cE '(^|[.!?] )Not (the |a |for |because |just |one |in |at |by |an )' || true)
+  if [ "$not_x_y_count" -gt 0 ]; then
+    errors+=("not_x_y_negation_hits=${not_x_y_count} — 'Not X. Y.' sentences sound AI-generated. Say what it IS, not what it isn't.")
+  fi
+
   # Corporate direct-address
   for phrase in "for founders" "hey founders" "fellow founders" "if you're a founder"; do
     if echo "$content" | grep -qi -- "$phrase"; then

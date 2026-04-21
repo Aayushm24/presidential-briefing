@@ -149,7 +149,14 @@ Write 3 LinkedIn post OPTIONS. Each MUST:
 
 **1. NO [Not X, it's Y] inversions — ZERO across all 3 options combined.** This is the #1 AI tell. The ship step's posts-gate.sh scans every option for patterns like "isn't X. It's Y", "aren't A. They're B", "this isn't about X. it's about Y", "stopped being X. it's becoming Y". Any hit = option rejected. Today's failure (2026-04-20) had 2 hits in posts: "The survivors aren't building better models. They're building better distribution" and "This isn't about model access anymore. It's about who already has the users." Both would fail the new gate. Replace with direct parallel claims ("Same pricing. Less per token.") or open questions ("what are you actually paying for?").
 
-**2. NO "It's like X" analogies — ZERO tolerance.** Today's failure included "It's like buying a coffee for $5, but they use a smaller cup." This is a declarative analogy. Replace with parallel structure or rhetorical question. NEVER keep "it's like...".
+**2. NO "Not X. Y." contrast-through-negation — ZERO tolerance.** Same AI-tell as [Not X, it's Y] but harder to catch because the gate misses it. Every form banned:
+- "Not because they got better tools. Because they built memory." → "The tools were the same. The infrastructure was different."
+- "Not for the computer use demos. For persistent state." → "OpenAI acquired Skybysoftware for state persistence."
+- "Not one lucky sprint." → "Nine months of compounding consistency."
+- "Memory is the hard part now. Not the model." → "Memory is the hard part now. The model is a commodity."
+Rule: if you write "Not [word]" to start a sentence, it's banned. Rewrite as a positive claim.
+
+**3. NO "It's like X" analogies — ZERO tolerance.** Today's failure included "It's like buying a coffee for $5, but they use a smaller cup." This is a declarative analogy. Replace with parallel structure or rhetorical question. NEVER keep "it's like...".
 
 **3. NO advice voice.** Zero "founders should...", "builders who invest now get...", "teams need to plan for...", "the ones who X will Y" closers. Replace with: personal observation + open question.
 
