@@ -4,6 +4,10 @@
 `/write-posts` generation from 2026-04-20 onward. Read this BEFORE composing
 the 3 daily options. Match its rhythm, not its claims.
 
+**CRITICAL — CONTENT EMBARGO:** The specific examples in this post (Notion, Canva, Anthropic/OpenAI, "12 months", Distribution/Proprietary data/Deep workflow integration) are ALREADY PUBLISHED and must NEVER appear in generated posts. Using them would make Aayush look like he's repeating himself.
+
+Extract DEVICES only (ellipsis hook, "That's X." recap tags, three-pillar list, "I doubt"/"IMO" markers, era-reframe, lowercase closer). Apply to TODAY'S news, not yesterday's examples.
+
 **Length:** ~1,900 characters
 **Template:** three-pillar (see `.claude/skills/write-posts/references/post-templates.md`)
 **Style (Blueprint):** Contrarian Philosopher

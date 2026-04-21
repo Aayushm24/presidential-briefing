@@ -1,4 +1,4 @@
-# LinkedIn posts — 2026-04-21 (v3 — examples-first)
+# LinkedIn posts — 2026-04-21 (v4)
 
 **Lead:** AI coding agents just proved they can 2x engineering velocity with real companies
 **Best option:** 1
@@ -32,9 +32,9 @@ Teams with institutional memory compound every sprint.
 
 That's the gap.
 
-Notion rebuilt their agent system five times before shipping. Every time a platform provider shipped the same feature underneath them. They only won by going deeper into context, not wider into features.
+OpenAI just bought a whole company to solve the same problem. Skybysoftware. Not for the computer use demos. For persistent state. Agents that remember your environment, your preferences, your deployment history across sessions. That's what state persistence means at the product layer.
 
-Same pattern. Different company. Different decade.
+Same bet. Different company. Same week.
 
 IMO, the question isn't whether your team uses Claude Code. It's whether your Claude Code usage teaches your organization anything after the session closes.
 

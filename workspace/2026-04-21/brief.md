@@ -1,8 +1,10 @@
 # AI coding agents just proved they can 2x engineering velocity with real companies
 
-[Intercom](https://www.lennysnewsletter.com/p/how-intercom-2xd-their-engineering) doubled engineering throughput in 9 months. 100% of engineers, designers, and PMs. Full telemetry. Documented methodology. Public numbers.
+Brian Scanlan spent nine months building something most engineering leaders won't invest in: [telemetry for AI impact](https://www.lennysnewsletter.com/p/how-intercom-2xd-their-engineering).
 
-This isn't a benchmark. It's a 500-person org that built the instrumentation to measure AI impact, ran it for three quarters, and published exactly what they found. The signal smart builders have been waiting for landed on a Tuesday.
+Not the model. Not the IDE plugin. A system that logs every Claude Code interaction, enforces engineering standards through hooks, and compounds institutional knowledge into a shared skills repository. Every engineer, designer, and PM at Intercom in the same loop. The result: 2x throughput, maintained code quality, measured in merged PRs per R&D employee per month over nine months.
+
+That's the story this week. Not that AI helps engineers code faster. That one VP built the infrastructure to make AI compound, and published the whole playbook.
 
 **Key takeaways:**
 - Intercom's 2x gain came from building memory infrastructure on top of Claude Code, not from Claude Code alone
