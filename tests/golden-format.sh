@@ -106,18 +106,17 @@ check_brief() {
   return 0
 }
 
-# Check all shipped briefs (workspace/*/brief.md)
-shopt -s nullglob
-for BRIEF in workspace/*/brief.md; do
-  check_brief "$BRIEF" || FAIL=1
-  CHECKED=$((CHECKED + 1))
-done
-
-# If called with an explicit file arg, check just that one
+# If called with an explicit file arg, check ONLY that file.
+# Otherwise check all workspace/*/brief.md.
 if [ $# -gt 0 ]; then
-  CHECKED=0; FAIL=0
   check_brief "$1" || FAIL=1
   CHECKED=$((CHECKED + 1))
+else
+  shopt -s nullglob
+  for BRIEF in workspace/*/brief.md; do
+    check_brief "$BRIEF" || FAIL=1
+    CHECKED=$((CHECKED + 1))
+  done
 fi
 
 if [ $CHECKED -eq 0 ]; then
