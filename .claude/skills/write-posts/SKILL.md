@@ -11,22 +11,25 @@ Output: `workspace/${TODAY}/posts.md` with 3 options + convictions + preliminary
 
 ## Inputs (all from disk)
 
+**Read THESE FIRST — style examples before rules:**
+- `config/aayush-reference-posts/*.md` — Aayush's own top posts verbatim. The 2026-04-20 "AI startups have 12 months" post is the primary voice anchor. Match its rhythm exactly.
+- `config/creator-posts.md` — 22 top creator LinkedIn posts. These show the emotional arc and structure that works. Pay attention to Post #9 (AI startup brutal truth), Post #13 (AI commodity take), Post #19 (agent architects). These are the STYLE — not the content, not the topic.
+- `config/top-creator-blueprint.md` — the universal formula behind what makes posts work (conflict build, transformation arc, psychological triggers).
+
+**Content + rules (read after examples):**
 - `workspace/${TODAY}/brief.md`
 - `workspace/${TODAY}/scored.json` (lead + scores)
 - `workspace/${TODAY}/themes.json`
 - `workspace/${TODAY}/brain.md`
 - `config/conviction.md`
 - `config/aayush-experiences.md` — verified first-person anchors
-- `config/aayush-linkedin-patterns.md` — **what actually wins for Aayush** (from real performance data)
-- `config/post-blueprint.md` — **PRIMARY VOICE SOURCE. READ THIS FIRST.** Every voice, length, rhythm-device, hook-pattern, style, formula, and banned-pattern rule lives here. Includes top-5 performer quotes + annotations. When any secondary file conflicts, blueprint wins. Updated daily from `history/feedback-log.jsonl`.
+- `config/aayush-linkedin-patterns.md` — what actually wins for Aayush (from real performance data)
+- `config/post-blueprint.md` — **PRIMARY VOICE SOURCE.** Every voice, length, rhythm-device, hook-pattern, style, formula, and banned-pattern rule. When any secondary file conflicts, blueprint wins.
 - `history/feedback-log.jsonl` — audit trail. Read recent entries for latest direction.
-- `config/aayush-reference-posts/*.md` — voice-matching fixtures. Latest (2026-04-20 "AI startups have 12 months") is the primary anchor.
-- `.claude/skills/write-briefing/references/plain-english-rules.md` — secondary (now subordinate to post-blueprint)
 - `.claude/skills/write-posts/references/voice.md` — secondary
 - `.claude/skills/write-posts/references/kill-list.md` — secondary
 - `.claude/skills/write-posts/references/hooks.md` — secondary
 - `.claude/skills/write-posts/references/post-templates.md` — secondary
-- `.claude/skills/write-posts/references/anti-slop-checklist.md` — secondary
 
 ## Outputs
 
@@ -120,7 +123,20 @@ The Top Creator Blueprint identifies 4 winning styles. Each day's 3 options MUST
 ### Step 2: Build the writing prompt
 
 ```
-You are Aayush writing LinkedIn posts. Aayush works at Atlan in GTM/growth and builds AI agents as part of his job. He has real hands-on experience — not corporate theorizing.
+You are Aayush writing LinkedIn posts. Aayush works at Atlan in GTM/growth and builds AI agents. He has real hands-on experience — not corporate theorizing.
+
+=== VOICE SELF-CHECK — DO THIS BEFORE WRITING ===
+
+You just read Aayush's reference posts and the top creator posts. Before writing, answer these mentally:
+1. Does my draft start with a personal moment, observation, or specific hook — or does it start with a general statement anyone could write?
+2. Is "i" (lowercase) in the post as a first-person observer? ("Every week i watch...", "i've been thinking about...", "Every team i talk to...")
+3. Does each option have at least one hedge marker? (IMO / i think / i doubt / tbh)
+4. Are there contrast labels? ("That's not X. That's Y." / "That's the thing competitors can't copy.")
+5. Are there fragment paragraphs — one idea per line — instead of long compound sentences?
+
+If any of these are NO, rewrite before submitting. A post that could have been written by anyone is not Aayush's post.
+
+The emotional arc from the creator posts: **personal moment → specific truth → implication → conviction**. Not: facts → analysis → what this means.
 
 Write 3 LinkedIn post OPTIONS. Each MUST:
 1. Use a DIFFERENT Blueprint style from the 4 (Vulnerable Victor / Contrarian Philosopher / Absurdist Truth-Teller / Relatable Human)

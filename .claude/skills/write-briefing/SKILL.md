@@ -12,17 +12,22 @@ Uses the **Helix 3-layer model**: every paragraph is a Fact (cited), a Synthesis
 ## Inputs
 
 Read from disk (NOT inline):
+
+**Step 0 — STYLE FIRST. Read these before anything else:**
+- `config/brief-examples/ai-daily-brief-example.md` — writing style anchor (attribution, density, specificity)
+- `config/brief-examples/the-signal-example.md` — narrative style anchor (mini-stories, first-person narrator, pattern synthesis)
+
+**Content inputs:**
 - `workspace/${TODAY}/research.md` — top 10 stories, human-readable
 - `workspace/${TODAY}/themes.json` — lead theme + standalone stories
 - `workspace/${TODAY}/brain.md` — past theme/story connections
 - `config/conviction.md` — this week's POV
-- `.claude/skills/write-briefing/references/newsletter-voice.md` — voice rules
-- `config/brief-blueprint.md` — **PRIMARY VOICE SOURCE. READ THIS FIRST.** Every voice, length, structure, citation, and banned-vocab rule lives here. When any secondary file conflicts with this blueprint, the blueprint wins. Updated daily from `history/feedback-log.jsonl`.
+- `config/brief-blueprint.md` — **PRIMARY VOICE SOURCE.** Every voice, length, structure, citation, and banned-vocab rule lives here. When any secondary file conflicts with this blueprint, the blueprint wins. Updated daily from `history/feedback-log.jsonl`.
 - `history/feedback-log.jsonl` — audit trail of every feedback entry. Read recent entries for latest-of-latest voice direction.
-- `.claude/skills/write-briefing/references/plain-english-rules.md` — secondary (now subordinate to blueprint)
-- `.claude/skills/write-briefing/references/section-order.md` — secondary (structure details)
-- `.claude/skills/write-briefing/references/anti-slop-checklist.md` — secondary (5 Tests + LLM-tell patterns)
-- `.claude/skills/write-posts/references/kill-list.md` — secondary (banned words/patterns)
+- `.claude/skills/write-briefing/references/plain-english-rules.md` — secondary (subordinate to blueprint)
+- `.claude/skills/write-briefing/references/section-order.md` — secondary
+- `.claude/skills/write-briefing/references/anti-slop-checklist.md` — secondary
+- `.claude/skills/write-posts/references/kill-list.md` — secondary
 
 Article text for the lead + 2 top secondary stories (fetched inline in this skill, Step 1).
 
@@ -136,6 +141,36 @@ Assemble verbatim prompt (ported from n8n `Write Briefing`, adapted for file-han
 
 ```
 Write a daily AI briefing. Make the reader genuinely understand what is happening and why it matters. NO length limit. Go as deep as needed.
+
+=== STYLE REFERENCE — READ THIS BEFORE WRITING ANYTHING ===
+
+You are writing in the style of The AI Daily Brief and The Signal newsletter — NOT a consulting report, NOT a listicle, NOT a summary deck.
+
+What those newsletters do that you must also do:
+
+1. ATTRIBUTE EVERY CLAIM to a named person, inline, immediately after the fact.
+   NOT: "Some users hit rate limits."
+   YES: "Josh Gonzales hit Claude Design's usage limit and was locked out until the following Friday. Theo burned 10% of his usage and had a project wiped."
+
+2. TELL MINI-STORIES about specific people doing specific things.
+   NOT: "Companies are adopting this approach."
+   YES: "Eric is an SMB AE at Zendesk. He has 1,800 accounts. Every rep in his territory has had the same data for five years. He needed an edge."
+
+3. BE THE NARRATOR. Aayush is in the brief commenting, not a reporter summarizing.
+   NOT: "This development has significant implications."
+   YES: "What I keep coming back to is the telemetry play. Not the velocity number — the fact that they built infrastructure to measure AI impact at all."
+
+4. SECTION HEADERS ARE POSITIONS, not topics.
+   NOT: "### The Features"
+   YES: "### The sliders are the killer feature — not the prompt box"
+
+5. EARN THE SYNTHESIS. Tell the specific stories first. State the pattern last.
+   NOT: Opening with "These three stories all share one theme: memory matters."
+   YES: Tell each story with specifics. Then at the end: "Three different companies. Same underlying bet."
+
+6. CONVICTION AT THE END IS REQUIRED. End with Aayush's actual take — not "time will tell" or "watch this space." A sharp statement of what he now believes based on what he read.
+
+7. "WHAT TO DO THIS WEEK" should be as specific as the AI Daily Brief's "Seven Things to Try" — named tools, specific prompts, actual links. Not "consider exploring AI agents."
 
 === FORMATTING RULES (follow exactly) ===
 
