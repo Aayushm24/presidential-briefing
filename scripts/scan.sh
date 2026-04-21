@@ -79,19 +79,69 @@ YESTERDAY=$(TZ=UTC date -u -d "yesterday" +%Y-%m-%d 2>/dev/null || TZ=UTC date -
 GROK_PROMPT="Today's date = ${TODAY}. Search X/Twitter for posts from the last 24 hours (since ${YESTERDAY}) by these X user handles: @karpathy, @rasbt, @natolambert, @simonw, @emollick, @garrytan, @swyx, @ttunguz. For each substantive post about AI technology, research, or industry, return a JSON array: [{author, date_of_post, text, full_post, url, key_claims}]. Include the exact timestamp in date_of_post if available. Skip personal/promotional content. Return ONLY the JSON array and nothing else."
 
 GROK_STATUS="ok"
-echo "[scan] calling Grok via ${LLM_PROXY_BASE_URL}/responses" >&2
-curl -sS --max-time 120 -X POST "${LLM_PROXY_BASE_URL}/responses" \
-  -H "Authorization: Bearer ${ATLAN_LLM_KEY}" \
-  -H "Content-Type: application/json" \
-  -d "$(jq -n --arg p "$GROK_PROMPT" '{
-    model: "grok-4",
-    input: [{role:"user", content:$p}],
-    tools: [{type:"x_search"}],
-    temperature: 0.2
-  }')" > "$WS/.grok-raw.json" || {
-    echo "::warning::Grok call failed or timed out (non-fatal, RSS-only fallback)" >&2
-    GROK_STATUS="failed"
-  }
+GROK_FAIL_REASON=""
+GROK_REQUEST_BODY="$(jq -n --arg p "$GROK_PROMPT" '{
+  model: "grok-4-1",
+  input: [{role:"user", content:$p}],
+  tools: [{type:"x_search"}],
+  temperature: 0.2
+}')"
+
+# Retry loop: up to 2 attempts with 10s delay between retries.
+# grok-4-1 via /responses with x_search can take 90-150s — use 180s timeout.
+GROK_MAX_ATTEMPTS=2
+GROK_ATTEMPT=0
+GROK_SUCCESS=false
+while [ $GROK_ATTEMPT -lt $GROK_MAX_ATTEMPTS ]; do
+  GROK_ATTEMPT=$((GROK_ATTEMPT + 1))
+  echo "[scan] Grok attempt $GROK_ATTEMPT/$GROK_MAX_ATTEMPTS via ${LLM_PROXY_BASE_URL}/responses (model=grok-4-1, timeout=180s)" >&2
+  GROK_HTTP_CODE=0
+  GROK_CURL_EXIT=0
+  GROK_HTTP_CODE=$(curl -sS --max-time 180 -o "$WS/.grok-raw.json" -w "%{http_code}" \
+    -X POST "${LLM_PROXY_BASE_URL}/responses" \
+    -H "Authorization: Bearer ${ATLAN_LLM_KEY}" \
+    -H "Content-Type: application/json" \
+    -d "$GROK_REQUEST_BODY" 2>"$WS/.grok-curl-stderr.log") || GROK_CURL_EXIT=$?
+
+  if [ $GROK_CURL_EXIT -eq 28 ]; then
+    GROK_FAIL_REASON="connection_timeout (curl exit 28, attempt $GROK_ATTEMPT)"
+    echo "::warning::Grok attempt $GROK_ATTEMPT timed out after 180s (curl exit 28)" >&2
+  elif [ $GROK_CURL_EXIT -ne 0 ]; then
+    GROK_FAIL_REASON="curl_error_$GROK_CURL_EXIT (attempt $GROK_ATTEMPT)"
+    echo "::warning::Grok attempt $GROK_ATTEMPT curl error exit=$GROK_CURL_EXIT" >&2
+    cat "$WS/.grok-curl-stderr.log" >&2 || true
+  elif [ "$GROK_HTTP_CODE" = "401" ] || [ "$GROK_HTTP_CODE" = "403" ]; then
+    GROK_FAIL_REASON="auth_error (HTTP $GROK_HTTP_CODE)"
+    echo "::warning::Grok auth error HTTP $GROK_HTTP_CODE — check ATLAN_LLM_KEY. No retry." >&2
+    break  # Auth errors won't be fixed by retrying
+  elif [ "$GROK_HTTP_CODE" = "400" ]; then
+    GROK_FAIL_REASON="format_error (HTTP 400)"
+    echo "::warning::Grok HTTP 400 — bad request format. Response:" >&2
+    cat "$WS/.grok-raw.json" >&2 || true
+    break  # Format errors won't be fixed by retrying
+  elif [ "$GROK_HTTP_CODE" = "200" ]; then
+    GROK_SUCCESS=true
+    echo "[scan] Grok attempt $GROK_ATTEMPT succeeded (HTTP 200)" >&2
+    break
+  else
+    GROK_FAIL_REASON="http_error_$GROK_HTTP_CODE (attempt $GROK_ATTEMPT)"
+    echo "::warning::Grok attempt $GROK_ATTEMPT unexpected HTTP $GROK_HTTP_CODE" >&2
+    cat "$WS/.grok-raw.json" >&2 || true
+  fi
+
+  # Retry delay (only if more attempts remain)
+  if [ $GROK_ATTEMPT -lt $GROK_MAX_ATTEMPTS ]; then
+    echo "[scan] retrying Grok in 10s..." >&2
+    sleep 10
+  fi
+done
+
+if [ "$GROK_SUCCESS" = "false" ]; then
+  echo "::warning::Grok all attempts failed — reason: $GROK_FAIL_REASON. Falling back to RSS-only." >&2
+  GROK_STATUS="failed"
+  # Write empty raw so downstream parsing doesn't break
+  echo '{}' > "$WS/.grok-raw.json"
+fi
 
 # Parse Grok: find the message item, extract content[0].text (Grok's JSON array)
 GROK_TEXT=$(jq -r '.output[]? | select(.type=="message") | .content[0].text // empty' "$WS/.grok-raw.json" 2>/dev/null || echo "")
@@ -211,6 +261,7 @@ jq -n \
   --arg date "$TODAY" \
   --arg generated_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
   --arg grok_status "$GROK_STATUS" \
+  --arg grok_fail_reason "$GROK_FAIL_REASON" \
   --arg grok_cutoff "$GROK_CUTOFF" \
   --argjson rss_stats "$(cat "$RSS_STATS")" \
   --argjson sitemap_stats "$SITEMAP_STATS_JSON" \
@@ -238,6 +289,7 @@ jq -n \
     },
     x: {
       grok_status: $grok_status,
+      grok_fail_reason: (if $grok_fail_reason == "" then null else $grok_fail_reason end),
       posts_returned_raw: $grok_raw_count,
       posts_within_24h: $grok_kept,
       posts_dropped_stale: $grok_dropped,
