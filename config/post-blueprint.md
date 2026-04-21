@@ -47,9 +47,11 @@ Requires a verified entry in `config/aayush-experiences.md` matching today's the
 ### TIER 2 — Personal-I Observer
 First-person present-tense observation of the news. Not a story arc, but Aayush in the frame.
 
-**Performance: avg 48 eng.** Signature phrases: "Every week I watch...", "Every team I talk to...", "I've been thinking about...", "Most people I know are..."
+**Performance: avg 48 eng.** Signature phrases: "Every week I watch...", "Every team I talk to...", "I've been thinking about...", "Most people I know are...", "I see it across my network..."
 
 Every option that isn't TIER 1 should have at least one TIER 2 moment — a sentence where Aayush is observing, not just describing.
+
+**Note:** When using a two-line binary hook (Pattern A variant), the TIER 2 observer voice moves into the bridge sentence rather than the hook itself. Don't force "every team i talk to" as the hook when a sharper contrarian statement works better.
 
 ### TIER 3 — Contrarian Philosopher
 Challenges conventional wisdom. Redefines what winning looks like. Paints an alternative reality.
@@ -80,6 +82,7 @@ Top example (voice direction): "I'm the most average bloke ever."
 ## The 4 hook patterns
 
 - **Pattern A — Contrarian Truth**: "Society's definition of wealth is expensive." / "AI isn't your competitive advantage. It's a commodity." / "every startup says they're 'ai-powered' now."
+  - **Two-line binary variant (2026-04-21)**: Pair a universal claim with an immediate inversion on the next line. Example: "Everyone has Claude Code. / Almost no one is using it right." Works better than a single declaration when the gap IS the whole point. No observer framing needed — just state the contrast and let the next line land it.
 - **Pattern B — Identity Statement**: "97% of LinkedIn creators are men. I'm in the 3%." / "I'm the most average bloke ever." Requires a verified Aayush-side fact.
 - **Pattern C — Absurd Comparison**: "A cat with Instagram makes more than your MBA."
 - **Pattern D — Time Bomb**: "I posted my first LinkedIn post 3 years ago." / **Variant: ellipsis** — "AI startups have 12 months before they die…" (from today's shipped post, 2026-04-20). Trailing ellipsis adds stakes without a full sentence.
@@ -127,6 +130,42 @@ Unnamed "some companies" or "many founders" = rewrite until named.
 
 ---
 
+## Structural devices (2026-04-21 additions)
+
+### Bridge sentence — between hook and story
+
+After a strong hook, add one sentence that (a) grounds the claim in Aayush's own observation and (b) names the specific gap or mechanism. Without the bridge, the reader goes from claim to proof without feeling the problem.
+
+**Structure:** `[Observer placement] + [mechanism or gap named]`
+
+Examples:
+- "I see it across my network, teams shipping with identical tools, but getting wildly different outcomes."
+- "The difference lies in what happens when your Claude conversation ends."
+- "Every founder I've talked to this week is asking the same question."
+
+The bridge keeps the post grounded and prevents the jump from hook to case study feeling abrupt.
+
+### Parenthetical personality aside
+
+Inject a casual, self-aware observation mid-post as an inline parenthetical + 1 emoji. Signals the author knows what the reader is thinking. Pre-empts an obvious objection without a full disclaimer sentence.
+
+**Format:** `(observation 🤷🏻‍♂️)` — inline, attached to the sentence that prompted it. Use once per post max.
+
+Example: "The tools were identical (using claude code is not a moat 🤷🏻‍♂️). The infrastructure was completely different."
+
+This is distinct from a standalone body emoji. It's a wink mid-sentence.
+
+### Single-line paragraph fragments for sequences
+
+When listing consequences, actions, or observations in sequence, break each into its own paragraph line. Never stack 3+ short sentences (under 12 words each) in a single paragraph block.
+
+**Pipeline fail:** "He built telemetry that logs every Claude Code interaction. Every pattern analyzed. Every skill saved to a shared repository."
+**Aayush edit:** Each sentence on its own line.
+
+Rule: if you have 3+ sentences that are each under 12 words, break them one-per-line. They land harder as separate beats.
+
+---
+
 ## Rhythm devices (performance-data-derived, 2026-04-20 calibration)
 
 ### Unicode-bold signature (the Aayush formatting)
@@ -153,10 +192,22 @@ p.s. Take this post as your sign to take a break from work :)
 p.p.s First day at the Vipassana center 👇🏻
 ```
 
-- **p.s.** = friendly directive or personal confession. Lowercase.
-- **p.p.s.** = image/asset pointer using 👇🏻 emoji. Only when an image is actually attached.
+- **p.s.** = friendly directive, personal confession, or one new concrete detail that reframes what the reader just read. Lowercase. Do NOT use p.s. to repeat a stat already covered in the body — use it to land something specific and surprising that the body didn't have room for.
+- **p.p.s.** = image/asset pointer using 👇🏻 emoji — OR — personal Atlan context CTA (see below). Lowercase.
 
 Reach for this on vulnerable or contrarian posts. 2 of top 5 posts used it.
+
+### Atlan context p.p.s. (2026-04-21)
+
+When the post topic overlaps with what Atlan is building (AI infrastructure, agent ops, data systems, institutional memory, workflow automation), add a p.p.s. that ties the post back to Aayush's actual work:
+
+```
+p.p.s. at Atlan we've been building this layer for a while. happy to compare notes with anyone doing the same. 👇🏻
+```
+
+**When to use:** Post theme = something Atlan builds or has shipped. Not a sales pitch — a genuine "we're in this too" signal. Makes the post feel less theoretical and more grounded in real work.
+
+**Tone:** Lowercase. Casual. "happy to compare notes" not "let's connect". "we've been building" not "we've built a solution".
 
 ### Short fragment paragraphs
 
@@ -220,6 +271,16 @@ of anything but nightmares?
 ```
 
 Use sparingly — 1 post per week can do this.
+
+### Closing question specificity (2026-04-21)
+
+Closing questions should be present-tense and specific, not future-abstract. Make the question answerable right now.
+
+**Pipeline fail:** "what does your team's AI memory look like after 12 months of compounding?" → aspirational, hypothetical, 12 months away.
+
+**Aayush edit:** "What does your team remember from last sprint's Claude Code usage?" → specific timeframe (last sprint), specific tool (Claude Code), answerable today.
+
+**Rule:** Default to "last [week/sprint/quarter]" or "right now" over "in 12 months" or "next year". Readers engage with questions about what they've already done, not what they plan to do.
 
 ### ALL-CAPS one-word emphasis
 
@@ -305,8 +366,12 @@ Briefs are for Aayush's learning (broad-audience newsletter voice). Posts are Aa
 ## Reach-for checklist — at least TWO per post (top-performer patterns)
 
 - [ ] Unicode-bold on 1-2 specific words/numbers (𝟰𝟬%, 𝗜𝗦)
-- [ ] P.S. closer (lowercase, friendly)
+- [ ] P.S. closer (lowercase, new concrete detail — not a repeat of body stats)
 - [ ] P.P.S. with 👇🏻 image pointer when an image is attached
+- [ ] Atlan context p.p.s. when post topic overlaps Atlan's work ("at Atlan we've been building this layer...")
+- [ ] Bridge sentence after hook (observer placement + mechanism named)
+- [ ] Parenthetical personality aside mid-post (one-liner + emoji, inline)
+- [ ] Single-line paragraph breaks on 3+ short sequential sentences
 - [ ] Parallel-imperative rhythm
 - [ ] Contrast labels (short binary pair + payoff)
 - [ ] Named specifics with $/scale ($15Bn, 100M users, $10B deal)
@@ -316,6 +381,7 @@ Briefs are for Aayush's learning (broad-audience newsletter voice). Posts are Aa
 - [ ] "That's X." recap-tag rhythm
 - [ ] Era-reframe ("2023 strategy on 2026 timelines")
 - [ ] Ellipsis hook ("…" at end of first line)
+- [ ] Two-line binary hook ("Everyone has X. / Almost no one is using it right.")
 
 Zero per post = probably generic. Four+ per post = probably overworked. Aim for 2-3.
 
