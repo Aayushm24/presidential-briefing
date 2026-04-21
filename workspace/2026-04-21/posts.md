@@ -1,11 +1,11 @@
-# LinkedIn posts — 2026-04-21 (v4)
+# LinkedIn posts - 2026-04-21
 
 **Lead:** AI coding agents just proved they can 2x engineering velocity with real companies
 **Best option:** 1
 
 ---
 
-## OPTION 1 — contrarian (hook score: 9)
+## OPTION 1 - contrarian (hook score: 9)
 
 **Conviction:** Teams with institutional AI memory compound every sprint. Teams without tools start fresh.
 
@@ -48,7 +48,7 @@ p.s. the number that hit me hardest: 100% of Intercom's engineers, designers, an
 
 ---
 
-## OPTION 2 — data-point (hook score: 8)
+## OPTION 2 - data-point (hook score: 8)
 
 **Conviction:** AI agents replace variance, not engineers. That's a 2x gain before shipping anything new.
 
@@ -92,7 +92,7 @@ p.s. the Mollick study is worth reading in full. it shows exactly where AI is re
 
 ---
 
-## OPTION 3 — pattern-observation (hook score: 8)
+## OPTION 3 - pattern-observation (hook score: 8)
 
 **Conviction:** Memory is the hard part now, not the model. 2026 moat = what your system learned, not what it can access.
 
@@ -102,7 +102,7 @@ Intercom doubled engineering velocity by building telemetry that remembers every
 
 OpenAI acquired Skybysoftware to solve state persistence. Agents that remember your environment across sessions, not just within them.
 
-Noetik is applying transformers to cancer trial matching. 95% of trials fail not because the drugs don't work — but because the wrong patients enrolled. Their fix: accumulated pattern matching across every trial ever run.
+Noetik is applying transformers to cancer trial matching. 95% of trials fail not because the drugs don't work, but because the wrong patients enrolled. Their fix: accumulated pattern matching across every trial ever run.
 
 Three different problems. Three different companies. The same underlying bet.
 
@@ -110,14 +110,14 @@ Memory is the hard part now. Not the model.
 
 Every team i talk to is racing to upgrade their foundation model. Anthropic ships something new. Everyone switches. OpenAI ships. Everyone switches again.
 
-But i watch the teams that actually compound — and none of them are winning on model selection.
+But i watch the teams that actually compound, and none of them are winning on model selection.
 
 They're winning on what they built to remember.
 
 The moat has shifted:
 
 - 2023: which model you access
-- 2024: how fast you ship on top of it  
+- 2024: how fast you ship on top of it 
 - 2026: what your system learned that competitors can't replicate overnight
 
 Intercom's advantage isn't Claude Code. It's 9 months of institutional knowledge their agents carry. A competitor can sign up for the same tool tomorrow. They can't fast-forward 9 months of compounding context.
