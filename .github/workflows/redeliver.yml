@@ -1,0 +1,87 @@
+name: Redeliver
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Date to redeliver (YYYY-MM-DD)"
+        required: true
+        default: ""
+
+jobs:
+  redeliver:
+    runs-on: ubuntu-latest
+    env:
+      LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
+      SUPABASE_URL: https://xbatqlzrtijdmicoakaq.supabase.co
+      GITHUB_REPO: Aayushm24/presidential-briefing
+      TZ: Asia/Kolkata
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: Aayushm24/presidential-briefing
+
+      - name: Redeliver brief + posts
+        env:
+          DATE: ${{ github.event.inputs.date }}
+          READWISE_TOKEN: ${{ secrets.READWISE_TOKEN }}
+          N8N_SLACK_WEBHOOK_URL: ${{ secrets.N8N_SLACK_WEBHOOK_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          set -euo pipefail
+          WS="workspace/${DATE}"
+
+          for f in "${WS}/brief.md" "${WS}/posts.md" "${WS}/posts.json"; do
+            if [ ! -f "$f" ]; then
+              echo "::error::missing required artifact: $f"
+              exit 1
+            fi
+          done
+
+          # Run gates to confirm clean
+          python3 scripts/clean_text.py "${WS}/brief.md" "${WS}/posts.md" 2>&1 || true
+          ./tests/kill-list-regex.sh "${WS}/brief.md" || { echo "::error::brief kill-list fail"; exit 1; }
+          ./tests/kill-list-regex.sh "${WS}/posts.md" || { echo "::error::posts kill-list fail"; exit 1; }
+          ./tests/golden-format.sh "${WS}/brief.md" || { echo "::error::golden-format fail"; exit 1; }
+          ./tests/posts-gate.sh "${WS}/posts.json" || { echo "::error::posts-gate fail"; exit 1; }
+          echo "pre-delivery gates: all clean"
+
+          LEAD_TITLE=$(head -1 "${WS}/brief.md" | sed 's/^# //' | head -c 200)
+
+          # --- Readwise ---
+          GITHUB_BRIEF_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/brief.md"
+          python3 scripts/send_readwise.py "${WS}/brief.md" "${GITHUB_BRIEF_URL}"
+          echo "readwise: sent"
+
+          # --- Slack ---
+          POSTS_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/posts.md"
+          BRIEF_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/brief.md"
+          POSTS_JSON=$(jq -c '[.options[] | .post]' "${WS}/posts.json")
+
+          if [ -f "${WS}/scan-summary.json" ]; then
+            SCAN_HEALTH=$(jq -c '{status:.status,rss_items:.rss.items_returned,rss_feeds_ok:.rss.feeds_processed,rss_feeds_total:.rss.feeds_total}' "${WS}/scan-summary.json" 2>/dev/null || echo '{"status":"unknown"}')
+          else
+            SCAN_HEALTH='{"status":"unknown"}'
+          fi
+
+          PAYLOAD=$(jq -n \
+            --arg title "$LEAD_TITLE" \
+            --arg brief_url "$BRIEF_URL" \
+            --arg posts_url "$POSTS_URL" \
+            --arg date "$DATE" \
+            --argjson posts "$POSTS_JSON" \
+            --argjson scan "$SCAN_HEALTH" \
+            '{type:"daily_brief",date:$date,title:$title,brief_url:$brief_url,posts_url:$posts_url,posts:$posts,scan:$scan}')
+
+          curl -sS -X POST "$N8N_SLACK_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD"
+          echo "slack: sent"
+
+          echo "shipped" > "${WS}/.status"
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git add "${WS}/.status"
+          git commit -m "redeliver: ${DATE} shipped" --allow-empty || true
+          git push origin main
