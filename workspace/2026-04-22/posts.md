@@ -1,88 +1,92 @@
 # LinkedIn posts - 2026-04-22
 
 **Lead:** AI coding tools are entering a volatile pricing and consolidation phase that will force every dev team to re-evaluate their tooling stack
-**Best option:** 1
+**Best option:** 2
 
 ---
 
-## OPTION 1 - contrarian (1401c)
+## OPTION 1 - contrarian (1306c)
 
 **Conviction:** The $60B Cursor valuation and 'nobody uses it' are both true, they're measuring different things.
 
-SpaceX just priced Cursor at $60B. Higher than Twitter sold for.
+SpaceX priced Cursor at $60B this week.
 
-And I can't stop thinking about what George Hotz wrote the same week: "Nobody I know even uses Cursor anymore."
+George Hotz wrote "nobody I know uses Cursor anymore" the same week.
 
-Both are true. That's the part nobody wants to sit with.
+I've been staring at these two sentences for three days.
 
-The $60B isn't a bet on code completion. It's a bet on distribution. SpaceX builds rockets, satellites, autonomous systems. Every engineer at SpaceX touches code daily. If Cursor ships xAI integration that gives SpaceX developers a 40% velocity advantage, that's not a productivity tool anymore. That's strategic infrastructure.
+They're both probably right. SpaceX engineers ship millions of lines of code for rockets, satellites, Starlink. If xAI gives Cursor a 40% velocity edge, that's $60B of strategic infrastructure, not a subscription tool.
 
-Here's what I keep coming back to: Hotz is right about usage, and SpaceX is right about value. They're measuring different things.
+Hotz is watching developer behavior. SpaceX is buying developer distribution. Different markets, same week.
 
-Hotz is measuring whether developers choose Cursor on their own. SpaceX is measuring whether controlling the tool developers use at their company is worth $60B. Those are completely different bets.
+What worries me is the gap between those two things.
 
-The dangerous version of this story for a 12-person dev team: you build your deployment review flow around Cursor rules. SpaceX exercises the option. The product pivots toward aerospace. Your migration plan is six weeks of pain.
+Every AI coding tool is currently valued by its distribution potential, not its actual usage. That means the pricing reflects what someone hopes to control, not what developers actually choose.
 
-I keep asking teams about this. Most don't have one.
+I keep asking dev teams: if your primary coding tool got acquired tomorrow, what's your migration plan?
 
-What's your exit plan if your primary AI coding tool got acquired tomorrow?
+Most don't have one.
 
-P.s. "Nobody I know uses Cursor" and "$60B for Cursor" are the same market making different calculations. That gap is where the risk lives. 👇🏻
+The teams I see being thoughtful about this treat AI tooling like cloud infrastructure, assume repricing, keep the core workflows portable, don't build a dependency you can't port in a week.
+
+The ones who aren't doing this are one acquisition announcement from a painful quarter.
+
+What's your exit plan?
+
+P.s. "Nobody I know uses Cursor" and "$60B for Cursor" being true at the same time is the whole story of 2026 AI valuations. 👇🏻
 
 ---
 
-## OPTION 2 - personal-discovery (1458c)
+## OPTION 2 - personal-discovery (1426c)
 
 **Conviction:** AI coding tool volatility is the market's way of telling you to keep workflows portable.
 
-I've been building agents at Atlan for months now. And the thing that surprised me most is the volatility, not the speed.
+I ran an internal audit of our AI coding tools at Atlan this week.
 
-Three things happened this week that I'm still processing.
+Three hours. Every tool we use, what it's actually doing, which workflows depend on it, how long migration would take.
 
-GitHub quietly paused new Copilot individual signups and cut premium model access to the top tier only.
+Turned out we had way more lock-in than I thought.
 
-Anthropic accidentally leaked a $100/month Claude Code pricing tier through a broken A/B test. They walked it back. But the screenshot is in every Slack I'm in.
+The audit was triggered by three things that happened the same week.
 
-SpaceX locked in a $60B option on Cursor. Same week Hotz said nobody he knows uses it.
+GitHub paused new Copilot signups and cut premium model access to the top tier. Anthropic accidentally leaked a $100/month Claude Code tier through a broken A/B test and walked it back. SpaceX locked in a $60B option on Cursor.
 
-I've started treating AI coding tools the way I treat cloud infrastructure. Assume the pricing reprices. Keep the workflows portable. Never build a dependency you can't port in a week.
+None of it was planned. All of it landed in the same 5 days.
 
-That's not paranoia. That's the market telling you something.
+What I realized from the audit: the switching cost is invisible until it's not. Custom agent rules, specific prompt formats, API response assumptions, review pipeline integrations, none of these show up on a budget sheet. But they represent real weeks of engineering if you need to migrate.
 
-The teams struggling are the ones who built deep workflows around one tool's quirks, specific agent rules, prompt formats, API responses, without thinking about what happens when the pricing sheet changes.
+The tools that embed deepest don't necessarily win on features. They win on how thoroughly they can make themselves load-bearing before you notice.
 
-IMO the switching cost is the product. That's what SpaceX is buying for $60B. That's what GitHub is protecting. That's what Anthropic is pricing.
+IMO the switching cost is the product now. That's what SpaceX is buying for $60B. That's what GitHub is protecting. That's what Anthropic is actually pricing.
 
-The same week all this happened, I ran an internal audit at Atlan. Every AI coding tool we use, what it's actually doing, which workflows depend on it, how long migration would take.
+I've started treating AI coding tools the way I treat cloud infrastructure: assume repricing, keep workflows portable, never build a dependency you can't port in a week.
 
-Took three hours. Turned out we had more lock-in than I thought.
-
-Could you swap your primary AI coding tool in 5 days if you had to?
+Could you swap your primary AI coding tool in 5 days?
 
 ---
 
-## OPTION 3 - pattern-observation (1467c)
+## OPTION 3 - pattern-observation (1464c)
 
 **Conviction:** Meta's employee keystroke harvesting is a data play, not just a privacy story.
 
-In one week, Meta started recording employee keystrokes for AI training.
+Meta started recording employee keystrokes for AI training.
 
-I want to sit with that for a second before we move on.
+I've been watching AI companies fight for proprietary data for two years. Everyone scrapes the web, buys datasets, tries to get user opt-ins.
 
-The privacy angle is real. The data angle matters more.
+Nobody cracked actual workplace behavior until now.
 
-Most AI companies train on public datasets. Scraped web text, GitHub repos, academic papers. The bottleneck has always been proprietary behavioral data: how actual knowledge workers think, navigate ambiguity, make decisions under time pressure.
+The bottleneck was never compute or model architecture. It was always the data of what knowledge work actually looks like. How fast engineers type when they're debugging vs. writing docs. When people copy-paste vs. retype. How many times something gets rewritten before it goes out.
 
-Meta just solved that. They now have access to millions of hours of real knowledge worker behavior. Real behavioral data, not stated preferences or surveys. Actual keystrokes. How fast engineers type when debugging vs. writing docs. When people copy-paste vs. retype. How many times something gets rewritten before it's sent.
+Meta just solved that. Their employee base is now a proprietary training dataset no competitor can access without hiring the same people.
 
-This is the data that makes AI assistants feel like they understand your work. The model isn't smarter. The training distribution finally includes what work actually looks like.
+This is the data that makes an AI assistant feel like it understands your work. The model is the same. The training distribution finally includes what work actually looks like.
 
-The question isn't whether to collect behavioral data. It's whether you have consent frameworks clean enough to actually use it.
+At Atlan, half my work is building AI agents. The agents that work are the ones trained on actual workflow patterns, not generic examples. Meta is doing at scale what we do manually on every agent we build.
 
-The companies with proprietary behavioral data from real workflows are going to build products that feel qualitatively different from everyone else's.
+The companies with access to proprietary behavioral data are going to build products that feel qualitatively different, a different category, not just an increment.
 
 What unique behavioral data does your product see that nobody else can replicate?
 
-P.s. This is also why SpaceX paying $60B for Cursor makes more sense than it looks. They want the coding behavior data from their engineers, not just the tool. 👇🏻
+P.s. This is also why SpaceX's $60B Cursor bet makes more sense than it looks. They want the engineering behavior data, not the code completions. 👇🏻
 
 ---

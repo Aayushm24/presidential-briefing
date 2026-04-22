@@ -80,6 +80,13 @@ check_file() {
     fi
   done
 
+  # AI contemplation phrases — sound like AI trying to be thoughtful
+  local ai_contemplation
+  ai_contemplation=$(printf '%s' "$content" | grep -ciE     "(here'?s what i keep coming back to|i want to sit with that|that'?s the part nobody wants to|the dangerous version of this story|it's worth sitting with|let that sink in|think about that for a moment)" || true)
+  if [ "$ai_contemplation" -gt 0 ]; then
+    errors+=("ai_contemplation_hits=${ai_contemplation} — phrases like 'Here\'s what I keep coming back to' and 'I want to sit with that' are AI tells")
+  fi
+
   # Pattern 1H: "It's like ..." analogies
   if echo "$content" | grep -qiE "[Ii]t's like [A-Z]"; then
     errors+=('analogy_pattern: "It\'"'"'s like X" — turn into a question')

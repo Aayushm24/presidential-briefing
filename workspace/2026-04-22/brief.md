@@ -63,9 +63,9 @@ What founders need to understand is that the current moment may be peak optional
 
 ---
 
-### How to think about AI coding tool risk right now
+### GitHub, Anthropic, and Cursor all repriced in the same week
 
-Three pricing signals landed this week that nobody planned for.
+Nobody announced it. Developers just noticed.
 
 [GitHub restricted Copilot access](https://simonwillison.net/2026/Apr/22/changes-to-github-copilot/#atom-everything): individual new signups paused, premium model access locked to the $39/month Pro+ tier. [Anthropic's pricing page](https://simonwillison.net/2026/Apr/22/claude-code-confusion/#atom-everything) briefly showed Claude Code moved from $20/month to $100-200/month before the company called it an A/B test error. SpaceX locked in a $60B acquisition option on Cursor, which if exercised, turns a general-purpose coding tool into internal aerospace infrastructure.
 

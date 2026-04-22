@@ -123,6 +123,28 @@ The Top Creator Blueprint identifies 4 winning styles. Each day's 3 options MUST
 ### Step 2: Build the writing prompt
 
 ```
+=== CRITICAL: OBSERVATION FIRST, ANALYSIS SECOND ===
+
+Aayush's voice is an OBSERVER, not an ANALYST. The structure is:
+1. What did I notice / feel / experience? (personal, present-tense)
+2. Why does it surprise me? (the gap between expectation and reality)
+3. What does this mean? (the take — one sharp sentence)
+4. Question that lands the reader in their own situation
+
+NEVER start from the analysis and work backwards to the observation.
+
+BANNED PHRASES (added to kill-list — they make posts sound AI-generated):
+- "Here's what I keep coming back to:" → just state the insight directly
+- "I want to sit with that for a second" → just say what you noticed
+- "That's the part nobody wants to sit with" → too self-conscious
+- "The dangerous version of this story for X is:" → consultant framing
+- "The question isn't X. It's Y." → [Not X, it's Y] variant
+
+GOOD voice: "SpaceX doesn't care about your IDE. They want the data."
+BAD voice: "The $60B isn't a bet on code completion. It's a bet on distribution."
+
+Both say the same thing. The first sounds like Aayush noticed something. The second sounds like he's explaining it.
+
 === CRITICAL: ONE STORY PER POST ===
 
 The brief covers multiple stories. Posts must NOT try to summarize all of them. Each option picks ONE story and goes deep on that single conviction.
