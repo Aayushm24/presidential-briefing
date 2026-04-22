@@ -1,63 +1,65 @@
-# SpaceX just treated Cursor like AWS treats chip makers
+# AI coding tool valuations have completely decoupled from usage reality
 
-[SpaceX](https://techcrunch.com/2026/04/21/spacex-is-working-with-cursor-and-has-an-option-to-buy-the-startup-for-60-billion/) signed a $60B acquisition option for Cursor, the AI coding assistant used by 100,000 developers.
+[SpaceX](https://techcrunch.com/2026/04/21/spacex-is-working-with-cursor-and-has-an-option-to-buy-the-startup-for-60-billion/) just locked in a $60B acquisition option on Cursor, that's more than Twitter sold for.
 
-This goes beyond just a big number. SpaceX is treating a developer tool like strategic infrastructure. The deal structure shows that AI coding tools now get infrastructure-scale capital because they control distribution to builders. Every dev tools founder needs to understand what triggers this kind of valuation logic.
+The AI coding tool market is entering a consolidation frenzy that makes zero economic sense. While teams are cutting tool budgets and pausing subscriptions, valuations keep climbing into absurd territory. This disconnect creates real risk for every dev team building workflow dependency on tools that could vanish, pivot, or 10x their prices overnight.
 
 **Key takeaways:**
-- AI coding tools now command infrastructure-scale valuations because they control where developers build
-- Strategic acquirers are pricing developer mindshare as a scarce, monopolizable resource
-- The option structure signals SpaceX betting on exclusive access to developer distribution, not just productivity gains
-- While this creates new funding opportunities for dev tools, it also means platform risk is about to become very real
-- Anthropic's pricing confusion around Claude Code creates a live opening for competitors to capture frustrated developers
+- Cursor secured a $60B acquisition option from SpaceX despite declining usage among early adopters
+- GitHub Copilot paused new individual signups while restructuring pricing and restricting access to premium models
+- Anthropic accidentally exposed plans for a potential $100/month Claude Code price hike through a botched A/B test
+- George Hotz called the Cursor valuation "sad" and questioned the entire AI coding market's defensibility
+- Builders should lock in pricing agreements now and avoid deep workflow dependency on any single tool
 
-### The option mechanics reveal the strategic bet
+### The $60B option that breaks all precedent
 
-The numbers tell the story. [SpaceX paid for a $60B acquisition option](https://techcrunch.com/2026/04/21/spacex-is-working-with-cursor-and-has-an-option-to-buy-the-startup-for-60-billion/) on Cursor with a $50B premoney valuation. The deal includes a $10B exclusive contract with xAI for model access. [The structure analysis](https://x.com/swyx/status/2046733194448216409) shows this isn't typical venture funding. It's infrastructure positioning.
+The numbers make no sense when you trace them back to actual usage patterns. [SpaceX negotiated an acquisition option](https://techcrunch.com/2026/04/21/spacex-is-working-with-cursor-and-has-an-option-to-buy-the-startup-for-60-billion/) valued at $60 billion for Cursor, a coding assistant that most early adopters have already stopped using regularly.
 
-Compare this to how AWS approaches chip makers. When AWS signs exclusive deals with chip companies, they're not just buying compute power. They're buying control over what their competitors can access. SpaceX is applying the same logic to developer tools.
+That valuation puts Cursor above Twitter's $44B sale price. Above whole public companies with decades of revenue and millions of daily active users. For a tool that generates code completions.
 
-The $10B xAI contract is the key detail. It means Cursor users get exclusive access to xAI models that other coding assistants can't offer. That creates a technical advantage that compounds over time. Developers who build habits around those exclusive capabilities become harder to switch away from the platform.
+The disconnect between valuation and reality is stark when you look at actual developer behavior. [George Hotz pointed this out directly](https://geohot.github.io//blog/jekyll/update/2026/04/22/ai-has-no-moat.html): "Nobody I know even uses Cursor any more." While anecdotal, this matches patterns I keep seeing across teams, initial excitement followed by gradual drift back to existing workflows.
 
-What I keep coming back to is the option structure itself. SpaceX could have just invested or acquired outright. Instead, they bought the right to acquire later at a fixed price. That signals they want to see how much developer mindshare Cursor can actually capture before committing to the full acquisition.
+SpaceX's interest makes strategic sense for their own development needs. They're building rockets, satellites, and autonomous systems that require massive amounts of custom software. Having dedicated AI coding infrastructure could accelerate their internal velocity significantly.
 
-The causal chain forward is clear. Other infrastructure companies now have to bid for the remaining independent AI coding tools. GitHub Copilot is owned by Microsoft. Claude Code belongs to Anthropic. That leaves a shrinking pool of tools that could provide exclusive access to developer distribution.
+But the $60B price tag signals something deeper about how these tools are being valued. This is a defensive play, not a revenue play. SpaceX is betting that controlling AI coding infrastructure will be essential for maintaining competitive advantage in complex engineering domains.
 
-This validates the conviction that small teams with AI beat 50-person organizations in 2026. Tools like Cursor accelerate that shift by making individual developers more powerful. The companies that control those tools control how software gets built.
+What this means for every other dev team: if SpaceX exercises this option, Cursor becomes an internal tool optimized for SpaceX's needs, not a general-purpose product. Teams depending on Cursor for core workflows could find themselves migrating to alternatives with 60 days notice.
 
-### Why SpaceX values developer mindshare like AWS values chip supply
+### GitHub Copilot retreats while demand peaks
 
-Infrastructure companies understand scarcity. AWS doesn't just buy chips because they need compute power. They buy exclusive access to prevent competitors from getting the same capabilities. SpaceX is applying identical logic to developer tools.
+The timing of [GitHub's Copilot restrictions](https://simonwillison.net/2026/Apr/22/changes-to-github-copilot/#atom-everything) reveals the market's underlying instability. Just as demand for AI coding assistance hits an all-time high, GitHub paused new individual subscriptions and restricted access to their best models.
 
-Think about daily usage patterns. A developer using Cursor writes code for 6-8 hours every day. They build muscle memory around specific autocomplete patterns, debugging flows, and integration points. Switching to a different tool means relearning those patterns and losing productivity for weeks.
+The changes hit teams hard. Individual plans can no longer sign up. Existing subscribers face tighter usage limits. Access to Claude Opus 4.7 now requires the $39/month Pro+ tier instead of the basic plan. Previous Opus versions got dropped entirely.
 
-That's real lock-in. This behavioral lock-in lives in human habit formation, unlike the artificial barriers from file formats or APIs.
+This looks like classic pre-consolidation behavior. GitHub is restructuring their entire pricing model while demand is strongest, suggesting they expect the competitive landscape to change dramatically soon. Companies don't voluntarily restrict access to profitable products unless they're preparing for something bigger.
 
-The switching cost goes beyond the tool subscription. Developers face productivity drops while adapting to new patterns, time spent configuring environments, and risks around edge case handling. Most developers won't switch unless forced to by their employer or by pricing changes.
+The practical impact lands immediately on thousands of dev teams who built GitHub Copilot into their daily workflows. Teams that started depending on Opus-level reasoning for complex refactoring tasks now face a choice: pay more or downgrade their tooling just as they've adapted to the higher baseline.
 
-SpaceX recognizes that controlling developer tools means controlling what gets built next. If they own the primary interface that developers use to write code, they influence the entire software ecosystem. New frameworks, libraries, and applications all flow through that chokepoint.
+I keep coming back to the signal this sends about model access economics. GitHub has direct partnerships with OpenAI and other model providers, giving them better unit economics than almost any competitor. If they're struggling to make premium model access profitable at current pricing, every other coding tool faces the same pressure amplified.
 
-AWS provides the infrastructure layer that determines what kinds of applications can exist. SpaceX is applying the same logic to developer tools. Control the infrastructure, influence everything built on top of it.
+### Anthropic's $100/month trial balloon
 
-Expect similar infrastructure plays for other high-engagement developer tools. Database interfaces, deployment platforms, and monitoring systems all create the same behavioral lock-in patterns. The companies that recognize this early will build acquisition pipelines around developer mindshare, not just revenue multiples.
+The most revealing moment came from [Anthropic's accidental pricing leak](https://simonwillison.net/2026/Apr/22/claude-code-confusion/#atom-everything). For several hours, their pricing page showed Claude Code moved from the $20/month Pro plan to $100/month or $200/month Max plans only.
 
-This connects to the broader trend where the cost of coordination is collapsing. When three people with the right tools can ship what used to require 25 engineers, the tools themselves become more valuable than the teams using them. That's the market shift SpaceX is betting on.
+Anthropic called it an A/B test gone wrong, but the damage was done. Thousands of developers saw a potential 5x price increase for a tool they use daily. The leak exposed what many suspected: current AI coding tool pricing is unsustainable at the unit economics level.
 
-### The contrarian view and what it misses
+The reaction was swift and harsh. Teams started evaluating alternatives immediately. Some began building internal tools to reduce Claude Code dependency. Others locked in annual contracts at current pricing before potential changes.
 
-George Hotz published a counterargument this week: the Cursor valuation is a bubble. His take: AI models are commoditizing, so tools built on top of them cannot sustain premium valuations.
+This reveals the fundamental fragility in the current market. Most AI coding tools operate at negative unit economics, subsidized by venture funding while they capture market share. When that subsidy pressure builds, pricing can jump overnight.
 
-The argument has historical precedent. During the dot-com bubble, companies with no revenue got billion-dollar valuations based on pure speculation about internet adoption. Many of those companies disappeared when the market corrected.
+The contradiction is clear: tools are getting more valuable to developers while becoming more expensive to operate. Model inference costs haven't dropped as fast as usage has grown. Every breakthrough in capability requires more compute, not less.
 
-But the bubble argument ignores that developer habits create real economic value. When a tool becomes part of someone's daily workflow, replacing it requires overcoming genuine switching costs. Those costs aren't artificial. They represent real productivity losses during the transition period.
+### The defensibility question George Hotz raised
 
-The market will test this thesis with other developer tool acquisitions over the next 12 months. If SpaceX's bet pays off through measurable developer retention and productivity gains, expect similar deals for other high-engagement tools. If developers abandon Cursor after the acquisition or fail to deliver the productivity gains SpaceX expects, the market will reprice these tools downward.
+[Hotz's reaction to the Cursor valuation](https://geohot.github.io//blog/jekyll/update/2026/04/22/ai-has-no-moat.html) cuts to the core tension: "AI has no defensible advantages." His argument is that these tools are thin wrappers around foundation models that anyone can build.
 
-The key difference from the dot-com bubble is that today's AI coding tools solve real, measurable problems. Developers using Cursor ship code faster than developers using traditional IDEs. That productivity gain is quantifiable and creates genuine economic value for the companies employing those developers.
+The technical reality supports this view. Cursor's core functionality, code completion, debugging assistance, refactoring suggestions, can be replicated by any team with API access to Claude or GPT-4. The interface matters, but not $60B worth.
 
-Most AI products fail because they skip memory and state management, not because of model limitations. Cursor succeeds because it maintains context across sessions, remembers project-specific patterns, and builds on previous interactions. That's harder to replicate than just accessing better models.
+Yet the valuations keep climbing. This suggests buyers see something beyond the current product: control over the interface layer between developers and AI models. In a world where every company becomes a software company, controlling how software gets written becomes strategically critical.
 
-The companies that understand this distinction will make better acquisition decisions. Tools that create lasting behavioral change matter more than tools that provide temporary capability boosts.
+The missing piece is data advantage. Cursor sees millions of code completions, refactoring sessions, and debugging flows every day. That behavioral data could train better coding-specific models over time. But only if they can keep users engaged and avoid churn to alternatives.
+
+What founders need to understand is that the current moment may be peak optionality for AI coding tools. Today, you can switch between Cursor, GitHub Copilot, Claude Code, and a dozen alternatives with minimal switching costs. That won't last if consolidation accelerates.
 
 ---
 

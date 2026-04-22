@@ -381,7 +381,14 @@ jobs:
           git config user.name "presidential-briefing-bot"
           git config user.email "bot@users.noreply.github.com"
 
-      - name: Download brief artifact
+      - name: Download scan artifact (base layer)
+        uses: actions/download-artifact@v4
+        with:
+          name: workspace-${{ needs.scan.outputs.today }}
+          path: workspace/${{ needs.scan.outputs.today }}/
+        continue-on-error: true
+
+      - name: Download brief artifact (overwrites base)
         if: needs.analyze.outputs.quiet_day != 'true'
         uses: actions/download-artifact@v4
         with:
@@ -389,18 +396,11 @@ jobs:
           path: workspace/${{ needs.scan.outputs.today }}/
         continue-on-error: true
 
-      - name: Download posts artifact
+      - name: Download posts artifact (overwrites base)
         if: needs.analyze.outputs.quiet_day != 'true'
         uses: actions/download-artifact@v4
         with:
           name: workspace-posts-${{ needs.scan.outputs.today }}
-          path: workspace/${{ needs.scan.outputs.today }}/
-        continue-on-error: true
-
-      - name: Download scan artifact (fallback for quiet-day)
-        uses: actions/download-artifact@v4
-        with:
-          name: workspace-${{ needs.scan.outputs.today }}
           path: workspace/${{ needs.scan.outputs.today }}/
         continue-on-error: true
 
