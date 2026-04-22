@@ -387,6 +387,36 @@ def fix_sentence_case(text: str) -> tuple[str, int]:
         fixed_lines.append(line)
     return '\n'.join(fixed_lines), count
 
+def clean_posts_json(posts_json_path: Path) -> int:
+    """Clean em dashes and other violations in posts.json post bodies.
+    Keeps posts.json in sync with posts.md after clean_text runs.
+    Returns count of changes made."""
+    import json as _json
+    if not posts_json_path.is_file():
+        return 0
+    try:
+        data = _json.loads(posts_json_path.read_text(encoding="utf-8"))
+    except Exception:
+        return 0
+    changed = 0
+    for opt in data.get("options", []):
+        original = opt.get("post", "")
+        cleaned, em_count = fix_em_dashes(original)
+        cleaned, _ = fix_bullets(cleaned)
+        cleaned, _ = apply_patterns(cleaned, WORD_SUBS)
+        cleaned, _ = apply_patterns(cleaned, AUDIENCE_SUBS)
+        cleaned, sc_count = fix_sentence_case(cleaned)
+        if cleaned != original:
+            opt["post"] = cleaned
+            changed += 1
+    if changed:
+        posts_json_path.write_text(
+            _json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8"
+        )
+        print(f"[clean] {posts_json_path}: synced {changed} post bodies", file=sys.stderr)
+    return changed
+
+
 def main() -> None:
     if len(sys.argv) < 2:
         print("Usage: clean_text.py <file.md> [<file.md>...]", file=sys.stderr)
@@ -395,6 +425,11 @@ def main() -> None:
     grand_total: dict[str, int] = {}
     for arg in sys.argv[1:]:
         path = Path(arg)
+
+        # Auto-sync posts.json when posts.md is cleaned
+        if path.name == "posts.md" and (path.parent / "posts.json").is_file():
+            clean_posts_json(path.parent / "posts.json")
+
         if not path.is_file():
             print(f"[clean] skip (not a file): {arg}", file=sys.stderr)
             continue
