@@ -1,61 +1,107 @@
-name: Dead-man Monitor
+name: Dead-man monitor
 
 on:
   schedule:
-    # 07:00 IST = 01:30 UTC. Runs 1.5h after daily-brief. If daily-brief missed or failed, re-run.
-    - cron: '30 1 * * *'
+    - cron: '30 1 * * *'   # 7:00 AM IST = 1:30 AM UTC
   workflow_dispatch:
 
 permissions:
   contents: read
-  actions: write
+  actions: write   # needed for gh run rerun
 
 jobs:
-  check:
-    name: Check today ran
+  check-and-retry:
+    name: Check if today shipped, retry if not
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
     env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       TZ: Asia/Kolkata
+      REPO: Aayushm24/presidential-briefing
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Check workspace for today
-        id: check
+      - name: Check shipped status and retry if needed
         run: |
+          set -euo pipefail
           TODAY=$(TZ=Asia/Kolkata date +%Y-%m-%d)
-          echo "today=$TODAY" >> $GITHUB_OUTPUT
-          STATUS_FILE="workspace/${TODAY}/.status"
+          echo "Checking delivery status for $TODAY..."
 
-          if [ ! -f "$STATUS_FILE" ]; then
-            echo "::warning::No workspace directory for $TODAY — pipeline never started"
-            echo "needs_rerun=1" >> $GITHUB_OUTPUT
+          # 1. Check git for .status file
+          GIT_STATUS=$(cat "workspace/$TODAY/.status" 2>/dev/null || echo "missing")
+          echo "Git .status: $GIT_STATUS"
+
+          if [ "$GIT_STATUS" = "shipped" ]; then
+            echo "✓ $TODAY already shipped. Nothing to do."
             exit 0
           fi
 
-          STATUS=$(cat "$STATUS_FILE")
-          if [ "$STATUS" == "shipped" ] || [ "$STATUS" == "quiet_day" ]; then
-            echo "OK: status=$STATUS"
-            echo "needs_rerun=0" >> $GITHUB_OUTPUT
-          else
-            echo "::warning::status=$STATUS for $TODAY — pipeline incomplete, triggering re-run"
-            echo "needs_rerun=1" >> $GITHUB_OUTPUT
+          # 2. Find today's daily-brief run via GitHub API
+          UTC_DATE=$(date -u +%Y-%m-%d)
+          IST_DATE=$TODAY
+
+          RUN_JSON=$(gh run list \
+            --workflow=daily-brief.yml \
+            --repo "$REPO" \
+            --limit 10 \
+            --json databaseId,conclusion,status,createdAt \
+            2>/dev/null || echo "[]")
+
+          RUN_ID=$(echo "$RUN_JSON" | jq -r "
+            [.[] | select(
+              (.createdAt | startswith(\"${UTC_DATE}\")) or
+              (.createdAt | startswith(\"${IST_DATE}\"))
+            )] | sort_by(.createdAt) | last | .databaseId // empty
+          ")
+
+          CONCLUSION=$(echo "$RUN_JSON" | jq -r "
+            [.[] | select(
+              (.createdAt | startswith(\"${UTC_DATE}\")) or
+              (.createdAt | startswith(\"${IST_DATE}\"))
+            )] | sort_by(.createdAt) | last | .conclusion // empty
+          ")
+
+          RUN_STATUS=$(echo "$RUN_JSON" | jq -r "
+            [.[] | select(
+              (.createdAt | startswith(\"${UTC_DATE}\")) or
+              (.createdAt | startswith(\"${IST_DATE}\"))
+            )] | sort_by(.createdAt) | last | .status // empty
+          ")
+
+          echo "Run ID: ${RUN_ID:-none} | Conclusion: ${CONCLUSION:-none} | Status: ${RUN_STATUS:-none}"
+
+          # 3. Act on run state
+
+          if [ -z "$RUN_ID" ]; then
+            echo "⚠️  No daily-brief run found for $TODAY. Triggering fresh pipeline..."
+            gh workflow run daily-brief.yml --repo "$REPO"
+            echo "Fresh pipeline triggered. Will complete in ~25 min."
+            exit 0
           fi
 
-      - name: Trigger daily-brief rerun
-        if: steps.check.outputs.needs_rerun == '1'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh workflow run daily-brief.yml \
-            -R ${{ github.repository }} \
-            -f dry_run=false \
-            -f today_override="${{ steps.check.outputs.today }}"
+          if [ "$RUN_STATUS" = "in_progress" ] || [ "$RUN_STATUS" = "queued" ]; then
+            echo "Pipeline still running (status=$RUN_STATUS). Leaving it alone."
+            exit 0
+          fi
 
-      # Rerun notification: the triggered daily-brief.yml will deliver the brief via its normal path.
-      # If you want a separate "dead-man fired" ping, extend the n8n webhook to accept {"type":"deadman","date":"..."} and add a step here.
+          if [ "$CONCLUSION" = "success" ]; then
+            echo "Pipeline succeeded but .status not in git (dry run or redeliver pending)."
+            exit 0
+          fi
+
+          if [ "$CONCLUSION" = "failure" ] || [ "$CONCLUSION" = "timed_out" ]; then
+            echo "⚠️  Pipeline $CONCLUSION (run=$RUN_ID). Re-running failed jobs only..."
+            gh run rerun "$RUN_ID" \
+              --repo "$REPO" \
+              --failed-only
+            echo "✓ Re-run triggered. Artifacts from successful jobs reused."
+            echo "  Expected completion: ~15 min."
+            exit 0
+          fi
+
+          echo "State: conclusion=$CONCLUSION status=$RUN_STATUS — no action."

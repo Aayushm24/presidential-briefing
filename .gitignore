@@ -26,7 +26,6 @@ workspace/*/.sitemap-items.jsonl
 workspace/*/.sitemap-stats.json
 workspace/*/.sitemap-stderr.log
 workspace/*/.grok-raw.json
-workspace/*/.status
 
 # OS
 .DS_Store

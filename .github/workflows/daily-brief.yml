@@ -572,6 +572,11 @@ jobs:
             git push origin main
           fi
           echo "shipped" > "${WS}/.status"
+          if [ "$DRY_RUN" != "1" ]; then
+            git add -f "${WS}/.status" || true
+            git commit -m "status: ${DATE} shipped" --allow-empty || true
+            git push origin main || true
+          fi
           echo "DELIVERY COMPLETE"
 
       - uses: actions/upload-artifact@v4
