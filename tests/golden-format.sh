@@ -9,7 +9,7 @@
 
 set -uo pipefail
 
-GRANDFATHER_DATE="2026-04-21"
+GRANDFATHER_DATE="2026-04-23"
 FAIL=0
 CHECKED=0
 
@@ -92,7 +92,7 @@ check_brief() {
 
   # Word count: FLOOR raised from 1200 to 1500 per 2026-04-20 feedback — brief at 1227 felt thin
   local wc=$(wc -w < "$file")
-  [ "$wc" -ge 1500 ] || errors+=("word_count=$wc (expect 1500+)")
+  [ "$wc" -ge 2000 ] || errors+=("word_count=$wc (expect 2000+)")
 
   if [ ${#errors[@]} -gt 0 ]; then
     echo "FAIL: $file"

@@ -164,7 +164,7 @@ curl -sS -X POST "${LLM_PROXY_BASE_URL}/v1/chat/completions" \
   -H "Authorization: Bearer ${ATLAN_LLM_KEY}" \
   -H "Content-Type: application/json" \
   -d "$(jq -n \
-    --arg model "claude-sonnet-4-6" \
+    --arg model "gemini-3-1-pro-preview" \
     --arg brief "${BRIEF_CONTENTS}" \
     --arg posts "${POSTS_MD_CONTENTS}" \
     '{model: $model, messages: [{role: "user", content: ("Writing audit. Check BOTH the brief and the 3 LinkedIn posts below against this checklist. Flag every violation with: file (brief/post_N), line quote, violation type, and one-line fix.\n\nCHECKLIST:\n1. EM DASHES — zero tolerance. Any (—) = flag.\n2. NOT X. Y. NEGATION — sentences starting with \"Not [the/a/for/because/just/one/in/at]\" = flag. Say what it IS.\n3. SENTENCE CASE — every sentence must start with capital letter. Exception: \"i\" is always lowercase. Flag any sentence starting with lowercase that is not \"i\".\n4. VAGUE GENERICS — \"many companies\", \"most teams\", \"the AI space\", \"various founders\", \"some people\", \"a lot of teams\" = flag. Replace with named entity or specific number.\n5. UNSOURCED STATS — any percentage or number without a named source = flag.\n6. PASSIVE VOICE — \"was built\", \"is being done\", \"has been shown\" = flag. Rewrite active.\n7. PADDING — any sentence that restates the prior sentence without adding new information = flag.\n8. CONVICTION MISSING — if a section ends without a stated take or question, flag as \"no conviction\".\n\nBRIEF:\n" + $brief + "\n\nPOSTS:\n" + $posts + "\n\nReturn JSON:\n{\"brief_violations\": [{\"line\": \"quote\", \"type\": \"violation_type\", \"fix\": \"one-line fix\"}], \"post_violations\": {\"option_1\": [...], \"option_2\": [...], \"option_3\": [...]}, \"total_violations\": N, \"summary\": \"one sentence\"}")}]}')"
@@ -228,7 +228,7 @@ Call:
 curl -sS -X POST "${LLM_PROXY_BASE_URL}/v1/chat/completions" \
   -H "Authorization: Bearer ${ATLAN_LLM_KEY}" \
   -H "Content-Type: application/json" \
-  -d "$(jq -n --arg model "claude-opus-4-6" --arg prompt "$VOICE_PROMPT" \
+  -d "$(jq -n --arg model "gemini-3-1-pro-preview" --arg prompt "$VOICE_PROMPT" \
     '{model: $model, messages: [{role: "user", content: $prompt}], temperature: 0.3, max_tokens: 4000}')"
 ```
 

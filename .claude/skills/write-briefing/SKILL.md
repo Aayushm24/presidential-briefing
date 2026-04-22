@@ -33,7 +33,7 @@ Article text for the lead + 2 top secondary stories (fetched inline in this skil
 
 ## Length + depth
 
-**Target: 1,800–2,200 words. Hard ceiling: 2,500.** Reversed from the earlier 900-1200 cap because Aayush's feedback was the briefs read shallow — "headlines without explanation." The new rule: explain the mechanism so the reader levels up, not just learns what happened.
+**Target: 2,500–3,500 words. Floor: 2,000. No ceiling — go as deep as needed.** Reversed from the earlier 900-1200 cap because Aayush's feedback was the briefs read shallow — "headlines without explanation." The new rule: explain the mechanism so the reader levels up, not just learns what happened.
 
 Section budgets:
 - Title: ≤80 chars, sentence case
@@ -131,7 +131,7 @@ Before composing prose, produce a structured outline of the full brief. Opus gen
 [1-3 concrete actions, each with named tool/link/time estimate]
 ```
 
-Per-section word targets are floors, not ceilings. Total brief: 1,800-2,200 words. Below 1,500 = the mechanism isn't explained enough.
+Per-section word targets are floors, not ceilings. Total brief: 2,500-3,500 words. Below 2,000 = the mechanism isn't explained enough.
 
 Every fact in the outline must map to a URL. If no URL exists for a fact, tag `[UNGROUNDED]` in the outline — the revise pass either finds a source or cuts the claim. The old `## Sources` footer is gone; citations live inline with the claim.
 
@@ -218,7 +218,7 @@ Claims without a URL source get tagged `[UNGROUNDED]` and resolved or killed in 
 
 === LENGTH — 1,800 WORDS IS THE FLOOR ===
 
-Target 1,800-2,200 words. Hard floor 1,200 (below that the ship step aborts). Go deep on the lead piece — explain the mechanism, the precedent, the causal chain forward, the mental-model shift. Secondary stories (#2, #3) get 350-500 words each, not 150. "What to do this week" gets 200-300 words.
+Target 2,500-3,500 words. Hard floor 2,000. Go deep on the lead piece — explain the mechanism, the precedent, the causal chain forward, the mental-model shift. Secondary stories (#2, #3) get 350-500 words each, not 150. "What to do this week" gets 200-300 words.
 
 If you finish the draft and it's under 1,500 words, you haven't explained the WHY enough. Go back to the lead section, pick the claim with the least mechanism behind it, and teach the reader what's happening underneath.
 

@@ -355,6 +355,38 @@ def clean_file(path: Path) -> dict:
     return counts
 
 
+def fix_sentence_case(text: str) -> tuple[str, int]:
+    """Capitalize first letter of each sentence. Exception: 'i' stays lowercase."""
+    import re
+    count = 0
+    lines = text.split('\n')
+    fixed_lines = []
+    for line in lines:
+        stripped = line.strip()
+        # Skip markdown headers, list items, blank lines, code blocks
+        if (not stripped or stripped.startswith(('#', '-', '*', '>', '`', '|'))
+                or stripped.startswith(('p.s', 'p.p.s', 'P.S', 'P.P.S'))):
+            fixed_lines.append(line)
+            continue
+        # Find first alphabetic character
+        first_alpha = next((i for i, c in enumerate(stripped) if c.isalpha()), None)
+        if first_alpha is not None:
+            char = stripped[first_alpha]
+            # Don't capitalize if a number or symbol precedes the first alpha
+            # e.g. "76% less variance" → don't capitalize "less"
+            prefix_before_alpha = stripped[:first_alpha]
+            has_number_prefix = any(c.isdigit() or c in '$%€£' for c in prefix_before_alpha)
+            # Only capitalize if not 'i' and no number prefix
+            if char.islower() and char != 'i' and not has_number_prefix:
+                # Find position in original line
+                line_offset = len(line) - len(line.lstrip())
+                pos_in_line = line_offset + first_alpha
+                if pos_in_line < len(line) and line[pos_in_line] == char:
+                    line = line[:pos_in_line] + char.upper() + line[pos_in_line+1:]
+                    count += 1
+        fixed_lines.append(line)
+    return '\n'.join(fixed_lines), count
+
 def main() -> None:
     if len(sys.argv) < 2:
         print("Usage: clean_text.py <file.md> [<file.md>...]", file=sys.stderr)

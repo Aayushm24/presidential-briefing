@@ -1,109 +1,144 @@
 {
   "version": "1.0.0",
   "proxy_base_url": "https://llmproxy.atlan.dev",
-  "description": "LLM Council routing. Models don't compete — they compose. Each task gets the best model for that specific job.",
+  "description": "LLM Council routing. Models don't compete \u2014 they compose. Each task gets the best model for that specific job.",
   "tasks": {
     "source_discovery_twitter": {
       "model": "grok-4-1",
       "temperature": 0.3,
       "why": "Only frontier model with native live X/Twitter data access",
-      "used_by": ["intake"]
+      "used_by": [
+        "intake"
+      ]
     },
     "significance_scoring": {
       "model": "claude-sonnet-4-6",
       "temperature": 0.2,
       "why": "Classification task. Sonnet is 5x cheaper than Opus and equally good at scoring against a rubric",
-      "used_by": ["filter"]
+      "used_by": [
+        "filter"
+      ]
     },
     "brain_connection_classification": {
       "model": "claude-sonnet-4-6",
       "temperature": 0.2,
       "why": "Classifying relationship types (BRIDGE/CONTRADICTS/EXTENDS/CONFIRMS) is structured work",
-      "used_by": ["brain"]
+      "used_by": [
+        "brain"
+      ]
     },
     "conviction_formation": {
       "model": "claude-opus-4-7",
       "temperature": 0.7,
       "why": "Forming original takes requires deep reasoning and nuance. Opus only.",
-      "used_by": ["briefing", "post"]
+      "used_by": [
+        "briefing",
+        "post"
+      ]
     },
     "briefing_writing": {
       "model": "claude-opus-4-7",
       "temperature": 0.6,
-      "why": "Opus 4.7 has better instruction following (new tokenizer pays closer attention per word) — critical for following newsletter style rules precisely. Keep temp 0.6 for factual accuracy.",
-      "used_by": ["briefing"]
+      "why": "Opus 4.7 has better instruction following (new tokenizer pays closer attention per word) \u2014 critical for following newsletter style rules precisely. Keep temp 0.6 for factual accuracy.",
+      "used_by": [
+        "briefing"
+      ]
     },
     "post_writing": {
       "model": "claude-opus-4-7",
       "temperature": 0.8,
-      "why": "Opus 4.7 for better voice-rule compliance. Higher temp (0.8 vs 0.6) for personality and variation — posts need creative energy, not safe output.",
-      "used_by": ["post"]
+      "why": "Opus 4.7 for better voice-rule compliance. Higher temp (0.8 vs 0.6) for personality and variation \u2014 posts need creative energy, not safe output.",
+      "used_by": [
+        "post"
+      ]
     },
     "format_selection": {
       "model": "claude-sonnet-4-6",
       "temperature": 0.2,
       "why": "Routing decision based on story type. Structured, fast.",
-      "used_by": ["post"]
+      "used_by": [
+        "post"
+      ]
     },
     "hook_extraction": {
       "model": "claude-sonnet-4-6",
       "temperature": 0.3,
       "why": "Finding the most surprising line in a draft. Pattern matching, not creative.",
-      "used_by": ["post"]
+      "used_by": [
+        "post"
+      ]
     },
     "writing_audit": {
       "model": "claude-sonnet-4-6",
       "temperature": 0.1,
-      "why": "Compliance check: em dashes, Not X.Y., sentence case, vague generics, unsourced stats, passive voice, padding. Runs on both brief + posts. Flag-only — doesn't independently trigger revise.",
-      "used_by": ["review"]
+      "why": "Compliance check: em dashes, Not X.Y., sentence case, vague generics, unsourced stats, passive voice, padding. Runs on both brief + posts. Flag-only \u2014 doesn't independently trigger revise.",
+      "used_by": [
+        "review"
+      ]
     },
     "review_structure": {
-      "model": "claude-sonnet-4-6",
+      "model": "gemini-3-1-pro-preview",
       "temperature": 0.2,
-      "why": "Structural QA: hook strength, flow, format compliance",
-      "used_by": ["review"]
+      "why": "Structural QA: hook strength, flow, format compliance Using Gemini as judge (different model family from Opus writer \u2014 avoids same-model circular bias).",
+      "used_by": [
+        "review"
+      ]
     },
     "review_fact_check": {
       "model": "gemini-3-1-pro-preview",
       "temperature": 0.1,
       "why": "Google Search grounding for real-time claim verification",
-      "used_by": ["review"]
+      "used_by": [
+        "review"
+      ]
     },
     "review_concept_accuracy": {
-      "model": "claude-opus-4-7",
+      "model": "gemini-3-1-pro-preview",
       "temperature": 0.3,
-      "why": "Are the technical explanations correct? Would an ML engineer find errors?",
-      "used_by": ["review"]
+      "why": "Are the technical explanations correct? Would an ML engineer find errors? Using Gemini as judge (different model family from Opus writer \u2014 avoids same-model circular bias).",
+      "used_by": [
+        "review"
+      ]
     },
     "review_teaching_quality": {
-      "model": "claude-sonnet-4-6",
+      "model": "gemini-3-1-pro-preview",
       "temperature": 0.3,
-      "why": "Could someone with no ML background follow this? Are there logic leaps?",
-      "used_by": ["review"]
+      "why": "Could someone with no ML background follow this? Are there logic leaps? Using Gemini as judge (different model family from Opus writer \u2014 avoids same-model circular bias).",
+      "used_by": [
+        "review"
+      ]
     },
     "review_voice_match": {
-      "model": "claude-opus-4-7",
+      "model": "gemini-3-1-pro-preview",
       "temperature": 0.3,
-      "why": "Comparing draft against voice profile requires nuanced judgment",
-      "used_by": ["review"]
+      "why": "Comparing draft against voice profile requires nuanced judgment Using Gemini as judge (different model family from Opus writer \u2014 avoids same-model circular bias).",
+      "used_by": [
+        "review"
+      ]
     },
     "review_adversarial": {
       "model": "grok-4-1",
       "temperature": 0.5,
       "why": "Is this take actually novel? Search X for similar takes. Lowest hallucination rate (4.22%).",
-      "used_by": ["review"]
+      "used_by": [
+        "review"
+      ]
     },
     "review_freshness": {
       "model": "grok-4-1",
       "temperature": 0.3,
       "why": "Is this news actually new? Has someone made this exact connection already?",
-      "used_by": ["review"]
+      "used_by": [
+        "review"
+      ]
     },
     "scoring_synthesis": {
-      "model": "claude-opus-4-7",
+      "model": "gemini-3-1-pro-preview",
       "temperature": 0.2,
-      "why": "Synthesizing all review outputs into a final confidence score",
-      "used_by": ["review"]
+      "why": "Synthesizing all review outputs into a final confidence score Using Gemini as judge (different model family from Opus writer \u2014 avoids same-model circular bias).",
+      "used_by": [
+        "review"
+      ]
     }
   }
 }

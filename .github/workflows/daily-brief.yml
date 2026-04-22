@@ -25,15 +25,14 @@ concurrency:
 
 # 5-job pipeline — each step on its own runner with its own timeout budget.
 #
-#   scan        → bash only: RSS + Grok + merge          (~3 min)
-#   analyze     → Claude Code: score + theme + brain     (~12 min)
-#   write-brief → Claude Code: brief only                (~8 min)  ─┐ parallel
-#   write-posts → Claude Code: posts only                (~6 min)  ─┘
-#   ship        → Claude Code: council + publish         (~12 min)
+#   scan        → bash: RSS + Grok + merge               (~3 min)
+#   analyze     → Sonnet: score + theme + brain          (~12 min)
+#   write-brief → Opus 4.7: brief only                   (~8 min)
+#   write-posts → Opus 4.7: posts (reads brief.md)       (~6 min, after write-brief)
+#   ship        → Gemini judges, Opus revises, bash gates (~12 min)
 #
-# Benefits vs 3-job: scan failure is cheap (no Claude Code wasted),
-# write-brief + write-posts run in parallel saving ~6 min, each step
-# has a fresh independent timeout.
+# Model split: Opus writes, Gemini judges (different model family = no circular bias).
+# write-posts is sequential after write-brief so posts draw from the synthesized brief.
 
 jobs:
   # ============================================================
@@ -285,7 +284,7 @@ jobs:
   # ============================================================
   write-posts:
     name: Write posts
-    needs: [scan, analyze]
+    needs: [scan, analyze, write-brief]
     if: needs.analyze.outputs.quiet_day != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 12
@@ -310,6 +309,12 @@ jobs:
           name: workspace-${{ needs.scan.outputs.today }}
           path: workspace/${{ needs.scan.outputs.today }}/
 
+      - name: Download brief artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: workspace-brief-${{ needs.scan.outputs.today }}
+          path: workspace/${{ needs.scan.outputs.today }}/
+
       - name: Write posts via Claude Code
         uses: anthropics/claude-code-base-action@v0.0.63
         with:
@@ -320,8 +325,9 @@ jobs:
             TODAY=${{ needs.scan.outputs.today }}
             DRY_RUN=${{ needs.scan.outputs.dry_run }}
 
-            Use research.md, brain.md, themes.json, scored.json as source material.
-            Do NOT write the briefing — that runs in a parallel job.
+            Use brief.md (primary), research.md, brain.md, themes.json, scored.json as source material.
+            brief.md is the synthesized briefing — posts should draw from its insights and framing, not from raw research.
+            Do NOT rewrite the briefing.
             Do NOT run council or publish.
           settings: .claude/settings.json
           anthropic_api_key: ${{ secrets.ATLAN_LLM_KEY }}

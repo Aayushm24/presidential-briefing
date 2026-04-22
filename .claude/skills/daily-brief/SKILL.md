@@ -107,7 +107,7 @@ Loop:
 2. Parse council scores. If all options score ≥12/15 voice audit AND fact-check passes → break, ship.
 3. Otherwise: read `.claude/skills/council/revise/SKILL.md`. Updates `posts.md` in place (backup saved as `posts.md.iter-N.bak`).
 4. Increment iter: `echo $(($(cat workspace/${TODAY}/.iter) + 1)) > workspace/${TODAY}/.iter`
-5. If iter > 2 → break anyway (force-ship with `[UNREVIEWED]` tag in publish.md).
+5. If iter > 2 → exit 1. Bash gate step will fail cleanly. Redeliver workflow handles manual recovery.
 
 Update status: `echo "council-ok" > workspace/${TODAY}/.status`
 
@@ -138,7 +138,7 @@ If triggered from Step 2 quiet-day path:
 - **Timeout (Actions 25-min cap):** `.status` tells us exactly where we stopped. Next manual re-run picks up from there.
 - **Grok empty response:** scan writes placeholder item, continues. Score gracefully handles.
 - **Supabase unreachable:** brain-connect writes empty `brain.md` with `[NO-BRAIN]` tag. Write-briefing proceeds without accumulated context.
-- **Any kill-list violation after 2 iterations:** force-ship tagged `[UNREVIEWED]`. Slack message flags for manual edit before Aayush ships.
+- **Any kill-list violation after 2 iterations:** exit 1 cleanly. Gates fail hard. Redeliver workflow used for manual recovery after fixing violations.
 
 ---
 
