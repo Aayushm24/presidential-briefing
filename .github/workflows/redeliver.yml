@@ -60,7 +60,16 @@ jobs:
           POSTS_JSON=$(jq -c '[.options[] | .post]' "${WS}/posts.json")
 
           if [ -f "${WS}/scan-summary.json" ]; then
-            SCAN_HEALTH=$(cat "${WS}/scan-summary.json" | jq -c '.' 2>/dev/null || echo '{"status":"unknown"}')
+            SCAN_HEALTH=$(jq -c '{
+              status:.status,
+              rss_items:.rss.items_returned,
+              rss_feeds_ok:.rss.feeds_processed,
+              rss_feeds_total:.rss.feeds_total,
+              rss_feeds_failed:.rss.feeds_failed,
+              sitemap_items:(.sitemap.items_total//0),
+              x_posts:.x.posts_within_24h,
+              degraded_reasons:(.degraded_reasons//[])
+            }' "${WS}/scan-summary.json" 2>/dev/null || echo '{"status":"unknown"}')
           else
             SCAN_HEALTH='{"status":"unknown"}'
           fi
