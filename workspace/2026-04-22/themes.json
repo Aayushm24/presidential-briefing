@@ -1,0 +1,49 @@
+{
+  "date": "2026-04-22",
+  "briefing_type": "pattern",
+  "lead_theme": {
+    "theme_title": "AI coding tools are becoming strategic infrastructure assets, triggering massive valuation bets and competitive positioning moves",
+    "conviction": "Builders should treat AI coding tools as platform-layer infrastructure, not SaaS products — the Cursor/$60B option and xAI exclusive contract signal that distribution lock-in via developer tooling is now worth infrastructure-scale capital, meaning founders building in this space must think about exclusivity and strategic acquirer value from day one",
+    "supporting_stories": [
+      "SpaceX is working with Cursor and has an option to buy the startup for $60B",
+      "SpaceXAI/Cursor deal breakdown — $50B premoney, $10B exclusive xAI contract",
+      "AI has no moat (geohot on Cursor/$60B deal)"
+    ],
+    "theme_strength": 75.2
+  },
+  "standalone_stories": [
+    "Meta will record employees' keystrokes and use it to train its AI models",
+    "Unauthorized group gains access to Anthropic's exclusive cyber tool Mythos"
+  ],
+  "all_themes": [
+    {
+      "theme_title": "AI coding tools are becoming strategic infrastructure assets, triggering massive valuation bets and competitive positioning moves",
+      "conviction": "Builders should treat AI coding tools as platform-layer infrastructure, not SaaS products — the Cursor/$60B option and xAI exclusive contract signal that distribution lock-in via developer tooling is now worth infrastructure-scale capital, meaning founders building in this space must think about exclusivity and strategic acquirer value from day one",
+      "supporting_stories": [
+        "SpaceX is working with Cursor and has an option to buy the startup for $60B",
+        "SpaceXAI/Cursor deal breakdown — $50B premoney, $10B exclusive xAI contract",
+        "AI has no moat (geohot on Cursor/$60B deal)"
+      ],
+      "theme_strength": 75.2
+    },
+    {
+      "theme_title": "Anthropic's opaque pricing changes on Claude Code are creating real market confusion and competitive vulnerability",
+      "conviction": "Any team budgeting AI coding tools into their stack right now faces genuine pricing uncertainty from Anthropic — builders should either lock in contracts, hedge with OpenAI Codex, or build abstraction layers that make switching costs low, because Anthropic's silent tier changes signal pricing instability is not over",
+      "supporting_stories": [
+        "Anthropic drops Claude Code from $20/month Pro plan without announcement — pricing confusion",
+        "Is Claude Code going to cost $100/month? Probably not - it's all very confusing",
+        "Claude Opus 4.7 adaptive thinking API settings — forcing reasoning tokens"
+      ],
+      "theme_strength": 69.2
+    },
+    {
+      "theme_title": "AI image generation is crossing a practical usability threshold with accurate text rendering, unlocking real product use cases",
+      "conviction": "Builders in marketing, design, and content automation should re-evaluate AI image generation as a production-ready component today — GPT-Image-2's text accuracy closes the last major gap that blocked real deployment in ad creative and product mockup workflows",
+      "supporting_stories": [
+        "[AINews] OpenAI launches GPT-Image-2",
+        "ChatGPT's new Images 2.0 model is surprisingly good at generating text"
+      ],
+      "theme_strength": 30.0
+    }
+  ]
+}

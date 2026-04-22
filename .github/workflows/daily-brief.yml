@@ -416,30 +416,22 @@ jobs:
           mkdir -p workspace/$TODAY
           echo "quiet_day" > workspace/$TODAY/.status
 
-      - name: Run council + clean + gates via Claude Code
+      - name: Run council + revise via Claude Code
         if: needs.analyze.outputs.quiet_day != 'true'
         uses: anthropics/claude-code-base-action@v0.0.63
         with:
           prompt: |
-            Run council + clean + quality gates. brief.md + posts.md + posts.json
+            Run council review and revise. brief.md + posts.md + posts.json
             already exist in workspace/${{ needs.scan.outputs.today }}/.
 
             1. Follow .claude/skills/council/attack/SKILL.md — writes council-notes.md
-            2. If council verdict is REVISE AND iter<1: follow .claude/skills/council/revise/SKILL.md (iter-1)
-            3. Run: python3 scripts/clean_text.py workspace/${{ needs.scan.outputs.today }}/brief.md workspace/${{ needs.scan.outputs.today }}/posts.md
-            4. Run: ./tests/kill-list-regex.sh workspace/${{ needs.scan.outputs.today }}/brief.md
-            5. Run: ./tests/kill-list-regex.sh workspace/${{ needs.scan.outputs.today }}/posts.md
-            6. Run: ./tests/golden-format.sh workspace/${{ needs.scan.outputs.today }}/brief.md
-            7. Run: ./tests/posts-gate.sh workspace/${{ needs.scan.outputs.today }}/posts.json
+            2. Run: python3 scripts/clean_text.py workspace/${{ needs.scan.outputs.today }}/brief.md workspace/${{ needs.scan.outputs.today }}/posts.md
+            3. If council verdict is REVISE: follow .claude/skills/council/revise/SKILL.md (up to 2 iterations)
+            4. After each revise, re-run: python3 scripts/clean_text.py workspace/${{ needs.scan.outputs.today }}/brief.md workspace/${{ needs.scan.outputs.today }}/posts.md
 
-            IF STEP 4, 5, 6 or 7 FAILS AFTER iter-1:
-              a. Re-run attack (deterministic pre-flight only)
-              b. If iter<2: follow revise SKILL.md AGAIN (iter-2)
-              c. Re-run steps 3, 4, 5, 6, 7
-
-            STOP after gates all pass OR iter-2 still failing.
-            If any gate fails after iter-2, write rejected status and exit 1.
-            If all pass, write gates-ok to workspace/TODAY/.status.
+            DO NOT run gate scripts yourself — a separate bash step does that.
+            DO NOT write .status — the bash gate step does that.
+            Your job: council review + clean_text only.
 
             TODAY=${{ needs.scan.outputs.today }}
             Council MUST run real LLM passes. Never mock.
@@ -456,6 +448,37 @@ jobs:
           LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
           TODAY: ${{ needs.scan.outputs.today }}
           DRY_RUN: ${{ needs.scan.outputs.dry_run }}
+
+      # ── SYSTEMIC FIX: gates run in pure bash, NOT inside Claude Code ──
+      # Claude Code cannot reliably exit 1 on its own gate failures.
+      # This step is the single source of truth for whether content ships.
+      - name: Quality gates (bash — deterministic, not LLM)
+        if: needs.analyze.outputs.quiet_day != 'true'
+        env:
+          DATE: ${{ needs.scan.outputs.today }}
+        run: |
+          set -euo pipefail
+          WS="workspace/${DATE}"
+          FAIL=0
+
+          echo "=== Running quality gates ==="
+
+          # Final clean pass (belt-and-braces after council revise)
+          python3 scripts/clean_text.py "${WS}/brief.md" "${WS}/posts.md" 2>&1 || true
+
+          ./tests/kill-list-regex.sh "${WS}/brief.md" || { echo "::error::brief kill-list FAIL"; FAIL=1; }
+          ./tests/kill-list-regex.sh "${WS}/posts.md"  || { echo "::error::posts kill-list FAIL"; FAIL=1; }
+          ./tests/golden-format.sh   "${WS}/brief.md"  || { echo "::error::golden-format FAIL"; FAIL=1; }
+          ./tests/posts-gate.sh      "${WS}/posts.json" || { echo "::error::posts-gate FAIL"; FAIL=1; }
+
+          if [ $FAIL -eq 1 ]; then
+            echo "::error::One or more quality gates failed. Content will not ship."
+            echo "rejected-gates" > "${WS}/.status"
+            exit 1
+          fi
+
+          echo "gates-ok" > "${WS}/.status"
+          echo "=== All quality gates passed ==="
 
       - name: Deliver (commit + Readwise + Slack)
         if: needs.analyze.outputs.quiet_day != 'true'

@@ -1,0 +1,168 @@
+You are a pattern recognition system. You received the top 10 AI stories of the day with scores.
+
+Your job: find THEMES. Which stories are about the same underlying shift? Group them.
+
+For each theme:
+- theme_title: one sentence describing the pattern (not any individual story)
+- conviction: a specific claim about what this pattern means for builders
+- supporting_stories: array of story titles that support this theme
+- theme_strength: count of supporting stories multiplied by their average score
+
+Rules:
+- A theme needs at least 2 supporting stories to count
+- Stories can only belong to one theme
+- If no theme has 2+ stories, return empty themes array
+- Look for: business model shifts, technology convergence, market signals, competitive moves pointing the same direction
+
+Return JSON only, no markdown:
+{
+  "themes": [{"theme_title": "", "conviction": "", "supporting_stories": [], "theme_strength": 0}],
+  "lead_theme_index": 0,
+  "standalone_stories": ["titles that don't fit any theme"]
+}
+
+Scored stories:
+<stories>
+[
+  {
+    "title": "SpaceX is working with Cursor and has an option to buy the startup for $60B",
+    "url": "https://techcrunch.com/2026/04/21/spacex-is-working-with-cursor-and-has-an-option-to-buy-the-startup-for-60-billion/",
+    "scores": {
+      "significance": 9,
+      "business_impact": 10,
+      "practitioner_value": 7,
+      "discussion_heat": 10,
+      "story_potential": 10
+    },
+    "combined_score": 9.2,
+    "verdict": "breakthrough",
+    "one_line_reason": "$60B acquisition option + $10B contract signals AI coding tools are now infrastructure-level assets — every founder building dev tools needs to understand this valuation logic."
+  },
+  {
+    "title": "SpaceXAI/Cursor deal breakdown — $50B premoney, $10B exclusive xAI contract",
+    "url": "https://x.com/swyx/status/2046733194448216409",
+    "scores": {
+      "significance": 9,
+      "business_impact": 10,
+      "practitioner_value": 7,
+      "discussion_heat": 10,
+      "story_potential": 9
+    },
+    "combined_score": 9.0,
+    "verdict": "breakthrough",
+    "one_line_reason": "Best deal structure analysis of the Cursor/SpaceX deal — the option pricing mechanics alone are worth studying for any founder thinking about strategic partnerships."
+  },
+  {
+    "title": "Anthropic drops Claude Code from $20/month Pro plan without announcement — pricing confusion",
+    "url": "https://x.com/simonw/status/2046732056995205620",
+    "scores": {
+      "significance": 8,
+      "business_impact": 9,
+      "practitioner_value": 8,
+      "discussion_heat": 9,
+      "story_potential": 9
+    },
+    "combined_score": 8.6,
+    "verdict": "breakthrough",
+    "one_line_reason": "Anthropic silently removed Claude Code from the $20 tier — a live case study in how NOT to handle pricing changes and a real opening for OpenAI Codex to steal market share."
+  },
+  {
+    "title": "Is Claude Code going to cost $100/month? Probably not - it's all very confusing",
+    "url": "https://simonwillison.net/2026/Apr/22/claude-code-confusion/#atom-everything",
+    "scores": {
+      "significance": 7,
+      "business_impact": 9,
+      "practitioner_value": 8,
+      "discussion_heat": 8,
+      "story_potential": 8
+    },
+    "combined_score": 8.0,
+    "verdict": "notable",
+    "one_line_reason": "Detailed breakdown of Anthropic's confusing pricing move — essential reading for any team currently budgeting Claude Code into their dev stack."
+  },
+  {
+    "title": "[AINews] OpenAI launches GPT-Image-2",
+    "url": "https://www.latent.space/p/ainews-openai-launches-gpt-image",
+    "scores": {
+      "significance": 8,
+      "business_impact": 8,
+      "practitioner_value": 8,
+      "discussion_heat": 8,
+      "story_potential": 7
+    },
+    "combined_score": 7.8,
+    "verdict": "notable",
+    "one_line_reason": "GPT-Image-2 is a meaningful capability jump for product builders — text rendering in images alone unlocks new use cases in marketing, design, and content automation."
+  },
+  {
+    "title": "ChatGPT's new Images 2.0 model is surprisingly good at generating text",
+    "url": "https://techcrunch.com/2026/04/21/chatgpts-new-images-2-0-model-is-surprisingly-good-at-generating-text/",
+    "scores": {
+      "significance": 7,
+      "business_impact": 7,
+      "practitioner_value": 8,
+      "discussion_heat": 7,
+      "story_potential": 7
+    },
+    "combined_score": 7.2,
+    "verdict": "notable",
+    "one_line_reason": "Accurate text in AI-generated images is a long-standing pain point finally being solved — directly usable today for ad creative, mockups, and product visuals."
+  },
+  {
+    "title": "AI has no moat (geohot on Cursor/$60B deal)",
+    "url": "https://geohot.github.io//blog/jekyll/update/2026/04/22/ai-has-no-moat.html",
+    "scores": {
+      "significance": 7,
+      "business_impact": 7,
+      "practitioner_value": 6,
+      "discussion_heat": 8,
+      "story_potential": 8
+    },
+    "combined_score": 7.2,
+    "verdict": "notable",
+    "one_line_reason": "Geohot's blunt take on the Cursor valuation as a scam/bubble is the contrarian view every founder advising on AI valuations needs to stress-test against."
+  },
+  {
+    "title": "Meta will record employees' keystrokes and use it to train its AI models",
+    "url": "https://techcrunch.com/2026/04/21/meta-will-record-employees-keystrokes-and-use-it-to-train-its-ai-models/",
+    "scores": {
+      "significance": 7,
+      "business_impact": 7,
+      "practitioner_value": 6,
+      "discussion_heat": 8,
+      "story_potential": 8
+    },
+    "combined_score": 7.2,
+    "verdict": "notable",
+    "one_line_reason": "Meta harvesting internal behavioral data for AI training signals a new frontier in proprietary data strategy — and raises immediate questions about employee consent that every AI-building company will face."
+  },
+  {
+    "title": "Claude Opus 4.7 adaptive thinking API settings — forcing reasoning tokens",
+    "url": "https://x.com/simonw/status/2046659404217659467",
+    "scores": {
+      "significance": 6,
+      "business_impact": 6,
+      "practitioner_value": 9,
+      "discussion_heat": 6,
+      "story_potential": 6
+    },
+    "combined_score": 6.6,
+    "verdict": "notable",
+    "one_line_reason": "Concrete API settings to force Claude Opus 4.7 to actually think — immediately actionable for any team using Claude for complex reasoning tasks."
+  },
+  {
+    "title": "Unauthorized group gains access to Anthropic's exclusive cyber tool Mythos",
+    "url": "https://techcrunch.com/2026/04/21/unauthorized-group-has-gained-access-to-anthropics-exclusive-cyber-tool-mythos-report-claims/",
+    "scores": {
+      "significance": 7,
+      "business_impact": 7,
+      "practitioner_value": 5,
+      "discussion_heat": 7,
+      "story_potential": 7
+    },
+    "combined_score": 6.6,
+    "verdict": "notable",
+    "one_line_reason": "A restricted AI cybersecurity tool leaking to unauthorized actors is a real-world AI safety failure — directly relevant to founders building or deploying sensitive AI capabilities."
+  }
+]
+</stories>
