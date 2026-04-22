@@ -1,6 +1,6 @@
 # AI coding tool valuations have completely decoupled from usage reality
 
-[SpaceX](https://techcrunch.com/2026/04/21/spacex-is-working-with-cursor-and-has-an-option-to-buy-the-startup-for-60-billion/) just locked in a $60B acquisition option on Cursor, that's more than Twitter sold for.
+[SpaceX](https://techcrunch.com/2026/04/21/spacex-is-working-with-cursor-and-has-an-option-to-buy-the-startup-for-60-billion/) just locked in a $60B acquisition option on Cursor. That's more than Twitter sold for.
 
 The AI coding tool market is entering a consolidation frenzy that makes zero economic sense. While teams are cutting tool budgets and pausing subscriptions, valuations keep climbing into absurd territory. This disconnect creates real risk for every dev team building workflow dependency on tools that could vanish, pivot, or 10x their prices overnight.
 
@@ -17,7 +17,7 @@ The numbers make no sense when you trace them back to actual usage patterns. [Sp
 
 That valuation puts Cursor above Twitter's $44B sale price. Above whole public companies with decades of revenue and millions of daily active users. For a tool that generates code completions.
 
-The disconnect between valuation and reality is stark when you look at actual developer behavior. [George Hotz pointed this out directly](https://geohot.github.io//blog/jekyll/update/2026/04/22/ai-has-no-moat.html): "Nobody I know even uses Cursor any more." While anecdotal, this matches patterns I keep seeing across teams, initial excitement followed by gradual drift back to existing workflows.
+The disconnect between valuation and reality is stark when you look at actual developer behavior. [George Hotz pointed this out directly](https://geohot.github.io//blog/jekyll/update/2026/04/22/ai-has-no-moat.html): "Nobody I know even uses Cursor any more." While anecdotal, this matches patterns i keep seeing across teams, initial excitement followed by gradual drift back to existing workflows.
 
 SpaceX's interest makes strategic sense for their own development needs. They're building rockets, satellites, and autonomous systems that require massive amounts of custom software. Having dedicated AI coding infrastructure could accelerate their internal velocity significantly.
 
@@ -63,23 +63,19 @@ What founders need to understand is that the current moment may be peak optional
 
 ---
 
-### Anthropic drops Claude Code from Pro plan without announcement
+### How to think about AI coding tool risk right now
 
-[Anthropic appears to have removed Claude Code](https://x.com/simonw/status/2046732056995205620) from their $20/month Pro plan without any public announcement. Users noticed the change when trying to access Claude Code features that had previously been included in their subscription tier.
+Three pricing signals landed this week that nobody planned for.
 
-[Simon Willison's detailed investigation](https://simonwillison.net/2026/Apr/22/claude-code-confusion/#atom-everything) shows the confusion extends beyond just the Pro tier removal. Anthropic's pricing page now shows different tiers and feature sets, but the company hasn't explained the changes or provided migration paths for existing users.
+[GitHub restricted Copilot access](https://simonwillison.net/2026/Apr/22/changes-to-github-copilot/#atom-everything): individual new signups paused, premium model access locked to the $39/month Pro+ tier. [Anthropic's pricing page](https://simonwillison.net/2026/Apr/22/claude-code-confusion/#atom-everything) briefly showed Claude Code moved from $20/month to $100-200/month before the company called it an A/B test error. SpaceX locked in a $60B acquisition option on Cursor, which if exercised, turns a general-purpose coding tool into internal aerospace infrastructure.
 
-This is a textbook case study in how not to handle pricing changes for developer tools. Silent tier adjustments anger existing users and create immediate opportunities for competitors. Developers who budgeted Claude Code into their workflows now face unexpected costs or forced migrations to alternative tools.
+These three events in one week reveal the underlying instability. The tools that feel stable today are navigating competing pressures between venture-backed growth, model inference costs that don't drop as fast as usage grows, and strategic acquirers who see developer distribution as infrastructure worth controlling.
 
-The timing creates a real opening for OpenAI Codex and GitHub Copilot. When developers feel betrayed by pricing changes, they actively seek alternatives rather than grudgingly accepting higher costs. That's different from typical SaaS churn, where users often accept price increases to avoid switching costs.
+The pattern is not random. GitHub, Anthropic, and Cursor are all at inflection points where the original pricing model, subsidized by venture capital to capture market share, is colliding with the reality that serving developers at scale is expensive. When that collision happens, pricing moves fast and without warning.
 
-OpenAI and Microsoft should target frustrated Claude Code users with migration incentives and feature comparisons. Anthropic's confusion gives competitors a window to capture users who are already motivated to switch.
+Every dev team building workflows around these tools is accumulating switching costs invisibly. Custom agent rules, specific prompt formats, API response assumptions, these all represent real migration costs that don't appear on any balance sheet until you have to move.
 
-The broader lesson for any AI company building developer tools: pricing transparency matters more for developers than for other user segments. Developers evaluate tools as long-term investments in their workflow. They need predictable costs to make architecture decisions and team budget planning.
-
-Anthropic's silent changes signal that their pricing strategy isn't stable yet. That uncertainty creates risk for any team considering Claude Code for production use. The smart play is either locking in contracts with Anthropic or building abstraction layers that make switching between AI coding assistants less painful.
-
-This connects to the conviction that founders are underusing Claude Code. The teams that treat it as an execution layer for their whole company get more value but also take on more platform risk. Anthropic's pricing instability makes hedging strategies necessary for teams that depend on AI tools for business-critical workflows.
+The actionable read: treat AI coding tools like cloud spend. Audit what you're actually using. Lock in annual pricing where possible. Keep the most critical workflows portable. The teams that treat volatility as a permanent condition rather than a temporary phase will make better decisions about which dependencies are worth taking on.
 
 ---
 

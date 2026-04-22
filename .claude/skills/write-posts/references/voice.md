@@ -22,7 +22,7 @@ A founder reads it and thinks *"this is exactly what I needed to know"* without 
 
 - Sentence length: short. One idea per line. Fragments are good.
 - Vocabulary: fifth-grade English. Simple words. "use" not "utilize."
-- Case: lowercase i. lowercase everything except proper nouns.
+- Case: sentence case throughout. Standard "I" for first-person pronoun.
 - Tone: self-deprecating humor + genuine expertise. Casual — "IMO", "ie", "we'll", "i think", "stupidly simple."
 - Numbers: specific. "$900M" not "nearly a billion." "47 wallets" not "dozens."
 - Contractions: always. "doesn't" not "does not."

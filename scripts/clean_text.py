@@ -376,8 +376,8 @@ def fix_sentence_case(text: str) -> tuple[str, int]:
             # e.g. "76% less variance" → don't capitalize "less"
             prefix_before_alpha = stripped[:first_alpha]
             has_number_prefix = any(c.isdigit() or c in '$%€£' for c in prefix_before_alpha)
-            # Only capitalize if not 'i' and no number prefix
-            if char.islower() and char != 'i' and not has_number_prefix:
+            # Capitalize if no number prefix (standard sentence case, including 'I')
+            if char.islower() and not has_number_prefix:
                 # Find position in original line
                 line_offset = len(line) - len(line.lstrip())
                 pos_in_line = line_offset + first_alpha
