@@ -5,7 +5,7 @@
 
 ---
 
-## OPTION 1 - contrarian (1445c)
+## OPTION 1 - contrarian (1520c)
 
 **Conviction:** SpaceX is buying a data flywheel, not a coding tool.
 
@@ -19,9 +19,9 @@ When we build agents at Atlan, we stopped thinking about the IDE a long time ago
 
 What we think about instead is the data that flows through the tool. The correction patterns. The debugging decisions. The deployment choices. The moments when an engineer stops, rewrites, and tries again.
 
-That's what SpaceX is buying.
+IMO that's what SpaceX is actually buying.
 
-The feedback loop between SpaceX engineers and every line of code they ship. That data trains better models. Better models attract more engineers. More engineers generate more data.
+The brief says it's a defensive infrastructure play. My read: the feedback loop between SpaceX engineers and every line of code they ship. That data trains better models. Better models attract more engineers. More engineers generate more data.
 
 SpaceX wants to own that loop for their own codebase.
 
@@ -37,33 +37,29 @@ p.s. This is why the valuation makes sense when you stop reading it as a coding 
 
 ---
 
-## OPTION 2 - personal-discovery (1302c)
+## OPTION 2 - personal-discovery (1489c)
 
 **Conviction:** The switching cost is the product, that's what $60B buys.
 
-Three AI coding tools repriced this week.
+I ran an internal audit of our AI coding tools at Atlan this week.
 
-Nobody announced it. Developers just noticed.
+Three hours. Every tool we use, what it's actually doing, which workflows depend on it, how long migration would take.
 
-GitHub paused new Copilot signups and cut premium model access to the top tier. Anthropic's pricing page briefly showed Claude Code moving from $20/month to $100/month before they called it a test. SpaceX locked in a $60B option on Cursor.
+What triggered it: three things happened the same week that all pointed at the same pressure.
 
-The pattern is always the same.
+GitHub paused new Copilot individual signups and cut premium model access to the $39/month Pro+ tier. Anthropic's pricing page briefly showed Claude Code at $100/month before they called it an accidental A/B test. SpaceX locked in a $60B acquisition option on Cursor with a $10B exclusive xAI contract.
 
-Tool builds on cheap model access. Developers adopt it. Tool becomes load-bearing. Pricing changes. Developer is stuck.
+None of these is a repricing. But all three signal that the tools dev teams depend on are at an inflection point, being acquired, restricting access, testing price thresholds.
 
-I ran a quick audit of our AI coding tools at Atlan. Which workflows depend on which tools. How long migration would take. What's load-bearing vs. optional.
+What the audit showed: the switching cost is invisible until it isn't. Custom agent rules, specific prompt formats, API response assumptions, none of these show up on a budget sheet. But they represent real weeks of engineering if you ever need to migrate.
 
-Took three hours. We had more lock-in than I thought.
+I doubt the current pricing landscape stays stable for the next 18 months. The unit economics don't work at current rates, and the strategic acquirers are circling.
 
-I doubt any of the current pricing survives the next 18 months unchanged. The unit economics don't work at current rates, and the strategic acquirers are circling.
+IMO the switching cost is the actual product. That's what SpaceX is buying for $60B. That's what GitHub is protecting.
 
-The teams I watch staying ahead of this treat AI tooling like cloud infrastructure. Assume repricing. Keep the core workflows portable. Never build a workflow you can't migrate in a week.
+Could you swap your primary AI coding tool in 5 days if you had to?
 
-The ones who aren't thinking about this are one acquisition announcement from a painful sprint.
-
-IMO the switching cost is the actual product. That's what $60B buys.
-
-What's your migration plan if your primary AI coding tool changes pricing tomorrow?
+p.s. The audit took three hours. We had more lock-in than I thought. Worth doing before a forced migration. 👇🏻
 
 ---
 

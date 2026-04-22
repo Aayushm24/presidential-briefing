@@ -88,6 +88,28 @@ If total violations > 0 OR mba_vocab/long_sentence violations exist, these are C
 
 LLM passes (steps 1-3) still run after this, but pre-flight findings take priority.
 
+### Step 0.5: Fabrication check (compare posts against brief)
+
+Before any LLM pass, verify that post claims are grounded in the brief:
+
+```bash
+# This is a flag-only check — write findings to council-notes, don't auto-fail
+echo "## Fabrication Check" >> workspace/${TODAY}/council-notes.md
+echo "Checking post claims against brief..." >> workspace/${TODAY}/council-notes.md
+
+# Check for repricing language (common fabrication)
+REPRICE_HITS=$(grep -c "repriced\|repricing" workspace/${TODAY}/posts.md 2>/dev/null || echo 0)
+if [ "$REPRICE_HITS" -gt 0 ]; then
+  echo "⚠️ FABRICATION RISK: 'repriced/repricing' found $REPRICE_HITS times in posts. Verify these events actually involved price changes." >> workspace/${TODAY}/council-notes.md
+fi
+```
+
+For the LLM voice audit pass, also include this instruction:
+"Cross-check each factual claim in the posts against the brief. Flag any claim that:
+1. States as fact something the brief only implies
+2. Names a pattern ('the pattern is always X') not explicitly in the brief  
+3. Uses 'repriced/repricing' for events that were access restrictions or acquisitions"
+
 ### Step 1: Parse posts.md into structured data
 
 ```bash

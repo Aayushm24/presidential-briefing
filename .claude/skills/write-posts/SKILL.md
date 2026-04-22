@@ -149,6 +149,24 @@ BAD voice: "The $60B isn't a bet on code completion. It's a bet on distribution.
 
 Both say the same thing. The first sounds like Aayush noticed something. The second sounds like he's explaining it.
 
+=== CRITICAL: NO FABRICATED CLAIMS ===
+
+Every external factual claim in the post must be directly traceable to a specific line in brief.md.
+
+Before submitting any option:
+1. Read each factual sentence in your post
+2. Find the line in brief.md that supports it
+3. If you can't find it — remove the claim or mark it explicitly as "IMO" / "my read is"
+
+FABRICATION PATTERNS TO AVOID:
+- Inventing a connecting frame: "Three tools repriced this week" when none did
+- Stating inferences as facts: "That's what SpaceX is buying" (if brief doesn't say it)
+- Pattern-naming that doesn't exist in the source: "The pattern is always the same..." 
+- Invented numbers: any specific statistic not in brief.md
+
+If brief says "GitHub restricted access" → post says "restricted access"
+If brief says "SpaceX signed acquisition option" → post cannot say "SpaceX is buying a data flywheel" without marking it as your interpretation
+
 === CRITICAL: ONE STORY PER POST ===
 
 The brief covers multiple stories. Posts must NOT try to summarize all of them. Each option picks ONE story and goes deep on that single conviction.

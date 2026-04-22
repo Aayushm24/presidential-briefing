@@ -80,6 +80,14 @@ check_file() {
     fi
   done
 
+  # Fabricated repricing language — "repriced/repricing" applied to events that aren't price changes
+  # e.g. "Three tools repriced this week" when they restricted access or got acquired
+  local repricing_hits
+  repricing_hits=$(printf '%s' "$content" | grep -ciE '(repriced|repricing)' || true)
+  if [ "$repricing_hits" -gt 0 ]; then
+    errors+=("repricing_language=${repricing_hits} — verify this actually happened. 'Repriced' is often fabricated when tools restricted access or were acquired.")
+  fi
+
   # AI contemplation phrases — sound like AI trying to be thoughtful
   local ai_contemplation
   ai_contemplation=$(printf '%s' "$content" | grep -ciE     "(here'?s what i keep coming back to|i want to sit with that|that'?s the part nobody wants to|the dangerous version of this story|it's worth sitting with|let that sink in|think about that for a moment)" || true)
