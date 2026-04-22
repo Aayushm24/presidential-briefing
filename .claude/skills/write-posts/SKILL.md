@@ -11,10 +11,14 @@ Output: `workspace/${TODAY}/posts.md` with 3 options + convictions + preliminary
 
 ## Inputs (all from disk)
 
-**Read THESE FIRST — style examples before rules:**
-- `config/aayush-reference-posts/*.md` — Aayush's own top posts verbatim. The 2026-04-20 "AI startups have 12 months" post is the primary voice anchor. Match its rhythm exactly.
-- `config/creator-posts.md` — 22 top creator LinkedIn posts. These show the emotional arc and structure that works. Pay attention to Post #9 (AI startup brutal truth), Post #13 (AI commodity take), Post #19 (agent architects). These are the STYLE — not the content, not the topic.
-- `config/top-creator-blueprint.md` — the universal formula behind what makes posts work (conflict build, transformation arc, psychological triggers).
+**Read THESE FIRST — direct structural templates from Aayush's actual AI posts:**
+- `config/aayush-ai-post-examples/` — 4 of Aayush's actual AI commentary posts. When writing about AI tools/startups/products, USE THESE AS DIRECT TEMPLATES. Not "read for inspiration" — match the exact structure, fill with today's news.
+  - `every-saas-ai-button.md` → named company contrast format, At Atlan grounds the abstract point
+  - `ai-startups-12-months.md` → ellipsis hook, three-pillar + "That's X." recap tags, I doubt/IMO
+  - `every-startup-ai-powered.md` → lowercase opener, contrast labels, parallel imperatives
+  - `agent-stack-hardening.md` → absurdist specific opener, IMO as genuine hedge
+- `config/aayush-reference-posts/*.md` — secondary voice anchor.
+- `config/creator-posts.md` — secondary style reference.
 
 **Content + rules (read after examples):**
 - `workspace/${TODAY}/brief.md`
