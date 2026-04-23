@@ -1,114 +1,94 @@
-# SpaceX bought Cursor's future for $10B because AI coding tools are infrastructure now
+# Shopify's CTO just revealed when enterprise AI went from experiment to infrastructure
 
-[Cursor](https://techcrunch.com/2026/04/22/how-spacex-preempted-a-2b-fundraise-with-a-60b-buyout-offer/) was closing a $2 billion funding round this week when SpaceX offered $10 billion upfront and a $60 billion acquisition path.
+[Mikhail Parakhin, Shopify's CTO, sat down with Latent Space](https://www.latent.space/p/shopify) and shared something rare: hard numbers on enterprise AI adoption inside one of the largest e-commerce companies in the world.
 
-This signals AI coding tools crossed from nice-to-have to critical infrastructure. When a rocket company pays Fortune 50 money for an IDE, the category isn't experimental anymore. The $2 billion ARR figure means developers now pay infrastructure-level prices for coding velocity.
+The headline: Shopify's token usage did not grow gradually. It exploded in December 2025. And the trigger was not a new model release. It was an internal decision to give every team unlimited Opus-4.6 tokens.
+
+This matters because most companies are still rationing AI access. They hand out seats, cap monthly spend, run ROI reviews on individual pilots. Shopify ran the opposite experiment and got the data every AI buyer has been asking for.
 
 **Key takeaways:**
-- SpaceX paid $10B for Cursor at $2B ARR, the 5x revenue multiple says coding agents are infrastructure, not software
-- [Shopify's CTO](https://www.latent.space/p/shopify) reveals token usage exploded December 2025, enterprise adoption tipping point visible in the data
-- OpenAI ships [workspace agents](https://openai.com/index/introducing-workspace-agents-in-chatgpt) directly competing with Zapier and Notion, platform layer getting aggressive about owning automation
-- Open-weight models like [Qwen3.6-27B](https://simonwillison.net/2026/Apr/22/qwen36-27b/#atom-everything) hitting flagship coding performance means the barrier isn't the model anymore
-- Google targets IT teams for enterprise agents while everyone else chases business users, strategic divergence worth watching
+- Shopify removed token budget limits in late 2025 and watched internal usage explode in December, a phase transition rather than a gradual ramp
+- [OpenAI shipped workspace agents inside ChatGPT](https://openai.com/index/introducing-workspace-agents-in-chatgpt) that run in the cloud and automate workflows across tools, direct pressure on Zapier, n8n, and Notion
+- [Qwen3.6-27B](https://simonwillison.net/2026/Apr/22/qwen36-27b/#atom-everything) claims flagship-level agentic coding in a 27B open-weight model that beats the previous 397B-parameter Qwen flagship
+- [Ethan Mollick](https://x.com/emollick/status/2046979551046013125) points out every system regulated by human effort cost is now breaking under AI's zero-effort floor
+- The common thread this week: the buyers treating AI as infrastructure are pulling away from the ones treating it as a tool
 
-### Why SpaceX paid $10B for a text editor
+### Why Shopify ran the unlimited-tokens experiment
 
-The numbers tell the story. [Cursor was on track to close a $2 billion funding round](https://techcrunch.com/2026/04/22/how-spacex-preempted-a-2b-fundraise-with-a-60b-buyout-offer/) this week when SpaceX made an offer they couldn't refuse: $10 billion upfront as a "collaboration fee" plus a path to a $60 billion acquisition.
+Most engineering leaders I talk to are stuck in the same loop. They buy Claude or GPT seats for a team. They watch the first few enthusiastic users burn through monthly budget by day 10. Finance escalates. IT writes a usage policy. Everyone else stays cautious, rations their queries, and the tool never reaches the point where it changes how work gets done.
 
-[Tom Tunguz breaks down the math](https://x.com/ttunguz/status/2046815672957870276): $2 billion ARR at a 5x revenue multiple. That's Fortune 50 money for what most people think of as a text editor. But SpaceX isn't paying for an IDE.
+Parakhin described the same pattern at Shopify earlier in 2025. Teams were experimenting, but nobody was building AI into the default workflow. The usage graphs were flat. Engineers treated every Opus call like it was coming out of their own pocket.
 
-They're paying for coding velocity at Mars mission scale.
+So Shopify made a call that sounds reckless on paper and obvious in hindsight. They told every team inside the company to stop rationing. Unlimited Opus-4.6 tokens. Do not worry about the bill. If you think AI can help with this task, just use it.
 
-SpaceX has 12,000 engineers working on software that controls rockets, life support systems, and manufacturing robots. Every line of code ships to actual hardware with actual deadlines. The Starship program needs software velocity that matches their hardware timeline. When you're planning a Mars mission for 2030, your biggest bottleneck isn't rocket science, it's how fast your engineers can write the code that runs the rockets.
+December 2025 is when the graphs broke. The shape was a vertical wall, not a trend line going up. Teams that had been tentatively running a few prompts a day started running thousands. Workflows that used to take a day started shipping in an hour. The ratio of AI-assisted code commits inside Shopify jumped from a minority to a majority in under three weeks.
 
-Cursor's agent architecture solves a specific problem that traditional IDEs don't: it lets non-senior engineers ship complex, safety-critical code. A junior developer with Cursor can write flight control software that would take a senior developer weeks to review and debug. That's not just productivity, that's expanding your effective engineering capacity without hiring thousands more people.
+I doubt this would have worked in 2024. The capability floor was not there yet. Opus-4.6 had crossed some internal threshold at Shopify where engineers stopped second-guessing its output on real production code, and once that trust existed, the only remaining barrier was the budget anxiety. Remove the anxiety, and the usage finds its natural level.
 
-What caught my eye in the deal structure is the acquisition timeline. SpaceX didn't just buy Cursor, they bought an option on Cursor's future. The $10 billion gets them immediate access to the technology. The $60 billion acquisition path means they're betting Cursor becomes more valuable as the AI coding market matures.
+That natural level turned out to be enormous.
 
-This traces to a conviction I've been tracking: small teams with AI beat 50-person organizations in 2026. SpaceX is proving this at scale. They're not just using AI to make their existing engineers more productive. They're using it to make their engineering organization fundamentally more capable.
+### The economics of artificial scarcity
 
-The causal chain forward is clear. Every company with complex engineering timelines will make similar bets. Boeing needs software for the 777X program. Lockheed Martin has F-35 upgrades on multi-year schedules. Tesla's manufacturing software controls billion-dollar factories. When hardware timelines are measured in years, software velocity becomes the competitive bottleneck.
+There is a deeper point buried in Parakhin's data that most coverage is going to miss.
 
-### The $2B ARR number changes everything
+When Shopify rationed tokens, they were not optimizing for cost. They were creating artificial scarcity that obscured the actual ROI. Because teams were being careful, they only used AI on the tasks where they were sure it would work. That meant the usage data showed only the high-confidence use cases. Which meant the ROI always looked like "nice to have" rather than "fundamental shift."
 
-The $2 billion ARR figure deserves its own section because it rewrites the economics of developer tools.
+The unlimited budget was not an AI experiment. It was a measurement experiment. Shopify wanted to see what usage looked like when friction and anxiety were removed, so they could decide how to think about AI spend going forward.
 
-Think about what that number means. Cursor has enough customers paying enough money to generate $2 billion in annual recurring revenue. At typical SaaS pricing, that's roughly 400,000 to 800,000 paying users at $200 to $500 per month. Or 100,000 enterprise customers at $1,500 to $2,000 per seat.
+The answer they got is the one every AI infrastructure team is now reverse-engineering from Shopify's leak: if you give engineers real access, AI becomes the default execution surface for anything involving text, code, data, or decisions. It stops being a tool you reach for and becomes the layer underneath everything.
 
-Those are infrastructure-level price points.
+This is the part that matters for anyone sizing their own AI spend. If your token usage is tidy and predictable and your teams are reporting "thoughtful adoption," you have not actually measured demand. You have measured rationing. The real demand shows up only when you remove the constraint, and then it looks like December 2025 at Shopify.
 
-Compare this to other development tool acquisitions. GitHub sold to Microsoft for $7.5 billion at roughly $300 million ARR. Figma sold to Adobe for $20 billion at $400 million ARR. Cursor's revenue run rate puts them in acquisition territory that only existed for established platforms, not coding tools.
+The strategic question that follows is uncomfortable. Shopify is Shopify. They can absorb a token bill. Can your company? If the answer is no, the next question is whether your competitors who can absorb that bill are about to pull three years ahead of you on productivity per engineer.
 
-The price ceiling for dev tools just exploded. When teams will pay $1,000 per month per developer for AI coding assistance, every other coding platform needs to reprice their value proposition. GitHub Copilot at $10 per month looks like a loss leader. Replit, CodeSandbox, all the coding platforms built on pre-AI pricing models need to adjust upward.
+### Why this connects to the dev tool consolidation
 
-This connects to my second conviction about memory architecture mattering more than the model. Cursor didn't win by having better language models, they won by solving context persistence across coding sessions. Your codebase knowledge, your debugging history, your architectural decisions, that memory layer is what developers pay infrastructure money for.
+The other thing that jumped out at me in Parakhin's interview is how the enterprise picture lines up with what is happening in the developer tool market right now.
 
-I keep coming back to the enterprise adoption curve. Shopify's CTO revealed that their token usage exploded in December 2025. That wasn't gradual adoption, that was a phase transition. Teams went from experimenting with AI coding to depending on it for daily work. The companies that recognized this shift early are now paying whatever it takes to secure access.
+[Cursor just locked in a $10 billion collaboration deal with SpaceX](https://techcrunch.com/2026/04/22/how-spacex-preempted-a-2b-fundraise-with-a-60b-buyout-offer/) with a $60 billion acquisition option on top. [Tom Tunguz broke down the math](https://x.com/ttunguz/status/2046815672957870276): Cursor is at roughly $2 billion ARR. That's the revenue profile of infrastructure, not an IDE.
 
-### What SpaceX knows that others don't
+You cannot get to $2B ARR on developer tools with a rationing mindset. That number requires thousands of companies doing exactly what Shopify did internally: treating AI coding as a default surface, not a cautious experiment. The SpaceX deal is the public market signal that Shopify's private data proves out.
 
-The deal reveals something about SpaceX's strategic thinking that most companies miss.
+Taken together, these are two views of the same shift. Shopify shows what usage looks like when the budget constraint disappears inside a company. Cursor's revenue shows what the aggregate bill looks like when thousands of companies hit that same point at once.
 
-SpaceX operates under constraints that normal software companies don't face. Their code controls hardware worth billions of dollars. Their deadlines are set by orbital mechanics and launch windows. Their engineering team needs to ship software that works perfectly the first time, every time.
+For builders, the read here is that the AI adoption curve is not gradual. It is a step function. Most of a company's adoption happens in the week after they stop rationing. And the companies hitting that step in 2026 are building a compounding lead on the ones still running pilot programs.
 
-In that environment, coding velocity means something different. Expanding what's possible within physics-driven timelines, not just shipping features faster. When you have six months to write the software for a Mars transfer window, the difference between fast and slow development isn't productivity, it's mission success or failure.
+### OpenAI's workspace agents want to own the automation layer
 
-Cursor's agent architecture addresses this directly. Traditional IDEs help individual developers write code faster. Cursor helps entire teams write better code faster. The AI doesn't just autocomplete, it understands your codebase architecture, your testing patterns, your deployment requirements. It can generate complex code that matches your existing patterns without requiring senior engineer review.
+The second big move this week is [OpenAI launching workspace agents inside ChatGPT](https://openai.com/index/introducing-workspace-agents-in-chatgpt). On the surface it looks like another product release. One layer down, it is a direct attack on Zapier, n8n, Notion's automation features, and anyone else sitting in the business-workflow automation layer.
 
-That capability multiplication is why SpaceX paid $10 billion for immediate access. They're not buying a tool, they're buying expanded engineering capacity for Mars-timeline projects.
+These agents are Codex-powered, which is the detail that matters. They can run in the cloud, persist state between sessions, and write their own automation logic on the fly rather than relying on a pre-built connector library. You describe a workflow in natural language, "when someone fills out this form, create a record in Salesforce, send the account team a Slack message, generate a first-draft proposal," and the agent assembles the pipeline.
 
-The strategic insight extends beyond SpaceX. Any company with complex engineering projects bound by external deadlines faces the same constraints. Automotive companies shipping new vehicle platforms. Aerospace companies with defense contracts. Manufacturing companies retooling factories. The physical world doesn't wait for software development cycles to catch up.
+That is a completely different shape of product from Zapier. Zapier's defensibility came from its connector library. Workspace agents bypass the library by writing the integration code when needed. If a tool has an API, the agent can hit it. If it has a web interface, the agent can drive a browser.
 
-These companies will follow SpaceX's lead. Not necessarily with $10 billion acquisitions, but with infrastructure-level spending on AI coding tools. The category just graduated from software expense to strategic infrastructure.
+The strategic play is obvious if you step back. OpenAI started by selling model access to companies like Zapier. Then they built ChatGPT to own the consumer interface. Now they are reaching into the workflow surface itself. This is the standard platform playbook: enable the ecosystem, watch where the value concentrates, then build directly in those layers.
 
----
+For anyone building in the automation or workflow space, the question is not whether OpenAI will come for your category. It is how fast. The teams that survive this wave will be the ones who picked a layer OpenAI does not want to own: deep enterprise compliance, regulated industry workflows, legacy system integration, or verticalized playbooks that require domain knowledge OpenAI does not have.
 
-### #2 Shopify's CTO reveals the moment enterprise AI went from experiment to infrastructure
+Horizontal "connect anything to anything" automation is now a platform battle, not a startup opportunity.
 
-The most valuable data point in AI adoption this week came from [Mikhail Parakhin, Shopify's CTO](https://www.latent.space/p/shopify), in a rare interview about enterprise AI usage.
+### Qwen3.6-27B puts flagship coding inside an open-weight model
 
-December 2025 was the tipping point. Parakhin shared exclusive data showing Shopify's AI token usage exploded that month, not gradually increased, exploded. Teams went from experimental usage to treating AI as core infrastructure for customer-facing features.
+The third story worth slowing down on is [Qwen's new 27B release](https://simonwillison.net/2026/Apr/22/qwen36-27b/#atom-everything). The claim, which Simon Willison is treating with appropriate skepticism but takes seriously, is that Qwen3.6-27B matches or beats the previous generation Qwen3.5-397B-A17B flagship on every major coding benchmark.
 
-What triggered the phase transition? Two things: Claude Opus-4.6's reliability crossed the threshold where teams trusted it with production code, and Shopify made the strategic decision to give teams unlimited token budgets.
+Read that number again. A 27 billion parameter dense model is claiming to outperform a 397 billion parameter mixture-of-experts model from the same team, one generation back. And the weights are open. You can download them and run them on reasonable hardware.
 
-The unlimited budget decision is the key insight. Most companies ration AI usage because they're not sure of the ROI. Shopify bet that removing the usage constraint would reveal the true demand. They were right, when teams didn't have to worry about token costs, they integrated AI into everything from customer support to inventory management to marketing copy generation.
+If the benchmarks hold up in practice, this changes the economics of agentic coding for anyone who does not want to send their code to a third-party provider. The compute you need for flagship-level coding just dropped by more than an order of magnitude. That puts it inside the range of what a single serious workstation can run locally, or what any team with a modest GPU budget can host on their own infrastructure.
 
-Parakhin's data shows what successful enterprise AI adoption looks like: not gradual pilot programs, but sudden organizational behavior change. Teams that were manually writing product descriptions and customer emails suddenly automated 70% of that work. Customer support response times dropped from hours to minutes because AI could handle complex queries without escalation.
+The business implication lines up with the Shopify story. One of the main frictions on unlimited-token experiments is the vendor bill. If you can run a model that is close-enough to frontier on your own hardware for a fixed cost, the token-anxiety barrier that Shopify had to explicitly remove just disappears for free. You get the unlimited-access experiment without the unlimited-access spend.
 
-The strategic insight for other enterprises is clear: token usage constraints create artificial barriers to discovering AI's actual business value. When Shopify removed those constraints, they discovered their teams were dramatically underusing AI because of budget anxiety, not capability limits.
+I doubt the closed frontier labs are going to let this stay true for long. There is a reason Anthropic and OpenAI have been pushing hard on memory, tools, and agent infrastructure rather than raw model capability. The model layer is compressing fast, and the labs that built their business on a model capability lead are visibly pivoting toward product advantages instead.
 
-This connects to the broader pattern in today's stories. Whether it's SpaceX paying $10 billion for coding velocity or Shopify removing token limits, successful AI adoption requires infrastructure-level investment commitments. Teams that treat AI as a line item expense miss the organizational capability expansion.
-
-What I find most compelling in Parakhin's data is the timing. December 2025 matches exactly when other enterprise teams started reporting similar usage spikes. There was an industry-wide moment when AI reliability crossed from "helpful sometimes" to "dependable enough for production." Companies that recognized that moment early are now building sustainable competitive advantages on AI-powered workflows.
-
----
-
-### #3 OpenAI's workspace agents target Zapier and Notion directly
-
-OpenAI just launched [workspace agents in ChatGPT](https://openai.com/index/introducing-workspace-agents-in-chatgpt) that directly compete with automation platforms like Zapier, n8n, and workflow features in Notion and Airtable.
-
-These aren't simple chatbots. They're Codex-powered agents that run in the cloud, persist state between sessions, and automate complex workflows across multiple tools. The key capability: they can understand your team's specific processes and build automation without requiring template libraries or pre-built connectors.
-
-The strategic move is significant. OpenAI is betting on owning the workflow automation layer rather than just providing the intelligence layer. Instead of selling API access to companies like Zapier, they're building the automation platform themselves.
-
-What makes this different from existing automation tools is the natural language interface combined with Codex's coding capability. You can describe a complex business process, "when someone fills out our intake form, create a project in Asana, send a Slack message to the account team, and generate a proposal template based on their requirements", and the agent will build and run that workflow.
-
-The technical implementation matters here. These agents run in OpenAI's cloud infrastructure, not as browser extensions or local scripts. That means they can handle long-running workflows, maintain context across sessions, and integrate with tools that don't have public APIs by using browser automation.
-
-For teams building workflow automation products, this is a direct competitive threat. OpenAI has model access, cloud infrastructure, and now user interface, everything needed to own the automation category. Companies like Zapier need to move upmarket fast, focusing on enterprise governance and compliance features that OpenAI won't prioritize.
-
-The broader pattern here is platform companies getting more aggressive about owning adjacent layers. OpenAI started with API access for developers. Now they're building applications that compete with their API customers. It's the classic platform evolution, enable the ecosystem until you understand which layers have the most value, then build directly in those layers.
-
-For builders in the automation space, the lesson is clear: differentiate on the layers OpenAI won't prioritize. Enterprise security, regulatory compliance, legacy system integration, industry-specific workflows. The generic automation layer is now a platform battle, not a startup opportunity.
-
----
+For builders right now, Qwen3.6-27B is worth an afternoon of testing. If it performs as claimed on your actual codebase, that is a meaningful shift in the cost structure of anything you are trying to build with local or private inference.
 
 ### What to do this week
 
-**Audit your team's coding tool spend.** Calculate how much your company pays per engineer for development tools. Include IDEs, GitHub, deployment platforms, monitoring tools. If you're spending less than $200 per engineer per month, you're underinvesting in velocity. The SpaceX deal proves teams will pay infrastructure money for coding acceleration.
+First, run a small-scale version of the Shopify experiment. Pick one team inside your company. Give them unlimited Claude or GPT budget for two weeks. No questions about spend. Track what they build. You are not measuring cost, you are measuring what demand looks like when anxiety goes away. That data is the input to every AI budget conversation you have for the rest of the year.
 
-**Try Cursor if you haven't yet.** Download it at cursor.sh and connect it to your biggest codebase. Time how long basic tasks take compared to your current setup. The interface looks like VS Code, but the AI integration is fundamentally different, it understands your entire codebase context, not just the current file. Most teams report 40-60% faster development cycles within the first week.
+Second, go look at your automation stack. If you are paying for Zapier or n8n or any workflow tool and the workflows are simple enough that a natural-language description would cover them, try rebuilding one of them inside ChatGPT workspace agents. Not to migrate, to calibrate. You need a direct read on how close OpenAI is to eating your current automation bill, and the only way to get that is to use the product on a real workflow.
 
-**Benchmark your team's AI adoption rate.** Track what percentage of code commits involve AI assistance. Use your git logs to measure: count commits with AI-generated code vs total commits over the last month. If it's under 30%, your team is falling behind the adoption curve that companies like SpaceX and Shopify are riding to competitive advantage. The enterprises that recognized December 2025 as the tipping point are now building sustainable advantages on AI-powered workflows.
+Third, download Qwen3.6-27B and run it on a coding task that matters. Even if you stay on Claude or GPT for production, you want a first-hand sense of how close open weights are to frontier. That sense is the input to every lock-in decision you make this year about embeddings, inference, and agent infrastructure.
 
-The common thread in today's stories: teams that treat AI as infrastructure, not software, are pulling ahead. Whether it's SpaceX paying $10 billion for coding velocity or Shopify removing token limits, the winners are making infrastructure-level investment commitments. The companies still treating AI as an experimental budget line are building tomorrow's competitive disadvantage.
+The thread across all three of these stories is the same one Parakhin drew out in the Shopify interview. The companies treating AI as an infrastructure layer, budgeted like AWS and sized like electricity, are on a different trajectory from the ones treating it as a line-item software expense. Shopify picked the first path in late 2025 and the graphs went vertical in December. The public market is pricing the same shift into Cursor's valuation. Every week that goes by, the gap between the two groups widens.
+
+One last thing to sit with from Parakhin's interview. He was asked what changed internally when Shopify shifted to unlimited tokens, and his answer was not about cost or productivity metrics. It was that engineers stopped treating AI like a vending machine and started treating it like a colleague. They began looping the model in on design discussions, using it to pressure-test architecture choices, having it draft pull request reviews. That is not a usage pattern a rationing regime can produce, because rationing forces a task-by-task ROI calculation and collaboration does not fit that shape. The real unlock at Shopify was not the token budget. It was the posture shift that unlimited access made possible. If you want to see what your team is actually capable of with current models, you probably have to pay for their vending-machine phase to end.

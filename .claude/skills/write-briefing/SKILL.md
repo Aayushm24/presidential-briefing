@@ -70,6 +70,31 @@ A claim without all three is just news. A claim with all three compounds Aayush'
 
 ## Process
 
+### Step 0: Check recent coverage to avoid repeating yesterday
+
+BEFORE picking a lead story, read the last 3 shipped briefs to avoid duplicate coverage:
+
+```bash
+TODAY=${TODAY}
+for DATE in $(ls workspace/ | grep -E '^[0-9]{4}-[0-9]{2}-[0-9]{2}$' | sort -r | head -4 | grep -v "^$TODAY$" | head -3); do
+  if [ -f "workspace/$DATE/brief.md" ]; then
+    # Extract H1 title and key takeaways
+    head -15 "workspace/$DATE/brief.md"
+    echo "---"
+  fi
+done > workspace/$TODAY/.recent-coverage.txt
+```
+
+Then when picking the lead story from scored.json:
+1. Check if the top-ranked story's named entities (companies, products, people) appear in yesterday's H1 or key takeaways
+2. If yes: SKIP that story as today's lead — move it to secondary or drop it entirely
+3. Pick the next-highest-scoring story with DIFFERENT named entities as the lead
+4. Log what was rejected and why in the outline
+
+**Rule:** If yesterday's lead was about Cursor/SpaceX, today's lead CANNOT be about Cursor/SpaceX even if the top story is. A reader seeing the same company two days in a row gets nothing new.
+
+Exception: if the story has genuinely new information (e.g., yesterday "SpaceX signed option", today "SpaceX exercised option early") — acceptable to re-cover IF the brief leads with what changed, not what we already said.
+
 ### Step 1: Fetch article text for lead + top 2 secondary
 
 Only fetch for the lead story and top 2 secondary (to cap token usage). For each:

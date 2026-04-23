@@ -1,104 +1,90 @@
 # LinkedIn posts - 2026-04-23
 
-**Lead:** SpaceX bought Cursor's future for $10B because AI coding tools are infrastructure now
+**Lead:** Shopify's CTO just revealed when enterprise AI went from experiment to infrastructure
 **Best option:** 2
 
 ---
 
-## OPTION 1 - contrarian (1401c)
+## OPTION 1 - personal-I observer (1547c)
 
-**Conviction:** SpaceX didn't buy Cursor for coding velocity. They bought it for Mars mission engineering capacity.
+**Conviction:** If your team's AI usage looks tidy and predictable, you haven't measured demand. You've measured rationing.
 
-Everyone thinks SpaceX paid $10B for a better text editor.
+Every team I talk to is measuring AI wrong.
 
-They're wrong.
+They hand out Claude or GPT seats. Set a monthly budget. Watch the first few enthusiastic users burn through it by day 10. Then finance escalates, IT writes a usage policy, and everyone else starts rationing their queries.
 
-Every week I watch companies chase coding velocity with AI. The real winners aren't optimizing for speed, they're expanding what's possible within physics-driven timelines.
+After three months the exec team looks at the graphs and concludes AI is "nice to have." Adoption is polite. ROI is moderate. Budget next year will be the same or slightly larger.
 
-SpaceX has 12,000 engineers writing software that controls rockets, life support systems, and manufacturing robots. When you're planning a Mars mission for 2030, your bottleneck isn't rocket science.
+That's not data. That's the shape of the rationing.
 
-It's how fast junior developers can ship safety-critical code that works the first time.
+Shopify's CTO just published the counter-experiment. They told every team inside the company to stop rationing Opus-4.6 tokens. Do not worry about the bill. Just use it.
 
-Cursor's agent architecture doesn't just make developers faster. It makes non-senior engineers capable of complex work that would take seniors weeks to review.
+December 2025 is when their usage graphs broke. The shape was a vertical wall, not a trend line going up.
 
-That's not productivity tooling. That's engineering capacity multiplication.
+I build AI agents at Atlan as my day job and I see the same thing on a smaller scale. The teams that treat inference like it's coming out of their own pocket use AI on one task a day. The teams that treat it like electricity build it into everything.
 
-The $2B ARR number proves developers will pay infrastructure money for this capability. GitHub Copilot at $10 per month suddenly looks like a loss leader.
+The budget anxiety is doing more damage than the budget itself.
 
-I build AI agents at Atlan and see this every day. Teams that treat AI as infrastructure beat teams that treat it as software.
+If your monthly token bill is predictable, you've measured how careful your team is. You have not measured what your team would do with real access.
 
-Boeing needs this for the 777X program. Tesla's factories run on billion-dollar software timelines. Lockheed Martin has F-35 upgrades measured in years.
+IMO the most important AI budget conversation this year is not about how much to spend. The real question is whether your current spend is real signal or just the shape of the fear.
 
-When hardware doesn't wait for software cycles, coding tools become essential infrastructure.
-
-What are you building that only works if your engineers ship faster than physics allows?
+What does your team's usage graph actually look like when you remove the anxiety?
 
 ---
 
-## OPTION 2 - personal-discovery (1655c)
+## OPTION 2 - personal story (1692c)
 
-**Conviction:** I've been building AI agents for months and still underestimated what SpaceX saw in Cursor.
+**Conviction:** I was rationing AI on myself for months before I realized the problem wasn't the cost. It was the posture.
 
-I've been building AI agents for months at Atlan.
+I've been building AI agents at Atlan for months.
 
-The results can be magical, but magical still costs hours fighting context management, output quality, hallucinations, and edge cases.
+For most of that time I was quietly rationing myself. Every Opus call felt like I had to justify it. I'd draft a prompt, decide whether it was "worth" the token cost, and about half the time I'd just do the task manually instead.
 
-Then SpaceX paid $10B for Cursor and I realized what I was missing.
+I had budget. Atlan wasn't going to fire me for running queries. The rationing was coming from inside my own head.
 
-I was thinking about coding velocity. They were thinking about Mars timelines.
+Then this week Shopify's CTO published data from an experiment that reframed everything.
 
-When I build agents at Atlan, we don't have them click buttons. They call APIs, read databases, talk to other apps through MCPs, post results where humans want them.
+They gave every team unlimited Opus-4.6 tokens. No budget anxiety. No ROI justification per call. Just use it.
 
-The humans never open the app when the agent is working.
+December 2025 is when Shopify's usage graphs broke. Vertical wall. The teams went from experimenting with AI to building it into everything they touch.
 
-That architecture shift changes everything. But I was still measuring productivity in developer hours saved.
+What Parakhin said about the cultural shift is the part I can't stop thinking about. Engineers stopped treating the model like a vending machine. They started treating it like a colleague. Looping it into design discussions. Asking it to pressure-test architecture. Having it draft pull request reviews.
 
-SpaceX is measuring something different: engineering capacity at rocket mission scale.
+That posture is what I was blocking on myself.
 
-They have 12,000 engineers working on software that controls rockets and life support systems. Every line of code ships to actual hardware with actual deadlines.
+When I stopped rationing this week, my agent work shifted immediately. Not 20 percent faster. A different shape of work. I'm debugging with the model in the loop. Drafting system prompts by having conversations, not writing them alone.
 
-The Starship program needs software velocity that matches their hardware timeline.
+The unlock wasn't the tokens. It was letting myself use them like a colleague, not a vending machine.
 
-A junior developer with Cursor can write flight control software that would take a senior developer weeks to review. That's not just faster development, that's expanding your effective engineering team without hiring thousands more people.
+If you're still doing silent math on every call, you're not underspending on AI. You're underusing yourself.
 
-The $2B ARR figure shows what I missed: developers will pay infrastructure-level money when AI becomes the difference between possible and impossible.
-
-When we build agents for GTM workflows at Atlan, the results can be magical. But SpaceX just proved the real magic happens when AI lets you ship what you couldn't ship before.
-
-What would your team attempt if junior developers could think like senior ones?
+p.s. the $10B SpaceX-Cursor deal is the same story at aggregate scale. Companies hit this phase shift together, and pricing reflects it.
 
 ---
 
-## OPTION 3 - absurdist (1624c)
+## OPTION 3 - contrarian (1508c)
 
-**Conviction:** A rocket company just paid more for a text editor than most countries' GDP because AI coding tools crossed into critical infrastructure.
+**Conviction:** Shopify's AI experiment wasn't about tokens. It was about discovering how much their rationing was costing them.
 
-SpaceX paid $10B for a text editor.
+Everyone's reading Shopify's unlimited-tokens experiment as a story about AI spend.
 
-Let me say that again: a rocket company paid more than Morocco's GDP for what most people think is a fancy autocomplete.
+They're missing the real lesson.
 
-This is like discovering your neighborhood barista secretly runs a $2B coffee empire.
+Shopify didn't run an AI experiment in late 2025. They ran a measurement experiment. Their CTO, Mikhail Parakhin, wanted to know what internal AI demand actually looked like with friction removed.
 
-Cursor was closing a $2B funding round when SpaceX offered $10B upfront plus a path to $60B acquisition. That's Fortune 50 money for an IDE.
+The answer arrived in December. A vertical wall on the usage graphs. Teams went from experimenting with AI to defaulting to it for anything involving text, code, or decisions.
 
-The math is wild: $2B ARR at a 5x revenue multiple means developers are paying $200-500 per month for coding assistance. GitHub Copilot at $10 suddenly looks like giving away money.
+Here's the part that matters for every other company.
 
-But here's the thing that breaks my brain: SpaceX didn't buy this for their 12,000 engineers to write code faster.
+When Shopify was rationing tokens earlier in 2025, teams only used AI on tasks where they were sure it would work. That produced tidy usage data and "thoughtful adoption" reports. It also produced a ROI number that looked like "nice to have."
 
-They bought it so junior developers can write safety-critical flight control software that works perfectly the first time.
+That number was fake. They were measuring how careful their team was, not how useful AI was.
 
-When your deadlines are set by orbital mechanics and launch windows, coding velocity means something different. It means expanding what's possible within physics-driven timelines.
+Every company still rationing AI in 2026 has the same bad data. The usage graphs are polite because the rationing is polite. The ROI looks moderate because the experiments are conservative. Nobody is lying. The measurement is just wrong.
 
-I build AI agents at Atlan and the results can be magical. But magical still costs hours fighting edge cases and context management.
+tbh this is the harder pill. If your AI budget conversations are based on current usage, you're pricing infrastructure at the cost of a locked cabinet.
 
-SpaceX just bet $10B that AI can solve this at Mars mission scale.
+I doubt every company can do what Shopify did. But every company needs to run a two-week version of it on one team, just to see what the real shape of demand looks like.
 
-The category graduated from "nice-to-have developer tool" to "critical infrastructure for engineering impossible things."
-
-Every company with complex engineering projects bound by external deadlines will follow SpaceX's lead.
-
-When the physical world doesn't wait for software development cycles, coding tools become essential infrastructure.
-
-What are you shipping that only works if your software moves at the speed of hardware?
-
----
+Otherwise you're planning next year's AI spend on numbers your own rationing produced.
