@@ -1,9 +1,17 @@
 #!/usr/bin/env bash
 # Kill-list regex test — scans workspace/*/posts.md and brief.md for banned words/patterns.
 # Source of truth: .claude/skills/write-posts/references/kill-list.md categories 1A–1F + 1G + 1K.
+#
+# Grandfather clause (matches tests/golden-format.sh): the "new regime" checks
+# (repricing language, AI contemplation, "Not X. Y." negation) only apply to
+# briefs/posts dated on/after 2026-04-23. Files before that date shipped under
+# the prior rules and are not reshipped. Universal rules (em dashes, bullets,
+# banned words, banned phrases, "It's like X" analogy, audience direct-address)
+# still apply to every file.
 
 set -uo pipefail
 
+GRANDFATHER_DATE="2026-04-23"
 FAIL=0
 CHECKED=0
 
@@ -54,6 +62,15 @@ check_file() {
   content=$(cat "$file")
   local errors=()
 
+  # Determine legacy status from path: workspace/YYYY-MM-DD/*.md
+  # BSD sed (macOS) and GNU sed (Linux) disagree on alternation, so match date only.
+  local file_date
+  file_date=$(echo "$file" | sed -nE 's|.*workspace/([0-9]{4}-[0-9]{2}-[0-9]{2})/.*|\1|p')
+  local is_legacy="false"
+  if [ -n "$file_date" ] && [ "$file_date" \< "$GRANDFATHER_DATE" ]; then
+    is_legacy="true"
+  fi
+
   # Em dashes (U+2014) — use UTF-8 byte sequence for portability across bash 3.2 + 4+
   local em_dash
   em_dash=$(printf '\xe2\x80\x94')
@@ -80,33 +97,37 @@ check_file() {
     fi
   done
 
-  # Fabricated repricing language — "repriced/repricing" applied to events that aren't price changes
-  # e.g. "Three tools repriced this week" when they restricted access or got acquired
-  local repricing_hits
-  repricing_hits=$(printf '%s' "$content" | grep -ciE '(repriced|repricing)' || true)
-  if [ "$repricing_hits" -gt 0 ]; then
-    errors+=("repricing_language=${repricing_hits} — verify this actually happened. 'Repriced' is often fabricated when tools restricted access or were acquired.")
-  fi
-
-  # AI contemplation phrases — sound like AI trying to be thoughtful
-  local ai_contemplation
-  ai_contemplation=$(printf '%s' "$content" | grep -ciE     "(here'?s what i keep coming back to|i want to sit with that|that'?s the part nobody wants to|the dangerous version of this story|it's worth sitting with|let that sink in|think about that for a moment)" || true)
-  if [ "$ai_contemplation" -gt 0 ]; then
-    errors+=("ai_contemplation_hits=${ai_contemplation} — phrases like 'Here\'s what I keep coming back to' and 'I want to sit with that' are AI tells")
-  fi
-
-  # Pattern 1H: "It's like ..." analogies
+  # Pattern 1H: "It's like ..." analogies (universal — applies to all files, legacy or new)
   if echo "$content" | grep -qiE "[Ii]t's like [A-Z]"; then
     errors+=('analogy_pattern: "It\'"'"'s like X" — turn into a question')
   fi
 
-  # Pattern 1I: "Not X. Y." contrast-through-negation (the AI-tell we keep missing)
-  # Catches: "Not the model.", "Not for the demos.", "Not because X.", "Not just X."
-  # as standalone sentences (not mid-sentence negation which is fine)
-  local not_x_y_count
-  not_x_y_count=$(echo "$content" | grep -cE '(^|[.!?] )Not (the |a |for |because |just |one |in |at |by |an )' || true)
-  if [ "$not_x_y_count" -gt 0 ]; then
-    errors+=("not_x_y_negation_hits=${not_x_y_count} — 'Not X. Y.' sentences sound AI-generated. Say what it IS, not what it isn't.")
+  # ── NEW-REGIME checks — only apply to files on/after GRANDFATHER_DATE ──
+  # Files before that date shipped under the prior rules and are not reshipped.
+  if [ "$is_legacy" = "false" ]; then
+    # Fabricated repricing language — "repriced/repricing" applied to events that aren't price changes
+    # e.g. "Three tools repriced this week" when they restricted access or got acquired
+    local repricing_hits
+    repricing_hits=$(printf '%s' "$content" | grep -ciE '(repriced|repricing)' || true)
+    if [ "$repricing_hits" -gt 0 ]; then
+      errors+=("repricing_language=${repricing_hits} — verify this actually happened. 'Repriced' is often fabricated when tools restricted access or were acquired.")
+    fi
+
+    # AI contemplation phrases — sound like AI trying to be thoughtful
+    local ai_contemplation
+    ai_contemplation=$(printf '%s' "$content" | grep -ciE "(here'?s what i keep coming back to|i want to sit with that|that'?s the part nobody wants to|the dangerous version of this story|it's worth sitting with|let that sink in|think about that for a moment)" || true)
+    if [ "$ai_contemplation" -gt 0 ]; then
+      errors+=("ai_contemplation_hits=${ai_contemplation} — phrases like 'Here\'s what I keep coming back to' and 'I want to sit with that' are AI tells")
+    fi
+
+    # Pattern 1I: "Not X. Y." contrast-through-negation (the AI-tell we keep missing)
+    # Catches: "Not the model.", "Not for the demos.", "Not because X.", "Not just X."
+    # as standalone sentences (not mid-sentence negation which is fine)
+    local not_x_y_count
+    not_x_y_count=$(echo "$content" | grep -cE '(^|[.!?] )Not (the |a |for |because |just |one |in |at |by |an )' || true)
+    if [ "$not_x_y_count" -gt 0 ]; then
+      errors+=("not_x_y_negation_hits=${not_x_y_count} — 'Not X. Y.' sentences sound AI-generated. Say what it IS, not what it isn't.")
+    fi
   fi
 
   # Corporate direct-address

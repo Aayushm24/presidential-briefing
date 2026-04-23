@@ -31,7 +31,7 @@ Teams with institutional memory compound every sprint.
 
 That's the gap.
 
-OpenAI acquired Skybysoftware this week for state persistence — agents that remember your environment, preferences, and deployment history across sessions. The computer use headline was marketing. The actual prize was memory.
+OpenAI acquired Skybysoftware this week for state persistence, agents that remember your environment, preferences, and deployment history across sessions. The computer use headline was marketing. The actual prize was memory.
 
 Same bet. Different company. Same week.
 
@@ -78,7 +78,7 @@ You're planning around throughput.
 That's a different model entirely.
 
 The hiring profile changes too. You're not looking for the person who can carry a bad sprint.
-You're looking for judgment — the ability to ask better questions than the agent answers on its own.
+You're looking for judgment, the ability to ask better questions than the agent answers on its own.
 
 Most companies haven't written that job description yet.
 
@@ -117,7 +117,7 @@ They're winning on what they built to remember.
 The moat has shifted:
 
 - 2023: which model you access
-- 2024: how fast you ship on top of it 
+- 2024: how fast you ship on top of it
 - 2026: what your system learned that competitors can't replicate overnight
 
 Intercom's advantage isn't Claude Code. It's 9 months of institutional knowledge their agents carry. A competitor can sign up for the same tool tomorrow. They can't fast-forward 9 months of compounding context.
