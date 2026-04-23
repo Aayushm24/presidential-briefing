@@ -469,6 +469,11 @@ jobs:
 
           echo "=== Running quality gates ==="
 
+          # Defensive: ensure execute bit is set. actions/checkout honors git
+          # 100755 mode in principle, but we've hit "Permission denied" from
+          # ./tests/*.sh on some runners despite the git index saying 100755.
+          chmod +x tests/*.sh scripts/*.sh scripts/*.py
+
           # Final clean pass (belt-and-braces after council revise)
           python3 scripts/clean_text.py "${WS}/brief.md" "${WS}/posts.md" 2>&1 || true
 
@@ -504,6 +509,9 @@ jobs:
               exit 1
             fi
           done
+
+          # Same defensive chmod as the Quality gates step above.
+          chmod +x tests/*.sh scripts/*.sh scripts/*.py
 
           python3 scripts/clean_text.py "${WS}/brief.md" "${WS}/posts.md" 2>&1 || true
 

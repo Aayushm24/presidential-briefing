@@ -39,6 +39,10 @@ jobs:
             fi
           done
 
+          # Defensive chmod — runners sometimes drop the execute bit even
+          # though git has 100755 for these scripts.
+          chmod +x tests/*.sh scripts/*.sh scripts/*.py
+
           # Run gates to confirm clean
           python3 scripts/clean_text.py "${WS}/brief.md" "${WS}/posts.md" 2>&1 || true
           ./tests/kill-list-regex.sh "${WS}/brief.md" || { echo "::error::brief kill-list fail"; exit 1; }
