@@ -50,9 +50,12 @@ jobs:
           LEAD_TITLE=$(head -1 "${WS}/brief.md" | sed 's/^# //' | head -c 200)
 
           # --- Readwise ---
-          GITHUB_BRIEF_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/brief.md"
+          # Use commit SHA in URL so regenerations create a fresh Readwise doc
+          # (Readwise Reader dedupes by URL — same URL = silent no-op on updated content).
+          COMMIT_SHA=$(git rev-parse HEAD)
+          GITHUB_BRIEF_URL="https://github.com/${GITHUB_REPO}/blob/${COMMIT_SHA}/${WS}/brief.md"
           python3 scripts/send_readwise.py "${WS}/brief.md" "${GITHUB_BRIEF_URL}"
-          echo "readwise: sent"
+          echo "readwise: sent (url=${GITHUB_BRIEF_URL})"
 
           # --- Slack ---
           POSTS_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/posts.md"

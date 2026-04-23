@@ -527,7 +527,10 @@ jobs:
             echo "committed to main"
           fi
 
-          GITHUB_BRIEF_URL="https://github.com/${GITHUB_REPO}/blob/main/${WS}/brief.md"
+          # Use commit SHA in URL so regenerations create a fresh Readwise doc
+          # (Readwise Reader dedupes by URL — same URL = silent no-op on updated content).
+          COMMIT_SHA=$(git rev-parse HEAD)
+          GITHUB_BRIEF_URL="https://github.com/${GITHUB_REPO}/blob/${COMMIT_SHA}/${WS}/brief.md"
           if [ "$DRY_RUN" == "1" ]; then
             echo "[DRY_RUN] would save to Readwise: ${GITHUB_BRIEF_URL}"
           else
