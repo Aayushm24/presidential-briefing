@@ -1,0 +1,147 @@
+{
+  "date": "2026-04-23",
+  "total_scored": 40,
+  "top_10": [
+    {
+      "title": "How SpaceX preempted a $2B fundraise with a $60B buyout offer (Cursor acquisition)",
+      "url": "https://techcrunch.com/2026/04/22/how-spacex-preempted-a-2b-fundraise-with-a-60b-buyout-offer/",
+      "scores": {
+        "significance": 10,
+        "business_impact": 10,
+        "practitioner_value": 8,
+        "discussion_heat": 10,
+        "story_potential": 10
+      },
+      "combined_score": 9.6,
+      "verdict": "breakthrough",
+      "one_line_reason": "Cursor at $2B ARR with a $60B acquisition option signals AI coding tools are now critical infrastructure worth more than most Fortune 500 companies."
+    },
+    {
+      "title": "Shopify's AI Phase Transition: 2026 Usage Explosion, Unlimited Opus-4.6 Token Budget — with Mikhail Parakhin, Shopify CTO",
+      "url": "https://www.latent.space/p/shopify",
+      "scores": {
+        "significance": 9,
+        "business_impact": 10,
+        "practitioner_value": 9,
+        "discussion_heat": 9,
+        "story_potential": 9
+      },
+      "combined_score": 9.2,
+      "verdict": "breakthrough",
+      "one_line_reason": "Rare CTO-level data on real enterprise AI adoption including the Dec 2025 token usage explosion — exactly what founders need to benchmark their own AI bets."
+    },
+    {
+      "title": "SpaceX-Cursor $10B partnership analysis: $60B acquisition option, Cursor at $2B ARR, xAI compute context",
+      "url": "https://x.com/ttunguz/status/2046815672957870276",
+      "scores": {
+        "significance": 9,
+        "business_impact": 10,
+        "practitioner_value": 7,
+        "discussion_heat": 10,
+        "story_potential": 9
+      },
+      "combined_score": 9.0,
+      "verdict": "breakthrough",
+      "one_line_reason": "Tom Tunguz breaks down why the deal makes strategic sense — the $2B ARR figure alone reframes what AI dev tools are worth."
+    },
+    {
+      "title": "Introducing workspace agents in ChatGPT",
+      "url": "https://openai.com/index/introducing-workspace-agents-in-chatgpt",
+      "scores": {
+        "significance": 9,
+        "business_impact": 9,
+        "practitioner_value": 9,
+        "discussion_heat": 8,
+        "story_potential": 8
+      },
+      "combined_score": 8.6,
+      "verdict": "breakthrough",
+      "one_line_reason": "Codex-powered cloud agents that automate complex workflows inside ChatGPT directly compete with Notion, Zapier, and enterprise automation platforms — builders need to know this exists today."
+    },
+    {
+      "title": "Qwen3.6-27B: Flagship-Level Coding in a 27B Dense Model",
+      "url": "https://simonwillison.net/2026/Apr/22/qwen36-27b/#atom-everything",
+      "scores": {
+        "significance": 9,
+        "business_impact": 8,
+        "practitioner_value": 9,
+        "discussion_heat": 8,
+        "story_potential": 8
+      },
+      "combined_score": 8.4,
+      "verdict": "notable",
+      "one_line_reason": "A 27B open-weight model claiming flagship coding performance means teams can run powerful coding agents locally or cheaply — massive cost and privacy implications for builders."
+    },
+    {
+      "title": "Speeding up agentic workflows with WebSockets in the Responses API",
+      "url": "https://openai.com/index/speeding-up-agentic-workflows-with-websockets",
+      "scores": {
+        "significance": 8,
+        "business_impact": 7,
+        "practitioner_value": 10,
+        "discussion_heat": 7,
+        "story_potential": 7
+      },
+      "combined_score": 7.8,
+      "verdict": "notable",
+      "one_line_reason": "Concrete engineering deep-dive on reducing API overhead in agent loops — immediately actionable for anyone building production agentic systems on OpenAI."
+    },
+    {
+      "title": "Google makes an interesting choice with its new agent-building tool for enterprises (Gemini Enterprise Agent Platform)",
+      "url": "https://techcrunch.com/2026/04/22/google-makes-an-interesting-choice-with-its-new-agent-building-tool-for-enterprises/",
+      "scores": {
+        "significance": 8,
+        "business_impact": 8,
+        "practitioner_value": 7,
+        "discussion_heat": 7,
+        "story_potential": 7
+      },
+      "combined_score": 7.4,
+      "verdict": "notable",
+      "one_line_reason": "Google targeting IT/technical users rather than business users for enterprise agent building is a strategic signal that shapes where the enterprise AI tooling market is heading."
+    },
+    {
+      "title": "Exclusive: Google deepens Thinking Machines Lab ties with new multibillion-dollar deal",
+      "url": "https://techcrunch.com/2026/04/22/exclusive-google-deepens-thinking-machines-lab-ties-with-new-multi-billion-dollar-deal/",
+      "scores": {
+        "significance": 8,
+        "business_impact": 8,
+        "practitioner_value": 5,
+        "discussion_heat": 8,
+        "story_potential": 8
+      },
+      "combined_score": 7.4,
+      "verdict": "notable",
+      "one_line_reason": "Mira Murati's post-OpenAI lab landing a multibillion-dollar Google Cloud deal confirms the top AI talent exodus is building real competing infrastructure — watch this space."
+    },
+    {
+      "title": "LLMs enabling pro se lawsuits at unprecedented rates — systems regulated by human effort are breaking",
+      "url": "https://x.com/emollick/status/2046979551046013125",
+      "scores": {
+        "significance": 8,
+        "business_impact": 8,
+        "practitioner_value": 6,
+        "discussion_heat": 8,
+        "story_potential": 9
+      },
+      "combined_score": 7.8,
+      "verdict": "notable",
+      "one_line_reason": "Ethan Mollick's observation that AI is breaking systems implicitly regulated by human effort cost is a critical strategic lens for founders building in regulated or high-friction industries."
+    },
+    {
+      "title": "OpenAI NOT deprecating text-embedding-3-small — announcement was a mistake",
+      "url": "https://x.com/simonw/status/2047091567694114986",
+      "scores": {
+        "significance": 7,
+        "business_impact": 8,
+        "practitioner_value": 9,
+        "discussion_heat": 8,
+        "story_potential": 7
+      },
+      "combined_score": 7.8,
+      "verdict": "notable",
+      "one_line_reason": "Critical correction for any team with stored vectors — plus Simon Willison's warning about proprietary embedding lock-in is practical advice every builder should hear before committing to a vendor."
+    }
+  ],
+  "quiet_day": false
+}

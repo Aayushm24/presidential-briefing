@@ -98,7 +98,7 @@ jobs:
             echo "⚠️  Pipeline $CONCLUSION (run=$RUN_ID). Re-running failed jobs only..."
             gh run rerun "$RUN_ID" \
               --repo "$REPO" \
-              --failed-only
+              --failed
             echo "✓ Re-run triggered. Artifacts from successful jobs reused."
             echo "  Expected completion: ~15 min."
             exit 0
