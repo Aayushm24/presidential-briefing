@@ -90,7 +90,9 @@ check_brief() {
   local mba_stack; mba_stack=$(grep -ciE "(up|move.*up|moves.*up|moving.*up|shift.*up)\s+the\s+stack" "$file" || true)
   [ "$mba_stack" -eq 0 ] || errors+=("mba_vocab_up_the_stack_hits=$mba_stack (expect 0 — use 'to apps' / 'to the product')")
 
-  # Word count: FLOOR raised from 1200 to 1500 per 2026-04-20 feedback — brief at 1227 felt thin
+  # Word count floor: 2000 words.
+  # History: 1200 → 1500 (2026-04-20) → 2000 (2026-04-23). Briefs under 2000 words
+  # consistently lacked the mechanism/specificity depth Aayush wants.
   local wc=$(wc -w < "$file")
   [ "$wc" -ge 2000 ] || errors+=("word_count=$wc (expect 2000+)")
 

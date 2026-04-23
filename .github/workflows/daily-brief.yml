@@ -589,3 +589,61 @@ jobs:
           path: workspace/${{ needs.scan.outputs.today }}/
           retention-days: 14
           overwrite: true
+
+  # ============================================================
+  # JOB 6: NOTIFY-FAILURE — sends a Slack alert if any upstream job failed.
+  # Runs after ship regardless of outcome, only fires on failure path.
+  # Without this, pipeline failures go silent until the 7am IST dead-man.
+  # ============================================================
+  notify-failure:
+    name: Notify on failure
+    needs: [scan, analyze, write-brief, write-posts, ship]
+    if: always() && (needs.scan.result == 'failure' || needs.analyze.result == 'failure' || needs.write-brief.result == 'failure' || needs.write-posts.result == 'failure' || needs.ship.result == 'failure')
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    env:
+      TZ: Asia/Kolkata
+      N8N_SLACK_WEBHOOK_URL: ${{ secrets.N8N_SLACK_WEBHOOK_URL }}
+      REPO: Aayushm24/presidential-briefing
+      RUN_ID: ${{ github.run_id }}
+
+    steps:
+      - name: Post failure alert to Slack
+        run: |
+          set -uo pipefail
+          TODAY="${{ needs.scan.outputs.today }}"
+          [ -z "$TODAY" ] && TODAY=$(TZ=Asia/Kolkata date +%Y-%m-%d)
+
+          FAILED=()
+          [ "${{ needs.scan.result }}" = "failure" ]        && FAILED+=("scan")
+          [ "${{ needs.analyze.result }}" = "failure" ]     && FAILED+=("analyze")
+          [ "${{ needs.write-brief.result }}" = "failure" ] && FAILED+=("write-brief")
+          [ "${{ needs.write-posts.result }}" = "failure" ] && FAILED+=("write-posts")
+          [ "${{ needs.ship.result }}" = "failure" ]        && FAILED+=("ship")
+
+          # Guard against empty array under set -u (the if: filter should prevent
+          # this, but belt-and-braces for when GitHub reports an unexpected value).
+          if [ "${#FAILED[@]}" -eq 0 ]; then
+            FAILED_CSV="unknown"
+          else
+            FAILED_CSV=$(IFS=,; echo "${FAILED[*]}")
+          fi
+          RUN_URL="https://github.com/${REPO}/actions/runs/${RUN_ID}"
+
+          PAYLOAD=$(jq -n \
+            --arg date "$TODAY" \
+            --arg failed "$FAILED_CSV" \
+            --arg run_url "$RUN_URL" \
+            '{type:"pipeline_failure",date:$date,failed_jobs:$failed,run_url:$run_url,message:("Daily brief pipeline failed for " + $date + ". Jobs that failed: " + $failed + ". Dead-man will auto-retry at 7am IST.")}')
+
+          if [ -n "${N8N_SLACK_WEBHOOK_URL:-}" ]; then
+            HTTP=$(curl -sS -o /tmp/resp.txt -w "%{http_code}" \
+              -X POST "$N8N_SLACK_WEBHOOK_URL" \
+              -H "Content-Type: application/json" -d "$PAYLOAD" || echo "000")
+            echo "notify-failure n8n HTTP $HTTP"
+            cat /tmp/resp.txt 2>/dev/null || true
+          else
+            echo "::warning::N8N_SLACK_WEBHOOK_URL not set — failure alert skipped"
+            echo "Would have sent: $PAYLOAD"
+          fi

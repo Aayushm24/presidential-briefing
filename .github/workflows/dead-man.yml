@@ -19,6 +19,7 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       TZ: Asia/Kolkata
       REPO: Aayushm24/presidential-briefing
+      N8N_SLACK_WEBHOOK_URL: ${{ secrets.N8N_SLACK_WEBHOOK_URL }}
 
     steps:
       - uses: actions/checkout@v4
@@ -28,9 +29,28 @@ jobs:
 
       - name: Check shipped status and retry if needed
         run: |
-          set -euo pipefail
+          set -uo pipefail
           TODAY=$(TZ=Asia/Kolkata date +%Y-%m-%d)
           echo "Checking delivery status for $TODAY..."
+
+          # Slack helper — fire and forget. Takes: type, action, details.
+          slack_alert() {
+            local alert_type="$1"
+            local action="$2"
+            local details="$3"
+            [ -z "${N8N_SLACK_WEBHOOK_URL:-}" ] && { echo "(no webhook — alert skipped)"; return 0; }
+            PAYLOAD=$(jq -n \
+              --arg date "$TODAY" \
+              --arg type "$alert_type" \
+              --arg action "$action" \
+              --arg details "$details" \
+              '{type:"deadman_alert",alert:$type,date:$date,action:$action,details:$details}')
+            curl -sS -X POST "$N8N_SLACK_WEBHOOK_URL" \
+              -H "Content-Type: application/json" -d "$PAYLOAD" \
+              -o /tmp/slack.txt -w "slack HTTP %{http_code}\n" || true
+            cat /tmp/slack.txt 2>/dev/null || true
+            echo ""
+          }
 
           # 1. Check git for .status file
           GIT_STATUS=$(cat "workspace/$TODAY/.status" 2>/dev/null || echo "missing")
@@ -77,9 +97,17 @@ jobs:
 
           # 3. Act on run state
 
+          RUN_URL=""
+          [ -n "$RUN_ID" ] && RUN_URL="https://github.com/${REPO}/actions/runs/${RUN_ID}"
+
           if [ -z "$RUN_ID" ]; then
             echo "⚠️  No daily-brief run found for $TODAY. Triggering fresh pipeline..."
-            gh workflow run daily-brief.yml --repo "$REPO"
+            if gh workflow run daily-brief.yml --repo "$REPO"; then
+              slack_alert "no_run_found" "triggered_fresh_pipeline" "No daily-brief run existed for today. Triggered a fresh pipeline. ETA ~25 min."
+            else
+              slack_alert "no_run_found" "failed_to_trigger" "No daily-brief run existed for today and triggering a fresh one FAILED. Manual intervention needed."
+              exit 1
+            fi
             echo "Fresh pipeline triggered. Will complete in ~25 min."
             exit 0
           fi
@@ -90,18 +118,26 @@ jobs:
           fi
 
           if [ "$CONCLUSION" = "success" ]; then
-            echo "Pipeline succeeded but .status not in git (dry run or redeliver pending)."
+            # Pipeline reports success but .status missing in git.
+            # Could be dry run, redeliver pending, or silent content-quality fail.
+            # Flag it so a human looks — don't silently assume it's fine.
+            slack_alert "success_no_status" "manual_check" "Pipeline succeeded for $TODAY but workspace/$TODAY/.status is missing in git (expected 'shipped'). Run: $RUN_URL. Check whether it was a dry run or whether redelivery is needed."
             exit 0
           fi
 
           if [ "$CONCLUSION" = "failure" ] || [ "$CONCLUSION" = "timed_out" ]; then
             echo "⚠️  Pipeline $CONCLUSION (run=$RUN_ID). Re-running failed jobs only..."
-            gh run rerun "$RUN_ID" \
-              --repo "$REPO" \
-              --failed
+            if gh run rerun "$RUN_ID" --repo "$REPO" --failed; then
+              slack_alert "pipeline_failure" "rerun_failed_jobs" "Daily brief $CONCLUSION overnight (run=$RUN_ID). Re-running failed jobs. If this rerun also fails, tomorrow's dead-man will alert again. Run: $RUN_URL"
+            else
+              slack_alert "pipeline_failure" "rerun_failed_to_trigger" "Daily brief $CONCLUSION overnight (run=$RUN_ID) and dead-man could NOT trigger a rerun. Manual intervention needed. Run: $RUN_URL"
+              exit 1
+            fi
             echo "✓ Re-run triggered. Artifacts from successful jobs reused."
             echo "  Expected completion: ~15 min."
             exit 0
           fi
 
+          # Unhandled state — still tell the human.
+          slack_alert "unknown_state" "no_action" "Dead-man found unexpected state: conclusion=$CONCLUSION status=$RUN_STATUS. Run: $RUN_URL"
           echo "State: conclusion=$CONCLUSION status=$RUN_STATUS — no action."

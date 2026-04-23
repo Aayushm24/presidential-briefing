@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Hard gate for posts.json — validates:
 #   1. Exactly 3 options present
-#   2. Each option.post is 1,100–2,000 characters
+#   2. Each option.post is >= MIN_CHARS (1,300), no upper cap
 #   3. Zero "[Not X, it's Y]" patterns across all 3 options combined
 #      (tight: same-subject inversion only — parallel comparisons with a
 #      different subject are allowed. See regex below.)
