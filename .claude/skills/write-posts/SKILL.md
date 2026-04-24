@@ -117,12 +117,27 @@ The Top Creator Blueprint identifies 4 winning styles. Each day's 3 options MUST
 - **F3 Absurd Mirror:** `[Relatable journey]. [Ridiculous comparison]. [What this reveals].` — works without personal experience.
 - **F4 Vulnerable Share:** `I don't [what's expected]. Because [raw truth]. Instead, I [alternative action]. And that's okay.` — ONLY with a matching entry.
 
-**The 4 hook patterns (pick one per option):**
+**The 5 hook patterns (pick one per option):**
 
 - **Pattern A — Contrarian Truth:** *"Society's definition of wealth is expensive." / "The best education doesn't come from classrooms." / "AI isn't your competitive advantage. It's a commodity."*
 - **Pattern B — Identity Statement:** *"97% of LinkedIn creators are men. I'm in the 3%." / "I'm the most average bloke ever."* (Requires a verified Aayush-side fact.)
 - **Pattern C — Absurd Comparison:** *"A cat with Instagram makes more than your MBA." / "The term ARR is getting redefined."*
 - **Pattern D — Time Bomb:** *"I posted my first LinkedIn post 3 years ago." / "I was 9 when I first saw what 'tension at the border' meant."* (Requires verified experience.)
+- **Pattern E — Observation-first setup (2026-04-24):** News reported flat, feed's predictable response, then pivot.
+  ```
+  [Company] [released/shipped/raised] [thing].
+
+  [Name of thing / price / number].
+
+  And my feed is already doing the thing it always does.
+
+  [Beat 1 of what the feed is doing — one line]
+  [Beat 2 of what the feed is doing — one line]
+  [Beat 3 of what the feed is doing — one line]
+
+  Then [named person] [specific action].
+  ```
+  Slower than a hook-punch. Earns the claim by showing the predictable discourse pattern first. Use on news-commentary about a frontier tool / model / pricing shift. Anchor: `config/aayush-ai-post-examples/gpt-55-my-feed-is-doing-the-thing.md`.
 
 ### Step 2: Build the writing prompt
 
@@ -251,7 +266,8 @@ NEVER: delve, leverage, cutting-edge, game-changing, seamless, revolutionary, gr
 NEVER: bullets (•), em-dashes (—), "It's like X" analogies (BANNED — today's 2026-04-20 run failed because Option 2 included: "It's like buying a coffee for $5, but they use a smaller cup". This is the #1 LLM tell. Replace with a direct parallel-structure claim: "Same sticker price. Less for your money." or a rhetorical question: "what are you actually paying for?")
 NEVER: "excited/thrilled/proud to announce", "check out our latest", "Learn more" CTA
 NEVER: webinar phrases like "In today's landscape", "It's important to note", "at the end of the day", "here's the thing"
-NEVER: three short sentences in a row
+NEVER: three short sentences CRAMMED INTO ONE PARAGRAPH. If you have a sequence of 3+ short sentences, break each onto its own paragraph with blank lines between. See post-blueprint.md "Default cadence: one sentence per paragraph" — single-sentence paragraphs are the default cadence now, not the exception. The 2026-04-24 GPT-5.5 post stacks 4+ short sentences as separate one-line paragraphs — that IS correct.
+NEVER: markdown `**bold**` in the post body. LinkedIn renders the asterisks literally. For emphasis, use unicode-bold (conditional on pivot-number per post-blueprint.md) or short-fragment paragraphs. The 2026-04-24 pipeline Option 2 shipped `**That's the new moat.**` which would have rendered with visible `**` on LinkedIn.
 NEVER: same word twice in one post (other than proper nouns + conjunctions)
 
 Full kill list:
@@ -497,7 +513,8 @@ Also save raw LLM output to `.posts-raw.json` for debugging.
 - NEVER address the audience directly ("for founders", "hey founders")
 - NEVER include hashtags other than 2-3 exact-match at the end
 - NEVER end with "Learn more" — CTAs must be specific or invitational
-- NEVER use three short sentences in a row
+- NEVER cram 3+ short sentences into one paragraph. Single-sentence paragraphs are the DEFAULT cadence (2026-04-24 post-blueprint rewrite). Stack sentences in one paragraph only when tightly causally linked.
+- NEVER use markdown `**bold**` — LinkedIn strips it and renders the asterisks literally. Use unicode-bold (conditional on pivot-number) or fragment paragraphs for weight.
 - NEVER repeat the same word twice in one post (other than conjunctions + proper nouns)
 - NEVER use engagement bait ("like if you agree", questions as hooks)
 - NEVER reference past posts explicitly — use accumulated context implicitly

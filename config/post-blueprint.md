@@ -86,6 +86,21 @@ Top example (voice direction): "I'm the most average bloke ever."
 - **Pattern B — Identity Statement**: "97% of LinkedIn creators are men. I'm in the 3%." / "I'm the most average bloke ever." Requires a verified Aayush-side fact.
 - **Pattern C — Absurd Comparison**: "A cat with Instagram makes more than your MBA."
 - **Pattern D — Time Bomb**: "I posted my first LinkedIn post 3 years ago." / **Variant: ellipsis** — "AI startups have 12 months before they die…" (from today's shipped post, 2026-04-20). Trailing ellipsis adds stakes without a full sentence.
+- **Pattern E — Observation-first setup (2026-04-24)**: News reported flat, feed's predictable response, then pivot.
+  ```
+  [Company] [released/shipped/raised] [thing].
+
+  [Name of thing / price / number].
+
+  And my feed is already doing the thing it always does.
+
+  [Beat 1 of what the feed is doing — one line]
+  [Beat 2 of what the feed is doing — one line]
+  [Beat 3 of what the feed is doing — one line]
+
+  Then [named person] [specific action].
+  ```
+  Slower than a hook-punch. Earns the claim by showing the predictable discourse pattern first. Use on news-commentary about a frontier tool / model / pricing shift. Anchor: `config/aayush-ai-post-examples/gpt-55-my-feed-is-doing-the-thing.md`.
 
 ---
 
@@ -102,6 +117,7 @@ Closing rhetorical questions: sentence case. "What does your team remember from 
 - **IMO** — "IMO, it's about who owns the user when the feature becomes commodity." (from today's post)
 - **I doubt** — "I doubt current stakes are about model access anymore."
 - **I think** — "I think [specific claim]"
+- **My take is** (2026-04-24) — "My take is teams with room in their AI budget just unlocked a new capability." Commits to the thesis without claiming authority. Use at the pivot from setup to implication.
 - **tbh, fwiw, ngl** — occasional, informal, not every post
 
 These are NOT guru-speak. They're the opposite — they signal humility and conviction at the same time. Use them.
@@ -151,37 +167,52 @@ Example: "The tools were identical (using claude code is not a moat 🤷🏻‍�
 
 This is distinct from a standalone body emoji. It's a wink mid-sentence.
 
-### Single-line paragraph fragments for sequences
+### Default cadence: one sentence per paragraph (2026-04-24)
 
-When listing consequences, actions, or observations in sequence, break each into its own paragraph line. Never stack 3+ short sentences (under 12 words each) in a single paragraph block.
+**Single-sentence paragraphs are the default, not the reach-for exception.** Stack 2 sentences in one paragraph ONLY when tightly causally linked (A therefore B). Stack 3 ONLY when the third is a wry closer the first two set up. Otherwise break.
+
+Anchor: the 2026-04-24 GPT-5.5 post has ~30 paragraphs; 28 are single sentences. Pipeline's Option 2 draft had ~14 paragraphs, only 4 single-sentence. Match Aayush's ratio.
 
 **Pipeline fail:** "He built telemetry that logs every Claude Code interaction. Every pattern analyzed. Every skill saved to a shared repository."
 **Aayush edit:** Each sentence on its own line.
 
 Rule: if you have 3+ sentences that are each under 12 words, break them one-per-line. They land harder as separate beats.
 
+**Character-count math:** character count includes line breaks. A 1,400-char post with 40 blank lines is not the same as a 1,400-char post with 12. Top performers often budget more than a third of char count to whitespace. Never pad prose to hit 1,800 — pad rhythm via line breaks.
+
 ---
 
 ## Rhythm devices (performance-data-derived, 2026-04-20 calibration)
 
-### Unicode-bold signature (the Aayush formatting)
+### Unicode-bold signature — conditional on pivot-number (2026-04-24 update)
 
-LinkedIn strips markdown. Aayush uses **Mathematical Bold block** (U+1D400-U+1D7FF) to make specific words render bold in the feed. This survives copy-paste.
+LinkedIn strips markdown. Aayush uses **Mathematical Bold block** (U+1D400-U+1D7FF) when a specific number or word IS the pivot of the post. Not on every post.
+
+**Use only when the number is the pivot.** In the 2026-04-20 "I quit my job" post, `𝟰𝟬%` and `𝟵𝟬%` ARE the pivot — savings down, anxiety down. Without them the post has no beat. In the 2026-04-24 GPT-5.5 post, Aayush uses zero unicode-bold — because no single number is the pivot. $180/M is a reference anchor, not a reveal.
 
 Examples from top-1 post (392 eng):
 - "My savings dropped 𝟰𝟬%. But, my anxiety dropped 𝟵𝟬%."
 - "Sometimes not knowing 𝗜𝗦 the plan."
 
 Rules:
-- 1-2 unicode-bold hits per post maximum
+- **If the post doesn't have a pivot number/word, don't hit unicode-bold at all.** Do not fabricate a number to justify the device. 2026-04-24 pipeline Option 2 fabricated `𝟯𝟲` at "reversing 𝟯𝟲 months faster" to satisfy the reach-for checklist — that number was not in the brief.
+- When used: 1-2 unicode-bold hits per post maximum
 - Apply to: the pivot number, the thesis word, a key verb
 - Never entire sentences
 - Numbers: use Bold Digit block (U+1D7CE-U+1D7FF). Example: `40` → `𝟰𝟬`, `90` → `𝟵𝟬`
 - Letters: use Mathematical Sans-Serif Bold (U+1D5D4-U+1D607). Example: `IS` → `𝗜𝗦`
 
-### P.S. / P.P.S. closer with 👇🏻 image pointer
+### NO markdown bold in post body (2026-04-24)
 
-Top-1 and top-5 posts both end with this pattern:
+LinkedIn strips `**bold**`. The asterisks render literally to readers. If you want weight on a word, use unicode-bold (conditional per above) or a short fragment paragraph. **Never use markdown asterisks.** 2026-04-24 pipeline Option 2 shipped `**That's not pricing. That's access.**` and `**That's the new moat.**` — these would have rendered with stars visible on LinkedIn.
+
+### P.S. / P.P.S. closer — conditional (2026-04-24 downgrade)
+
+**Use p.s./p.p.s. when** (a) you have a genuine confession or image worth pointing at, or (b) the post is a personal/vulnerable arc. **Skip when** the post is news-commentary and the closer is itself the payoff.
+
+The 2026-04-24 GPT-5.5 post closed on `Did you try GPT 5.5 yet? I haven't my I'm excited...` — a present-tense personal question. Forcing p.s. onto that post would deflate the arrow. For news-commentary mode, the unresolved closer IS the p.s. equivalent.
+
+Top-1 and top-5 posts ended with this pattern:
 
 ```
 p.s. Take this post as your sign to take a break from work :)
@@ -191,7 +222,7 @@ p.p.s First day at the Vipassana center 👇🏻
 - **p.s.** = friendly directive, personal confession, or one new concrete detail that reframes what the reader just read. Lowercase. Do NOT use p.s. to repeat a stat already covered in the body — use it to land something specific and surprising that the body didn't have room for.
 - **p.p.s.** = image/asset pointer using 👇🏻 emoji — OR — personal Atlan context CTA (see below). Lowercase.
 
-Reach for this on vulnerable or contrarian posts. 2 of top 5 posts used it.
+**NOT a reach-for.** Not every post needs one. Count by mode: vulnerable-personal posts often use 3-4 formatting devices (p.s., unicode-bold, 👇🏻). News-commentary posts typically use 0-1.
 
 ### Atlan context p.p.s. (2026-04-21)
 
@@ -215,12 +246,32 @@ Top performers use 2-8 word standalone paragraphs for emphasis:
 
 These break rhythm and carry weight. Use sparingly — 2-3 per post max.
 
-### "That's X." recap-tag pattern
+### "That's X." recap-tag pattern (two variants)
 
-After making a concrete point, close with a tag naming what you just showed:
-- "Canva has 100 million users. When they decide your AI feature belongs in their workflow, you're not competing against their product. You're competing against their audience. **That's distribution.**"
+After making a concrete point, close with a 3-word tag naming what you just showed.
 
-Posts using this pattern read as structured and deliberate. From today's 1,595c post.
+**Variant 1 — concept-naming.** The tag names the underlying concept:
+- "Canva has 100 million users. When they decide your AI feature belongs in their workflow, you're not competing against their product. You're competing against their audience. That's distribution."
+
+**Variant 2 — diagnostic beat (2026-04-24).** The tag names a *behavioral observation* about what you just quoted:
+- `"Happy to pay $180 per million tokens." / That's a tell.` (2026-04-24 GPT-5.5 post)
+- `That's a signal.` / `That's a pattern.` / `That's a tell.` — 3-word standalone paragraphs that read as live interpretation, not as concept-naming.
+
+Use Variant 2 right after a named quote or specific action, when you want the reader to register the meaning before you unpack it. Use Variant 1 anywhere you've finished building an argument and want to label the thing you just built.
+
+Posts using this pattern read as structured and deliberate.
+
+### Vulnerability-in-closer — available to any style (2026-04-24)
+
+Close with a present-tense admission of uncertainty, incompleteness, or not-yet-doing-the-thing. Does NOT require a verified past experience — only a present state.
+
+Examples:
+- `Did you try GPT 5.5 yet? I haven't my I'm excited...` (2026-04-24 GPT-5.5, TIER 3 contrarian)
+- `What's the ugliest workaround in your current agent setup?` — implied "I have a few" (agent-stack-hardening)
+
+Works even on contrarian-philosopher and observer-mode posts. **Distinct from TIER 1 Vulnerable Victor which requires a verified past arc.** Vulnerability-in-closer just needs a real present state ("I haven't", "I'm also figuring this out", "I don't know yet").
+
+When you use this, typos or typo-like flow ("I haven't my I'm excited") are allowed if they keep the rhythm of thought. Do not sanitize into "I haven't tried it yet, but I'm excited." — the run-on IS the signal.
 
 ### Parallel-imperative rhythm
 
@@ -358,27 +409,42 @@ Briefs are for Aayush's learning (broad-audience newsletter voice). Posts are Aa
 - [ ] 0 hashtags
 - [ ] Passes posts-gate.sh: no "It's like X", no AI-tell inversion, no trailing hashtags, no banned MBA-vocab (differentiation, commoditization, table stakes)
 
-## Reach-for checklist — at least TWO per post (top-performer patterns)
+## Formatting devices — calibrate to post mode (2026-04-24 rewrite)
 
-- [ ] Unicode-bold on 1-2 specific words/numbers (𝟰𝟬%, 𝗜𝗦)
-- [ ] P.S. closer (lowercase, new concrete detail — not a repeat of body stats)
-- [ ] P.P.S. with 👇🏻 image pointer when an image is attached
-- [ ] Atlan context p.p.s. when post topic overlaps Atlan's work ("at Atlan we've been building this layer...")
-- [ ] Bridge sentence after hook (observer placement + mechanism named)
-- [ ] Parenthetical personality aside mid-post (one-liner + emoji, inline)
-- [ ] Single-line paragraph breaks on 3+ short sequential sentences
-- [ ] Parallel-imperative rhythm
-- [ ] Contrast labels (short binary pair + payoff)
-- [ ] Named specifics with $/scale ($15Bn, 100M users, $10B deal)
-- [ ] Two-question close OR poetic line-break close
-- [ ] ALL-CAPS one-word emphasis (once/post max)
-- [ ] Negative-space paragraphs (2-8 word standalone for emphasis)
-- [ ] "That's X." recap-tag rhythm
-- [ ] Era-reframe ("2023 strategy on 2026 timelines")
-- [ ] Ellipsis hook ("…" at end of first line)
-- [ ] Two-line binary hook ("Everyone has X. / Almost no one is using it right.")
+These are OPTIONS, not a checklist. Count by mode, not by quantity.
 
-Zero per post = probably generic. Four+ per post = probably overworked. Aim for 2-3.
+**News-commentary / observer-mode posts** (like 2026-04-24 GPT-5.5, using Pattern E observation-first):
+Typically use **0-1** formatting devices. Rely on paragraph breaks, observation-first setup, and a personal closer. Do not force additional devices in.
+
+**Vulnerable-personal posts** (like 2026-04-20 "I quit my job", TIER 1):
+Use **3-4** formatting devices. p.s., p.p.s., unicode-bold on the pivot number, 👇🏻 pointer to image, etc.
+
+**Contrarian-philosopher posts** (like 2026-04-20 "every startup says they're 'ai-powered'"):
+Use **1-2** formatting devices. Typically contrast labels or a "That's X." recap plus one emphasis device.
+
+### Available devices (pick per mode, do not stack mandatorily)
+
+- Unicode-bold on pivot words/numbers — **ONLY when a specific number/word IS the pivot** (2026-04-24 §g). Do not fabricate a number to justify the device.
+- Markdown asterisks `**bold**` — **NEVER** (LinkedIn renders the stars, 2026-04-24 §h).
+- P.S. closer — lowercase, new concrete detail. Skip when the post's natural closer is a genuine question or admission.
+- P.P.S. with 👇🏻 image pointer — only when an image is actually attached.
+- Atlan context p.p.s. — only when post topic overlaps Atlan's actual work. Not a default closer.
+- Bridge sentence after hook (observer placement + mechanism named).
+- Parenthetical personality aside mid-post (one-liner + emoji, inline).
+- Single-line paragraph breaks — **default cadence now, not a reach-for** (see "Default cadence: one sentence per paragraph").
+- Parallel-imperative rhythm.
+- Contrast labels (short binary pair + payoff).
+- Named specifics with $/scale ($15Bn, 100M users, $10B deal).
+- Two-question close OR poetic line-break close OR unresolved-admission close (2026-04-24 §i).
+- ALL-CAPS one-word emphasis (once per post max).
+- Negative-space paragraphs (2-8 word standalone for emphasis).
+- "That's X." recap-tag rhythm (concept-naming or diagnostic beat — two variants).
+- Era-reframe ("2023 strategy on 2026 timelines").
+- Ellipsis hook ("…" at end of first line).
+- Two-line binary hook.
+- Arrow `↓` as visual colon before a quote — pending confirmation as a repeatable device (see `config/post-redesign-2026-04-24.md` Q1).
+
+**Old rule (removed 2026-04-24):** "aim for 2-3 devices per post." This rule was pushing the pipeline toward fabricated `𝟯𝟲`-style unicode-bold hits on posts that didn't need any formatting. The correct count depends on which mode you're writing in, not a constant minimum.
 
 ---
 

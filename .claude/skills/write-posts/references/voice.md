@@ -166,8 +166,8 @@ into one sentence. Max 1 per post — it's a hammer, not a screwdriver.
 
 ## Case + emphasis rules
 
-- **Lowercase i** (not uppercase I) as pronoun — always.
-- **Opening a question with lowercase** ("what are you building that only YOU can build?") is allowed when the question is rhetorical or personal. Reserve uppercase for formal framing questions. Aayush's 2026-04-20 post closes with lowercase "what" intentionally — it reads like he's thinking aloud, not interviewing you.
+- **Uppercase `I` as pronoun — default.** Matches `voice.md` §Tone line 25 and CLAUDE.md feedback-log entry (2026-04-21). The earlier "lowercase i always" rule was based on a 2026-04-19 reading of Aayush's posts that turned out to be wrong — his actual posts consistently use uppercase `I` ("I build AI agents at Atlan", "I've been thinking about", "My take is ... I haven't my I'm excited..." in 2026-04-24). Do NOT use lowercase `i` unless mirroring a specific Aayush post that has it.
+- **Opening a question with lowercase** ("what are you building that only YOU can build?") is allowed when the question is rhetorical or personal. Reserve uppercase for formal framing questions. Aayush's 2026-04-20 post closes with lowercase "what" intentionally — it reads like he's thinking aloud, not interviewing you. This is about the first word of a question, NOT about the `I` pronoun inside the post.
 - **ALL-CAPS one word per post max** for emphasis (e.g. "only YOU can build", "40 have the same BUG"). More than once = screaming, kills the device.
 - Proper nouns still capitalize (Anthropic, OpenAI, Notion, Canva).
 
