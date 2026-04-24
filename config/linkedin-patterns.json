@@ -1,5 +1,5 @@
 {
-  "total_posts": 26,
+  "total_posts": 28,
   "top_5_by_engagement": [
     {
       "date": "2025-05-26",
@@ -61,11 +61,11 @@
   ],
   "bottom_3_by_engagement": [
     {
-      "date": "2026-04-20",
-      "first_line": "AI startups have 12 months before they die…",
+      "date": "2026-04-21",
+      "first_line": "Everyone has Claude Code. Almost no one is using it right.",
       "hook_pattern": "other",
       "style": "Unclassified",
-      "composite_engagement": 7
+      "composite_engagement": 3
     },
     {
       "date": "2025-01-28",
@@ -100,14 +100,14 @@
       "avg_engagement": 392.0
     },
     "other": {
-      "count": 18,
-      "avg_engagement": 53.0
+      "count": 20,
+      "avg_engagement": 48.6
     }
   },
   "style_stats": {
     "Vulnerable Victor": {
-      "count": 3,
-      "avg_engagement": 145.0
+      "count": 4,
+      "avg_engagement": 112.2
     },
     "Contrarian Philosopher": {
       "count": 2,
@@ -122,8 +122,8 @@
       "avg_engagement": 67.0
     },
     "Unclassified": {
-      "count": 18,
-      "avg_engagement": 49.7
+      "count": 19,
+      "avg_engagement": 47.3
     }
   },
   "cta_stats": {
@@ -133,7 +133,7 @@
     },
     "direct-question": {
       "count": 5,
-      "avg_engagement": 47.8
+      "avg_engagement": 48.0
     },
     "challenge": {
       "count": 0,
@@ -144,8 +144,8 @@
       "avg_engagement": 41.0
     },
     "soft-close": {
-      "count": 8,
-      "avg_engagement": 98.5
+      "count": 9,
+      "avg_engagement": 87.9
     }
   },
   "length_buckets": {
@@ -159,7 +159,9 @@
       17
     ],
     "medium (1000-2000)": [
-      7,
+      14,
+      3,
+      8,
       12,
       40,
       8,

@@ -4,7 +4,7 @@
 
 Read by `/write-posts` when generating the 3 daily options. Use this to weight which Blueprint style/hook/CTA to pick for today's content based on what's actually worked for Aayush.
 
-**Total posts analyzed:** 26
+**Total posts analyzed:** 28
 
 ---
 
@@ -37,8 +37,8 @@ Read by `/write-posts` when generating the 3 daily options. Use this to weight w
 
 ## Bottom 3 (what underperforms)
 
-- 2026-04-20 | Hook: **other** | Style: **Unclassified** | Engagement: 7
-  *"AI startups have 12 months before they die…"*
+- 2026-04-21 | Hook: **other** | Style: **Unclassified** | Engagement: 3
+  *"Everyone has Claude Code. Almost no one is using it right."*
 - 2025-01-28 | Hook: **other** | Style: **Unclassified** | Engagement: 1
   *"Any obsidian users in my network? "*
 - 2024-09-20 | Hook: **other** | Style: **Unclassified** | Engagement: 1
@@ -49,7 +49,7 @@ Read by `/write-posts` when generating the 3 daily options. Use this to weight w
 | Pattern | Count | Avg engagement |
 |---|---|---|
 | **D** Time Bomb | 1 | 392.0 |
-| **other** Other/Unclassified | 18 | 53.0 |
+| **other** Other/Unclassified | 20 | 48.6 |
 | **A** Contrarian Truth | 2 | 47.5 |
 | **C** Absurd Comparison | 1 | 41.0 |
 | **B** Identity / Confession | 4 | 33.8 |
@@ -58,18 +58,18 @@ Read by `/write-posts` when generating the 3 daily options. Use this to weight w
 
 | Style | Count | Avg engagement |
 |---|---|---|
-| **Vulnerable Victor** | 3 | 145.0 |
+| **Vulnerable Victor** | 4 | 112.2 |
 | **Contrarian Philosopher** | 2 | 69.5 |
 | **Relatable Human** | 1 | 67.0 |
-| **Unclassified** | 18 | 49.7 |
+| **Unclassified** | 19 | 47.3 |
 | **Absurdist Truth-Teller** | 2 | 40.5 |
 
 ## CTA type performance
 
 | CTA | Count | Avg engagement |
 |---|---|---|
-| soft-close | 8 | 98.5 |
-| direct-question | 5 | 47.8 |
+| soft-close | 9 | 87.9 |
+| direct-question | 5 | 48.0 |
 | community | 1 | 41.0 |
 | permission-giving | 0 | 0 |
 | challenge | 0 | 0 |
@@ -158,7 +158,7 @@ p.p.s First day at the Vipassana center 👇🏻
 
 ## Option pickup rates (since tracking started)
 
-**Attribution summary:** variant_of=0 · inspired_by=0 · organic=26
+**Attribution summary:** variant_of=0 · inspired_by=0 · organic=28
 
 *Pickup* = published post matched a generated option (Jaccard ≥ 0.25 on first 3 lines' 3-grams).
 
@@ -166,21 +166,27 @@ p.p.s First day at the Vipassana center 👇🏻
 
 | Template | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
+| **absurd-mirror** | 1 | 0 | 0% | n/a | ← never shipped
 | **absurdist** | 1 | 0 | 0% | n/a | ← never shipped
-| **contrarian** | 3 | 0 | 0% | n/a | ← never shipped
+| **contrarian** | 7 | 0 | 0% | n/a | ← never shipped
+| **data-point** | 2 | 0 | 0% | n/a | ← never shipped
 | **dot-connecting** | 2 | 0 | 0% | n/a | ← never shipped
-| **personal-discovery** | 2 | 0 | 0% | n/a | ← never shipped
+| **pattern-observation** | 2 | 0 | 0% | n/a | ← never shipped
+| **personal story** | 1 | 0 | 0% | n/a | ← never shipped
+| **personal-I observer** | 1 | 0 | 0% | n/a | ← never shipped
+| **personal-discovery** | 3 | 0 | 0% | n/a | ← never shipped
 | **relatable** | 1 | 0 | 0% | n/a | ← never shipped
 
 ### By source hook pattern
 
 | Hook | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
-| **A** | 3 | 0 | 0% | n/a |
-| **B** | 2 | 0 | 0% | n/a |
-| **C** | 1 | 0 | 0% | n/a |
+| **A** | 6 | 0 | 0% | n/a |
+| **B** | 4 | 0 | 0% | n/a |
+| **C** | 5 | 0 | 0% | n/a |
+| **E** | 2 | 0 | 0% | n/a |
 | **F** | 1 | 0 | 0% | n/a |
-| **G** | 2 | 0 | 0% | n/a |
+| **G** | 3 | 0 | 0% | n/a |
 
 ### How to use this in /write-posts
 
