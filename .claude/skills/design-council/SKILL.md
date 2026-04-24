@@ -41,7 +41,7 @@ If arg is a path (ends in `.md` / `.json` / `.txt`), read it. Otherwise treat as
 
 ### What to produce
 
-Write to `creatives/YYYY-MM-DD/define-<slug>.md`:
+Write to `workspace/YYYY-MM-DD/creatives/define-<slug>.md`:
 
 ```markdown
 # Define — <slug>
@@ -140,9 +140,9 @@ Do not proceed until the human approves. If they push back, iterate on define.md
 
 ### What to produce per option
 
-For each of the 5 options, write a complete HTML file to `creatives/YYYY-MM-DD/option-<N>-<name-slug>.html` and render to `option-<N>-<name-slug>.png`.
+For each of the 5 options, write a complete HTML file to `workspace/YYYY-MM-DD/creatives/option-<N>-<name-slug>.html` and render to `option-<N>-<name-slug>.png`.
 
-Document each option in a single `creatives/YYYY-MM-DD/develop-<slug>.md`:
+Document each option in a single `workspace/YYYY-MM-DD/creatives/develop-<slug>.md`:
 
 ```markdown
 ## Option 1: Quiet Tension
@@ -160,8 +160,8 @@ Document each option in a single `creatives/YYYY-MM-DD/develop-<slug>.md`:
 
 ```bash
 python3 scripts/render_creative.py \
-  creatives/YYYY-MM-DD/option-<N>-<slug>.html \
-  creatives/YYYY-MM-DD/option-<N>-<slug>.png \
+  workspace/YYYY-MM-DD/creatives/option-<N>-<slug>.html \
+  workspace/YYYY-MM-DD/creatives/option-<N>-<slug>.png \
   --width 1200 --height 1200
 ```
 
@@ -171,7 +171,7 @@ Or 1200×1500 for Story archetype.
 
 Read all 5 rendered PNGs yourself via Read tool. Show them to the user by listing paths + the develop.md. Say:
 
-> "Develop phase done. 5 options in `creatives/YYYY-MM-DD/`. Open them to review. Reply with what to ship, what to kill, what to combine, or what new direction to try."
+> "Develop phase done. 5 options in `workspace/YYYY-MM-DD/creatives/`. Open them to review. Reply with what to ship, what to kill, what to combine, or what new direction to try."
 
 Do not proceed until user selects ≥ 1 survivor.
 
@@ -205,7 +205,7 @@ Per option:
 
 Per option: **Ship** / **Revise** / **Kill**, with specific action points.
 
-Write to `creatives/YYYY-MM-DD/deliver-<slug>.md`. Show user. Offer the winner(s) as final.
+Write to `workspace/YYYY-MM-DD/creatives/deliver-<slug>.md`. Show user. Offer the winner(s) as final.
 
 ---
 
@@ -297,3 +297,29 @@ These were hand-built to match the Marketing OS aesthetic. Match this quality ba
 3. **Deliver** (7-dim critique + verdict on survivors) → ship winner(s)
 
 Three pauses. No phase skips itself. Define is where quality is won or lost — if convictions are wrong, 5 options will all be wrong.
+
+---
+
+## Proven references — creatives Aayush said worked
+
+### 2026-04-24 — GPT-5.5 "Receipt" (`workspace/2026-04-24/creatives/option-1-receipt.png`)
+
+Aayush's feedback: "one of the best creatives we've built." File anchored here as a reference for the **"artifact metaphor"** direction: turn the subject of the post into a physical-world object rather than explaining it with copy.
+
+**What worked:**
+1. **Artifact-as-argument.** The creative IS a receipt. The PAID stamp does the interpretive work that a headline would normally do. Zero explanatory copy.
+2. **12 words of text total.** `ORDER #0055 · 04.24.2026` / `GPT-5.5` / `1,000,000 tokens` / `$180.00` / `PAID` / `TOTAL $180.00` / `debate ended before checkout.` — every word earns its spot.
+3. **One brick-red accent** on an otherwise off-white canvas. Color does one job: mark the decision. Everything else is neutral ledger-paper.
+4. **Monospaced type throughout.** Reads as a real receipt, not a design. The realism is the scroll-stop.
+5. **Footer outside the receipt**, small caps, lowercase. `debate ended before checkout.` is the commentary beat — it's the "That's a tell." equivalent, written one layer below the artifact.
+6. **Torn zigzag bottom edge.** The one flourish that separates this from "generated card" aesthetics. Signals human hand.
+7. **Zero brand marks.** No Atlan logo, no OpenAI logo, no stock imagery, no AI-slop "brain with circuit lines." The creative stands on its own.
+
+**When to reach for this direction:** post is about a moment where someone has already decided something (bought, paid, locked in, walked away). Receipt, boarding pass, handwritten sticky note, chat message, contract — pick the artifact that encodes the decision.
+
+**When NOT to:** post is about a process, a tension still unresolved, or an emerging trend. Artifact metaphors need a completed action to anchor them.
+
+**Files (for style imitation):**
+- `workspace/2026-04-24/creatives/option-1-receipt.html` — HTML/CSS, copy-paste to start a new receipt-style creative.
+- `workspace/2026-04-24/creatives/option-1-receipt.png` — 2160×2160 render ready for LinkedIn.
+- `workspace/2026-04-24/creatives/deliver.md` — original design brief with layout spec, color palette ("ledger paper"), typography notes, and the two runner-up concepts.

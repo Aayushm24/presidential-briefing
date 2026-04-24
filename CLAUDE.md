@@ -41,6 +41,8 @@ When the user's request matches, invoke the skill by running `/{skill-name}` in 
 | Apply council fixes | `/revise` | `.claude/skills/council/revise/SKILL.md` |
 | Commit + deliver | `/publish` | `.claude/skills/publish/SKILL.md` |
 | Sunday conviction candidates | `/weekly-feedback` | `.claude/skills/weekly-feedback/SKILL.md` |
+| **Ingest a finalized Aayush post, update voice truth** | `/post-feedback` | `.claude/skills/post-feedback/SKILL.md` |
+| **Build 5 creative options for a post** | `/design-council` | `.claude/skills/design-council/SKILL.md` |
 
 ---
 
@@ -57,7 +59,14 @@ workspace/2026-04-19/
 ├── brain.md            # brain connections
 ├── brief.md            # the newsletter
 ├── posts.md            # 3 options with scores
+├── posts.json          # posts in structured form (gated by posts-gate.sh)
 ├── council-notes.md    # critique from /attack
+├── scan-summary.json   # feed health (reasons, counts) for /publish
+├── creatives/          # /design-council output — 5 options as .html + .png
+│   ├── define-<slug>.md
+│   ├── develop-<slug>.md
+│   ├── deliver-<slug>.md
+│   └── option-N-<slug>.{html,png}
 └── published.md        # final shipped content
 ```
 
