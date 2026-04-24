@@ -639,11 +639,26 @@ jobs:
           fi
           RUN_URL="https://github.com/${REPO}/actions/runs/${RUN_ID}"
 
+          # n8n routes by `type` field — it only knows daily_brief / nothing_new / scan_degraded.
+          # Reusing scan_degraded because its Slack template already renders a `message` +
+          # `reasons[]` block that carries our failure context cleanly. The leading
+          # "PIPELINE FAILURE:" in the message makes the severity obvious in Slack.
+          # TODO(someday): add a real pipeline_failure route in n8n so this can be specific.
           PAYLOAD=$(jq -n \
             --arg date "$TODAY" \
             --arg failed "$FAILED_CSV" \
             --arg run_url "$RUN_URL" \
-            '{type:"pipeline_failure",date:$date,failed_jobs:$failed,run_url:$run_url,message:("Daily brief pipeline failed for " + $date + ". Jobs that failed: " + $failed + ". Dead-man will auto-retry at 7am IST.")}')
+            '{
+              type: "scan_degraded",
+              date: $date,
+              message: ("PIPELINE FAILURE: daily brief failed for " + $date + ". Jobs that failed: " + $failed + ". Dead-man will auto-retry at 7am IST. See: " + $run_url),
+              rss_summary: ("failed jobs: " + $failed),
+              reasons: [
+                ("pipeline_failure on " + $date),
+                ("failed_jobs=" + $failed),
+                ("run_url=" + $run_url)
+              ]
+            }')
 
           if [ -n "${N8N_SLACK_WEBHOOK_URL:-}" ]; then
             HTTP=$(curl -sS -o /tmp/resp.txt -w "%{http_code}" \
