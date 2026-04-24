@@ -43,16 +43,16 @@ A founder reads it and thinks *"this is exactly what I needed to know"* without 
 2. **Specific tools/repos/links.** Named. Linked. Founders save these.
 3. **Specific numbers.** Revenue, cost, team size, time. "$25/month. No team. No office."
 4. **Outcomes, not process.** "16 days. 187 trades. 71% win rate. $800 seed. +$8,700."
-5. **Reader thinks "i should try this"** not "i understand this concept."
+5. **Reader thinks "I should try this"** not "I understand this concept."
 6. **No jargon without a plain-English explanation first.**
 7. **The insight is about HOW TO USE AI WELL,** not how AI works internally.
 
 ## Emotion distribution
 
-- 40% vulnerability — "i kept waiting for the catch. the catch never came."
-- 30% practical insight — "three commands. the bot sees 500+ markets in real time."
-- 20% wisdom — "the hardest engineering skill is knowing which problems to stop solving."
-- 10% humor — "he looked at me like i was an idiot."
+- 40% vulnerability — "I kept waiting for the catch. The catch never came."
+- 30% practical insight — "Three commands. The bot sees 500+ markets in real time."
+- 20% wisdom — "The hardest engineering skill is knowing which problems to stop solving."
+- 10% humor — "He looked at me like I was an idiot."
 
 ## Hook-Proof-Implication-CTA structure
 

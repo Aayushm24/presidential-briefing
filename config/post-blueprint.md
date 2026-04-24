@@ -86,7 +86,7 @@ Top example (voice direction): "I'm the most average bloke ever."
 - **Pattern B — Identity Statement**: "97% of LinkedIn creators are men. I'm in the 3%." / "I'm the most average bloke ever." Requires a verified Aayush-side fact.
 - **Pattern C — Absurd Comparison**: "A cat with Instagram makes more than your MBA."
 - **Pattern D — Time Bomb**: "I posted my first LinkedIn post 3 years ago." / **Variant: ellipsis** — "AI startups have 12 months before they die…" (from today's shipped post, 2026-04-20). Trailing ellipsis adds stakes without a full sentence.
-- **Pattern E — Observation-first setup (2026-04-24)**: News reported flat, feed's predictable response, then pivot.
+- **Pattern E — Observation-first setup (EXPERIMENTAL, 2026-04-24):** News reported flat, feed's predictable response, then pivot. Corpus evidence: **0 of 4 finalized Aayush posts use this pattern.** One single off-corpus post (2026-04-24 GPT-5.5) used it. Treat as experimental — reach for punch-first (Pattern A) or two-line binary first. Use Pattern E ONLY when the story is genuinely a hype-cycle moment where the discourse-first setup earns the claim.
   ```
   [Company] [released/shipped/raised] [thing].
 
@@ -100,7 +100,9 @@ Top example (voice direction): "I'm the most average bloke ever."
 
   Then [named person] [specific action].
   ```
-  Slower than a hook-punch. Earns the claim by showing the predictable discourse pattern first. Use on news-commentary about a frontier tool / model / pricing shift. Anchor: `config/aayush-ai-post-examples/gpt-55-my-feed-is-doing-the-thing.md`.
+  Anchor: `config/aayush-ai-post-examples/gpt-55-my-feed-is-doing-the-thing.md`. See `config/post-corpus-analysis-2026-04-24.md` §3.1 for the corpus counts that led to this demotion.
+
+**Workhorse first:** 3 of 4 finalized posts use punch-first openers (named-specific stat → paradox, two-line binary, or time-bomb ellipsis). Reach for these before Pattern E.
 
 ---
 
@@ -117,7 +119,7 @@ Closing rhetorical questions: sentence case. "What does your team remember from 
 - **IMO** — "IMO, it's about who owns the user when the feature becomes commodity." (from today's post)
 - **I doubt** — "I doubt current stakes are about model access anymore."
 - **I think** — "I think [specific claim]"
-- **My take is** (2026-04-24) — "My take is teams with room in their AI budget just unlocked a new capability." Commits to the thesis without claiming authority. Use at the pivot from setup to implication.
+- **My take is** (OCCASIONAL, 2026-04-24) — "My take is teams with room in their AI budget just unlocked a new capability." **Corpus count: 0 hits in 4 finalized posts.** IMO (3 hits) and I doubt (2 hits) are the proven defaults — reach for those first. Treat "My take is" as an allowed variant, not a first-class marker.
 - **tbh, fwiw, ngl** — occasional, informal, not every post
 
 These are NOT guru-speak. They're the opposite — they signal humility and conviction at the same time. Use them.
@@ -157,15 +159,23 @@ Examples:
 
 The bridge keeps the post grounded and prevents the jump from hook to case study feeling abrupt.
 
-### Parenthetical personality aside
+### Parenthetical personality aside — three variants (3 of 4 corpus posts)
 
-Inject a casual, self-aware observation mid-post as an inline parenthetical + 1 emoji. Signals the author knows what the reader is thinking. Pre-empts an obvious objection without a full disclaimer sentence.
+Inject a casual, self-aware observation mid-post as an inline parenthetical. Corpus evidence: Post 2 alone uses all three variants below. Use **one per post max**, picking the variant that matches the moment.
 
-**Format:** `(observation 🤷🏻‍♂️)` — inline, attached to the sentence that prompted it. Use once per post max.
+**Variant 1 — self-aware wink (with emoji).** Pre-empts an obvious objection without a full disclaimer sentence.
+- Format: `(observation 🤷🏻‍♂️)` — inline, attached to the sentence that prompted it.
+- Example: "The tools were identical (using claude code is not a moat 🤷🏻‍♂️). The infrastructure was completely different." (Post 4)
 
-Example: "The tools were identical (using claude code is not a moat 🤷🏻‍♂️). The infrastructure was completely different."
+**Variant 2 — explanatory (no emoji).** Unpacks a technical term or detail in one beat, so the sentence can keep moving.
+- Format: `(one-line unpacking of the term just used)`
+- Example: "OpenAI's Codex update shipped computer use (the agent literally sees your screen and operates your apps for you) which changes everything." (Post 2)
 
-This is distinct from a standalone body emoji. It's a wink mid-sentence.
+**Variant 3 — tonal (single word or short phrase).** Adds voice without adding content. Rare but punchy.
+- Format: `(quietly)` or similar short adverb/phrase in parens.
+- Example: "(quietly)" as a tag on a sentence about a major shift happening below the surface (Post 2).
+
+This is distinct from a standalone body emoji. It's a wink or a beat inside the sentence, never a standalone paragraph.
 
 ### Default cadence: one sentence per paragraph (2026-04-24)
 
@@ -224,6 +234,23 @@ p.p.s First day at the Vipassana center 👇🏻
 
 **NOT a reach-for.** Not every post needs one. Count by mode: vulnerable-personal posts often use 3-4 formatting devices (p.s., unicode-bold, 👇🏻). News-commentary posts typically use 0-1.
 
+### At Atlan grounding beat — mid-post (3 of 4 corpus posts, 2026-04-24 addition)
+
+**The workhorse Atlan placement is MID-POST, not in the p.p.s.** 3 of 4 finalized posts have a single-line "At Atlan, we..." grounding beat in the body of the post. Only Post 4 uses the Atlan CTA in a p.p.s. The blueprint has been under-representing the mid-post form.
+
+**What it does:** converts an abstract argument into a concrete one-liner of lived experience. Signals "I'm not theorizing — I'm in it too."
+
+**Format:** one sentence, mid-post, after a general claim. Not a CTA. Not a disclaimer. A proof beat.
+- Post 1: "At Atlan, we've been building agents for months and this tracks."
+- Post 2: "When we build agents at Atlan, we don't have them click buttons."
+- Post 4 (mid-post, separate from p.p.s.): "At Atlan we've learned shipping agents fast and fixing them publicly beats shipping perfectly."
+
+**Rules:**
+- One per post max (either the mid-post beat OR the p.p.s., never both unless the post earns it — Post 4 is the edge case).
+- Must come AFTER you've made the general point, not before. The beat CONVERTS the abstraction; it does not introduce it.
+- Lowercase "at Atlan" (not "At Atlan,") in informal posts; sentence case at sentence start.
+- Never used as a setup — always as a proof.
+
 ### Atlan context p.p.s. (2026-04-21)
 
 When the post topic overlaps with what Atlan is building (AI infrastructure, agent ops, data systems, institutional memory, workflow automation), add a p.p.s. that ties the post back to Aayush's actual work:
@@ -235,6 +262,40 @@ p.p.s. at Atlan we've been building this layer for a while. happy to compare not
 **When to use:** Post theme = something Atlan builds or has shipped. Not a sales pitch — a genuine "we're in this too" signal. Makes the post feel less theoretical and more grounded in real work.
 
 **Tone:** Lowercase. Casual. "happy to compare notes" not "let's connect". "we've been building" not "we've built a solution".
+
+### Hyphen-bullet 3-item list (4 of 4 corpus posts, 2026-04-24 addition)
+
+**Every single finalized corpus post uses hyphen-bulleted sub-lists.** This is Aayush's most reliable parallel structure. The blueprint has been treating this as incidental; it's core.
+
+**Format:** one-line setup ending with `:` followed by 2-4 bulleted items, each on its own line, each under 12 words, each starting with `- `.
+
+**Count distribution in the corpus:** Post 1 has 6 hyphen-bullet lines, Post 2 has 16, Post 3 has 3, Post 4 has 2.
+
+**Examples from the corpus:**
+
+Post 1 (3-item, explanatory):
+```
+This is multiple layers of the agent stack hardening at once:
+- runtime primitives becoming first-class
+- orchestration getting native support
+- security tools catching up to output volume
+```
+
+Post 1 (3-item, actionable):
+```
+Here's why IMO that cost should drop now:
+- native sandboxed execution = stop building infra
+- long-running support = stop managing state yourself
+- security tooling = stop manually auditing agent output
+```
+
+**Rules:**
+- 3-item is the dominant length. 2 or 4 items OK.
+- Each line starts with `- ` (hyphen + space).
+- Each line under 12 words.
+- Parallel grammatical structure within the list (all noun phrases, all imperatives, all `= ` equations — pick one pattern per list).
+- No nested bullets. No sub-bullets.
+- Use 1-2 lists per post max; more than that fragments the post.
 
 ### Short fragment paragraphs
 
@@ -253,25 +314,25 @@ After making a concrete point, close with a 3-word tag naming what you just show
 **Variant 1 — concept-naming.** The tag names the underlying concept:
 - "Canva has 100 million users. When they decide your AI feature belongs in their workflow, you're not competing against their product. You're competing against their audience. That's distribution."
 
-**Variant 2 — diagnostic beat (2026-04-24).** The tag names a *behavioral observation* about what you just quoted:
-- `"Happy to pay $180 per million tokens." / That's a tell.` (2026-04-24 GPT-5.5 post)
-- `That's a signal.` / `That's a pattern.` / `That's a tell.` — 3-word standalone paragraphs that read as live interpretation, not as concept-naming.
+**Variant 2 — diagnostic beat (UNCONFIRMED, 2026-04-24).** The tag names a *behavioral observation* about what you just quoted. **Corpus count: 0 of 4 finalized posts use this variant.** Single off-corpus sighting in the 2026-04-24 GPT-5.5 post: `"Happy to pay $180 per million tokens." / That's a tell.` Do NOT reach for this variant until it shows up in 2+ more finalized posts.
 
-Use Variant 2 right after a named quote or specific action, when you want the reader to register the meaning before you unpack it. Use Variant 1 anywhere you've finished building an argument and want to label the thing you just built.
+**Corpus-proven form is Variant 1 (concept-naming).** All 4 corpus "That's X." uses name a concept: `That's distribution.` / `That's proprietary data.` / `That's the third.` / `That's the gap.` Reach for Variant 1 by default. Use Variant 2 only if the moment genuinely requires it and you're ready to defend the choice.
 
 Posts using this pattern read as structured and deliberate.
 
-### Vulnerability-in-closer — available to any style (2026-04-24)
+### Vulnerability-in-closer — RARE (1 of 4 corpus posts)
 
 Close with a present-tense admission of uncertainty, incompleteness, or not-yet-doing-the-thing. Does NOT require a verified past experience — only a present state.
 
-Examples:
-- `Did you try GPT 5.5 yet? I haven't my I'm excited...` (2026-04-24 GPT-5.5, TIER 3 contrarian)
-- `What's the ugliest workaround in your current agent setup?` — implied "I have a few" (agent-stack-hardening)
+**Corpus evidence: 1 of 4 finalized posts uses this** (Post 1 / agent-stack-hardening: `What's the ugliest workaround in your current agent setup? 👀` — implied "I have a few"). Do NOT treat as a standard reach-for. The dominant corpus closer is a **specific present-tense question to the reader** (see §"Closing move" below), not a confession about the writer.
 
-Works even on contrarian-philosopher and observer-mode posts. **Distinct from TIER 1 Vulnerable Victor which requires a verified past arc.** Vulnerability-in-closer just needs a real present state ("I haven't", "I'm also figuring this out", "I don't know yet").
+Examples (sparingly):
+- `Did you try GPT 5.5 yet? I haven't my I'm excited...` (2026-04-24 GPT-5.5, off-corpus)
+- `What's the ugliest workaround in your current agent setup?` (Post 1)
 
 When you use this, typos or typo-like flow ("I haven't my I'm excited") are allowed if they keep the rhythm of thought. Do not sanitize into "I haven't tried it yet, but I'm excited." — the run-on IS the signal.
+
+**Don't default to vulnerability-in-closer for news-commentary.** Default to a specific present-tense question like `What does your team remember from last sprint?` instead.
 
 ### Parallel-imperative rhythm
 
@@ -401,13 +462,16 @@ Briefs are for Aayush's learning (broad-audience newsletter voice). Posts are Aa
 
 - [ ] Hook under 70 chars, fits before the "see more" fold
 - [ ] Sentence case throughout — every sentence starts with capital letter, including "I"
+- [ ] Uppercase `I` pronoun (not `i`). **Corpus evidence: 6 of 7 first-person pronoun uses are uppercase; the 1 lowercase is inside quoted AI-chatbot dialogue.**
 - [ ] No em dashes
-- [ ] 1,300c floor, no cap — write as long as the content earns
+- [ ] No markdown `**bold**` (LinkedIn renders the asterisks literally)
+- [ ] 1,300c total floor, **1,100 prose-char floor** (prose = total minus whitespace), soft cap at 2,000 total, hard cap at 2,700
 - [ ] At least 3 specific numbers OR named tools/companies
 - [ ] CTA is not "Learn more" or engagement bait
 - [ ] Max 1 emoji in body (👇🏻 in p.p.s. pointer doesn't count)
 - [ ] 0 hashtags
 - [ ] Passes posts-gate.sh: no "It's like X", no AI-tell inversion, no trailing hashtags, no banned MBA-vocab (differentiation, commoditization, table stakes)
+- [ ] **Closes with a question OR unresolved pivot to the reader.** Corpus evidence: 4 of 4 finalized posts do this. Options: (a) direct question with specific present-tense framing ("What does your team remember from last sprint?"), (b) unresolved statement pointed at reader ("Because they might not be who you think."), (c) rare — self-admitting question ("I haven't tried X yet").
 
 ## Formatting devices — calibrate to post mode (2026-04-24 rewrite)
 
@@ -442,7 +506,7 @@ Use **1-2** formatting devices. Typically contrast labels or a "That's X." recap
 - Era-reframe ("2023 strategy on 2026 timelines").
 - Ellipsis hook ("…" at end of first line).
 - Two-line binary hook.
-- Arrow `↓` as visual colon before a quote — pending confirmation as a repeatable device (see `config/post-redesign-2026-04-24.md` Q1).
+- Arrow `↓` as visual colon before a quote — **0 corpus uses (single off-corpus sighting).** Do NOT use until 2+ more uses appear in finalized posts. Resolved per `config/post-corpus-analysis-2026-04-24.md` §Q1.
 
 **Old rule (removed 2026-04-24):** "aim for 2-3 devices per post." This rule was pushing the pipeline toward fabricated `𝟯𝟲`-style unicode-bold hits on posts that didn't need any formatting. The correct count depends on which mode you're writing in, not a constant minimum.
 

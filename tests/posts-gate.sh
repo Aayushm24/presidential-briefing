@@ -18,8 +18,11 @@
 
 set -uo pipefail
 
-MIN_CHARS=1300
-MAX_CHARS=99999  # no cap — top posts go to 2,161c. content determines length.
+MIN_CHARS=1300        # total-char floor (includes whitespace)
+MIN_PROSE_CHARS=1100  # prose-char floor (total minus whitespace). Catches posts that
+                      # hit 1300 total by stacking blank lines. Corpus min prose = 1,293.
+MAX_CHARS=2700        # hard cap — Post 2 in corpus is 2,604; reject only absurd length
+SOFT_CAP_CHARS=2000   # warn-level cap; above this requires earning the length
 FAIL=0
 CHECKED=0
 
@@ -45,17 +48,29 @@ check_posts() {
     errors+=("options_count=$count (expect 3)")
   fi
 
-  # Per-option char count gate
+  # Per-option char count gate (total + prose-char floor)
   local i=1
   while [ $i -le "$count" ]; do
     local idx=$((i - 1))
     local post
     post=$(jq -r ".options[$idx].post // \"\"" "$file")
     local chars=${#post}
+
+    # Prose chars = total minus whitespace (spaces, tabs, newlines)
+    local prose_only
+    prose_only=$(printf '%s' "$post" | tr -d '[:space:]')
+    local prose_chars=${#prose_only}
+
     if [ "$chars" -lt "$MIN_CHARS" ]; then
-      errors+=("option_${i}_too_short=${chars}c (floor ${MIN_CHARS})")
+      errors+=("option_${i}_too_short=${chars}c (total floor ${MIN_CHARS})")
     elif [ "$chars" -gt "$MAX_CHARS" ]; then
-      errors+=("option_${i}_too_long=${chars}c (cap ${MAX_CHARS})")
+      errors+=("option_${i}_too_long=${chars}c (hard cap ${MAX_CHARS} — corpus max 2,604)")
+    elif [ "$chars" -gt "$SOFT_CAP_CHARS" ]; then
+      # Warn only, do not fail. Signals the post needs to earn the length.
+      echo "  ::warning::option_${i}=${chars}c (above soft cap ${SOFT_CAP_CHARS} — verify the content earns it)" >&2
+    fi
+    if [ "$prose_chars" -lt "$MIN_PROSE_CHARS" ]; then
+      errors+=("option_${i}_prose_too_short=${prose_chars}c (prose floor ${MIN_PROSE_CHARS}; whitespace doesn't count)")
     fi
     i=$((i + 1))
   done
@@ -83,6 +98,16 @@ check_posts() {
   its_like=$(printf '%s' "$all_posts" | grep -ciE "(^|[[:space:]])it'?s\s+like\s+" || true)
   if [ "$its_like" -gt 0 ]; then
     errors+=("its_like_analogy_hits=${its_like} (expect 0)")
+  fi
+
+  # Lowercase-i-as-pronoun — zero tolerance (2026-04-24 corpus analysis: uppercase I wins 6:0)
+  # Match "i" as a standalone pronoun: preceded by start-of-line or non-letter-apostrophe,
+  # followed by space, apostrophe-contraction, or sentence punctuation.
+  # Do NOT match "ai" / "i18n" / "i.e." / "i'm" inside a word / "hi"
+  local lowercase_i
+  lowercase_i=$(printf '%s' "$all_posts" | grep -cE "(^|[^a-zA-Z'])i([ ,.?!]|'m|'ve|'d|'ll|'s)" || true)
+  if [ "$lowercase_i" -gt 0 ]; then
+    errors+=("lowercase_i_pronoun_hits=${lowercase_i} (expect 0 — use uppercase I; corpus is 6:0 uppercase)")
   fi
 
   # Trailing hashtag block
