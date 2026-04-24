@@ -440,7 +440,7 @@ Run quick validation against `section-order.md` rules:
 - [ ] `### What to do this week` present (or equivalent)
 - [ ] No em dashes (regex fail = auto-revise in council)
 - [ ] No H2 headers
-- [ ] Word count 800–2,500
+- [ ] Word count 2,000+ (hard floor — gates fail below this; target 2,500–3,500)
 
 If validation fails structurally (e.g., missing What-to-do section), rewrite ONCE with specific fix. If second attempt fails, tag `[STRUCTURE-INCOMPLETE]` in the brief and proceed — `/attack` council will catch it.
 
