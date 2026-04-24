@@ -54,6 +54,7 @@ jobs:
         run: echo "today=$(TZ=Asia/Kolkata date +%Y-%m-%d)" >> $GITHUB_OUTPUT
 
       - name: Snapshot posts
+        id: snapshot
         env:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
         run: |
@@ -61,7 +62,11 @@ jobs:
           if [ "${{ github.event.inputs.dry_run }}" == "true" ]; then
             DRY_FLAG="--dry-run"
           fi
-          python3 scripts/linkedin_performance.py $DRY_FLAG
+          # Tee stderr to a file so the notify step can parse the stats line.
+          python3 scripts/linkedin_performance.py $DRY_FLAG 2> >(tee /tmp/perf-stats.log >&2)
+          # Surface the stats line as a step output.
+          STATS=$(grep -oE 'posts_fetched=[0-9]+ files_created=[0-9]+ files_updated=[0-9]+[^"]*' /tmp/perf-stats.log | tail -1)
+          echo "stats=${STATS}" >> $GITHUB_OUTPUT
 
       - name: Attribute published posts to generated options
         if: github.event.inputs.dry_run != 'true'
@@ -97,11 +102,14 @@ jobs:
           fi
 
       - name: Commit and push
+        id: commit
         if: github.event.inputs.dry_run != 'true'
         run: |
           TODAY=${{ steps.today.outputs.today }}
           if [ -z "$(git status --porcelain)" ]; then
             echo "no changes to commit"
+            echo "committed=0" >> $GITHUB_OUTPUT
+            echo "files_changed=0" >> $GITHUB_OUTPUT
             exit 0
           fi
           COUNT=$(git status --porcelain performance-data/ | wc -l | tr -d ' ')
@@ -109,3 +117,90 @@ jobs:
           git commit -m "perf: snapshot $TODAY ($COUNT posts) + attributions + rebuilt patterns"
           git pull --rebase origin main
           git push origin HEAD:main
+          echo "committed=1" >> $GITHUB_OUTPUT
+          echo "files_changed=${COUNT}" >> $GITHUB_OUTPUT
+
+      - name: Notify Slack on success
+        if: github.event.inputs.dry_run != 'true'
+        env:
+          N8N_SLACK_WEBHOOK_URL: ${{ secrets.N8N_SLACK_WEBHOOK_URL }}
+          DATE: ${{ steps.today.outputs.today }}
+          STATS: ${{ steps.snapshot.outputs.stats }}
+          COMMITTED: ${{ steps.commit.outputs.committed }}
+          FILES_CHANGED: ${{ steps.commit.outputs.files_changed }}
+          RUN_ID: ${{ github.run_id }}
+          REPO: Aayushm24/presidential-briefing
+        run: |
+          set -uo pipefail
+          # Reusing the scan_degraded type because n8n routes it. Message prefix
+          # "PERF SNAPSHOT:" keeps the Slack text clearly distinct from pipeline alerts.
+          RUN_URL="https://github.com/${REPO}/actions/runs/${RUN_ID}"
+          MSG="PERF SNAPSHOT: LinkedIn engagement scrape ran for ${DATE}. ${STATS:-stats unavailable}. files_committed=${FILES_CHANGED:-0}. Run: ${RUN_URL}"
+          PAYLOAD=$(jq -n \
+            --arg date "$DATE" \
+            --arg msg "$MSG" \
+            --arg stats "$STATS" \
+            --arg run_url "$RUN_URL" \
+            '{
+              type: "scan_degraded",
+              date: $date,
+              message: $msg,
+              rss_summary: $stats,
+              reasons: ["linkedin_performance_snapshot_ok", $stats, ("run_url=" + $run_url)]
+            }')
+          if [ -n "${N8N_SLACK_WEBHOOK_URL:-}" ]; then
+            HTTP=$(curl -sS -o /tmp/resp.txt -w "%{http_code}" \
+              -X POST "$N8N_SLACK_WEBHOOK_URL" \
+              -H "Content-Type: application/json" -d "$PAYLOAD" || echo "000")
+            echo "perf-notify n8n HTTP $HTTP"
+            cat /tmp/resp.txt 2>/dev/null || true
+          else
+            echo "::warning::N8N_SLACK_WEBHOOK_URL not set — success alert skipped"
+          fi
+
+  # ============================================================
+  # notify-failure — fires if the snapshot job failed. Same
+  # scan_degraded hijack as daily-brief + dead-man use.
+  # ============================================================
+  notify-failure:
+    name: Notify on failure
+    needs: snapshot
+    if: always() && needs.snapshot.result == 'failure'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    env:
+      TZ: Asia/Kolkata
+      N8N_SLACK_WEBHOOK_URL: ${{ secrets.N8N_SLACK_WEBHOOK_URL }}
+      REPO: Aayushm24/presidential-briefing
+      RUN_ID: ${{ github.run_id }}
+
+    steps:
+      - name: Post failure alert to Slack
+        run: |
+          set -uo pipefail
+          TODAY=$(TZ=Asia/Kolkata date +%Y-%m-%d)
+          RUN_URL="https://github.com/${REPO}/actions/runs/${RUN_ID}"
+          PAYLOAD=$(jq -n \
+            --arg date "$TODAY" \
+            --arg run_url "$RUN_URL" \
+            '{
+              type: "scan_degraded",
+              date: $date,
+              message: ("PERF SNAPSHOT FAILURE: LinkedIn engagement scrape failed for " + $date + ". Common causes: Apify token expired, rate limited, or actor output shape changed. Run: " + $run_url),
+              rss_summary: "linkedin_performance_snapshot_failed",
+              reasons: [
+                ("linkedin_performance_failed on " + $date),
+                ("run_url=" + $run_url),
+                "check apify token + actor A3cAPGpwBEG8RJwse"
+              ]
+            }')
+          if [ -n "${N8N_SLACK_WEBHOOK_URL:-}" ]; then
+            HTTP=$(curl -sS -o /tmp/resp.txt -w "%{http_code}" \
+              -X POST "$N8N_SLACK_WEBHOOK_URL" \
+              -H "Content-Type: application/json" -d "$PAYLOAD" || echo "000")
+            echo "perf-notify-failure n8n HTTP $HTTP"
+            cat /tmp/resp.txt 2>/dev/null || true
+          else
+            echo "::warning::N8N_SLACK_WEBHOOK_URL not set — failure alert skipped"
+          fi

@@ -89,7 +89,20 @@ Any other path change in an automated commit is rejected by the workflow.
 - Sources: `config/sources.csv`
 - Model routing: `config/council.json` (task → model, via `llmproxy.atlan.dev`)
 - Weekly POV: `config/conviction.md`
-- Secrets: GitHub Actions secrets — `ATLAN_LLM_KEY` (shared by llmproxy + xAI), `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_KEY` (weekly only), `READWISE_TOKEN` (Readwise Reader API), `N8N_SLACK_WEBHOOK_URL` (n8n proxy — Slack bot token lives in n8n, not here).
+- Secrets: GitHub Actions secrets — `ATLAN_LLM_KEY` (shared by llmproxy + xAI), `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_KEY` (weekly only), `READWISE_TOKEN` (Readwise Reader API), `N8N_SLACK_WEBHOOK_URL` (n8n proxy — Slack bot token lives in n8n, not here), `APIFY_TOKEN` (LinkedIn engagement scraping).
+
+## Scheduled workflows — observability map
+
+Every workflow that runs on cron posts to the n8n Slack webhook on both success and failure, so silent failures are impossible.
+
+| Workflow | Cron (UTC) | Cron (IST) | What it does | Slack alert types |
+|---|---|---|---|---|
+| `daily-brief.yml` | `0 0 * * *` | 5:30 AM daily | Scan → analyze → write brief + posts → council → gates → commit + deliver | `daily_brief` on ship; `scan_degraded` on pipeline failure (via notify-failure job); `nothing_new` on quiet days |
+| `dead-man.yml` | `30 1 * * *` + `0 4 * * *` | 7:00 + 9:30 AM daily | Reruns failed daily-brief jobs; also checks linkedin-performance freshness on Tue/Sat | `deadman_alert` with action subtype (rerun_failed_jobs, triggered_fresh_pipeline, perf_stale, etc.) |
+| `linkedin-performance.yml` | `30 17 * * 1,5` | 11:00 PM Mon + Fri | Apify scrape of last 5 LinkedIn posts → snapshot engagement → rebuild pattern file | `scan_degraded` with "PERF SNAPSHOT" prefix on success; same route with "PERF SNAPSHOT FAILURE" on failure |
+| `weekly-feedback.yml` | `30 1 * * 0` | 7:00 AM Sunday | Synthesize week's feedback into conviction candidates | (writes to workspace, Slack send is a separate step) |
+
+**Known limitation:** GitHub cron is best-effort and routinely runs 1-3 hours late. Dead-man's double-cron + linkedin-performance staleness check mitigate but don't eliminate this. If you stop seeing Slack alerts entirely for >48h, check the Actions tab manually — the scheduler itself may be stuck.
 
 ## Infrastructure
 
@@ -97,6 +110,7 @@ Any other path change in an automated commit is rejected by the workflow.
 - **LLM gateway**: `llmproxy.atlan.dev` (LiteLLM proxy, routes to Anthropic/Google/xAI).
 - **Brain**: Supabase Postgres + pgvector. Tables: `brain_pages`, `brain_themes`. RPC: `search_brain`.
 - **Delivery**: Gmail SMTP → Readwise Reader inbox + n8n webhook → Slack DM (scout slack bot → U08G02QDEAG).
+- **LinkedIn engagement**: Apify actor `A3cAPGpwBEG8RJwse` (harvestapi/linkedin-profile-posts) scraping `linkedin.com/in/aayush-maheshwari/`. Writes to `performance-data/post-<id>.md`. Feeds `/weekly-feedback`.
 
 ## Compounding effect
 

@@ -144,3 +144,80 @@ jobs:
           # Unhandled state — still tell the human.
           slack_alert "unknown_state" "no_action" "Dead-man found unexpected state: conclusion=$CONCLUSION status=$RUN_STATUS. Run: $RUN_URL"
           echo "State: conclusion=$CONCLUSION status=$RUN_STATUS — no action."
+
+      # ==========================================================
+      # Secondary check — linkedin-performance cron staleness.
+      # Runs every day after the main daily-brief check. Only alerts
+      # on the mornings AFTER an expected run (Tue/Sat IST), and only
+      # if the most recent successful scheduled run is stale.
+      # ==========================================================
+      - name: Check linkedin-performance cron didn't silently skip
+        run: |
+          set -uo pipefail
+          TODAY=$(TZ=Asia/Kolkata date +%Y-%m-%d)
+          DOW=$(TZ=Asia/Kolkata date +%u)  # 1=Mon ... 7=Sun
+          # linkedin-performance cron is Mon(1) + Fri(5) @ 23:00 IST.
+          # Check on Tue(2) + Sat(6) mornings (the day AFTER).
+          if [ "$DOW" != "2" ] && [ "$DOW" != "6" ]; then
+            echo "DOW=$DOW — not a check day for linkedin-performance. Skipping."
+            exit 0
+          fi
+          echo "DOW=$DOW → checking linkedin-performance freshness"
+
+          # Slack helper — reuse the one defined in the previous step by
+          # inlining it (step env is isolated, so redefine).
+          slack_alert() {
+            local alert_type="$1"
+            local action="$2"
+            local details="$3"
+            [ -z "${N8N_SLACK_WEBHOOK_URL:-}" ] && { echo "(no webhook — alert skipped)"; return 0; }
+            PAYLOAD=$(jq -n \
+              --arg date "$TODAY" \
+              --arg type "$alert_type" \
+              --arg action "$action" \
+              --arg details "$details" \
+              '{type:"deadman_alert",alert:$type,date:$date,action:$action,details:$details}')
+            curl -sS -X POST "$N8N_SLACK_WEBHOOK_URL" \
+              -H "Content-Type: application/json" -d "$PAYLOAD" \
+              -o /tmp/slack.txt -w "slack HTTP %{http_code}\n" || true
+            cat /tmp/slack.txt 2>/dev/null || true
+            echo ""
+          }
+
+          # Find the most recent SCHEDULED successful linkedin-performance run.
+          PERF_JSON=$(gh run list \
+            --workflow=linkedin-performance.yml \
+            --repo "$REPO" \
+            --event schedule \
+            --status success \
+            --limit 5 \
+            --json databaseId,createdAt \
+            2>/dev/null || echo "[]")
+
+          LAST_OK=$(echo "$PERF_JSON" | jq -r '.[0].createdAt // empty')
+          LAST_ID=$(echo "$PERF_JSON" | jq -r '.[0].databaseId // empty')
+
+          if [ -z "$LAST_OK" ]; then
+            slack_alert "perf_missing" "manual_check" "No successful scheduled linkedin-performance run found in the last 5 attempts. Check https://github.com/${REPO}/actions/workflows/linkedin-performance.yml"
+            exit 0
+          fi
+
+          # Compute days-since in portable bash (macOS and GNU coreutils differ).
+          LAST_EPOCH=$(python3 -c "from datetime import datetime; d=datetime.fromisoformat('${LAST_OK}'.replace('Z','+00:00')); print(int(d.timestamp()))")
+          NOW_EPOCH=$(date -u +%s)
+          DAYS_SINCE=$(( (NOW_EPOCH - LAST_EPOCH) / 86400 ))
+          echo "linkedin-performance last successful scheduled run: $LAST_OK (${DAYS_SINCE} days ago, run=${LAST_ID})"
+
+          # Freshness threshold: cron is every Mon+Fri (3-4 day gap). >4 days = missed.
+          if [ "$DAYS_SINCE" -gt 4 ]; then
+            RUN_URL="https://github.com/${REPO}/actions/runs/${LAST_ID}"
+            echo "⚠️  stale: ${DAYS_SINCE} days since last run. Triggering manual run..."
+            if gh workflow run linkedin-performance.yml --repo "$REPO"; then
+              slack_alert "perf_stale" "triggered_manual" "linkedin-performance cron didn't fire as expected — last success was ${DAYS_SINCE} days ago (${LAST_OK}). Triggered a manual run to catch up. Last successful run: ${RUN_URL}"
+            else
+              slack_alert "perf_stale" "manual_trigger_failed" "linkedin-performance is ${DAYS_SINCE} days stale AND manual trigger failed. Check Apify token + workflow file. Last success: ${RUN_URL}"
+              exit 1
+            fi
+          else
+            echo "✓ linkedin-performance is fresh (${DAYS_SINCE} days since last run)"
+          fi
