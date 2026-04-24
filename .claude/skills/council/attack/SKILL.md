@@ -81,11 +81,11 @@ FORMAT_VIOL=$(grep -c '^  - ' workspace/${TODAY}/.brief-format.log || echo 0)
 
 # Extract every clean_text.py violation flag. The gates (golden-format,
 # posts-gate) fail on any of these — council MUST revise all of them.
-MBA_VOCAB=$(grep -oE 'mba_vocabulary_violation..: [01]' workspace/${TODAY}/.plain-english.log | grep -oE '[01]$' | head -1 || echo 0)
-LONG_SENTENCE=$(grep -oE 'long_sentence_violation..: [01]' workspace/${TODAY}/.plain-english.log | grep -oE '[01]$' | head -1 || echo 0)
-NOT_X_ITS_Y=$(grep -oE 'not_x_its_y_violation..: [01]' workspace/${TODAY}/.plain-english.log | grep -oE '[01]$' | head -1 || echo 0)
-NEAT_BOW=$(grep -oE 'neat_bow_violation..: [01]' workspace/${TODAY}/.plain-english.log | grep -oE '[01]$' | head -1 || echo 0)
-GURU_VOICE=$(grep -oE 'guru_voice_violation..: [01]' workspace/${TODAY}/.plain-english.log | grep -oE '[01]$' | head -1 || echo 0)
+MBA_VOCAB=$(grep -oE 'mba_vocabulary_violation[^,}]*[01]' workspace/${TODAY}/.plain-english.log | grep -oE '[01]$' | head -1 || echo 0)
+LONG_SENTENCE=$(grep -oE 'long_sentence_violation[^,}]*[01]' workspace/${TODAY}/.plain-english.log | grep -oE '[01]$' | head -1 || echo 0)
+NOT_X_ITS_Y=$(grep -oE 'not_x_its_y_violation[^,}]*[01]' workspace/${TODAY}/.plain-english.log | grep -oE '[01]$' | head -1 || echo 0)
+NEAT_BOW=$(grep -oE 'neat_bow_violation[^,}]*[01]' workspace/${TODAY}/.plain-english.log | grep -oE '[01]$' | head -1 || echo 0)
+GURU_VOICE=$(grep -oE 'guru_voice_violation[^,}]*[01]' workspace/${TODAY}/.plain-english.log | grep -oE '[01]$' | head -1 || echo 0)
 
 # Word count check — golden-format.sh floor is 2000 words. Catching it here
 # lets council expand the brief instead of hitting a hard gate failure at ship.
