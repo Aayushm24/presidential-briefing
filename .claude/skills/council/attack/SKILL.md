@@ -78,13 +78,33 @@ python3 scripts/clean_text.py workspace/${TODAY}/brief.md workspace/${TODAY}/pos
 BRIEF_VIOL=$(grep -c '^  - ' workspace/${TODAY}/.brief-violations.log || echo 0)
 POSTS_VIOL=$(grep -c '^  - ' workspace/${TODAY}/.posts-violations.log || echo 0)
 FORMAT_VIOL=$(grep -c '^  - ' workspace/${TODAY}/.brief-format.log || echo 0)
+
+# Extract every clean_text.py violation flag. The gates (golden-format,
+# posts-gate) fail on any of these — council MUST revise all of them.
 MBA_VOCAB=$(grep -oE 'mba_vocabulary_violation..: [01]' workspace/${TODAY}/.plain-english.log | grep -oE '[01]$' | head -1 || echo 0)
 LONG_SENTENCE=$(grep -oE 'long_sentence_violation..: [01]' workspace/${TODAY}/.plain-english.log | grep -oE '[01]$' | head -1 || echo 0)
+NOT_X_ITS_Y=$(grep -oE 'not_x_its_y_violation..: [01]' workspace/${TODAY}/.plain-english.log | grep -oE '[01]$' | head -1 || echo 0)
+NEAT_BOW=$(grep -oE 'neat_bow_violation..: [01]' workspace/${TODAY}/.plain-english.log | grep -oE '[01]$' | head -1 || echo 0)
+GURU_VOICE=$(grep -oE 'guru_voice_violation..: [01]' workspace/${TODAY}/.plain-english.log | grep -oE '[01]$' | head -1 || echo 0)
 
-echo "[attack] pre-flight: brief=${BRIEF_VIOL}, posts=${POSTS_VIOL}, format=${FORMAT_VIOL}, mba_vocab=${MBA_VOCAB}, long_sentence=${LONG_SENTENCE}"
+# Word count check — golden-format.sh floor is 2000 words. Catching it here
+# lets council expand the brief instead of hitting a hard gate failure at ship.
+BRIEF_WORDS=$(wc -w < workspace/${TODAY}/brief.md | tr -d ' ')
+WORDCOUNT_VIOL=0
+[ "$BRIEF_WORDS" -lt 2000 ] && WORDCOUNT_VIOL=1
+
+echo "[attack] pre-flight: brief=${BRIEF_VIOL}, posts=${POSTS_VIOL}, format=${FORMAT_VIOL}, mba_vocab=${MBA_VOCAB}, long_sentence=${LONG_SENTENCE}, not_x_its_y=${NOT_X_ITS_Y}, neat_bow=${NEAT_BOW}, guru_voice=${GURU_VOICE}, brief_words=${BRIEF_WORDS} (wc_viol=${WORDCOUNT_VIOL})"
 ```
 
-If total violations > 0 OR mba_vocab/long_sentence violations exist, these are CONFIRMED hard-rule failures. Write them verbatim to the top of `council-notes.md` as "Deterministic findings". Set the verdict to REVISE — no LLM interpretation required. Include the specific MBA words found (from `.plain-english.log`) and the specific long sentences verbatim in the notes.
+If total violations > 0 OR any of mba_vocab / long_sentence / not_x_its_y / neat_bow / guru_voice / wordcount violations exist, these are CONFIRMED hard-rule failures. Write them verbatim to the top of `council-notes.md` as "Deterministic findings". Set the verdict to REVISE — no LLM interpretation required.
+
+For each violation type, include the specific offenders verbatim from `.plain-english.log`:
+- `mba_vocabulary` — list the banned words caught
+- `long_sentence` — quote each >22-word sentence
+- `not_x_its_y` — quote each inversion so revise knows exactly what to rewrite
+- `neat_bow` — quote the closer that needs replacing
+- `guru_voice` — quote the third-person prescription
+- `word_count` — say "brief is at ${BRIEF_WORDS} words, needs 2000+. Expand the lead section with more mechanism/specificity, not more topics."
 
 LLM passes (steps 1-3) still run after this, but pre-flight findings take priority.
 
