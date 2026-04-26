@@ -455,10 +455,125 @@ jobs:
           TODAY: ${{ needs.scan.outputs.today }}
           DRY_RUN: ${{ needs.scan.outputs.dry_run }}
 
-      # ── SYSTEMIC FIX: gates run in pure bash, NOT inside Claude Code ──
-      # Claude Code cannot reliably exit 1 on its own gate failures.
-      # This step is the single source of truth for whether content ships.
-      - name: Quality gates (bash — deterministic, not LLM)
+      # ── SYSTEMIC FIX (2026-04-26): deterministic edit-and-verify loop ──
+      # The LLM council (above step) does the QUALITY work — fact check, voice
+      # audit, adversarial review. It writes council-notes.md and runs revise.
+      # But the council runs inside the Claude Code agent which has historically
+      # gotten stuck in todo-list loops or hit timeouts before the edits land.
+      #
+      # This step picks up whatever the council didn't fully fix: it reads the
+      # gate output and surgically edits brief.md / posts.md / posts.json to
+      # remove the specific violations until gates pass. Up to 3 iterations.
+      #
+      # Sequence: LLM council (quality + revise) → THIS step (deterministic
+      # cleanup) → bash gates (final verdict) → deliver.
+      - name: Deterministic edit-and-verify (after LLM council)
+        if: needs.analyze.outputs.quiet_day != 'true'
+        uses: anthropics/claude-code-base-action@v0.0.63
+        with:
+          prompt: |
+            DETERMINISTIC GATE CLEANUP. The council has finished its quality work.
+            Your ONLY job: edit files in workspace/${{ needs.scan.outputs.today }}/
+            until the gates pass. No commentary, no analysis, no LLM-judge thinking.
+
+            FILES:
+            - brief.md
+            - posts.md
+            - posts.json
+
+            GATES:
+            - tests/kill-list-regex.sh (em-dashes, banned words, "Not X. Y.", repricing, etc.)
+            - tests/golden-format.sh (word count >= 2000, no MBA vocab, no [Not X. It's Y], etc.)
+            - tests/posts-gate.sh (per-option char count 1300-2700, prose >= 1100, no banned patterns)
+
+            ALGORITHM:
+            ```
+            for iter in 1..3:
+              # Auto-fix what's deterministic
+              python3 scripts/clean_text.py workspace/${{ needs.scan.outputs.today }}/brief.md workspace/${{ needs.scan.outputs.today }}/posts.md
+
+              # Capture violations
+              ./tests/kill-list-regex.sh workspace/${{ needs.scan.outputs.today }}/brief.md > /tmp/gate1.log 2>&1 ; KL_BRIEF=$?
+              ./tests/kill-list-regex.sh workspace/${{ needs.scan.outputs.today }}/posts.md > /tmp/gate2.log 2>&1 ; KL_POSTS=$?
+              ./tests/golden-format.sh workspace/${{ needs.scan.outputs.today }}/brief.md > /tmp/gate3.log 2>&1 ; GF=$?
+              ./tests/posts-gate.sh workspace/${{ needs.scan.outputs.today }}/posts.json > /tmp/gate4.log 2>&1 ; PG=$?
+
+              if all gates exit 0: exit loop, write status=cleaned
+            ```
+
+            For each violation, apply the SPECIFIC fix using the Edit tool:
+
+            **MBA vocab (moat / table stakes / differentiation / commoditization / "up the stack"):**
+            - "moat" → "the thing competitors can't copy" or name it concretely
+            - "table stakes" → "a standard practice" / "everyone has it now"
+            - "differentiation" → "what makes you different" / name the specific thing
+            - "commoditization" → "becoming a commodity" / specific market dynamic
+
+            **"Not X. Y." negation (kill-list pattern):**
+            - Find the sentence starting "Not [the/a/for/because/just/one/in/at]"
+            - Rewrite to declarative: state what it IS instead
+
+            **"[Not X. It's Y]" inversion (golden-format pattern):**
+            - Find "isn't / aren't / is not / are not... It's/They're [about/just/becoming/etc]"
+            - Rewrite both halves into a single declarative sentence
+
+            **Em dashes:**
+            - clean_text.py auto-fixes; if any survive, replace with ", " or ". "
+
+            **Word count < 2000 in brief:**
+            - Expand the lead section with more mechanism/specificity, NOT more topics
+            - Add 2-3 paragraphs that explain HOW the change works, not just WHAT happened
+            - Do not add "What to do this week" items just to pad
+
+            **Long sentences (>22 words):**
+            - Break into 2 sentences at the natural clause boundary
+            - Keep the meaning identical
+
+            **"repricing" / "repriced":**
+            - Verify the claim. If the event was access restriction, acquisition, or
+              pricing change of a different shape, rewrite to the actual specific event
+            - If the claim is genuinely about a price change, replace with "pricing
+              change" or "raised prices"
+
+            **option_N_too_short in posts (< 1300 total chars or < 1100 prose):**
+            - Add 1-2 more paragraphs of detail to that specific option
+            - Match the option's existing template/voice — do NOT pivot the angle
+
+            **option_N_too_long (> 2700 chars):**
+            - Trim from the middle, not the closer
+
+            **lowercase-i pronoun:**
+            - Replace lowercase "i" with uppercase "I" (do not touch "AI", "i.e.", etc.)
+
+            After each edit, re-run all 4 gates. Stop when they all pass OR after 3 iterations.
+
+            CRITICAL CONSTRAINTS:
+            - Use the Edit tool to modify files. Never rewrite an entire file.
+            - Preserve the council's voice/structure decisions — only fix violations.
+            - If posts.json and posts.md disagree, treat posts.json as source of truth and rebuild posts.md.
+            - DO NOT add new content beyond what's needed to clear violations.
+            - DO NOT change the lead story, hook patterns, or template choices.
+            - If after 3 iterations gates still fail, exit 0 anyway — the bash gate step
+              will reject and surface the unfixable violations clearly.
+
+            TODAY=${{ needs.scan.outputs.today }}
+          settings: .claude/settings.json
+          anthropic_api_key: ${{ secrets.ATLAN_LLM_KEY }}
+          max_turns: 60
+          timeout_minutes: 10
+        env:
+          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ATLAN_LLM_KEY }}
+          ANTHROPIC_BASE_URL: https://llmproxy.atlan.dev
+          ANTHROPIC_MODEL: claude-sonnet-4-6
+          ANTHROPIC_SMALL_FAST_MODEL: claude-sonnet-4-6
+          ATLAN_LLM_KEY: ${{ secrets.ATLAN_LLM_KEY }}
+          LLM_PROXY_BASE_URL: https://llmproxy.atlan.dev
+          TODAY: ${{ needs.scan.outputs.today }}
+
+      # ── FINAL GATES — bash, deterministic, not LLM ──
+      # If the deterministic edit step above couldn't fix everything, this fails
+      # the ship step with a clear rejection message.
+      - name: Quality gates (bash — final verdict)
         if: needs.analyze.outputs.quiet_day != 'true'
         env:
           DATE: ${{ needs.scan.outputs.today }}
@@ -467,14 +582,12 @@ jobs:
           WS="workspace/${DATE}"
           FAIL=0
 
-          echo "=== Running quality gates ==="
+          echo "=== Running quality gates (final verdict) ==="
 
-          # Defensive: ensure execute bit is set. actions/checkout honors git
-          # 100755 mode in principle, but we've hit "Permission denied" from
-          # ./tests/*.sh on some runners despite the git index saying 100755.
+          # Defensive: ensure execute bit is set.
           chmod +x tests/*.sh scripts/*.sh scripts/*.py
 
-          # Final clean pass (belt-and-braces after council revise)
+          # Final clean pass (belt-and-braces after deterministic edit step)
           python3 scripts/clean_text.py "${WS}/brief.md" "${WS}/posts.md" 2>&1 || true
 
           ./tests/kill-list-regex.sh "${WS}/brief.md" || { echo "::error::brief kill-list FAIL"; FAIL=1; }
@@ -639,25 +752,18 @@ jobs:
           fi
           RUN_URL="https://github.com/${REPO}/actions/runs/${RUN_ID}"
 
-          # n8n routes by `type` field — it only knows daily_brief / nothing_new / scan_degraded.
-          # Reusing scan_degraded because its Slack template already renders a `message` +
-          # `reasons[]` block that carries our failure context cleanly. The leading
-          # "PIPELINE FAILURE:" in the message makes the severity obvious in Slack.
-          # TODO(someday): add a real pipeline_failure route in n8n so this can be specific.
+          # Proper pipeline_failure route added to n8n on 2026-04-26.
+          # Slack template renders as: 🔴 PIPELINE FAILED — DATE / message / failed jobs / run link.
           PAYLOAD=$(jq -n \
             --arg date "$TODAY" \
             --arg failed "$FAILED_CSV" \
             --arg run_url "$RUN_URL" \
             '{
-              type: "scan_degraded",
+              type: "pipeline_failure",
               date: $date,
-              message: ("PIPELINE FAILURE: daily brief failed for " + $date + ". Jobs that failed: " + $failed + ". Dead-man will auto-retry at 7am IST. See: " + $run_url),
-              rss_summary: ("failed jobs: " + $failed),
-              reasons: [
-                ("pipeline_failure on " + $date),
-                ("failed_jobs=" + $failed),
-                ("run_url=" + $run_url)
-              ]
+              failed_jobs: $failed,
+              run_url: $run_url,
+              message: ("Daily brief pipeline failed. Dead-man retries at 7:00, 9:30, and 14:00 IST. The deterministic edit-and-verify step should fix content failures on rerun.")
             }')
 
           if [ -n "${N8N_SLACK_WEBHOOK_URL:-}" ]; then

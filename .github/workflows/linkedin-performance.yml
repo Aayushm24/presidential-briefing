@@ -132,21 +132,16 @@ jobs:
           REPO: Aayushm24/presidential-briefing
         run: |
           set -uo pipefail
-          # Reusing the scan_degraded type because n8n routes it. Message prefix
-          # "PERF SNAPSHOT:" keeps the Slack text clearly distinct from pipeline alerts.
+          # Proper perf_snapshot route added to n8n on 2026-04-26.
           RUN_URL="https://github.com/${REPO}/actions/runs/${RUN_ID}"
-          MSG="PERF SNAPSHOT: LinkedIn engagement scrape ran for ${DATE}. ${STATS:-stats unavailable}. files_committed=${FILES_CHANGED:-0}. Run: ${RUN_URL}"
+          MSG="LinkedIn engagement scrape ran. ${STATS:-stats unavailable}. files_committed=${FILES_CHANGED:-0}. Run: ${RUN_URL}"
           PAYLOAD=$(jq -n \
             --arg date "$DATE" \
             --arg msg "$MSG" \
-            --arg stats "$STATS" \
-            --arg run_url "$RUN_URL" \
             '{
-              type: "scan_degraded",
+              type: "perf_snapshot",
               date: $date,
-              message: $msg,
-              rss_summary: $stats,
-              reasons: ["linkedin_performance_snapshot_ok", $stats, ("run_url=" + $run_url)]
+              message: $msg
             }')
           if [ -n "${N8N_SLACK_WEBHOOK_URL:-}" ]; then
             HTTP=$(curl -sS -o /tmp/resp.txt -w "%{http_code}" \
@@ -159,8 +154,8 @@ jobs:
           fi
 
   # ============================================================
-  # notify-failure — fires if the snapshot job failed. Same
-  # scan_degraded hijack as daily-brief + dead-man use.
+  # notify-failure — fires if the snapshot job failed.
+  # Uses the pipeline_failure route in n8n.
   # ============================================================
   notify-failure:
     name: Notify on failure
@@ -185,15 +180,11 @@ jobs:
             --arg date "$TODAY" \
             --arg run_url "$RUN_URL" \
             '{
-              type: "scan_degraded",
+              type: "pipeline_failure",
               date: $date,
-              message: ("PERF SNAPSHOT FAILURE: LinkedIn engagement scrape failed for " + $date + ". Common causes: Apify token expired, rate limited, or actor output shape changed. Run: " + $run_url),
-              rss_summary: "linkedin_performance_snapshot_failed",
-              reasons: [
-                ("linkedin_performance_failed on " + $date),
-                ("run_url=" + $run_url),
-                "check apify token + actor A3cAPGpwBEG8RJwse"
-              ]
+              failed_jobs: "linkedin_performance_snapshot",
+              run_url: $run_url,
+              message: "LinkedIn engagement scrape (Apify) failed. Common causes: Apify token expired, rate limited, or actor A3cAPGpwBEG8RJwse output shape changed."
             }')
           if [ -n "${N8N_SLACK_WEBHOOK_URL:-}" ]; then
             HTTP=$(curl -sS -o /tmp/resp.txt -w "%{http_code}" \
