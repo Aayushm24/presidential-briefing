@@ -90,6 +90,7 @@ Any other path change in an automated commit is rejected by the workflow.
 - Model routing: `config/council.json` (task → model, via `llmproxy.atlan.dev`)
 - Weekly POV: `config/conviction.md`
 - Secrets: GitHub Actions secrets — `ATLAN_LLM_KEY` (shared by llmproxy + xAI), `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_KEY` (weekly only), `READWISE_TOKEN` (Readwise Reader API), `N8N_SLACK_WEBHOOK_URL` (n8n proxy — Slack bot token lives in n8n, not here), `APIFY_TOKEN` (LinkedIn engagement scraping).
+- **n8n Slack workflow:** `N8N_SLACK_WEBHOOK_URL` points to `https://atlanhq.app.n8n.cloud/webhook/presidential-briefing`. The handling workflow is `Xig1FSWa5VOoyo3Y` ("Presidential Briefing → Slack DM") on `atlanhq.app.n8n.cloud`. It routes by `body.type` and supports 8 types: `daily_brief`, `nothing_new`, `scan_degraded`, `weekly_feedback`, `pipeline_failure`, `perf_snapshot`, `deadman_alert`, plus an unknown-type fallback that DMs the raw payload so nothing silent-drops. There is also a deprecated workflow `DmOb03TeRcr0jibU` ("presidential-briefing-slack (DEPRECATED)") at path `/webhook/presidential-briefing-slack` — do NOT update that one; it's only kept around for dev reference.
 
 ## Scheduled workflows — observability map
 
