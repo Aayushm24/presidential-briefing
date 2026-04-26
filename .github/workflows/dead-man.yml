@@ -2,14 +2,10 @@ name: Dead-man monitor
 
 on:
   schedule:
-    # Three fallback windows. GitHub cron is best-effort and routinely runs
-    # 1-3 hours late. Daily-brief's ship step has historically run as late
-    # as 06:07 UTC (4-5h after expected 02:30 UTC start), so the third cron
-    # at 08:30 UTC catches the case where ship completed between the second
-    # check and now. Dead-man is idempotent (no-op if today shipped).
+    # Two fallback windows. GitHub cron is best-effort and routinely runs
+    # 1-3 hours late. Dead-man is idempotent (no-op if today shipped).
     - cron: '30 1 * * *'   # 7:00 AM IST — primary check
     - cron: '0 4 * * *'    # 9:30 AM IST — backstop for late scheduled runs
-    - cron: '30 8 * * *'   # 2:00 PM IST — catches late-ship completions
   workflow_dispatch:
 
 permissions:
