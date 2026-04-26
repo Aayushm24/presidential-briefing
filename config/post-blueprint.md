@@ -14,6 +14,24 @@ His audience: founders in AI, operators thinking about how the game changes, bui
 
 ---
 
+## Reader awareness level — pre-flight question (2026-04-26, Paolo Trivellato)
+
+**Before drafting any of the 3 options, decide which awareness level it targets.** Most pipeline failures around "this post sounds generic" come from defaulting to Level 2 every time. Every option in posts.json should declare its level in the conviction line.
+
+| Level | Reader state | Hook needs to do | Voice register |
+|---|---|---|---|
+| **L1 — Unaware** | Hasn't noticed the problem yet | Show the problem with specifics — name a tool, price, person, behaviour — let the reader's gut react before any claim | Observation-first (Pattern E, GPT-5.5 anchor) |
+| **L2 — Aware-unsure** | Sees the problem, doesn't know what works | Reframe the problem at a deeper level than the conventional take — dig 3-4 levels beneath the surface | Contrarian / two-line binary (Pattern A) |
+| **L3 — Actively looking** | Wants a path or playbook | Name the meta-skill, give a specific signal of progress, make next step clear | Personal-I observer / data-point with named source |
+
+**Sourcing:** Paolo Trivellato's anti-content-pillars approach (see `.claude/skills/write-posts/references/external-frameworks.md` §"Creator spotlight #3"). Reframed for Aayush's builder-to-builder context.
+
+**How to use:** If the day's brief covers a topic readers haven't touched yet (an obscure tool, a sleeper trend), default to L1. If it covers the active debate everyone's having (model pricing, agent stacks), default to L2 — and dig deeper than the obvious take. If it covers a problem readers are actively trying to solve right now (Claude Code adoption, GTM engineering), L3 with the specific path.
+
+**One option per level** when a story spans multiple awareness states. Three options on the same level → pipeline drift.
+
+---
+
 ## Length — 1,400-1,800 chars sweet spot
 
 **Floor: 1,300 chars** (posts-gate.sh rejects below this).
@@ -103,6 +121,42 @@ Top example (voice direction): "I'm the most average bloke ever."
   Anchor: `config/aayush-ai-post-examples/gpt-55-my-feed-is-doing-the-thing.md`. See `config/post-corpus-analysis-2026-04-24.md` §3.1 for the corpus counts that led to this demotion.
 
 **Workhorse first:** 3 of 4 finalized posts use punch-first openers (named-specific stat → paradox, two-line binary, or time-bomb ellipsis). Reach for these before Pattern E.
+
+- **Pattern F — Before → But → After (EXPERIMENTAL, 2026-04-26, Matt Barker):** A 3-word hook framework that contrasts the reader's problem state with their dream state and implies you have a proven path between the two. Corpus evidence: **0 of 5 finalized Aayush posts use this exact shape.** Source: external (Kleo's 5-3-1 newsletter, Matt Barker micro-playbook — see `references/external-frameworks.md`). Treat as experimental.
+  ```
+  [Specific Before — concrete past state with a stat or named tool/person].
+
+  But [specific transition — what changed, what was learned].
+
+  [Specific After — concrete present state with a stat or proof].
+  ```
+  Worked example from the source: "Last April, I had zero LinkedIn presence. But today, I hit 10,000 followers (and average 3 inbound leads a week)." Use only when Aayush has a real before/after arc to anchor (verified entry in `config/aayush-experiences.md`). Without that, the "After" reads as fabricated.
+
+---
+
+## Reframe depth — avoid surface-level complaints (2026-04-26)
+
+Aayush's posts consistently work because they dig 3-4 levels beneath the surface complaint. **Surface-level posts read as generic; basement-level posts read as Aayush.** This is a quality criterion, not a hard gate — but it should be checked at council pre-flight.
+
+**Surface vs basement (corpus evidence):**
+
+| Surface complaint | Basement reframe (Aayush's actual posts) |
+|---|---|
+| "AI tools are getting expensive" | "The debate only exists when the gains are marginal. When a jump like this lands, the advantage almost always outweighs the cost" (2026-04-24) |
+| "Companies are buying more AI tokens" | "The budget anxiety is doing more damage than the budget itself. Your usage graph is the shape of your rationing, not your demand" (2026-04-23) |
+| "Coding tools are getting consolidated" | "The category just graduated from software expense to strategic infrastructure" (2026-04-22, pre-rewrite) |
+| "Every SaaS is shipping AI buttons" | "The button isn't the problem. The user it's designed for is" (every-saas-ai-button.md) |
+| "AI startups will struggle in 2026" | Surface = market timing; basement = "12 months to find distribution before incumbents copy the feature" (ai-startups-12-months.md) |
+
+**The check (for council pre-flight):** read each option's hook + first paragraph. Ask:
+
+1. Does the post identify a *faulty belief* the reader is holding, or just describe an event?
+2. Does it *redefine* the problem at a deeper level (a posture, a measurement error, a category shift) — or stop at the surface description?
+3. Could you swap out "AI" for any other tech topic and the post would still read as generic? If yes, the post is surface-level — push for the reframe.
+
+**Where it lives:** add to `.claude/skills/council/attack/SKILL.md` Step 1 voice audit as a numbered question: "Does this post reframe the surface complaint at a deeper level, or does it describe the surface event only?" — if surface only, flag REVISE.
+
+**Sourcing:** Nicolas Cole's "Generic Content Trap" template (see `references/external-frameworks.md` §"Template 2"). The principle, not the template — Aayush's voice already does this naturally; this rule keeps the pipeline from drifting toward surface-level summaries when the writer is tired.
 
 ---
 

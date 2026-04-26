@@ -141,6 +141,16 @@ The Top Creator Blueprint identifies 4 winning styles. Each day's 3 options MUST
 
 ### Step 2: Build the writing prompt
 
+**Pre-flight: pick the reader awareness level for each option.** Three options should NOT all target the same level — that's how the pipeline drifts toward generic. Per Paolo Trivellato's anti-content-pillars framework (see `config/post-blueprint.md` §"Reader awareness level"):
+
+- **L1 — Unaware:** reader hasn't noticed the problem yet. Hook shows the problem with specifics (named tool, price, person, behaviour). Voice: observation-first.
+- **L2 — Aware-unsure:** reader sees the problem, doesn't know what works. Hook reframes at deeper level. Voice: contrarian / two-line binary.
+- **L3 — Actively looking:** reader wants a path. Hook names the meta-skill or specific signal of progress. Voice: personal-I observer / data-point with named source.
+
+Recommended distribution: 1 option at L1, 1 at L2, 1 at L3. If the day's brief is dense in one zone, all 3 in that zone is acceptable — but explicitly note in conviction lines.
+
+Each option's `conviction` field in posts.json should declare its awareness level: e.g. `"conviction": "L2: The debate only exists when the gains are marginal..."`. The posts-gate doesn't validate this; it's metacognitive scaffolding for the writer.
+
 ```
 === CRITICAL: OBSERVATION FIRST, ANALYSIS SECOND ===
 
