@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>capability chart</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4efe6;
+    --ink: #141414;
+    --ink-soft: rgba(20,20,20,0.55);
+    --grid: rgba(20,20,20,0.10);
+    --accent: #a8301f;
+  }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    color: var(--ink);
+  }
+  .canvas {
+    width: 1080px; height: 1080px;
+    position: relative;
+    overflow: hidden;
+    padding: 96px;
+    box-sizing: border-box;
+  }
+  .eyebrow {
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  .axis-label-y {
+    position: absolute;
+    left: 96px;
+    top: 184px;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    transform: rotate(-90deg);
+    transform-origin: left top;
+  }
+  .axis-label-x {
+    position: absolute;
+    left: 96px;
+    bottom: 96px;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .chart-wrap {
+    position: absolute;
+    left: 96px;
+    top: 220px;
+    width: 888px;
+    height: 640px;
+  }
+  svg { display: block; width: 100%; height: 100%; }
+  .annotation {
+    position: absolute;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+  .annotation .lead {
+    color: var(--ink-soft);
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .annotation.peak {
+    left: 290px;
+    top: 22px;
+    text-align: left;
+    max-width: 260px;
+  }
+  .annotation.valley {
+    left: 600px;
+    top: 575px;
+    text-align: left;
+    max-width: 260px;
+  }
+  .annotation.valley .word {
+    color: var(--accent);
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="eyebrow">ai capability &mdash; observed</div>
+
+    <div class="axis-label-y">capability</div>
+    <div class="axis-label-x">task &rarr;</div>
+
+    <div class="chart-wrap">
+      <svg viewBox="0 0 888 640" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- subtle baseline grid -->
+        <line x1="0" y1="640" x2="888" y2="640" stroke="rgba(20,20,20,0.35)" stroke-width="1.5"/>
+        <line x1="0" y1="0" x2="0" y2="640" stroke="rgba(20,20,20,0.35)" stroke-width="1.5"/>
+
+        <!-- horizontal dashed reference -->
+        <line x1="0" y1="160" x2="888" y2="160" stroke="rgba(20,20,20,0.15)" stroke-width="1" stroke-dasharray="3,6"/>
+        <line x1="0" y1="320" x2="888" y2="320" stroke="rgba(20,20,20,0.15)" stroke-width="1" stroke-dasharray="3,6"/>
+        <line x1="0" y1="480" x2="888" y2="480" stroke="rgba(20,20,20,0.15)" stroke-width="1" stroke-dasharray="3,6"/>
+
+        <!-- jagged capability line - hand-drawn feel via slight irregularities -->
+        <polyline
+          fill="none"
+          stroke="#141414"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          points="
+            14,420
+            70,300
+            120,360
+            170,140
+            220,200
+            260,90
+            310,170
+            360,250
+            410,210
+            470,470
+            520,380
+            580,560
+            640,300
+            700,460
+            760,170
+            820,260
+            870,210
+          "
+        />
+
+        <!-- peak marker (ink) -->
+        <circle cx="260" cy="90" r="9" fill="#141414"/>
+        <circle cx="260" cy="90" r="9" fill="none" stroke="#f4efe6" stroke-width="3"/>
+
+        <!-- valley marker (accent) -->
+        <circle cx="580" cy="560" r="11" fill="#a8301f"/>
+        <circle cx="580" cy="560" r="11" fill="none" stroke="#f4efe6" stroke-width="3"/>
+
+        <!-- callout line peak: from dot up and right toward label -->
+        <line x1="260" y1="80" x2="290" y2="50" stroke="rgba(20,20,20,0.55)" stroke-width="1"/>
+        <!-- callout line valley: from dot down and right toward label -->
+        <line x1="580" y1="571" x2="600" y2="595" stroke="rgba(168,48,31,0.7)" stroke-width="1"/>
+      </svg>
+
+      <div class="annotation peak">
+        <span class="lead">peak</span>
+        complex algorithms
+      </div>
+
+      <div class="annotation valley">
+        <span class="lead">valley</span>
+        <span class="word">counting characters</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
