@@ -2,7 +2,7 @@
 
 ## Context
 
-- **Date written:** 2026-04-26
+- **Date written:** 2026-04-27
 - **Theme:** AI automation skeptics, the jagged frontier of capability, augmentation > automation
 - **Trigger:** The flood of "AI automation expert" pitches in Aayush's LinkedIn feed
 - **Why this matters as an anchor:** Second confirmed Register B post (after GPT-5.5 "my feed is doing the thing" on 2026-04-24). Validates the two-register framework. Also the second corpus instance of the **two-line binary hook** — graduates that pattern from "variant of A" to confirmed.

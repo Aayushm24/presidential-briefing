@@ -1,4 +1,4 @@
-# Post feedback design doc — 2026-04-26 (jagged frontier post)
+# Post feedback design doc — 2026-04-27 (jagged frontier post)
 
 **Source:** Aayush wrote and ran the post through me for refinement before posting. `source: aayush-direct-write` in feedback-log.
 
@@ -85,7 +85,7 @@ None proposed. The post passes all 4 gates locally:
 
 1. **Does the dismissive-quote bullet pattern recur?** If post #6 also uses `[Role] thinks [domain] is "just [trivializing thing]"`, promote it to a confirmed device.
 2. **Does the "matters more than X is Y" meta-skill framing recur?** Watch for the explicit comparative form.
-3. **Is Register B sustainable engagement-wise?** When 2026-04-26 + 2026-04-24 engagement data lands, compare against Register A posts (Atlan-stake) to see if the no-Atlan register holds attention.
+3. **Is Register B sustainable engagement-wise?** When 2026-04-27 + 2026-04-24 engagement data lands, compare against Register A posts (Atlan-stake) to see if the no-Atlan register holds attention.
 4. **Two-thesis temptation in original drafts.** Both this post and the GPT-5.5 post had a second thesis in early drafts that got cut. This is a recurring writer behavior worth flagging proactively in `/write-posts` SKILL — when generating options, deliberately pick ONE thesis per option and reject the temptation to add a second one mid-post.
 
 ---

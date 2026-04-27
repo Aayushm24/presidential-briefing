@@ -10,7 +10,7 @@ Fill the structure with today's news. Do not change the structure.
 - `every-saas-ai-button.md`, `ai-startups-12-months.md`, `every-startup-ai-powered.md`, `agent-stack-hardening.md`
 - Aayush takes a position, names his company stake ("At Atlan, we..."), closes with a p.s. or p.p.s.
 
-**Register B — "my feed is doing the thing" (2026-04-24 addition, 2 anchors as of 2026-04-26):**
+**Register B — "my feed is doing the thing" (2026-04-24 addition, 2 anchors as of 2026-04-27):**
 - `gpt-55-my-feed-is-doing-the-thing.md` — frontier-tool launch, observation-first
 - `jagged-frontier-the-20-percent.md` — category critique with dismissive-quote bullet list, two-line binary hook
 - Aayush observes the market, pivots to a sharp reframe, lands an opinion, closes with a specific present-tense question
