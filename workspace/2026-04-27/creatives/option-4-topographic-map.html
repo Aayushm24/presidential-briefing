@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>topographic map</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4efe6;
+    --ink: #141414;
+    --ink-soft: rgba(20,20,20,0.55);
+    --contour: rgba(20,20,20,0.35);
+    --contour-faint: rgba(20,20,20,0.18);
+    --accent: #a8301f;
+  }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    color: var(--ink);
+  }
+  .canvas {
+    width: 1080px; height: 1080px;
+    position: relative;
+    overflow: hidden;
+    padding: 96px;
+    box-sizing: border-box;
+  }
+  .eyebrow {
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  .map-wrap {
+    position: absolute;
+    left: 96px;
+    top: 200px;
+    width: 888px;
+    height: 700px;
+  }
+  svg { display: block; width: 100%; height: 100%; }
+  .label {
+    position: absolute;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .label.peak {
+    left: 240px;
+    top: 130px;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .label.valley {
+    left: 590px;
+    top: 540px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .footer-tag {
+    position: absolute;
+    left: 96px;
+    bottom: 96px;
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .footer-tag .accent { color: var(--accent); font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="eyebrow">the frontier &mdash; mapped</div>
+
+    <div class="map-wrap">
+      <svg viewBox="0 0 888 700" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outermost contour -->
+        <path d="M 30,610 C 80,560 130,580 180,540 C 230,500 280,520 330,470 C 380,420 430,460 490,470 C 560,490 620,510 680,540 C 740,570 800,560 860,600"
+          fill="none" stroke="rgba(20,20,20,0.18)" stroke-width="1.4"/>
+
+        <!-- Mid contour band 1 -->
+        <path d="M 70,560 C 120,510 170,540 220,490 C 260,450 300,470 340,420 C 380,380 420,410 470,420 C 540,440 600,470 660,500 C 720,530 780,520 830,560"
+          fill="none" stroke="rgba(20,20,20,0.22)" stroke-width="1.4"/>
+
+        <!-- Mid contour band 2 -->
+        <path d="M 110,510 C 150,470 190,500 230,440 C 260,400 290,420 320,370 C 350,330 380,350 410,360 C 470,380 520,420 560,470 C 610,520 670,530 710,540 C 750,550 790,520 800,510"
+          fill="none" stroke="rgba(20,20,20,0.30)" stroke-width="1.5"/>
+
+        <!-- Inner peak ring 1 -->
+        <path d="M 160,440 C 190,410 220,420 240,380 C 260,340 280,330 300,310 C 330,280 350,300 370,310 C 410,330 430,360 440,400 C 440,420 420,440 400,450 C 360,470 320,470 280,470 C 230,470 180,470 160,440 Z"
+          fill="none" stroke="rgba(20,20,20,0.40)" stroke-width="1.6"/>
+
+        <!-- Inner peak ring 2 -->
+        <path d="M 200,380 C 220,360 240,360 260,330 C 280,310 290,300 310,290 C 330,280 350,290 360,310 C 380,340 380,370 370,390 C 340,410 300,420 260,420 C 230,420 200,400 200,380 Z"
+          fill="none" stroke="rgba(20,20,20,0.55)" stroke-width="1.7"/>
+
+        <!-- Innermost peak -->
+        <path d="M 240,340 C 260,320 280,320 295,310 C 320,300 335,320 335,340 C 330,360 305,370 280,370 C 260,370 240,360 240,340 Z"
+          fill="none" stroke="rgba(20,20,20,0.78)" stroke-width="1.9"/>
+        <path d="M 270,340 C 280,330 290,330 300,335 C 305,345 295,355 285,355 C 275,355 270,345 270,340 Z"
+          fill="rgba(20,20,20,0.92)"/>
+
+        <!-- Inner valley ring 1 (depression) -->
+        <path d="M 540,510 C 570,490 600,490 630,490 C 670,490 700,500 720,520 C 740,550 740,580 720,600 C 700,620 670,630 630,630 C 600,630 570,620 550,600 C 530,580 530,540 540,510 Z"
+          fill="none" stroke="rgba(168,48,31,0.30)" stroke-width="1.5"/>
+
+        <!-- Inner valley ring 2 -->
+        <path d="M 565,535 C 590,520 620,520 640,525 C 670,535 690,550 695,575 C 695,600 680,615 660,620 C 630,625 600,615 580,600 C 565,585 555,560 565,535 Z"
+          fill="none" stroke="rgba(168,48,31,0.50)" stroke-width="1.6"/>
+
+        <!-- Innermost valley -->
+        <path d="M 590,560 C 610,550 630,550 645,560 C 660,570 665,590 655,600 C 640,612 615,610 600,600 C 585,590 580,575 590,560 Z"
+          fill="none" stroke="rgba(168,48,31,0.75)" stroke-width="1.8"/>
+
+        <!-- Valley accent marker -->
+        <circle cx="620" cy="580" r="11" fill="#a8301f"/>
+        <circle cx="620" cy="580" r="11" fill="none" stroke="#f4efe6" stroke-width="3"/>
+
+        <!-- Callout for peak -->
+        <line x1="285" y1="345" x2="240" y2="158" stroke="rgba(20,20,20,0.45)" stroke-width="1"/>
+        <!-- Callout for valley -->
+        <line x1="630" y1="585" x2="660" y2="555" stroke="rgba(168,48,31,0.65)" stroke-width="1"/>
+
+        <!-- Elevation labels -->
+        <text x="410" y="358" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="rgba(20,20,20,0.45)">+99</text>
+        <text x="430" y="475" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="rgba(20,20,20,0.45)">+50</text>
+        <text x="490" y="535" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="rgba(168,48,31,0.55)">&minus;40</text>
+        <text x="535" y="595" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="rgba(168,48,31,0.7)">&minus;88</text>
+      </svg>
+
+      <div class="label peak">peak &mdash; complex algorithms</div>
+      <div class="label valley">valley &mdash; counting characters</div>
+    </div>
+
+    <div class="footer-tag">teams build for the peaks. <span class="accent">crash on the valleys.</span></div>
+  </div>
+</body>
+</html>

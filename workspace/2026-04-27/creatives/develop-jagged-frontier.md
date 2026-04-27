@@ -12,11 +12,10 @@
 
 ## Selection for render
 
-Picking **#1 Capability Chart**, **#2 The Gap**, and **#3 Automation Invoice** for HTML + PNG render.
+All five rendered to HTML + PNG per skill spec (5 distinct mechanics, not 3).
 
-Reasoning:
-- #1 directly executes the strongest conviction bet (the chart IS the post).
-- #2 is the most distinct register from #1 (zero illustration, pure type).
-- #3 is the proven receipt callback and gives Aayush a known-working option as a safety net.
-
-#4 (topo) and #5 (stack diff) documented but not rendered — they share too much DNA with #1 and #2 respectively, and the spec asks for 3 strongest options.
+- **#1 Capability Chart** — the strongest conviction bet (the chart IS the post)
+- **#2 The Gap** — pure typography, zero illustration, maximum negative space
+- **#3 Automation Invoice** — proven receipt aesthetic callback to GPT-5.5 post
+- **#4 Topographic Map** — terrain metaphor; "frontier" as land you map, not conquer
+- **#5 Stack Diff** — pitch-vs-ship two-column comparison; mirrors the post's "naive 80% pitch vs the 20% that ships" structure

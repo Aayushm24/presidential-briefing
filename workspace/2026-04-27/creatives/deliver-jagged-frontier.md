@@ -79,16 +79,74 @@
 
 ---
 
+## Option 4: Topographic Map
+
+`option-4-topographic-map.png`
+
+| # | Dim | Score | Notes |
+|---|---|---|---|
+| 1 | Hierarchy | 7 | Eye finds the dark peak first, then drifts to the brick-red valley. Two foci compete slightly. |
+| 2 | Contrast | 8 | Black contour rings + brick-red contour rings on warm paper. Cleanly separated. |
+| 3 | Flow | 7 | Diagonal: top-left peak label → contours → bottom-right valley label. Reads as terrain. |
+| 4 | Layout | 7 | Map sits in lower-right two-thirds of canvas; upper area is generous but a touch empty. |
+| 5 | Clear Space | 8 | Negative space lets the contours breathe. |
+| 6 | CTA | n/a | Footer "teams build for the peaks. crash on the valleys." is recap-tag, not CTA. |
+| 7 | Scroll-Stop | 7 | The contour-line aesthetic is distinctive but reads as decorative if the viewer doesn't immediately get the metaphor. |
+
+- **Position statement:** PARTIAL. Topography is a richer metaphor than a chart, but it asks the viewer to do the translation work. A cartographer's frontier vs a builder's frontier — same word, different mental model.
+- **3-second test:** BORDERLINE. Needs the labels to land the metaphor.
+- **Thumbnail test:** PASS. Contour shapes survive scaling.
+- **Logo-swap test:** PASS. Hand-feel contours + mono labels stay builder-coded.
+- **Kill list:** clean.
+- **Bet validated:** #1 partially (artifact-as-argument), #3 (hand-drawn over vector-clean).
+
+**Verdict: REVISE or HOLD.** Beautiful but cooler than Option 1's directness.
+
+---
+
+## Option 5: Stack Diff
+
+`option-5-stack-diff.png`
+
+| # | Dim | Score | Notes |
+|---|---|---|---|
+| 1 | Hierarchy | 9 | Two columns, equal weight, brick-red right column wins by intent. |
+| 2 | Contrast | 9 | Strikethrough left + clean brick-red right. Maximum legible contrast. |
+| 3 | Flow | 9 | Left-to-right diff exactly matches the post's "what they sold vs what shipped" structure. |
+| 4 | Layout | 8 | Two columns + center pipe + footer is conventional but justified — the form is the message. |
+| 5 | Clear Space | 8 | Tight on text density; slightly busier than Options 1 and 2. |
+| 6 | CTA | n/a | Footer "the 20% they skipped decides whether the tool ships." is the post's own thesis. |
+| 7 | Scroll-Stop | 8 | "80% AI 20% magic" struck through is the visual hook. |
+
+- **Position statement:** YES. The diff format mirrors the post's argument literally. Left column is the founder's slide; right is what actually shipped.
+- **3-second test:** PASS. Two headers, two values per row, one accent.
+- **Thumbnail test:** PARTIAL. Smaller text in the line items will go unreadable below 600px wide.
+- **Logo-swap test:** PASS. Diff aesthetic is unmistakably builder/dev-coded.
+- **Kill list:** clean.
+- **Bet validated:** #1 (the diff IS the argument).
+
+**Verdict: SHIP as runner-up to Option 1.**
+
+---
+
 ## Recommendation
 
 **Ship Option 1: Capability Chart.**
 
 Reason: it's the only option that turns the post's central metaphor into a visual argument. The polyline IS the jagged frontier. The brick-red dot lands precisely on the example the post names ("counting characters"), so the image and the post are reinforcing each other rather than competing. It hits the artifact-as-argument bar set by the GPT-5.5 receipt without copying its vessel — a different artifact, same conviction. Thumbnail-readable, builder-coded, zero AI-slop.
 
-**Runner-up: Option 2: The Gap.**
+**Runner-up: Option 5: Stack Diff.**
 
-If Aayush wants more visual confidence and less analytical distance, Option 2 wins on raw scroll-stop. The two giant words + zigzag seam is the loudest the brief allows. Use it if the post needs to fight for attention in a busy feed window.
+If Aayush wants the post's structural argument made literal — pitch on the left, ship on the right — Option 5 is the cleanest execution. Stronger second pick than Option 2 because it ties to the post's "80% pitch / 20% handoff" framing directly.
+
+**Strong third: Option 2: The Gap.**
+
+Maximum scroll-stop, minimum analytical distance. Reach for it if the feed window is crowded and the post needs to fight for the eye.
 
 **Hold Option 3: Automation Invoice.**
 
 Keep on the bench. Reach for it when a future post is about a *completed* automation pitch — a deal closed, a tool shipped, a contract signed. Today's post is about an unfinished argument, and receipts are for closed loops.
+
+**Hold Option 4: Topographic Map.**
+
+Beautiful but asks for translation work. Use when the audience is technical and the post leans into the "uncharted territory" framing rather than the "uneven capability" one.

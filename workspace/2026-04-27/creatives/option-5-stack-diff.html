@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>stack diff</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4efe6;
+    --ink: #141414;
+    --ink-soft: rgba(20,20,20,0.55);
+    --ink-faint: rgba(20,20,20,0.4);
+    --rule: rgba(20,20,20,0.18);
+    --accent: #a8301f;
+  }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    color: var(--ink);
+  }
+  .canvas {
+    width: 1080px; height: 1080px;
+    position: relative;
+    overflow: hidden;
+    padding: 96px;
+    box-sizing: border-box;
+  }
+  .eyebrow {
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  .grid {
+    position: absolute;
+    left: 96px;
+    top: 220px;
+    width: 888px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 56px;
+  }
+  .col {
+    border-top: 2px solid var(--ink);
+    padding-top: 28px;
+  }
+  .col-tag {
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+  }
+  .col.right .col-tag { color: var(--accent); }
+  .lineitem {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 22px;
+  }
+  .lineitem .label {
+    font-weight: 500;
+  }
+  .lineitem .value {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .col.left .lineitem.struck .label,
+  .col.left .lineitem.struck .value {
+    color: var(--ink-faint);
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+  }
+  .col.right .lineitem.kept .label,
+  .col.right .lineitem.kept .value {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .header-row {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 22px;
+    line-height: 1.15;
+  }
+  .col.right .header-row { color: var(--accent); }
+  .col-frame {
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .footer-tag {
+    position: absolute;
+    left: 96px;
+    bottom: 96px;
+    width: 888px;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .footer-tag .strong { font-weight: 700; }
+  .footer-tag .accent { color: var(--accent); font-weight: 700; }
+  .pipe {
+    position: absolute;
+    left: 50%;
+    top: 240px;
+    bottom: 200px;
+    width: 1px;
+    background: rgba(20,20,20,0.10);
+    transform: translateX(-0.5px);
+  }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="eyebrow">stack diff &mdash; pitch vs ship</div>
+
+    <div class="pipe"></div>
+
+    <div class="grid">
+      <div class="col left">
+        <div class="col-frame">what they sold</div>
+        <div class="header-row">80% AI<br/>20% magic</div>
+
+        <div class="lineitem struck"><span class="label">code generation</span><span class="value">100%</span></div>
+        <div class="lineitem struck"><span class="label">customer triage</span><span class="value">100%</span></div>
+        <div class="lineitem struck"><span class="label">edge cases</span><span class="value">&mdash;</span></div>
+        <div class="lineitem struck"><span class="label">handoff design</span><span class="value">&mdash;</span></div>
+      </div>
+
+      <div class="col right">
+        <div class="col-frame">what shipped</div>
+        <div class="header-row">handoff at 20%</div>
+
+        <div class="lineitem"><span class="label">code generation</span><span class="value">peaks</span></div>
+        <div class="lineitem"><span class="label">customer triage</span><span class="value">valleys</span></div>
+        <div class="lineitem kept"><span class="label">edge cases</span><span class="value">human</span></div>
+        <div class="lineitem kept"><span class="label">handoff design</span><span class="value">the&nbsp;product</span></div>
+      </div>
+    </div>
+
+    <div class="footer-tag">the 20% they skipped <span class="accent">decides whether the tool ships.</span></div>
+  </div>
+</body>
+</html>
