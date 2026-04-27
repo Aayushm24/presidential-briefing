@@ -10,13 +10,14 @@ Fill the structure with today's news. Do not change the structure.
 - `every-saas-ai-button.md`, `ai-startups-12-months.md`, `every-startup-ai-powered.md`, `agent-stack-hardening.md`
 - Aayush takes a position, names his company stake ("At Atlan, we..."), closes with a p.s. or p.p.s.
 
-**Register B — "my feed is doing the thing" (2026-04-24 addition):**
-- `gpt-55-my-feed-is-doing-the-thing.md`
-- Aayush observes the feed, pivots to a named person's test, lands an opinion, ends unresolved
+**Register B — "my feed is doing the thing" (2026-04-24 addition, 2 anchors as of 2026-04-26):**
+- `gpt-55-my-feed-is-doing-the-thing.md` — frontier-tool launch, observation-first
+- `jagged-frontier-the-20-percent.md` — category critique with dismissive-quote bullet list, two-line binary hook
+- Aayush observes the market, pivots to a sharp reframe, lands an opinion, closes with a specific present-tense question
 - No Atlan mention, no p.s., no emoji, no unicode bold
-- Load-bearing devices: ↓ arrow before pull-quote, "That's a tell." 3-word beats, ALL CAPS on one word, unresolved closing question with typo-like flow
+- Load-bearing devices vary by post: GPT-5.5 used `↓` arrow + "That's a tell." beats; jagged-frontier uses two-line binary hook + dismissive-quote bullets + "That's [concept]." recap-tag
 
-**When to pick which:** Register A for stories where Aayush's operator experience is the angle. Register B for frontier-tool / model / pricing stories where the angle is "watch what the market is doing."
+**When to pick which:** Register A for stories where Aayush's operator experience is the angle. Register B for frontier-tool / model / pricing / category-critique stories where the angle is "watch what the market is doing."
 
 ## Key patterns across Register A
 

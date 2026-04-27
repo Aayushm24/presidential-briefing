@@ -100,7 +100,9 @@ Top example (voice direction): "I'm the most average bloke ever."
 ## The 4 hook patterns
 
 - **Pattern A — Contrarian Truth**: "Society's definition of wealth is expensive." / "AI isn't your competitive advantage. It's a commodity." / "every startup says they're 'ai-powered' now."
-  - **Two-line binary variant (2026-04-21)**: Pair a universal claim with an immediate inversion on the next line. Example: "Everyone has Claude Code. / Almost no one is using it right." Works better than a single declaration when the gap IS the whole point. No observer framing needed — just state the contrast and let the next line land it.
+- **Pattern A.b — Two-line binary hook (CONFIRMED, 2026-04-26 — corpus 2/5):** Pair a universal claim with an immediate inversion on the next line. State the contrast and let the second line land it. No observer framing needed.
+  - Examples (corpus): `Everyone has Claude Code.` / `Almost no one is using it right.` (Post 4) and `Everybody these days is an AI automation expert.` / `It's a great service to sell to founders.` (jagged-frontier post 2026-04-26).
+  - Use when the gap between line 1 and line 2 IS the whole point. Promoted from "variant of Pattern A" after the second corpus instance landed.
 - **Pattern B — Identity Statement**: "97% of LinkedIn creators are men. I'm in the 3%." / "I'm the most average bloke ever." Requires a verified Aayush-side fact.
 - **Pattern C — Absurd Comparison**: "A cat with Instagram makes more than your MBA."
 - **Pattern D — Time Bomb**: "I posted my first LinkedIn post 3 years ago." / **Variant: ellipsis** — "AI startups have 12 months before they die…" (from today's shipped post, 2026-04-20). Trailing ellipsis adds stakes without a full sentence.
