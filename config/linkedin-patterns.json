@@ -1,5 +1,5 @@
 {
-  "total_posts": 28,
+  "total_posts": 29,
   "top_5_by_engagement": [
     {
       "date": "2025-05-26",
@@ -100,14 +100,14 @@
       "avg_engagement": 392.0
     },
     "other": {
-      "count": 20,
-      "avg_engagement": 48.6
+      "count": 21,
+      "avg_engagement": 47.1
     }
   },
   "style_stats": {
     "Vulnerable Victor": {
       "count": 4,
-      "avg_engagement": 112.2
+      "avg_engagement": 112.5
     },
     "Contrarian Philosopher": {
       "count": 2,
@@ -122,8 +122,8 @@
       "avg_engagement": 67.0
     },
     "Unclassified": {
-      "count": 19,
-      "avg_engagement": 47.3
+      "count": 20,
+      "avg_engagement": 45.8
     }
   },
   "cta_stats": {
@@ -132,8 +132,8 @@
       "avg_engagement": 0
     },
     "direct-question": {
-      "count": 5,
-      "avg_engagement": 48.0
+      "count": 6,
+      "avg_engagement": 42.7
     },
     "challenge": {
       "count": 0,
@@ -159,7 +159,8 @@
       17
     ],
     "medium (1000-2000)": [
-      14,
+      16,
+      15,
       3,
       8,
       12,

@@ -4,7 +4,7 @@
 
 Read by `/write-posts` when generating the 3 daily options. Use this to weight which Blueprint style/hook/CTA to pick for today's content based on what's actually worked for Aayush.
 
-**Total posts analyzed:** 28
+**Total posts analyzed:** 29
 
 ---
 
@@ -49,8 +49,8 @@ Read by `/write-posts` when generating the 3 daily options. Use this to weight w
 | Pattern | Count | Avg engagement |
 |---|---|---|
 | **D** Time Bomb | 1 | 392.0 |
-| **other** Other/Unclassified | 20 | 48.6 |
 | **A** Contrarian Truth | 2 | 47.5 |
+| **other** Other/Unclassified | 21 | 47.1 |
 | **C** Absurd Comparison | 1 | 41.0 |
 | **B** Identity / Confession | 4 | 33.8 |
 
@@ -58,10 +58,10 @@ Read by `/write-posts` when generating the 3 daily options. Use this to weight w
 
 | Style | Count | Avg engagement |
 |---|---|---|
-| **Vulnerable Victor** | 4 | 112.2 |
+| **Vulnerable Victor** | 4 | 112.5 |
 | **Contrarian Philosopher** | 2 | 69.5 |
 | **Relatable Human** | 1 | 67.0 |
-| **Unclassified** | 19 | 47.3 |
+| **Unclassified** | 20 | 45.8 |
 | **Absurdist Truth-Teller** | 2 | 40.5 |
 
 ## CTA type performance
@@ -69,7 +69,7 @@ Read by `/write-posts` when generating the 3 daily options. Use this to weight w
 | CTA | Count | Avg engagement |
 |---|---|---|
 | soft-close | 9 | 87.9 |
-| direct-question | 5 | 48.0 |
+| direct-question | 6 | 42.7 |
 | community | 1 | 41.0 |
 | permission-giving | 0 | 0 |
 | challenge | 0 | 0 |
@@ -158,7 +158,7 @@ p.p.s First day at the Vipassana center 👇🏻
 
 ## Option pickup rates (since tracking started)
 
-**Attribution summary:** variant_of=0 · inspired_by=0 · organic=28
+**Attribution summary:** variant_of=0 · inspired_by=0 · organic=29
 
 *Pickup* = published post matched a generated option (Jaccard ≥ 0.25 on first 3 lines' 3-grams).
 
@@ -167,24 +167,24 @@ p.p.s First day at the Vipassana center 👇🏻
 | Template | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
 | **absurd-mirror** | 1 | 0 | 0% | n/a | ← never shipped
-| **absurdist** | 1 | 0 | 0% | n/a | ← never shipped
-| **contrarian** | 7 | 0 | 0% | n/a | ← never shipped
-| **data-point** | 2 | 0 | 0% | n/a | ← never shipped
+| **absurdist** | 2 | 0 | 0% | n/a | ← never shipped
+| **contrarian** | 9 | 0 | 0% | n/a | ← never shipped
+| **data-point** | 3 | 0 | 0% | n/a | ← never shipped
 | **dot-connecting** | 2 | 0 | 0% | n/a | ← never shipped
 | **pattern-observation** | 2 | 0 | 0% | n/a | ← never shipped
 | **personal story** | 1 | 0 | 0% | n/a | ← never shipped
 | **personal-I observer** | 1 | 0 | 0% | n/a | ← never shipped
-| **personal-discovery** | 3 | 0 | 0% | n/a | ← never shipped
+| **personal-discovery** | 5 | 0 | 0% | n/a | ← never shipped
 | **relatable** | 1 | 0 | 0% | n/a | ← never shipped
 
 ### By source hook pattern
 
 | Hook | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
-| **A** | 6 | 0 | 0% | n/a |
-| **B** | 4 | 0 | 0% | n/a |
-| **C** | 5 | 0 | 0% | n/a |
-| **E** | 2 | 0 | 0% | n/a |
+| **A** | 8 | 0 | 0% | n/a |
+| **B** | 6 | 0 | 0% | n/a |
+| **C** | 6 | 0 | 0% | n/a |
+| **E** | 3 | 0 | 0% | n/a |
 | **F** | 1 | 0 | 0% | n/a |
 | **G** | 3 | 0 | 0% | n/a |
 
