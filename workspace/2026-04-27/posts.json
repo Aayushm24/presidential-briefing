@@ -1,0 +1,31 @@
+{
+  "date": "2026-04-27",
+  "lead_title": "AI automation strategy requires modeling both the s-curve timing and regulatory backlash",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian",
+      "hook_pattern": "A",
+      "hook_score": 8,
+      "conviction": "L2: Most founders pitching AI automation are making two prediction errors that kill startups: overestimating AI capability in adjacent domains while completely ignoring regulatory backlash timing",
+      "post": "Every AI automation pitch follows the same pattern.\n\nFounder sees AI excel in their domain. Assumes it works the same everywhere else.\n\nThey pitch \"80% automation\" without understanding the remaining 20% might be the most critical part.\n\nI see this across teams at Atlan. Sales ops thinks accounting is \"just entering numbers.\" Product thinks customer service is \"just answering questions.\"\n\nBoth are wrong about what AI can replace.\n\nThe jagged frontier is real. AI writes perfect code for complex algorithms but fails at counting characters in a string.\n\nIt handles creative tasks that seemed impossible two years ago. It breaks on basic reasoning any human solves instantly.\n\nThis creates a predictable startup failure mode.\n\nTeams build for the peaks. Crash on the valleys.\n\nThe successful automation tools I track all have one thing in common.\n\nThey don't promise full automation.\n\nThey design human handoff points from day one.\n\nAI handles what it's good at. Humans handle the rest. The interface between them IS the product.\n\nIMO the bigger blind spot is regulatory timing.\n\nProfessional associations defending boundaries move faster than founders expect.\n\nAI legal tools working perfectly today could face licensing restrictions within 24 months.\n\nThe paradox: the better your AI tool works, the faster it triggers regulatory defense mechanisms.\n\nSuccess becomes the thing that kills you unless you plan for the backlash.\n\nWhat would happen to your automation if regulations hit in 12 months instead of 5 years?"
+    },
+    {
+      "option": 2,
+      "template": "data-point",
+      "hook_pattern": "C",
+      "hook_score": 9,
+      "conviction": "L3: GBrain's hybrid retrieval breakthrough proves the memory architecture problem — 97.9% Recall@5 with 31-point precision gains shows pure vector search is leaving performance on the table",
+      "post": "97.9% Recall@5 with a 31-point precision gain.\n\nThat's what hybrid retrieval just delivered over pure vector approaches.\n\nGarry Tan shipped the numbers this week on GBrain's architecture.\n\nThe breakthrough comes from combining techniques.\n\nGraph layer for entity resolution. Vector search for semantic similarity. Keyword search for exact matches.\n\nEach layer catches what the others miss.\n\nEvery team building AI agents hits the same wall I've hit at Atlan.\n\nContext has become the hard part.\n\nWhat does the system remember across sessions? How does state persist between users? How do lessons compound?\n\nPure vector became the default because it was simple to implement. Good enough for demos.\n\nBut the precision gaps show up the moment you move to real user queries.\n\nVector similarity can't distinguish \"Apple the company\" from \"apple the fruit\" reliably.\n\nSemantic search finds related content but misses specific facts. Keyword search finds facts but misses connections.\n\nGBrain's approach solves this with regex-based entity extraction. Zero LLM calls. Lower costs while boosting accuracy.\n\nThe timing is perfect.\n\nTeams are hitting the limits of simple vector search right now. Demos work. Production systems struggle.\n\nThis validates what I keep seeing: most AI products fail because they skip memory, not because of the model.\n\nBetter retrieval leads to better context. Better context leads to better outputs. Better outputs lead to actual adoption instead of demos that don't stick.\n\nTbh this is the upgrade path every production RAG system needs.\n\nHow much precision are you leaving on the table with pure vector search?"
+    },
+    {
+      "option": 3,
+      "template": "personal-discovery",
+      "hook_pattern": "B",
+      "hook_score": 8,
+      "conviction": "L1: The s-curve framing separates capability debates from timing debates — every AI strategy conversation gets tangled because people mix \"how good\" with \"how fast\"",
+      "post": "Every AI discussion I have gets stuck in the same loop.\n\nPerson A argues about what AI can eventually do. Person B argues about when it'll happen.\n\nThey talk past each other for 30 minutes.\n\nEthan Mollick nailed the solution this week: \"Every AI discussion rests on two questions: how good can AI get? And how fast? Everything else is downstream.\"\n\nThis is the cleanest mental model I've found for any AI strategy conversation.\n\nCapability ceiling question: Will AI handle complex legal research? Probably yes.\n\nTiming question: 18 months or 5 years? That determines whether you build now or wait.\n\nAt Atlan, we've been using this framing for roadmap decisions.\n\nMost downstream predictions depend on getting both answers right.\n\nJob displacement assumes both high capability AND fast timeline. Regulatory responses intensify when timeline accelerates faster than institutions adapt.\n\nMy conviction that small teams with AI beat 50-person orgs only holds if we're on the steep part of the s-curve for coding and coordination tools.\n\nIf we're still in the flat early section, traditional teams keep their advantage.\n\nThe causal chain runs clear: s-curve timing determines tool capability, which determines team advantages, which determines market structure.\n\nFounders who get timing wrong build either too early or too late.\n\nToo early: AI isn't capable enough yet. Too late: everyone has access to the same capabilities.\n\nI keep coming back to this when I see automation pitches.\n\nThe capability question and the timing question are different questions.\n\nAnswer them separately.\n\nWhat s-curve timing assumptions is your roadmap built on?"
+    }
+  ]
+}
