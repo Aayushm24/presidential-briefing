@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>procurement contract</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4efe6;
+    --doc: #fbf8f1;
+    --ink: #141414;
+    --ink-soft: rgba(20,20,20,0.55);
+    --ink-faint: rgba(20,20,20,0.32);
+    --accent: #a8301f;
+  }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    color: var(--ink);
+  }
+  .canvas {
+    width: 1080px; height: 1080px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 36px;
+    position: relative;
+    box-sizing: border-box;
+    padding: 96px;
+  }
+  .doc {
+    width: 720px;
+    background: var(--doc);
+    padding: 56px 64px;
+    color: var(--ink);
+    box-shadow: 0 6px 24px rgba(20,20,20,0.08), 0 1px 2px rgba(20,20,20,0.06);
+    position: relative;
+  }
+  .doc::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -22px;
+    height: 24px;
+    background: var(--doc);
+    clip-path: polygon(
+      0 0, 5% 90%, 10% 30%, 15% 100%, 20% 40%, 25% 95%,
+      30% 25%, 35% 90%, 40% 40%, 45% 100%, 50% 20%, 55% 90%,
+      60% 40%, 65% 100%, 70% 30%, 75% 95%, 80% 25%, 85% 90%,
+      90% 35%, 95% 100%, 100% 40%, 100% 0
+    );
+  }
+  .head {
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .doc-title {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 22px;
+  }
+  .rule { border: none; border-top: 1px dashed rgba(0,0,0,0.30); margin: 18px 0; }
+  .meta-row {
+    display: flex; justify-content: space-between;
+    font-size: 13px;
+    color: var(--ink-soft);
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+  }
+  .body-line {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--ink-faint);
+    margin: 0;
+    letter-spacing: 0.01em;
+  }
+  .clause {
+    margin: 22px 0 18px;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .clause .num {
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .clause .struck {
+    color: rgba(20,20,20,0.45);
+    text-decoration: line-through;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 3px;
+  }
+  .margin-note {
+    color: var(--accent);
+    font-weight: 700;
+    margin-left: 14px;
+    letter-spacing: 0.04em;
+  }
+  .margin-note .caret {
+    color: var(--accent);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+  .total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .total .label {
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .footer-note {
+    font-size: 16px;
+    color: var(--ink-soft);
+    letter-spacing: 0.01em;
+  }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="doc">
+      <div class="head">openai &middot; microsoft &nbsp;&middot;&nbsp; amendment 04.2026</div>
+      <div class="doc-title">Re: distribution rights, exclusivity</div>
+
+      <hr class="rule" />
+
+      <p class="body-line">
+        Effective immediately, and in consideration of the obligations set forth herein,
+        the parties agree to amend the original cloud distribution clause as follows.
+      </p>
+
+      <div class="clause">
+        <span class="num">Clause 4.1 &middot; cloud provider</span>
+        <span class="struck">Provider shall ship exclusively on Microsoft Azure.</span>
+        <span class="margin-note"><span class="caret">&rarr;</span>aws, gcp, anywhere.</span>
+      </div>
+
+      <hr class="rule" />
+
+      <div class="meta-row">
+        <span>consideration</span>
+        <span>term</span>
+      </div>
+      <div class="total">
+        <span>$50,000,000,000</span>
+        <span class="label">5 years</span>
+      </div>
+
+      <div style="height: 24px"></div>
+    </div>
+    <div class="footer-note">$10b/year to not be exclusive.</div>
+  </div>
+</body>
+</html>

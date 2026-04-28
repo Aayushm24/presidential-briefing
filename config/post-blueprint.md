@@ -100,9 +100,12 @@ Top example (voice direction): "I'm the most average bloke ever."
 ## The 4 hook patterns
 
 - **Pattern A — Contrarian Truth**: "Society's definition of wealth is expensive." / "AI isn't your competitive advantage. It's a commodity." / "every startup says they're 'ai-powered' now."
-- **Pattern A.b — Two-line binary hook (CONFIRMED, 2026-04-26 — corpus 2/5):** Pair a universal claim with an immediate inversion on the next line. State the contrast and let the second line land it. No observer framing needed.
-  - Examples (corpus): `Everyone has Claude Code.` / `Almost no one is using it right.` (Post 4) and `Everybody these days is an AI automation expert.` / `It's a great service to sell to founders.` (jagged-frontier post 2026-04-26).
-  - Use when the gap between line 1 and line 2 IS the whole point. Promoted from "variant of Pattern A" after the second corpus instance landed.
+- **Pattern A.b — Two-line binary hook (CONFIRMED, 2026-04-26 — corpus 3/6 as of 2026-04-28):** Pair a universal claim with an immediate inversion on the next line. State the contrast and let the second line land it. No observer framing needed.
+  - Examples (corpus): `Everyone has Claude Code.` / `Almost no one is using it right.` (Post 4); `Everybody these days is an AI automation expert.` / `It's a great service to sell to founders.` (jagged-frontier 2026-04-26); `That second question used to have one answer per cloud.` / `Now it has one answer, period.` (openai-50b-anywhere 2026-04-28, used as closer not opener).
+  - Use when the gap between line 1 and line 2 IS the whole point. Promoted from "variant of Pattern A" after the second corpus instance landed. Works as opener AND closer (the 2026-04-28 post uses it to land the consequence, not to set up the post).
+- **Pattern A.c — Numeric-anchor lede (CONFIRMED, 2026-04-28 — corpus 2/6):** Open with a specific dollar figure tied to a paradoxical purpose. The number is the hook; the paradox is the tension. Distinct from Pattern A.b because the punch is in line 1 alone.
+  - Examples (corpus): `Someone raised $9M just to babysit AI-generated code.` (agent-stack-hardening, Post 1); `OpenAI just paid $50 billion to give up their biggest moat.` (openai-50b-anywhere 2026-04-28).
+  - Pattern: `[Subject] [verb-paid/raised/spent] [$ figure] [paradoxical purpose].` Use when the dollar figure plus the paradox is the whole opening — no setup, no observer voice in the lede.
 - **Pattern B — Identity Statement**: "97% of LinkedIn creators are men. I'm in the 3%." / "I'm the most average bloke ever." Requires a verified Aayush-side fact.
 - **Pattern C — Absurd Comparison**: "A cat with Instagram makes more than your MBA."
 - **Pattern D — Time Bomb**: "I posted my first LinkedIn post 3 years ago." / **Variant: ellipsis** — "AI startups have 12 months before they die…" (from today's shipped post, 2026-04-20). Trailing ellipsis adds stakes without a full sentence.
@@ -245,6 +248,18 @@ Anchor: the 2026-04-24 GPT-5.5 post has ~30 paragraphs; 28 are single sentences.
 Rule: if you have 3+ sentences that are each under 12 words, break them one-per-line. They land harder as separate beats.
 
 **Character-count math:** character count includes line breaks. A 1,400-char post with 40 blank lines is not the same as a 1,400-char post with 12. Top performers often budget more than a third of char count to whitespace. Never pad prose to hit 1,800 — pad rhythm via line breaks.
+
+### Wider paragraph spacing — Register B variant (2026-04-28, corpus 2/6)
+
+Register B news-commentary posts can stretch paragraph spacing from single-blank to double or triple-blank between paragraphs (`\n\n\n` or `\n\n\n\n` in source). The wider gap slows reading deliberately and gives each beat its own breath.
+
+**Corpus evidence:**
+- 2026-04-24 GPT-5.5 anchor (`gpt-55-my-feed-is-doing-the-thing.md`): 19 instances of triple-blank-line spacing within the post.
+- 2026-04-28 OpenAI $50B post (`openai-50b-anywhere.md`): triple-blank-line spacing throughout.
+
+**When to use:** Register B observer-mode posts where the cadence IS the rhythm — news-commentary, frontier-shift posts. Single-blank remains the default for Register A (operator-stake) posts (Posts 1-4 in the main corpus all use single-blank).
+
+**Don't:** stretch spacing in posts that already lean heavy on hyphen-bullet lists or "That's X." recap rhythm — those devices need single-blank tightness to land. The wider spacing is for fragment-paragraph runs, not for structured prose.
 
 ---
 

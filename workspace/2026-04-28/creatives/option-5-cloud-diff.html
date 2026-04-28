@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>cloud diff</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4efe6;
+    --ink: #141414;
+    --ink-soft: rgba(20,20,20,0.55);
+    --ink-faint: rgba(20,20,20,0.32);
+    --accent: #a8301f;
+    --gutter: rgba(20,20,20,0.06);
+  }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    color: var(--ink);
+  }
+  .canvas {
+    width: 1080px; height: 1080px;
+    position: relative;
+    overflow: hidden;
+    padding: 96px;
+    box-sizing: border-box;
+  }
+  .eyebrow {
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  .filename {
+    font-size: 14px;
+    letter-spacing: 0.10em;
+    color: var(--ink-soft);
+    margin-top: 6px;
+  }
+  .filename .at {
+    color: var(--ink-faint);
+    margin: 0 8px;
+  }
+  .diff {
+    position: absolute;
+    left: 96px;
+    top: 260px;
+    width: 888px;
+    background: transparent;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1.5px solid var(--ink);
+    padding: 36px 0 36px 0;
+  }
+  .diff-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    align-items: center;
+    font-size: 26px;
+    line-height: 1.6;
+    padding: 6px 0;
+  }
+  .gutter {
+    text-align: center;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--ink-soft);
+    user-select: none;
+  }
+  .diff-row.minus {
+    color: var(--ink-faint);
+    text-decoration: line-through;
+    text-decoration-color: rgba(20,20,20,0.32);
+    text-decoration-thickness: 2px;
+  }
+  .diff-row.minus .gutter { color: var(--ink-faint); text-decoration: none; -webkit-text-decoration: none; }
+  .diff-row.plus { color: var(--accent); font-weight: 600; }
+  .diff-row.plus .gutter { color: var(--accent); }
+  .diff-row .key { color: var(--ink-soft); }
+  .diff-row.plus .key { color: var(--accent); opacity: 0.85; }
+  .comment {
+    margin-top: 26px;
+    font-size: 18px;
+    color: var(--ink-soft);
+    letter-spacing: 0.01em;
+    padding-left: 60px;
+    line-height: 1.5;
+  }
+  .comment .tag {
+    color: var(--ink-faint);
+    margin-right: 8px;
+  }
+  .footer {
+    position: absolute;
+    left: 96px;
+    bottom: 96px;
+    right: 96px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .footer .stamp {
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.20em;
+    border: 2px solid var(--accent);
+    padding: 6px 14px;
+    transform: rotate(-3deg);
+  }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="eyebrow">distribution.diff &middot; +1 -1</div>
+    <div class="filename">openai/cloud<span class="at">@</span>monday</div>
+
+    <div class="diff">
+      <div class="diff-row minus">
+        <span class="gutter">&minus;</span>
+        <span><span class="key">cloud:</span>&nbsp; azure &nbsp;&middot;&nbsp; exclusive</span>
+      </div>
+      <div class="diff-row plus">
+        <span class="gutter">+</span>
+        <span><span class="key">cloud:</span>&nbsp; aws &middot; gcp &middot; azure &nbsp;&middot;&nbsp; anywhere</span>
+      </div>
+
+      <div class="comment">
+        <span class="tag">//</span> $10b/year to flip this line.
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>committed: 5y &middot; $50B</span>
+      <span class="stamp">merged</span>
+    </div>
+  </div>
+</body>
+</html>

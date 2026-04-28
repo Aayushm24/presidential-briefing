@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>price tag</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4efe6;
+    --tag: #fbf8f1;
+    --ink: #141414;
+    --ink-soft: rgba(20,20,20,0.55);
+    --accent: #a8301f;
+  }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    color: var(--ink);
+  }
+  .canvas {
+    width: 1080px; height: 1080px;
+    position: relative;
+    overflow: hidden;
+    padding: 96px;
+    box-sizing: border-box;
+  }
+  .eyebrow {
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  .stage {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 180px;
+    height: 720px;
+  }
+  svg { display: block; width: 100%; height: 100%; }
+  .footer {
+    position: absolute;
+    left: 96px;
+    bottom: 96px;
+    right: 96px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+  .footer .left {
+    line-height: 1.4;
+  }
+  .footer .left .strong { color: var(--ink); font-weight: 500; }
+  .footer .right {
+    text-align: right;
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="eyebrow">04.28.2026 &nbsp;&middot;&nbsp; price of distribution</div>
+
+    <div class="stage">
+      <svg viewBox="0 0 1080 720" xmlns="http://www.w3.org/2000/svg">
+        <!-- string from above the canvas down to the tag punch hole -->
+        <line x1="540" y1="0" x2="540" y2="120" stroke="#141414" stroke-width="2" stroke-linecap="round" />
+
+        <!-- Price tag: irregular hand-drawn polygon shape with a notch at top-left for the punch hole. -->
+        <!-- Tag fill -->
+        <path d="
+          M 540 120
+          L 600 180
+          L 880 180
+          L 880 600
+          L 200 600
+          L 200 180
+          L 480 180
+          Z
+        " fill="#fbf8f1" stroke="#141414" stroke-width="3" stroke-linejoin="round" />
+
+        <!-- Punch hole (string passes through here) -->
+        <circle cx="540" cy="180" r="14" fill="#f4efe6" stroke="#141414" stroke-width="2" />
+
+        <!-- A diagonal torn-corner accent on the bottom-right -->
+        <path d="
+          M 880 540
+          L 820 600
+          L 880 600
+          Z
+        " fill="#a8301f" />
+        <line x1="880" y1="540" x2="820" y2="600" stroke="#141414" stroke-width="2" />
+
+        <!-- $50B (the headline number) -->
+        <text x="540" y="380" text-anchor="middle"
+              font-family="IBM Plex Mono, monospace"
+              font-size="180"
+              font-weight="700"
+              fill="#141414"
+              letter-spacing="-2">$50B</text>
+
+        <!-- subline -->
+        <text x="540" y="450" text-anchor="middle"
+              font-family="IBM Plex Mono, monospace"
+              font-size="22"
+              font-weight="500"
+              fill="rgba(20,20,20,0.55)"
+              letter-spacing="3">TO NOT BE EXCLUSIVE</text>
+
+        <!-- handwritten note line near the bottom -->
+        <line x1="280" y1="510" x2="800" y2="510" stroke="rgba(20,20,20,0.20)" stroke-width="1" stroke-dasharray="3,5" />
+
+        <text x="540" y="555" text-anchor="middle"
+              font-family="IBM Plex Mono, monospace"
+              font-size="18"
+              font-weight="500"
+              fill="rgba(20,20,20,0.55)"
+              letter-spacing="1">azure &rarr; aws &middot; gcp &middot; anywhere</text>
+      </svg>
+    </div>
+
+    <div class="footer">
+      <div class="left">
+        <span class="strong">$10B / year.</span><br />
+        committed revenue, in exchange for distribution.
+      </div>
+      <div class="right">
+        openai &middot; microsoft &middot; 5y
+      </div>
+    </div>
+  </div>
+</body>
+</html>
