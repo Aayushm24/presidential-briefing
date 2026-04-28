@@ -49,7 +49,7 @@ turns out it was me. i was passing everything inline instead of using a memory l
 ## 2. contrarian
 
 **When:** brain finds CONTRADICTS, or lead story challenges consensus.
-**Hook pattern:** A (Contrarian Truth) or F (Direct Challenge).
+**Hook pattern:** A (Contrarian Truth), F (Direct Challenge), or **A.b (Two-line binary hook)** when the gap between line 1 and line 2 carries the contrast (e.g. *"Everybody these days is an AI automation expert. / It's a great service to sell to founders."*). A.b is a corpus-confirmed sub-pattern of A — see `references/hooks.md`.
 
 Template:
 
@@ -113,7 +113,7 @@ opposite economics.
 ## 4. news-take
 
 **When:** significance 9–10 on lead story. Aayush has an original angle.
-**Hook pattern:** I (News Take) or E (Specific Number + Surprise).
+**Hook pattern:** I (News Take), E (Specific Number + Surprise), or **A.c (Numeric-anchor lede)** when the story has a specific dollar figure tied to a paradoxical purpose (e.g. *"OpenAI just paid $50 billion to give up their biggest moat."*). Closer can use **A.b (Two-line binary)** to land the consequence (e.g. *"That second question used to have one answer per cloud. / Now it has one answer, period."*). Both A.b and A.c are corpus-confirmed sub-patterns of A — see `references/hooks.md`.
 
 Template:
 

@@ -126,12 +126,37 @@ Write a short design doc (≤800 words) to `config/post-feedback-<DATE>.md` cove
 3. **Hard-gate updates** — if the post reveals a rule that should be enforced by `tests/posts-gate.sh` (e.g. banned phrase, character cap), propose the regex/threshold.
 4. **Open questions** — things that need 2-3 more posts before resolving.
 
-Then **apply the HIGH CONFIDENCE edits** to:
-- `config/post-blueprint.md`
-- `.claude/skills/write-posts/SKILL.md`
-- `.claude/skills/write-posts/references/voice.md`
-- `tests/posts-gate.sh` (only if adding a deterministic gate)
-- `config/aayush-ai-post-examples/README.md` if a new register or pattern class needs naming
+Then **apply the HIGH CONFIDENCE edits**. There is a propagation list — a single new pattern often needs to land in 4-6 places, not 1. **Walk this list every time. Do not skip it.** The 2026-04-28 ingest taught us: I edited the blueprint correctly but missed `hooks.md`, `post-templates.md`, and the write-posts SKILL hook list. The pattern was "promoted" but write-posts couldn't actually reach for it because the references didn't know it existed.
+
+**Propagation map — by edit type:**
+
+| Type of change | Where it MUST land |
+|---|---|
+| New hook sub-pattern (e.g. A.b, A.c) | `config/post-blueprint.md` §"Hook patterns"<br>`.claude/skills/write-posts/SKILL.md` §"5 hook patterns" — add to the bulleted list<br>`.claude/skills/write-posts/references/hooks.md` — add as scored sub-pattern under parent letter<br>`.claude/skills/write-posts/references/post-templates.md` — update the "Hook pattern:" line on any template where the new sub-pattern fits |
+| New cadence/spacing rule | `config/post-blueprint.md` §"Default cadence"<br>`.claude/skills/write-posts/SKILL.md` §"KILL LIST" or §"voice" (whichever already houses cadence)<br>`.claude/skills/write-posts/references/voice.md` §"Rhythm" |
+| New register or register variant | `config/post-blueprint.md` (top of file)<br>`config/aayush-ai-post-examples/README.md` — register naming + when-to-pick<br>`.claude/skills/write-posts/SKILL.md` if a register triggers a different prompt path |
+| New banned phrase / kill-list entry | `tests/posts-gate.sh` (regex)<br>`.claude/skills/write-posts/references/kill-list.md`<br>`.claude/skills/write-posts/SKILL.md` §"KILL LIST" |
+| New anti-pattern in the post (something the post explicitly skips) | `config/aayush-ai-post-examples/<slug>.md` "Things this post does NOT do"<br>only edit blueprint if 2+ posts skip the same thing |
+| New voice rule (e.g. lowercase opener, contraction usage) | `config/post-blueprint.md`<br>`.claude/skills/write-posts/references/voice.md` |
+
+**Files that already read the blueprint at runtime — do NOT need editing on every promotion:**
+- `.claude/skills/council/attack/SKILL.md` and `.claude/skills/council/revise/SKILL.md` — both load `config/post-blueprint.md` as PRIMARY voice source. Updating the blueprint flows through automatically.
+- `.claude/skills/weekly-feedback/SKILL.md` — synthesizes from `history/feedback-log.jsonl`.
+
+**Verification step before commit (5 seconds, mandatory):**
+
+```bash
+# Every promoted pattern's keyword should appear in BOTH the blueprint and the write-posts surface.
+# Use -ci (case-insensitive count) — pattern names get title-cased in some files, lowercase in others.
+# If grep returns 0 in any required row, propagation is incomplete.
+PATTERN_KEYWORD="<the canonical phrase, e.g. 'two-line binary' or 'numeric-anchor'>"
+echo "blueprint:         $(grep -ci "$PATTERN_KEYWORD" config/post-blueprint.md)"
+echo "write-posts SKILL: $(grep -ci "$PATTERN_KEYWORD" .claude/skills/write-posts/SKILL.md)"
+echo "hooks.md:          $(grep -ci "$PATTERN_KEYWORD" .claude/skills/write-posts/references/hooks.md)"
+echo "post-templates.md: $(grep -ci "$PATTERN_KEYWORD" .claude/skills/write-posts/references/post-templates.md)"
+```
+
+For a hook sub-pattern: all 4 rows should be ≥1. For a cadence/spacing rule: blueprint + SKILL + voice.md should be ≥1; references-row may be 0. If a required row is 0, you missed a propagation site — open the file and add the entry.
 
 Do NOT apply LOW CONFIDENCE edits. Park them in the design doc with the corpus count.
 
@@ -162,14 +187,24 @@ Push to main.
 
 ## Outputs — full list
 
+Always written:
 - [ ] `history/feedback-log.jsonl` — 1 new line
 - [ ] `config/aayush-ai-post-examples/<slug>.md` — new file
 - [ ] `config/post-feedback-<DATE>.md` — design doc (keep all of them, they're the audit trail)
-- [ ] `config/post-blueprint.md` — edited if corpus evidence supports it
-- [ ] `.claude/skills/write-posts/SKILL.md` — edited if a rule in the SKILL needs softening or a worked example added
-- [ ] `.claude/skills/write-posts/references/voice.md` — edited if a line contradicts the new evidence
-- [ ] `tests/posts-gate.sh` — edited only to add deterministic gates
-- [ ] `config/aayush-ai-post-examples/README.md` — edited only if a new register/pattern class emerged
+
+Conditionally written (per the Phase 4 propagation map — walk it before commit):
+- [ ] `config/post-blueprint.md` — for every HIGH CONFIDENCE edit
+- [ ] `config/aayush-ai-post-examples/README.md` — only if a new register/pattern class emerged
+- [ ] `.claude/skills/write-posts/SKILL.md` — for new hook patterns, cadence rules, kill-list entries, register triggers
+- [ ] `.claude/skills/write-posts/references/voice.md` — for new voice rules / cadence / register guidance
+- [ ] `.claude/skills/write-posts/references/hooks.md` — for any new hook pattern or sub-pattern
+- [ ] `.claude/skills/write-posts/references/post-templates.md` — for hook pattern letters that map into specific post templates
+- [ ] `.claude/skills/write-posts/references/kill-list.md` — for new banned phrases
+- [ ] `tests/posts-gate.sh` — only to add deterministic regex/threshold gates
+
+**Council and weekly-feedback skills are auto-updated through `config/post-blueprint.md` — do not edit them for pattern promotions.**
+
+**Before commit, run the verification grep from Phase 4** to confirm the new pattern's keyword appears in both the blueprint AND the write-posts surface. If propagation is partial, ship is not ready.
 
 ## Anti-patterns (what went wrong on 2026-04-24)
 
@@ -178,13 +213,18 @@ Push to main.
 3. **Conflated "this post uses X" with "this is a repeatable pattern."** A post can do something unique; that doesn't mean it's a pattern.
 4. **Over-weighted ornament** (↓ arrow, "That's a tell.", unicode-bold fabrications) vs **under-weighted structure** (At Atlan mid-post beat, hyphen-bullet lists, closing-question rule). The structural stuff was in every corpus post — the ornament was in one.
 
+## Anti-patterns (what went wrong on 2026-04-28)
+
+5. **Edited the blueprint but stopped there.** Promoted Pattern A.b and A.c to `config/post-blueprint.md` but left `.claude/skills/write-posts/references/hooks.md` and `references/post-templates.md` showing the old A → J list with no sub-patterns. The patterns existed in voice truth but the writing prompt couldn't reach for them. **Fix:** Phase 4 now ships with an explicit propagation map (above) and a `grep` verification step. Walk the map every time. The blueprint is the source of truth, but the references are what the prompt loads.
+
 ## Invocation checklist (for future-me)
 
 - [ ] Read the post. Read the current blueprint. Read last ~10 feedback entries.
 - [ ] Phase 1: append feedback-log entry.
 - [ ] Phase 2: write few-shot anchor.
 - [ ] Phase 3: run corpus counts on every candidate pattern. **Do not skip.**
-- [ ] Phase 4: design doc + apply HIGH CONFIDENCE edits only.
+- [ ] Phase 4: design doc + apply HIGH CONFIDENCE edits, **walk the propagation map for each one**.
+- [ ] Phase 4.5: run the verification grep — every promoted pattern keyword must appear in BOTH the blueprint and the write-posts surface.
 - [ ] Phase 5: verify gates + commit + push.
 - [ ] Tell Aayush: what was applied, what was parked, any open questions.
 
