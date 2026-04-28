@@ -1,0 +1,63 @@
+name: grok-probe
+
+# Hits the same Grok endpoint scripts/scan.sh uses, with the same model + tools.
+# Reports HTTP code, latency, and a small snippet of the response body. No retries,
+# no fallback — this is a diagnostic, so we want raw signal.
+#
+# Trigger: gh workflow run grok-probe.yml
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Hit Grok via llmproxy.atlan.dev/responses
+        env:
+          ATLAN_LLM_KEY: ${{ secrets.ATLAN_LLM_KEY }}
+        run: |
+          set -uo pipefail
+          BODY='{"model":"grok-4","input":[{"role":"user","content":"Say hello in five words."}],"tools":[{"type":"x_search"}],"temperature":0.2}'
+          echo "## Grok probe — $(date -u)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          start=$(date +%s)
+          http=$(curl -sS --max-time 180 -o /tmp/grok.json -w "%{http_code}" \
+            -X POST "https://llmproxy.atlan.dev/responses" \
+            -H "Authorization: Bearer ${ATLAN_LLM_KEY}" \
+            -H "Content-Type: application/json" \
+            -d "$BODY" 2>/tmp/grok.err)
+          curl_exit=$?
+          end=$(date +%s)
+          elapsed=$((end - start))
+
+          echo "**Elapsed:** ${elapsed}s" >> $GITHUB_STEP_SUMMARY
+          echo "**HTTP code:** ${http}" >> $GITHUB_STEP_SUMMARY
+          echo "**curl exit:** ${curl_exit}" >> $GITHUB_STEP_SUMMARY
+
+          if [ "$curl_exit" -eq 28 ]; then
+            echo "::error::Grok timed out after ${elapsed}s (curl exit 28)"
+            echo "**Result:** TIMEOUT" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+          if [ "$curl_exit" -ne 0 ]; then
+            echo "::error::curl failed exit=${curl_exit}"
+            cat /tmp/grok.err
+            echo "**Result:** CURL ERROR ${curl_exit}" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+          if [ "$http" != "200" ]; then
+            echo "::error::HTTP ${http}"
+            head -c 500 /tmp/grok.json
+            echo "**Result:** HTTP ${http}" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+
+          echo "::notice::Grok OK in ${elapsed}s"
+          echo "**Result:** OK" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo '```json' >> $GITHUB_STEP_SUMMARY
+          jq -r '.output[]? | select(.type=="message") | .content[0].text // empty' /tmp/grok.json | head -c 500 >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
