@@ -19,6 +19,27 @@ Examples:
 
 **When to use:** brain finds a CONTRADICTS connection, or the lead story challenges consensus.
 
+### Pattern A.b: Two-line binary hook — score 8 (corpus-confirmed 3/6 as of 2026-04-28)
+Variant of A. Pair a universal claim with an immediate inversion on the next line. The contrast IS the hook.
+
+Examples:
+- *"Everyone has Claude Code. / Almost no one is using it right."* (Post 4)
+- *"Everybody these days is an AI automation expert. / It's a great service to sell to founders."* (jagged-frontier 2026-04-26)
+- *"That second question used to have one answer per cloud. / Now it has one answer, period."* (openai-50b-anywhere 2026-04-28 — used as closer, not opener)
+
+**When to use:** the gap between line 1 and line 2 IS the whole point. Works as opener AND closer. No observer framing required. See `config/post-blueprint.md` §"Pattern A.b".
+
+### Pattern A.c: Numeric-anchor lede — score 8 (corpus-confirmed 2/6 as of 2026-04-28)
+Variant of A. Open with a specific dollar figure tied to a paradoxical purpose. The number is the hook, the paradox is the tension.
+
+Examples:
+- *"Someone raised $9M just to babysit AI-generated code."* (agent-stack-hardening, Post 1)
+- *"OpenAI just paid $50 billion to give up their biggest moat."* (openai-50b-anywhere 2026-04-28)
+
+Pattern: `[Subject] [verb-paid/raised/spent] [$ figure] [paradoxical purpose].` Distinct from Pattern E (Specific Number + Surprise) — A.c requires the dollar figure AND a paradox; Pattern E accepts any data point. Distinct from A.b — the punch is in line 1 alone, no inversion needed.
+
+**When to use:** lead story has a specific dollar figure where the spend itself is the paradox. See `config/post-blueprint.md` §"Pattern A.c".
+
 ## Pattern B: Identity / Confession — score 9
 Open with vulnerability. Audience relates before they learn. Aayush's top-performing pattern.
 
