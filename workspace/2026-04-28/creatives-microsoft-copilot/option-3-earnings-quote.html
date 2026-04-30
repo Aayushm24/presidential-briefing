@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>earnings quote</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4efe6;
+    --ink: #141414;
+    --ink-soft: rgba(20,20,20,0.55);
+    --accent: #a8301f;
+  }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    color: var(--ink);
+  }
+  .canvas {
+    width: 1080px; height: 1080px;
+    position: relative;
+    overflow: hidden;
+    padding: 96px;
+    box-sizing: border-box;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1.5px solid var(--ink);
+    padding-bottom: 18px;
+  }
+  .ticker {
+    font-size: 16px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .ticker .dot {
+    color: var(--ink-soft);
+    margin: 0 10px;
+    font-weight: 400;
+  }
+  .meta {
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-align: right;
+    line-height: 1.4;
+  }
+  .quote-block {
+    position: absolute;
+    left: 96px;
+    right: 96px;
+    top: 280px;
+  }
+  .open-quote {
+    font-size: 96px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 0.7;
+    margin-bottom: 8px;
+  }
+  .quote {
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-top: 0;
+  }
+  .quote .accent {
+    color: var(--accent);
+    position: relative;
+    display: inline-block;
+  }
+  .quote .accent::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    bottom: -6px;
+    height: 4px;
+    background: var(--accent);
+  }
+  .attribution {
+    margin-top: 60px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  .attribution .em {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .attribution .bar {
+    width: 56px; height: 1.5px;
+    background: var(--ink-soft);
+  }
+  .footer {
+    position: absolute;
+    left: 96px;
+    bottom: 96px;
+    right: 96px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-top: 1px dashed rgba(20,20,20,0.30);
+    padding-top: 18px;
+  }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="header">
+      <div class="ticker">
+        MSFT <span class="dot">&middot;</span> Q3 FY26 <span class="dot">&middot;</span> EARNINGS CALL
+      </div>
+      <div class="meta">
+        04.23.2026<br/>
+        verbatim transcript
+      </div>
+    </div>
+
+    <div class="quote-block">
+      <div class="open-quote">&ldquo;</div>
+      <div class="quote">
+        We fully plan to <span class="accent">exploit</span> it.
+      </div>
+      <div class="attribution">
+        <span class="bar"></span>
+        <span class="em">satya nadella</span>
+        <span>on the openai deal</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div>20m paid seats &middot; $0 model cost</div>
+      <div>through 2032</div>
+    </div>
+  </div>
+</body>
+</html>

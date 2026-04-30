@@ -100,9 +100,9 @@ Top example (voice direction): "I'm the most average bloke ever."
 ## The 4 hook patterns
 
 - **Pattern A — Contrarian Truth**: "Society's definition of wealth is expensive." / "AI isn't your competitive advantage. It's a commodity." / "every startup says they're 'ai-powered' now."
-- **Pattern A.b — Two-line binary hook (CONFIRMED, 2026-04-26 — corpus 3/6 as of 2026-04-28):** Pair a universal claim with an immediate inversion on the next line. State the contrast and let the second line land it. No observer framing needed.
-  - Examples (corpus): `Everyone has Claude Code.` / `Almost no one is using it right.` (Post 4); `Everybody these days is an AI automation expert.` / `It's a great service to sell to founders.` (jagged-frontier 2026-04-26); `That second question used to have one answer per cloud.` / `Now it has one answer, period.` (openai-50b-anywhere 2026-04-28, used as closer not opener).
-  - Use when the gap between line 1 and line 2 IS the whole point. Promoted from "variant of Pattern A" after the second corpus instance landed. Works as opener AND closer (the 2026-04-28 post uses it to land the consequence, not to set up the post).
+- **Pattern A.b — Two-line binary hook (CONFIRMED, 2026-04-26 — corpus 4/7 as of 2026-04-28):** Pair a universal claim with an immediate inversion on the next line. State the contrast and let the second line land it. No observer framing needed.
+  - Examples (corpus): `Everyone has Claude Code.` / `Almost no one is using it right.` (Post 4); `Everybody these days is an AI automation expert.` / `It's a great service to sell to founders.` (jagged-frontier 2026-04-26); `That second question used to have one answer per cloud.` / `Now it has one answer, period.` (openai-50b-anywhere 2026-04-28, used as closer not opener); `20 million people pay Microsoft for Copilot every month.` / `And Microsoft now pays $0 for the models running it.` (20m-copilot-zero-cost 2026-04-28).
+  - Use when the gap between line 1 and line 2 IS the whole point. Promoted from "variant of Pattern A" after the second corpus instance landed. Works as opener AND closer (the 2026-04-28 openai-50b post uses it to land the consequence; the 2026-04-28 20M-Copilot post uses it as the lede with a paid-vs-free asymmetry).
 - **Pattern A.c — Numeric-anchor lede (CONFIRMED, 2026-04-28 — corpus 2/6):** Open with a specific dollar figure tied to a paradoxical purpose. The number is the hook; the paradox is the tension. Distinct from Pattern A.b because the punch is in line 1 alone.
   - Examples (corpus): `Someone raised $9M just to babysit AI-generated code.` (agent-stack-hardening, Post 1); `OpenAI just paid $50 billion to give up their biggest moat.` (openai-50b-anywhere 2026-04-28).
   - Pattern: `[Subject] [verb-paid/raised/spent] [$ figure] [paradoxical purpose].` Use when the dollar figure plus the paradox is the whole opening — no setup, no observer voice in the lede.
@@ -248,6 +248,20 @@ Anchor: the 2026-04-24 GPT-5.5 post has ~30 paragraphs; 28 are single sentences.
 Rule: if you have 3+ sentences that are each under 12 words, break them one-per-line. They land harder as separate beats.
 
 **Character-count math:** character count includes line breaks. A 1,400-char post with 40 blank lines is not the same as a 1,400-char post with 12. Top performers often budget more than a third of char count to whitespace. Never pad prose to hit 1,800 — pad rhythm via line breaks.
+
+### Quote-as-paragraph-opener (CONFIRMED, 2026-04-28 — corpus 2/7)
+
+A short quoted phrase (one sentence, in double-quotes) sitting as its own standalone paragraph between the lede and the bridge. The quote IS the moment that makes the abstract news concrete to the reader. Distinct from a quoted line embedded in narrative — this version stands alone with whitespace before and after.
+
+**Corpus evidence:**
+- 2026-04-28 OpenAI $50B post (`openai-50b-anywhere.md`): `"We run on Azure."` as standalone paragraph between the paradox lede and the operator-stake bridge.
+- 2026-04-28 20M-Copilot post (`20m-copilot-zero-cost.md`): `"We fully plan to exploit it" was his exact phrasing on the earnings call.` — Satya quote pulled out as the pivot, with attribution baked into the same paragraph.
+
+**Format:** the quote on its own line (or paired with a one-clause attribution like `was his exact phrasing on the earnings call`). Use double-quotes, not italics. Sentence case inside the quote unless mirroring the source verbatim.
+
+**When to use:** one specific phrase from a named source carries the actual pivot of the story. Reach for it when (a) the quote is short enough to land on one line, (b) the speaker is named explicitly somewhere in the post, and (c) the quote does work the writer's prose can't (i.e. it's the moment the reader feels the deal, not the moment the writer explains it).
+
+**Don't:** pull a quote that's already widely-circulated unless the framing around it is original; pile multiple quoted-paragraph-openers in the same post (one per post max — though a post can use one for the lede AND a single internal repeated quote without violating this); use this device when the speaker is not named.
 
 ### Wider paragraph spacing — Register B variant (2026-04-28, corpus 2/6)
 
@@ -577,6 +591,7 @@ Use **1-2** formatting devices. Typically contrast labels or a "That's X." recap
 - Era-reframe ("2023 strategy on 2026 timelines").
 - Ellipsis hook ("…" at end of first line).
 - Two-line binary hook.
+- Quote-as-paragraph-opener — **corpus 2/7 (CONFIRMED 2026-04-28).** Short quoted phrase from a named source, on its own paragraph between lede and bridge. See §"Quote-as-paragraph-opener" for full guidance.
 - Arrow `↓` as visual colon before a quote — **0 corpus uses (single off-corpus sighting).** Do NOT use until 2+ more uses appear in finalized posts. Resolved per `config/post-corpus-analysis-2026-04-24.md` §Q1.
 
 **Old rule (removed 2026-04-24):** "aim for 2-3 devices per post." This rule was pushing the pipeline toward fabricated `𝟯𝟲`-style unicode-bold hits on posts that didn't need any formatting. The correct count depends on which mode you're writing in, not a constant minimum.

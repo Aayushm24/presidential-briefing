@@ -112,6 +112,18 @@ claim is opinion rather than fact.
 Cap: max 2 of these markers across a single post. More than that reads as hedging.
 Aayush's 2026-04-20 post uses "I doubt" once and "IMO" once — that's the target.
 
+## Rhythm device: quote-as-paragraph-opener (CONFIRMED, 2026-04-28 — corpus 2/7)
+
+A short quoted phrase from a named source, sitting as its own standalone paragraph between the lede and the bridge. The quote IS the moment that makes the abstract news concrete.
+
+Examples:
+- *`"We run on Azure."`* (openai-50b-anywhere, 2026-04-28) — the wall ending every regulated-industry deal Aayush had for 3 months.
+- *`"We fully plan to exploit it" was his exact phrasing on the earnings call.`* (20m-copilot-zero-cost, 2026-04-28) — Satya's pivot quote, pulled out before the thesis.
+
+Use when one specific phrase from a named source carries the actual pivot of the story. Double-quotes, not italics. Speaker named explicitly somewhere in the post. One per post max. Don't reach for this when the quote is decoration; reach for it when the quote does work the writer's prose can't.
+
+See `config/post-blueprint.md` §"Quote-as-paragraph-opener" for full guidance.
+
 ## Rhythm device: short fragment paragraph
 
 Paragraphs of 3-8 words, standing alone on their own line, are a deliberate

@@ -17,11 +17,12 @@ Fill the structure with today's news. Do not change the structure.
 - No Atlan mention, no p.s., no emoji, no unicode bold
 - Load-bearing devices vary by post: GPT-5.5 used `↓` arrow + "That's a tell." beats; jagged-frontier uses two-line binary hook + dismissive-quote bullets + "That's [concept]." recap-tag
 
-**Register A-without-Atlan (2026-04-28, 1 anchor — track):**
+**Register A-without-Atlan (2026-04-28, 2 anchors — track):**
 - `openai-50b-anywhere.md` — OpenAI's $50B Azure-exclusivity exit, procurement consequence
-- Operator-living-the-problem voice (`every conversation I've had for 3 months`) but NO `at Atlan we…` beat
-- Numeric-anchor lede (Pattern A.c), quote-as-paragraph-opener, two-line binary closer, triple-blank-line spacing
-- Watch whether this becomes a third register or stays a one-off Register A variant
+- `20m-copilot-zero-cost.md` — Microsoft Copilot's 20M paid seats + $0 inference cost, agent-layer compression
+- Operator-living-the-problem voice (`every conversation I've had for 3 months`, `Everywhere on the internet, I still see people pitch:`) but NO `at Atlan we…` beat
+- Devices in common: two-line binary opener (Pattern A.b), quote-as-paragraph-opener (now CONFIRMED 2/7), specific present-tense closing question
+- Watch whether this becomes a third register or stays a Register A variant. Two anchors now — graduating signal if a 3rd lands.
 
 **When to pick which:** Register A for stories where Aayush's operator experience is the angle. Register B for frontier-tool / model / pricing / category-critique stories where the angle is "watch what the market is doing."
 

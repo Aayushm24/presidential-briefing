@@ -19,13 +19,14 @@ Examples:
 
 **When to use:** brain finds a CONTRADICTS connection, or the lead story challenges consensus.
 
-### Pattern A.b: Two-line binary hook — score 8 (corpus-confirmed 3/6 as of 2026-04-28)
+### Pattern A.b: Two-line binary hook — score 8 (corpus-confirmed 4/7 as of 2026-04-28)
 Variant of A. Pair a universal claim with an immediate inversion on the next line. The contrast IS the hook.
 
 Examples:
 - *"Everyone has Claude Code. / Almost no one is using it right."* (Post 4)
 - *"Everybody these days is an AI automation expert. / It's a great service to sell to founders."* (jagged-frontier 2026-04-26)
 - *"That second question used to have one answer per cloud. / Now it has one answer, period."* (openai-50b-anywhere 2026-04-28 — used as closer, not opener)
+- *"20 million people pay Microsoft for Copilot every month. / And Microsoft now pays $0 for the models running it."* (20m-copilot-zero-cost 2026-04-28 — paid-vs-free asymmetry as opener)
 
 **When to use:** the gap between line 1 and line 2 IS the whole point. Works as opener AND closer. No observer framing required. See `config/post-blueprint.md` §"Pattern A.b".
 

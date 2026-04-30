@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>paradox stack</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4efe6;
+    --ink: #141414;
+    --ink-soft: rgba(20,20,20,0.55);
+    --accent: #a8301f;
+  }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    color: var(--ink);
+  }
+  .canvas {
+    width: 1080px; height: 1080px;
+    position: relative;
+    overflow: hidden;
+    padding: 96px;
+    box-sizing: border-box;
+  }
+  .eyebrow {
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  .stack {
+    position: absolute;
+    left: 96px;
+    right: 96px;
+    top: 220px;
+  }
+  .row {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 28px;
+  }
+  .num {
+    font-size: 280px;
+    font-weight: 700;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+  .unit {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    transform: translateY(-30px);
+  }
+  .rule {
+    height: 2px;
+    background: var(--ink);
+    margin: 36px 0 30px 0;
+    width: 100%;
+  }
+  .row-2 .num { color: var(--ink); }
+  .annotation {
+    position: absolute;
+    left: 96px;
+    bottom: 168px;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    max-width: 540px;
+  }
+  .annotation .em { color: var(--ink); }
+  .footer {
+    position: absolute;
+    left: 96px;
+    bottom: 96px;
+    right: 96px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .footer .stamp {
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+  }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="eyebrow">04.28.2026 &nbsp;&middot;&nbsp; the copilot deal</div>
+
+    <div class="stack">
+      <div class="row row-1">
+        <div class="num">20M</div>
+        <div class="unit">paid seats<br/>/ month</div>
+      </div>
+      <div class="rule"></div>
+      <div class="row row-2">
+        <div class="num">$0</div>
+        <div class="unit">paid for<br/>the models</div>
+      </div>
+    </div>
+
+    <div class="annotation">
+      <span class="em">that's the deal satya signed.</span><br/>
+      royalty-free frontier models through 2032.
+    </div>
+
+    <div class="footer">
+      <div>microsoft &middot; copilot &middot; q3 fy26</div>
+      <div class="stamp">"exploit it"</div>
+    </div>
+  </div>
+</body>
+</html>

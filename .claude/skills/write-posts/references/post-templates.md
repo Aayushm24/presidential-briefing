@@ -113,7 +113,9 @@ opposite economics.
 ## 4. news-take
 
 **When:** significance 9–10 on lead story. Aayush has an original angle.
-**Hook pattern:** I (News Take), E (Specific Number + Surprise), or **A.c (Numeric-anchor lede)** when the story has a specific dollar figure tied to a paradoxical purpose (e.g. *"OpenAI just paid $50 billion to give up their biggest moat."*). Closer can use **A.b (Two-line binary)** to land the consequence (e.g. *"That second question used to have one answer per cloud. / Now it has one answer, period."*). Both A.b and A.c are corpus-confirmed sub-patterns of A — see `references/hooks.md`.
+**Hook pattern:** I (News Take), E (Specific Number + Surprise), or **A.c (Numeric-anchor lede)** when the story has a specific dollar figure tied to a paradoxical purpose (e.g. *"OpenAI just paid $50 billion to give up their biggest moat."*). Closer can use **A.b (Two-line binary)** to land the consequence (e.g. *"That second question used to have one answer per cloud. / Now it has one answer, period."*) — A.b can also work as the OPENER when the news has a paid-vs-free or someone-pays-someone-doesn't asymmetry (e.g. *"20 million people pay Microsoft for Copilot every month. / And Microsoft now pays $0 for the models running it."*). Both A.b and A.c are corpus-confirmed sub-patterns of A — see `references/hooks.md`.
+
+**Reach-for device:** **quote-as-paragraph-opener** (CONFIRMED corpus 2/7, 2026-04-28). When the lead story has one specific phrase from a named source that carries the actual pivot, pull it out as its own standalone paragraph between the lede and the bridge. *"We run on Azure."* (openai-50b) and *"We fully plan to exploit it" was his exact phrasing on the earnings call.* (20m-copilot) both use this. One per post max. Speaker named in the post. See `config/post-blueprint.md` §"Quote-as-paragraph-opener".
 
 Template:
 
