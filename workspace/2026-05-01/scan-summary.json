@@ -1,0 +1,89 @@
+{
+  "date": "2026-05-01",
+  "generated_at": "2026-05-01T02:56:22Z",
+  "rss": {
+    "feeds_total": 36,
+    "feeds_processed": 35,
+    "feeds_failed": 1,
+    "items_returned": 24,
+    "cutoff_utc": "2026-04-30T02:49:46.077291+00:00",
+    "failing_feeds": [
+      {
+        "url": "https://importai.substack.com/feed",
+        "status": "malformed",
+        "error": "<unknown>:2:1326: not well-formed (invalid token)"
+      }
+    ]
+  },
+  "sitemap": {
+    "sources_total": 4,
+    "sources_ok": 4,
+    "sources_failed": 0,
+    "items_total": 1,
+    "per_source": [
+      {
+        "name": "Cohere",
+        "sitemap_url": "https://cohere.com/sitemap.xml",
+        "filter": "/blog/",
+        "ua": "default",
+        "status": "ok",
+        "error": null,
+        "urls_in_window": 0,
+        "items_scraped": 0,
+        "page_errors": []
+      },
+      {
+        "name": "AI Daily Brief",
+        "sitemap_url": "https://aidailybrief.beehiiv.com/sitemap.xml",
+        "filter": "/p/",
+        "ua": "googlebot",
+        "status": "ok",
+        "error": null,
+        "urls_in_window": 1,
+        "items_scraped": 1,
+        "page_errors": []
+      },
+      {
+        "name": "Superhuman AI",
+        "sitemap_url": "https://www.superhuman.ai/sitemap.xml",
+        "filter": "/p/",
+        "ua": "googlebot",
+        "status": "ok",
+        "error": null,
+        "urls_in_window": 0,
+        "items_scraped": 0,
+        "page_errors": []
+      },
+      {
+        "name": "The Neuron",
+        "sitemap_url": "https://www.theneurondaily.com/sitemap.xml",
+        "filter": "/p/",
+        "ua": "googlebot",
+        "status": "ok",
+        "error": null,
+        "urls_in_window": 0,
+        "items_scraped": 0,
+        "page_errors": []
+      }
+    ]
+  },
+  "x": {
+    "grok_status": "failed",
+    "grok_fail_reason": "connection_timeout (curl exit 28, attempt 2)",
+    "posts_returned_raw": 0,
+    "posts_within_24h": 0,
+    "posts_dropped_stale": 0,
+    "cutoff_utc": "2026-04-30T02:56:22.275597+00:00",
+    "dropped_detail": []
+  },
+  "totals": {
+    "rss_items": 24,
+    "sitemap_items": 1,
+    "x_posts": 0,
+    "total": 25
+  },
+  "status": "scan-degraded",
+  "degraded_reasons": [
+    "x_posts=0 (grok_status=failed)"
+  ]
+}
