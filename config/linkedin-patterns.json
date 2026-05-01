@@ -1,5 +1,5 @@
 {
-  "total_posts": 29,
+  "total_posts": 31,
   "top_5_by_engagement": [
     {
       "date": "2025-05-26",
@@ -61,11 +61,11 @@
   ],
   "bottom_3_by_engagement": [
     {
-      "date": "2026-04-21",
-      "first_line": "Everyone has Claude Code. Almost no one is using it right.",
+      "date": "2026-04-28",
+      "first_line": "OpenAI just paid $50 billion to give up their biggest moat.",
       "hook_pattern": "other",
       "style": "Unclassified",
-      "composite_engagement": 3
+      "composite_engagement": 2
     },
     {
       "date": "2025-01-28",
@@ -100,8 +100,8 @@
       "avg_engagement": 392.0
     },
     "other": {
-      "count": 21,
-      "avg_engagement": 47.1
+      "count": 23,
+      "avg_engagement": 43.4
     }
   },
   "style_stats": {
@@ -122,8 +122,8 @@
       "avg_engagement": 67.0
     },
     "Unclassified": {
-      "count": 20,
-      "avg_engagement": 45.8
+      "count": 22,
+      "avg_engagement": 42.0
     }
   },
   "cta_stats": {
@@ -132,8 +132,8 @@
       "avg_engagement": 0
     },
     "direct-question": {
-      "count": 6,
-      "avg_engagement": 42.7
+      "count": 8,
+      "avg_engagement": 33.2
     },
     "challenge": {
       "count": 0,
@@ -159,7 +159,9 @@
       17
     ],
     "medium (1000-2000)": [
-      16,
+      7,
+      2,
+      17,
       15,
       3,
       8,
