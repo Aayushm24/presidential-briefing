@@ -1,0 +1,31 @@
+{
+  "date": "2026-05-03",
+  "lead_title": "AI agents are forcing teams to rebuild trust systems from scratch",
+  "best_option": 1,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian",
+      "hook_pattern": "A.b",
+      "hook_score": 8,
+      "conviction": "L2: Most builders treat agent permission creep as a bug when it's actually a feature that needs explicit design",
+      "post": "Every AI agent starts with file access.\n\nAnd ends up managing your entire life.\n\nSwyx's personal agent began reading documents. A few months later, it was running backups at 2 AM, monitoring system health, and drafting his business emails.\n\nNo single permission felt dangerous. The end state was an AI system with deeper access than he'd ever explicitly authorized.\n\nThis is happening to every team shipping agents right now.\n\nThe permission model breaks because it's binary, \"file access: yes/no\", instead of contextual. Users want the agent to get more capable. They don't want to wake up discovering their AI is managing business communications without explicit authorization.\n\nAt Atlan, when we build agents, we design expansion triggers that require user confirmation. Instead of gradual scope creep, you get explicit checkpoints: \"Agent can read files, will ask permission before modifying, reports every action taken.\"\n\nThe UI becomes less about features and more about governance.\n\nMost teams I talk to are building permission systems like it's still 2022. Trust boundaries need to be designed from day one, not bolted on after users complain about scope creep.\n\nThe teams that get this early will ship agents users actually trust. The ones that don't will face adoption collapse or reputational damage later.\n\nWhat permission boundaries are you designing into your agent stack?"
+    },
+    {
+      "option": 2,
+      "template": "personal-I observer",
+      "hook_pattern": "H",
+      "hook_score": 7,
+      "conviction": "L3: Software engineering is restructuring around plan-review loops where engineers design AI tasks and evaluate outputs",
+      "post": "Every week I watch engineering teams restructure around AI.\n\nThe pattern is always the same.\n\nTeams that adapt fast nail the plan-review loop. Engineers spend time designing AI tasks and evaluating outputs, not writing code line by line. They ship features in days that used to take weeks.\n\nTeams that don't adapt find themselves slower than pure human development.\n\nThe middle ground doesn't exist.\n\nSwyx's retrospective on 2021-2025 frames the mental model CTOs are using now. AI ate the middle of software development. Engineers still plan the work and review the output. The AI generates the code.\n\nThe skills that matter flip completely:\n- Code review becomes the core competency\n- Architecture design becomes more valuable\n- Junior engineers who prompt well beat senior engineers who can't evaluate AI output\n\nAt Atlan, we're seeing this firsthand. Teams report spending 40% of their time on prompt engineering and 60% on output validation. The coordination effects compound when everyone operates this way.\n\nThe actual job becomes unrecognizable. Not \"people who write code\" but \"people who design systems and verify AI execution.\"\n\nAgile sprints designed for human velocity don't fit AI-native development cycles. Scrum ceremonies built around individual productivity miss the new coordination points.\n\nWhat does your team's plan-review cycle look like right now?"
+    },
+    {
+      "option": 3,
+      "template": "data-point",
+      "hook_pattern": "E",
+      "hook_score": 8,
+      "conviction": "L1: Executive AI perception gets shaped by social media narratives, not technical ground truth",
+      "post": "Ethan Mollick gets asked about AI labs by executives weekly.\n\nThe questions come from X discussions filtered through LinkedIn. Not from technical benchmarks, API reliability, or cost analysis.\n\nThis creates a two-track reality every AI founder faces. Engineers evaluate models based on performance. Executives evaluate AI partnerships based on brand perception and peer network signals.\n\nThe same technology gets different strategic treatment based on narrative, not capability.\n\nI see this gap in every AI pitch meeting. Technical documentation for the builders. Executive briefings that meet C-suite audiences where they actually form opinions, which is social media momentum, not ground truth.\n\nThe Oscar Academy's decision to exclude AI-generated content from award eligibility shows how institutional gatekeepers operate on reputational risk. The rule protects organizational prestige, not artistic quality.\n\nFor AI media startups, this means regulatory environments get shaped by institutional self-preservation. Building the best AI video generation doesn't matter if major distribution channels ban AI content for brand safety.\n\nEvery industry has equivalent gatekeepers making similar calculations. Product-market fit includes navigating gatekeeper perception, not just user adoption.\n\nAI companies need institutional relationship development as much as technical development. The best model loses if it can't get past the perception layer.\n\nHow are you communicating AI strategy to decision-makers who form opinions on LinkedIn?"
+    }
+  ]
+}
