@@ -1,0 +1,31 @@
+{
+  "date": "2026-05-05",
+  "lead_title": "The enterprise AI go-to-market layer is consolidating into a handful of winners",
+  "best_option": 1,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A",
+      "hook_score": 8,
+      "conviction": "L2: The enterprise AI distribution war isn't about who has the most capital — it's about finding workflows the well-funded players can't afford to care about.",
+      "post": "Sierra just raised $950M to own enterprise AI customer service.\n\nEvery founder's asking: \"how do we compete against that capital?\"\n\nWrong question.\n\nThe question is: \"what are they NOT buying with that $950M?\"\n\nHere's what I see across my network: teams building in enterprise AI are panicking about Sierra's war chest.\n\nThey're thinking like it's 2021.\n\nMore capital = more market share = game over.\n\nBut enterprise AI in 2026 isn't SaaS in 2021.\n\nThe wins I'm tracking at Atlan and across founder conversations aren't coming from whoever raised the most. They're coming from teams who found a workflow Sierra can't touch.\n\nCustomer service bots? That's solved now. Sierra won.\n\nBut what about the 47 other workflows every enterprise runs?\n\nThe inventory management that still takes 6 people and 3 days.\n\nThe contract review that legal teams hate but can't automate.\n\nThe sales forecasting that's still done in Excel.\n\nSierra's $950M bought them distribution dominance in one vertical. It also telegraphed to every competitor exactly which vertical to avoid.\n\nThe playbook is counterintuitive: instead of raising to compete, identify the workflows Sierra's size prevents them from caring about.\n\nSmall teams can move fast on 10-person company problems. Sierra needs 10,000-person company problems to justify their burn rate.\n\nSmart founders aren't competing with Sierra. They're building where Sierra isn't looking.\n\nThe enterprise AI landscape just got clearer, not harder.\n\nWhat workflow does your team know that the $1B+ startups are ignoring?"
+    },
+    {
+      "option": 2,
+      "template": "absurdist-truth-teller",
+      "hook_pattern": "C",
+      "hook_score": 7,
+      "conviction": "L1: The $950M enterprise AI raises reveal how absurd the capital requirements have become — and why internal tools are winning against venture-backed startups.",
+      "post": "Someone just raised $950M to make customer service chatbots.\n\nThat's more money than most countries spend on their entire AI programs.\n\nFor chatbots.\n\nHere's what $950M used to buy you:\n- A small country's annual budget\n- Three unicorn startups\n- The entire Twitter acquisition (almost)\n\nNow it buys you the right to say \"we're the global standard for AI customer service.\"\n\nMeanwhile, I built Jake, an AI SDR that's booked 47 meetings in 3 months. Cost: my salary and a Claude subscription.\n\nThe absurdity isn't the amount.\n\nIt's what the amount signals.\n\nWhen $950M is what it takes to win ONE enterprise AI vertical, every other vertical becomes either:\n- A billion-dollar opportunity\n- Not worth building at all\n\nThe math is wild. Sierra needed almost a billion dollars to convince enterprises their chatbot is worth buying. That tells you everything about how hard enterprise sales has become when you're competing with free alternatives.\n\nAt Atlan, we've learned something watching this unfold.\n\nThe teams building internal AI tools are getting results that enterprise AI vendors with $100M+ in funding can't match.\n\nNot because the tools are better.\n\nBecause they're built for specific workflows the big players can't afford to care about.\n\nThe $950M just told everyone exactly which game not to play.\n\nWhat game are you playing that Sierra can't afford to enter?"
+    },
+    {
+      "option": 3,
+      "template": "relatable-human",
+      "hook_pattern": "B",
+      "hook_score": 8,
+      "conviction": "L3: Sierra's $950M raise forces every other enterprise AI builder to get specific about their one defensible workflow instead of trying to build everything for everyone.",
+      "post": "I'm building AI agents at Atlan.\n\nAnd Sierra just made my life way easier.\n\nTheir $950M Series C told every startup in enterprise AI exactly what NOT to build.\n\nCustomer service bots? Sierra owns that now.\n\nConversational AI? Good luck competing with a $1B war chest.\n\nGeneral enterprise AI? Find a different wedge.\n\nLook, I'm not pretending I could have built what Sierra built.\n\nBut I didn't need to.\n\nThe enterprise AI opportunity isn't one giant market. It's 200 specific workflows that big companies struggle with.\n\nJake, our AI SDR, works because it solves one specific thing: qualifying inbound chat visitors. Not general customer service. Not broad conversational AI. One workflow.\n\n47 meetings in 3 months. $1.04M in pipeline.\n\nBuilt for the workflow Sierra's platform won't prioritize.\n\nHere's the thing about focus: when you solve one workflow extremely well, customers trust you to solve the second one. When you try to solve everything, they trust you to solve nothing.\n\nThat's what Sierra's raise really did. It forced everyone else to get specific.\n\nThe \"build everything for everyone\" phase of enterprise AI just ended.\n\nThe \"build one thing extremely well\" phase just started.\n\nEvery founder I know is now asking: what's the one workflow we can own completely?\n\nThat question didn't exist before Sierra raised $950M.\n\nNow it's the only question that matters.\n\nWhat's your one workflow?"
+    }
+  ]
+}
