@@ -1,0 +1,31 @@
+{
+  "date": "2026-05-07",
+  "lead_title": "Claude Code becomes the platform that changes how developers build",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A.b",
+      "hook_score": 8,
+      "conviction": "L2: Most teams are using Claude Code like an IDE plugin when it just became developer infrastructure",
+      "post": "Everyone has Claude Code.\n\nAlmost no one is using it right.\n\nI see it across my network, teams shipping with identical tools, but getting wildly different outcomes.\n\nThe difference isn't coding speed. It's what happens when your Claude conversation ends.\n\nAt Atlan, when we build agents, they don't click buttons:\n- They call APIs\n- They read from databases\n- They coordinate through MCPs\n- They post results where we want them\n\nThe humans never open the app.\n\nBut most founders I talk to are still treating Claude Code like autocomplete with extra steps.\n\nYesterday's Anthropic event changed that. API usage up 17x year-on-year. SpaceX partnering for all of Colossus data center capacity. Multi-agent orchestration shipping natively.\n\nThat's not feature updates. That's platform capture.\n\nTeams using Claude Code for one terminal window are competing against teams using it for their entire company infrastructure.\n\nThe category just graduated from software expense to strategic infrastructure.\n\nWhen Simon Willison covered yesterday's announcement, he called out something most missed: routines that run on schedules, webhooks that trigger workflows, and memory that persists across sessions.\n\nThat's not developer tooling. That's the operating system for AI-first teams.\n\nIMO, most teams are still stuck in conversation mode when the winners moved to execution mode.\n\nWhat's your team using Claude Code for beyond writing code?"
+    },
+    {
+      "option": 2,
+      "template": "vulnerable-victor",
+      "hook_pattern": "B",
+      "hook_score": 9,
+      "conviction": "L3: I've been building AI wrong for months — treating agents like assistants instead of infrastructure",
+      "post": "I've been sabotaging my own AI pipelines for months.\n\nEvery agent I built kept losing state between sessions. I blamed the model.\n\nTurns out it was me. I was passing everything inline instead of using a memory layer.\n\nYesterday's Anthropic event hit me different.\n\nDreams memory system. Multi-agent orchestration. Scheduled routines that run without humans.\n\nI realized I've been building chatbots when I should have been building infrastructure.\n\nAt Atlan, we have $1.04M in S2 pipeline from Jake, an AI SDR that didn't exist a year ago.\n\nBut even Jake loses context between conversations.\n\nThe breakthrough isn't better prompts. It's persistent memory that compounds.\n\nWhen your AI remembers every interaction, every pattern, every preference, suddenly it stops being a tool and starts being a team member.\n\nMost people missed this in yesterday's announcement. They heard \"Claude Code updates.\"\n\nI heard \"the runtime that changes how software gets built.\"\n\nAPI usage up 17x year-on-year isn't adoption. That's systematic integration into how teams ship.\n\nThe mistake I kept making: treating Claude like a better search engine instead of the foundation layer for everything my team builds. Every API call, every database query, every workflow trigger now runs through Claude Code routines.\n\nThe teams shipping fastest aren't using Claude Code as better autocomplete. They're using it as their execution layer.\n\nWhat does your team remember from last sprint's AI interactions?"
+    },
+    {
+      "option": 3,
+      "template": "absurdist-truth-teller",
+      "hook_pattern": "C",
+      "hook_score": 7,
+      "conviction": "L1: While everyone debates AI tools, Match Group just became the first public company to explicitly trade people for AI budget",
+      "post": "Match Group just did something no CEO wanted to say out loud.\n\nThey're slowing hiring to pay for AI tools.\n\nAI tools now do the work better than the people they didn't hire.\n\n\"AI tools cost a lot of money, but we're seeing real productivity gains that make the investment worthwhile even if it means slower hiring\", Gary Swidler, Match Group CFO.\n\nThat's boardroom-speak for: we found the replacement.\n\nWhile everyone's arguing about whether AI replaces jobs, Match Group did the math:\n\n$200K for AI that handles 10x customer support volume vs. $50K per human who handles normal volume.\n\nThe ROI became obvious.\n\nThis wasn't a tech experiment. This was a budget reallocation with public company precedent.\n\nEvery earnings call this quarter, CFOs will get asked: \"Are you pulling a Match Group?\"\n\nThe mental model shift hits different when you see it in SEC filings.\n\nAI spending isn't a nice-to-have anymore. It's headcount planning.\n\nThe absurd part: we spent two years debating whether AI would replace jobs while companies quietly started replacing jobs with AI budgets.\n\nMatch Group just said the quiet part out loud. Every other public company is doing the same math right now.\n\nSmall teams with AI infrastructure beat large teams with traditional coordination overhead.\n\nBut only if they think like platform users, not feature consumers.\n\nWhat's one role your AI budget could replace by Q4?"
+    }
+  ]
+}
