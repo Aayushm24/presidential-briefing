@@ -1,0 +1,100 @@
+# LinkedIn posts, 2026-05-08
+
+**Lead:** AI security testing just got 100x more effective
+**Briefing type:** pattern
+**Best option:** 1 (pre-council self-score)
+
+---
+
+## OPTION 1, contrarian-philosopher (hook score: 8)
+
+**Conviction:** L1: Most companies think their internal security team catches every vulnerability, Mythos proving that assumption costs them real exploits
+
+**Post:**
+Mozilla security researchers missed bugs that AI found in days.
+
+I see this across every company I talk to.
+
+Teams spend months on security reviews. Internal researchers audit the same codebase over and over. They check authentication logic, network handling, UI validation.
+
+Then Mythos, Anthropic's security testing AI, scans Firefox and finds high-severity vulnerabilities the human team never spotted.
+
+Not edge cases. Real bugs in production code that users download daily.
+
+What changed? Mythos analyzes entire codebases simultaneously while tracking interaction patterns between components. Security engineers review sequentially, authentication first, then networking, then UI. They miss how all three connect to create attack surfaces.
+
+This is the new security economics for anyone shipping software.
+
+At Atlan we've been thinking about this shift. Your internal security team will miss vulnerabilities that AI catches. The cost difference makes the choice obvious.
+
+One Mythos analysis costs less than one senior security engineer's monthly salary.
+
+Companies that integrate frontier AI security analysis now get a competitive advantage. They ship more secure software than competitors relying only on human review.
+
+The question every founder should ask: what vulnerabilities is your team missing that AI would catch today?
+
+---
+
+## OPTION 2, data-point (hook score: 8)
+
+**Conviction:** L2: China's AI market runs parallel to Western labs, not behind them, Moonshot's revenue proves builders have a third competitive tier to consider
+
+**Post:**
+Moonshot AI hit $200M ARR at a $20B valuation this week.
+
+That's not a pilot program. That's paying customers at scale.
+
+Chinese enterprises and developers are buying AI services in volumes that generate real revenue. This shifts the competitive landscape from "China is catching up" to "China has a separate, thriving AI economy."
+
+I've been tracking the numbers coming out of Chinese labs. The operational differences are striking:
+
+- They hire more students at lower costs than Western labs paying senior AI scientist salaries
+- They build data infrastructure in-house instead of buying from cloud providers
+- They optimize for compute efficiency over raw model size
+
+The cost advantages are real. Chinese labs can train larger teams of junior researchers while Western labs compete for the same pool of expensive talent.
+
+What fascinates me most is how different the business model execution looks. Western labs focus on foundation models with broad API access. Chinese labs build vertical solutions for specific industries first, then extract general capabilities.
+
+Moonshot's revenue comes from enterprise customers who want AI that understands Chinese business contexts, regulatory requirements, and cultural nuances that Western models miss. They're not just translating English prompts, they're building for fundamentally different user expectations.
+
+The technical approaches differ too. Chinese labs optimize for inference efficiency because compute costs matter more in their market. They build smaller, faster models that deliver comparable results to Western frontier models but run on less expensive hardware.
+
+For builders choosing model strategies, this represents a third competitive tier. You can build on OpenAI/Anthropic APIs, train your own models, or tap into Chinese AI infrastructure.
+
+The Chinese option just became more credible with Moonshot's revenue proof. Their success validates the approach of building AI for specific markets rather than pursuing universal solutions.
+
+What does this mean for your model strategy? The global AI market is not winner-take-all. There's room for regional leaders who understand local contexts better than global platforms.
+
+**P.S.** The Moonshot model suggests AI success comes from deep market understanding, not just technical capabilities.
+
+---
+
+## OPTION 3, personal-observer (hook score: 8)
+
+**Conviction:** L3: The Anthropic-xAI compute sharing deal signals builders must pick an ecosystem now, hedging across all providers becomes economically untenable
+
+**Post:**
+Competitors sharing infrastructure sounds contradictory.
+
+Until you trace the economics.
+
+Anthropic and xAI just signed a deal to share SpaceX's Colossus data center capacity. Both companies compete on models, products, and enterprise deals. They cooperate on infrastructure because compute scarcity hurts both more than shared access helps either.
+
+I build AI agents at Atlan and this changes how every builder should think about platform strategy.
+
+The compute bottleneck that has constrained AI development starts loosening when both Anthropic and xAI have reliable access to frontier-scale compute. They can focus on model improvements and product development rather than infrastructure scrambling.
+
+This points to broader consolidation. Frontier labs will increasingly share the expensive parts, data centers, compute clusters, specialized hardware, while competing on everything else.
+
+For builders, the platform choice window is closing. The Anthropic-xAI infrastructure deal signals that hedging across all providers becomes strategically and economically untenable.
+
+You need to pick your ecosystem alignment:
+
+- Which AI capabilities does your product depend on?
+- Do you need API reliability or enterprise compliance?
+- Can your team move fast when partnership opportunities appear?
+
+The founders who choose Anthropic or OpenAI as their primary platform now position themselves for the partnership deals that come next.
+
+What ecosystem are you building on?
