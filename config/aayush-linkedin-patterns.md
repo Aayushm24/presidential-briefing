@@ -168,30 +168,30 @@ p.p.s First day at the Vipassana center 👇🏻
 |---|---|---|---|---|
 | **absurd-mirror** | 1 | 0 | 0% | n/a | ← never shipped
 | **absurdist** | 3 | 0 | 0% | n/a | ← never shipped
-| **absurdist-truth-teller** | 3 | 0 | 0% | n/a | ← never shipped
+| **absurdist-truth-teller** | 5 | 0 | 0% | n/a | ← never shipped
 | **commentary-take** | 1 | 0 | 0% | n/a | ← never shipped
 | **contrarian** | 14 | 0 | 0% | n/a | ← never shipped
-| **contrarian-philosopher** | 5 | 0 | 0% | n/a | ← never shipped
+| **contrarian-philosopher** | 7 | 0 | 0% | n/a | ← never shipped
 | **data-point** | 9 | 0 | 0% | n/a | ← never shipped
 | **dot-connecting** | 2 | 0 | 0% | n/a | ← never shipped
 | **pattern-observation** | 5 | 0 | 0% | n/a | ← never shipped
 | **personal story** | 1 | 0 | 0% | n/a | ← never shipped
-| **personal-I observer** | 2 | 0 | 0% | n/a | ← never shipped
+| **personal-I observer** | 3 | 0 | 0% | n/a | ← never shipped
 | **personal-discovery** | 6 | 0 | 0% | n/a | ← never shipped
 | **personal-observer** | 2 | 0 | 0% | n/a | ← never shipped
 | **relatable** | 1 | 0 | 0% | n/a | ← never shipped
-| **relatable-human** | 1 | 0 | 0% | n/a | ← never shipped
+| **relatable-human** | 2 | 0 | 0% | n/a | ← never shipped
 | **vulnerable-victor** | 1 | 0 | 0% | n/a | ← never shipped
 
 ### By source hook pattern
 
 | Hook | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
-| **A** | 16 | 0 | 0% | n/a |
-| **A.b** | 4 | 0 | 0% | n/a |
+| **A** | 18 | 0 | 0% | n/a |
+| **A.b** | 5 | 0 | 0% | n/a |
 | **A.c** | 3 | 0 | 0% | n/a |
-| **B** | 8 | 0 | 0% | n/a |
-| **C** | 10 | 0 | 0% | n/a |
+| **B** | 9 | 0 | 0% | n/a |
+| **C** | 12 | 0 | 0% | n/a |
 | **D** | 1 | 0 | 0% | n/a |
 | **E** | 8 | 0 | 0% | n/a |
 | **F** | 1 | 0 | 0% | n/a |
