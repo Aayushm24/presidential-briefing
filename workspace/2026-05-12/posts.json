@@ -1,0 +1,31 @@
+{
+  "date": "2026-05-12",
+  "lead_title": "Companies are restructuring engineering teams around AI agents, not just adding AI to existing workflows",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian",
+      "hook_pattern": "A.b",
+      "hook_score": 8,
+      "conviction": "L2: Most companies are still treating AI as a feature add-on when the real shift is organizational—small teams with agents beat 50-person traditional orgs.",
+      "post": "Every Fortune 500 is \"going AI.\"\n\nAlmost none are going AI Native.\n\nGM just laid off hundreds of IT workers to hire AI-native engineers instead. They're replacing, not retraining.\n\nThat's the signal everyone missed.\n\nMost companies are asking \"how do we add AI to our existing processes?\"\n\nThe wrong question.\n\nAI Native companies ask \"why do these processes exist at all?\"\n\nWhen Notion ships PRs from a single Slack comment, they're not improving their development process.\n\nThey're eliminating it.\n\nWhen Shopify's CEO works with River (their coding agent) in public channels with 100+ employees watching, that's not productivity software.\n\nThat's workforce transformation.\n\nThe coordination overhead that made large teams necessary is collapsing.\n\nAt Atlan, we've seen this firsthand. When we build agents, we don't have them click buttons, they call APIs, read databases, post results where humans need them.\n\nThe humans never open the app when the agent is working.\n\nHere's what GM figured out: retraining 500 legacy IT workers costs more than hiring 50 AI-native engineers who ship at 3x velocity.\n\nThe math is becoming obvious.\n\nSmall teams with AI agents beat large teams with human coordination.\n\nWhat would your org look like if you designed it from scratch today?\n\nThe companies getting this right aren't retrofitting their old processes. They're building new ones.\n\nWhen you have agents handling the coordination work, teams of 5 can outmaneuver teams of 50.\n\nP.S. GM just proved that workforce replacement beats workforce retraining. The Fortune 500 message is loud and clear: adapt or get replaced."
+    },
+    {
+      "option": 2,
+      "template": "absurdist-data-point",
+      "hook_pattern": "C",
+      "hook_score": 8,
+      "conviction": "L1: The \"hybrid workforce\" everyone talks about is actually full workforce replacement happening right now at Fortune 500 scale.",
+      "post": "Someone just fired hundreds of people to hire people who talk to robots better.\n\nGeneral Motors.\n\nThey laid off \"hundreds\" of IT workers this week and immediately posted job listings for \"AI-native development, data engineering, and agent development.\"\n\nFull replacement instead of retraining.\n\nMeanwhile, at Notion, engineers @mention an agent from Slack and get full PRs with screenshots in 20 minutes.\n\nAt Shopify, the CEO works with \"River\" (their coding agent) in public channels. Over 100 employees follow along to learn the patterns.\n\nAt GitLab, they're consolidating by 30% \"for the agentic era.\"\n\nThree different companies. Same playbook.\n\nFire the coordination layer. Hire the agent layer.\n\nThe \"hybrid workforce\" everyone keeps talking about?\n\nIt's not humans + AI working together.\n\nIt's small teams of AI-fluent humans replacing large teams of traditional workers.\n\nI build AI agents at Atlan for GTM workflows. The pattern is everywhere now.\n\nWhen the agent handles API calls, database reads, and cross-system integration, the human team shrinks from 15 to 3.\n\nGM's bet: 50 prompt engineers outship 500 system administrators.\n\nThe early data says they're right.\n\nYour industry is next. Are you the 50 or the 500?\n\nThe math is brutal but simple: AI-native talent ships faster than traditional talent. Traditional management structures create bottlenecks that agents eliminate.\n\nEvery Fortune 500 CEO is watching GM's experiment. If it works, expect similar moves across industries.\n\nP.S. The \"hybrid workforce\" isn't coming. It's here. And it looks nothing like what we expected."
+    },
+    {
+      "option": 3,
+      "template": "vulnerable-observer",
+      "hook_pattern": "B",
+      "hook_score": 7,
+      "conviction": "L3: I'm watching every prediction I made about gradual AI adoption get proven wrong by companies going straight to workforce restructuring.",
+      "post": "I've been wrong about AI adoption timelines for months.\n\nI kept saying \"companies will slowly integrate AI tools into existing workflows.\"\n\nThen GM fired hundreds of IT workers in one week.\n\nTo hire AI-native engineers instead.\n\nI thought we'd see gradual retraining programs. Pilot projects. Change management.\n\nWhat we're seeing is organizational surgery.\n\nNotion doesn't train developers to use AI coding tools. They built Boxy, an agent that ships PRs from Slack comments in 20 minutes.\n\nShopify doesn't have AI adoption workshops. Their CEO works with River (their coding agent) in public channels where 100+ employees watch and learn.\n\nThe coordination overhead I thought would take years to solve?\n\nIt's collapsing in months.\n\nEvery week I watch small AI-augmented teams outship entire departments.\n\nAt Atlan, when we build agents that handle API calls and database operations, the human team shrinks by 70%.\n\nThe work didn't disappear. The coordination did.\n\nI thought Fortune 500s would be the slowest to change.\n\nThey're moving the fastest.\n\nGM's calculation: why retrain 500 people over 3 years when you can hire 50 people who already think in agent workflows?\n\nThe talent market just shifted under all of us.\n\nAre you building skills that work with agents, or skills that agents replace?\n\nThe companies I thought would resist this change are leading it. Enterprise IT departments that took 18 months to approve new software are restructuring their entire workforce in weeks.\n\nI've had to rethink everything about how technology adoption works in large organizations. The old rules don't apply when the ROI is this clear.\n\nP.P.S. My prediction track record on AI timelines is officially broken. Everything is happening faster than anyone expected."
+    }
+  ]
+}
