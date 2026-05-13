@@ -1,0 +1,31 @@
+{
+  "date": "2026-05-13",
+  "lead_title": "AI is proving or disproving itself in specific vertical markets with real revenue and real failures as the signal",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A",
+      "hook_score": 8,
+      "conviction": "L2: The debate about AI validation is missing the point — it's not about models getting better, it's about payment infrastructure already existing in the winning verticals",
+      "post": "Most founders are building AI for the wrong signal.\n\nThey chase model benchmarks and demo polish.\n\nThe winners follow the money that's already flowing.\n\nEvery week I watch another AI startup pitch their \"new approach\" to healthcare, legal, or sales AI.\n\nBut only the ones building where payment infrastructure already exists ship real revenue.\n\nVapi hit a $500M valuation because Amazon Ring needed voice AI infrastructure and had procurement budget to evaluate 41 platforms.\n\nMedicare created reimbursement categories for AI deployment, $120 per patient per month for care coordination agents.\n\nThe 11x founder who built AI SDRs admitted they don't work after 18 months of trying.\n\nThree different signals. Same pattern.\n\nAI works when enterprises already have budgets, regulatory frameworks, and evaluation criteria.\n\nAI fails when the category has to create its own payment infrastructure from scratch.\n\nAt Atlan, we've learned this the hard way building agents across different verticals.\n\nHealthcare pays for outcomes Medicare defines.\nEnterprise voice pays for procurement specifications.\nAutonomous sales burns budget because B2B relationships still require human continuity.\n\nThe hardest part isn't the model.\n\nIt's finding verticals where someone is already paying for the problem your AI solves.\n\nMost AI founders optimize for technical capability.\n\nThe ones winning in 2026 optimize for payment infrastructure compatibility.\n\nWhat vertical are you building for, and who's already paying to solve that problem?"
+    },
+    {
+      "option": 2,
+      "template": "personal-I-observer",
+      "hook_pattern": "B",
+      "hook_score": 8,
+      "conviction": "L3: I've been watching enterprise AI buying patterns shift from proof-of-concept to procurement, and the winners solve integration problems rather than AI problems",
+      "post": "I've been tracking enterprise AI deals for months.\n\nThe pattern that keeps showing up surprises everyone.\n\nEnterprise buyers don't pick the smartest AI.\n\nThey pick the one that integrates without custom development.\n\nAmazon Ring evaluated 41 voice AI platforms before picking Vapi.\n\nVapi probably didn't win because their models were better.\n\nThey won because their API plugged into Ring's existing infrastructure without breaking anything.\n\nEvery founder I talk to is optimizing the wrong axis.\n\nThey're making their AI smarter, faster, cheaper.\n\nBut enterprise procurement cares about compatibility over capability.\n\nThe buyer values integration ease over algorithmic performance.\n\nI see it across our own deals at Atlan.\n\nWhen we pitch agents to enterprise teams, the first question isn't \"how accurate is it?\"\n\nIt's \"what does implementation look like?\"\n\n- Does it work with our existing APIs?\n- Can we deploy it without custom development?\n- Will it break our current workflows?\n\nThe technical conversation happens after the integration conversation.\n\nMost AI founders have this backwards.\n\nThey lead with model performance metrics.\n\nEnterprise buyers want to know if your AI fits their stack without rewiring everything.\n\nThe companies winning enterprise deals in 2026 aren't building better models.\n\nThey're building better integration compatibility.\n\nWhat does your enterprise integration story look like right now?"
+    },
+    {
+      "option": 3,
+      "template": "data-point",
+      "hook_pattern": "E",
+      "hook_score": 8,
+      "conviction": "L1: Most health AI founders have no idea that Medicare pays $120 per patient per month for AI agent deployment, creating a massive revenue opportunity hiding in plain sight",
+      "post": "$120 per patient per month.\n\nThat's what Medicare pays healthcare providers for AI agent deployment.\n\nMost health AI founders have no idea this payment model exists.\n\nMedicare's 2026 reimbursement structure explicitly rewards AI deployment in three categories: care coordination, medication management, and patient communication.\n\nFor a 10,000-patient Medicare Advantage plan, that's $1.2M in monthly revenue just from government reimbursement.\n\nThe timing is what catches my eye.\n\nHealthcare regulatory approval usually takes years.\n\nCMS built AI reimbursement into 2026 payments, meaning they started this process in 2023.\n\nThey anticipated AI agent adoption before most AI companies built healthcare products.\n\nThe government payment infrastructure moved faster than most founders.\n\nThis creates an immediate GTM opportunity that most health AI teams are missing.\n\nInstead of selling efficiency improvements to cost-conscious buyers, they can sell revenue increases through Medicare reimbursement.\n\nRevenue conversations close faster than cost-saving conversations in healthcare procurement.\n\nThe reimbursement structure favors AI that handles patient-facing interactions over diagnostic tools.\n\nMedicare pays for communication improvements, not clinical decision support.\n\nAt Atlan, we've seen this pattern across other verticals where government payment models drive adoption.\n\nThe challenge isn't convincing buyers to pay for AI.\n\nIt's building AI that qualifies for existing reimbursement categories.\n\nHealthcare has government-backed payment infrastructure for AI deployment right now.\n\nThe founders who discover this early capture reimbursement revenue while others pitch cost savings.\n\nAre you building healthcare AI? Have you checked what Medicare reimburses for your category?"
+    }
+  ]
+}
