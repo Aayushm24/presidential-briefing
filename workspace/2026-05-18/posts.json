@@ -1,0 +1,31 @@
+{
+  "date": "2026-05-18",
+  "lead_title": "AI is actively replacing finance analysts, not just assisting them",
+  "best_option": 3,
+  "options": [
+    {
+      "option": 1,
+      "template": "personal-I observer",
+      "hook_pattern": "A.b",
+      "hook_score": 8,
+      "conviction": "L3: Teams that bought productivity tools discovered they bought workforce planning tools instead — the enterprise conversation shifted from \"help my team work better\" to \"reduce my headcount\"",
+      "post": "Every team I talk to says they deployed AI to help their analysts work faster.\n\nAlmost none of them have analysts anymore.\n\nI see it across my network, teams that started with \"AI copilot\" projects six months ago now run entire workflows without human analysts in the loop.\n\nCitadel didn't add ChatGPT to help their existing research teams. They built systems that handle analyst-level work directly. Griffin's complaint about hiring costs buried the real story: they don't need as many humans anymore.\n\nAt Atlan, we've been building agents for months and the pattern is everywhere:\n\n- Finance teams that automated 80% of their model-building\n- Marketing teams where AI writes the entire campaign strategy\n- Product teams where agents handle all the competitive research\n\nThe humans became reviewers, not doers.\n\nHere's what I keep watching happen: teams buy productivity tools and discover they bought workforce planning tools instead.\n\nThe AI doesn't assist the analyst. It becomes the analyst.\n\nIMO, every knowledge worker vertical faces the same calculation Citadel just made. Legal research, consulting analysis, marketing strategy, all follow identical automation economics.\n\nThe enterprise buyer conversation changed from \"this helps my team work better\" to \"this means I need fewer team members.\"\n\nWhat happened at your company when AI stopped being an assistant and started being the person doing the work?"
+    },
+    {
+      "option": 2,
+      "template": "contrarian philosopher",
+      "hook_pattern": "A",
+      "hook_score": 7,
+      "conviction": "L2: Enterprise buyers are already pricing in role replacement economics, not productivity enhancement — builders should design for headcount reduction, not workflow augmentation",
+      "post": "Enterprise AI isn't about making workers more productive anymore.\n\nEveryone still talks about \"AI copilots\" and \"augmenting human capability.\"\n\nBut the numbers tell a different story.\n\nEthan Mollick's team research proved it: AI teammates compensate for individual skill gaps in professional settings. Teams with AI perform as well as teams without it, even when individual humans have lower baseline skills.\n\nThat's the mechanism Ken Griffin discovered at Citadel. You don't need the most skilled analysts if your AI agents handle the analytical work directly.\n\nHere's the reality most builders are missing:\n\nThe conversation in enterprise boardrooms shifted from \"how can AI help our analysts\" to \"how many analysts do we actually need?\"\n\nTeams that built for productivity gains discovered they built for headcount reduction instead.\n\nI doubt this stops at finance. The automotive industry started their AI talent war this week. Not to help existing engineers work faster. To replace categories of work that required humans six months ago.\n\nThe jagged frontier is real, but the pattern is consistent: AI handles structured knowledge tasks full. Humans move from doing the work to reviewing AI output.\n\nThis forces the next causal step. Every knowledge worker vertical faces the same calculation Citadel made. Legal research, consulting analysis, marketing strategy, all follow identical automation economics.\n\nThe successful teams won't be the ones who made their analysts 20% faster.\n\nThey'll be the ones who needed 50% fewer analysts.\n\nWhat category of work at your company moved from \"AI-assisted\" to \"AI-executed\" in the last six months?"
+    },
+    {
+      "option": 3,
+      "template": "vulnerable victor",
+      "hook_pattern": "D",
+      "hook_score": 9,
+      "conviction": "L1: As an AI builder, I'm experiencing firsthand the transition from AI as productivity tool to AI as workforce replacement — the personal reality of automating knowledge work",
+      "post": "I've been building AI agents at Atlan for months...\n\nAnd I just realized I might be automating my own job.\n\nEvery agent I ship handles work that used to require a human. Jake, our AI SDR, booked 47 meetings in 3 months. Our BDR outreach pipeline turns Demandbase exports into personalized emails with zero human writing.\n\nThe pattern is accelerating everywhere I look.\n\nCitadel doesn't just have AI tools helping their analysts work faster. They built systems that replace the analyst workflow entirely. Ken Griffin's complaint about hiring costs revealed the real story: they don't need as many people anymore.\n\nAt first, I thought this was about productivity. Help teams do more with the same headcount.\n\nBut the math doesn't work that way.\n\nWhen AI agents handle the analytical work directly, you need fewer analysts. When they write the marketing campaigns, you need fewer marketers. When they process the legal research, you need fewer paralegals.\n\nThe human moves from doing the work to reviewing AI output.\n\nHere's what scares me: every knowledge worker vertical faces this same calculation. Finance, legal, consulting, marketing, the economics are identical across all of them.\n\nTeams that started with \"AI copilot\" projects are discovering they built workforce planning tools instead.\n\nThe enterprise conversation changed from \"how can AI help my team\" to \"how many team members do I actually need.\"\n\nI'm building the systems that prove we need fewer humans to do the same work.\n\nAnd tbh, I'm not sure if that makes me part of the solution or part of the problem.\n\nWhat happens when the AI you built becomes better at your job than you are?"
+    }
+  ]
+}
