@@ -1,0 +1,156 @@
+name: linkedin-probe
+
+# One-off LinkedIn profile scrape for research / competitor analysis.
+# Different from linkedin-performance.yml: that one tracks Aayush's posts over
+# time and commits per-post markdown snapshots. This one is a stateless probe —
+# takes any profile URL, dumps the raw Apify dataset as a downloadable artifact,
+# and posts a top-N engagement summary to the run summary. No git commits.
+#
+# Trigger: gh workflow run linkedin-probe.yml -f profile_url=https://... -f max_posts=50
+
+on:
+  workflow_dispatch:
+    inputs:
+      profile_url:
+        description: 'LinkedIn profile URL (e.g. https://www.linkedin.com/in/prukalpa/)'
+        type: string
+        required: true
+      max_posts:
+        description: 'Number of recent posts to fetch (1-100)'
+        type: string
+        default: '50'
+      top_n:
+        description: 'How many top posts to surface in summary'
+        type: string
+        default: '10'
+      sort_by:
+        description: 'Engagement sort metric'
+        type: choice
+        default: 'total'
+        options:
+          - total
+          - likes
+          - comments
+          - shares
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Install deps
+        run: python3 -m pip install --quiet requests
+
+      - name: Hit Apify actor + dump raw dataset
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          PROFILE_URL: ${{ github.event.inputs.profile_url }}
+          MAX_POSTS: ${{ github.event.inputs.max_posts }}
+        run: |
+          python3 <<'PY'
+          import json, os, sys, time, requests
+          token = os.environ['APIFY_TOKEN']
+          url = os.environ['PROFILE_URL']
+          maxp = int(os.environ['MAX_POSTS'])
+          t0 = time.time()
+          resp = requests.post(
+              "https://api.apify.com/v2/acts/A3cAPGpwBEG8RJwse/run-sync-get-dataset-items",
+              params={"token": token, "timeout": 300},
+              json={"profileUrls": [url], "maxPosts": maxp},
+              timeout=310,
+          )
+          elapsed = time.time() - t0
+          if resp.status_code not in (200, 201):
+              print(f"::error::Apify HTTP {resp.status_code}: {resp.text[:300]}", file=sys.stderr)
+              sys.exit(1)
+          items = resp.json()
+          if not isinstance(items, list):
+              print(f"::error::Unexpected shape: {type(items).__name__}", file=sys.stderr)
+              sys.exit(1)
+          with open('/tmp/raw.json', 'w', encoding='utf-8') as f:
+              json.dump(items, f, ensure_ascii=False, indent=2)
+          print(f"[linkedin-probe] posts_fetched={len(items)} elapsed_s={elapsed:.1f}", file=sys.stderr)
+          PY
+
+      - name: Build top-N summary
+        env:
+          TOP_N: ${{ github.event.inputs.top_n }}
+          SORT_BY: ${{ github.event.inputs.sort_by }}
+          PROFILE_URL: ${{ github.event.inputs.profile_url }}
+        run: |
+          python3 <<'PY' >> $GITHUB_STEP_SUMMARY
+          import json, os, re
+          top_n = int(os.environ['TOP_N'])
+          sort_by = os.environ['SORT_BY']
+          url = os.environ['PROFILE_URL']
+          with open('/tmp/raw.json', encoding='utf-8') as f:
+              items = json.load(f)
+
+          def score(p):
+              e = p.get('engagement') or {}
+              likes = e.get('likes', 0) or 0
+              comments = e.get('comments', 0) or 0
+              shares = e.get('shares', 0) or 0
+              if sort_by == 'likes': return likes
+              if sort_by == 'comments': return comments
+              if sort_by == 'shares': return shares
+              return likes + comments + shares
+
+          ranked = sorted(items, key=score, reverse=True)[:top_n]
+
+          print(f"# LinkedIn probe — {url}")
+          print()
+          print(f"**Posts fetched:** {len(items)} · **Top:** {top_n} by `{sort_by}`")
+          print()
+          print(f"| # | Likes | Comments | Reposts | Posted | Type | Hashtags | Preview |")
+          print(f"|---|------:|---------:|--------:|--------|------|----------|---------|")
+          for i, p in enumerate(ranked, 1):
+              e = p.get('engagement') or {}
+              content = (p.get('content') or '').replace('\n', ' ').replace('|', '\\|')
+              preview = content[:120] + ('…' if len(content) > 120 else '')
+              posted = ((p.get('postedAt') or {}).get('date') or '')[:10]
+              tags = ', '.join((p.get('hashtags') or [])[:5]) or '—'
+              ptype = p.get('type') or 'post'
+              link = p.get('linkedinUrl') or '#'
+              print(f"| [{i}]({link}) | {e.get('likes', 0)} | {e.get('comments', 0)} | {e.get('shares', 0)} | {posted} | {ptype} | {tags} | {preview} |")
+
+          # Per-post full content blocks
+          print()
+          print("## Full content of each top post")
+          print()
+          for i, p in enumerate(ranked, 1):
+              e = p.get('engagement') or {}
+              posted = ((p.get('postedAt') or {}).get('date') or '')[:10]
+              link = p.get('linkedinUrl') or '#'
+              content = p.get('content') or '(no content)'
+              print(f"### {i}. {posted} — likes:{e.get('likes',0)} · comments:{e.get('comments',0)} · reposts:{e.get('shares',0)}")
+              print(f"[Open on LinkedIn]({link})")
+              print()
+              print('```')
+              print(content)
+              print('```')
+              # Reaction breakdown if available
+              reactions = e.get('reactions') or []
+              if reactions:
+                  rx = ', '.join(f"{r.get('type','?')}:{r.get('count',0)}" for r in reactions)
+                  print(f"_Reactions: {rx}_")
+              hashtags = p.get('hashtags') or []
+              if hashtags:
+                  print(f"_Hashtags: {', '.join(hashtags)}_")
+              print()
+          PY
+
+      - name: Upload raw dataset as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linkedin-probe-raw
+          path: /tmp/raw.json
+          if-no-files-found: error
+          retention-days: 14
