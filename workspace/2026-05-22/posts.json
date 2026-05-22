@@ -1,0 +1,31 @@
+{
+  "date": "2026-05-22",
+  "lead_title": "Agentic infrastructure is maturing into a two-tier market split by compute access and model efficiency",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A.b",
+      "hook_score": 8,
+      "conviction": "L2: Most builders are still optimizing for capability when they should be optimizing for cost — the two-tier agent market is already here, not coming.",
+      "post": "Everyone has agents on their roadmap.\n\nAlmost no one is planning for the compute bill.\n\nI see it across teams building AI products, they demo beautiful agentic workflows, then hit the wall when they calculate cost per user session.\n\nDaytona hit 850,000 daily agent runs this week.\n\n74% month-over-month growth.\n\nThat's not experiment traffic. That's production scale.\n\nBut here's what most builders miss: the teams shipping those agents already picked their lane.\n\nEfficient architectures for broad markets. Or premium workflows for deep-pocket customers.\n\nThere's no middle path because compute physics creates a binary choice.\n\nMicrosoft proved this with MagenticLite, small models orchestrated through specialized tasks, not one frontier model doing everything.\n\nSame agentic experience. 50x less compute cost.\n\nIMO, teams still betting on \"model quality first\" are building tomorrow's pricing problem.\n\nThe richest companies will get full agents. Everyone else gets chatbots.\n\nThat split is happening now, not in 2027.\n\nI watched a founder demo their research agent last week. Beautiful interface. Answers complex questions across multiple documents. Connects insights across different sources.\n\nThen I asked the compute cost question.\n\n$47 per user session.\n\nFor a product targeting college students.\n\nThe economics don't work at any realistic subscription price.\n\nMeanwhile, Simon Willison just shipped Datasette Agent for production data work. Conversational interfaces for SQLite databases. Built by someone who's been shipping AI tools since before the current wave.\n\nThe data exploration layer is ready. The infrastructure is mature.\n\nAt Atlan, we learned this building Jake, our AI SDR that booked $1.04M in pipeline.\n\nThe constraint isn't capability anymore. It's sustainable unit economics.\n\nWhat's your compute cost per user session? And can you still deliver value at 10x your current user base?"
+    },
+    {
+      "option": 2,
+      "template": "personal-I-observer",
+      "hook_pattern": "B",
+      "hook_score": 9,
+      "conviction": "L1: Most teams haven't noticed that agent infrastructure just crossed from research to production readiness — the sandbox problem is solved, but the cost problem is about to split the market.",
+      "post": "Every week I watch agent demos that work perfectly.\n\nThen I ask: \"How much does that cost per user session?\"\n\nThat's when the conversation changes.\n\nIvan Burazin at Daytona dropped numbers this week that separate real traction from demo theater.\n\n850,000 daily agent runs.\n\n74% month-over-month growth.\n\nAgent sandboxes running on bare metal with reinforcement learning loops.\n\nThat's builders running agents in production workflows every single day.\n\nThe infrastructure layer finally works.\n\nBut Ethan Mollick caught the other half of the story: we're quite short of compute.\n\nComplex agentic workflows are becoming expensive. Single-turn chatbots are getting cheaper.\n\nThe richest companies get agents. Everyone else gets stuck with basic chatbots.\n\nI've been thinking about what this means for the 3-person team trying to compete with 50-person orgs through AI multiplication.\n\nYou can build agent-powered features faster than they can. But only if your compute architecture scales without venture funding to subsidize operations.\n\nThe teams that commit to efficient agent architectures now will own the broad market.\n\nThe teams that optimize for maximum capability will own the premium segment.\n\nSimon Willison just shipped Datasette Agent, conversational interfaces for SQLite databases. Production-ready. Extensible. Built by someone who's been shipping AI tools since before the current wave.\n\nThe data exploration layer is ready for builders today.\n\nWhat's your team building that only you can build at compute costs you can actually sustain?"
+    },
+    {
+      "option": 3,
+      "template": "absurdist-truth-teller",
+      "hook_pattern": "A.c",
+      "hook_score": 8,
+      "conviction": "L3: The prototype-to-production gap for agents is becoming a repeatable, fundable problem — there's a systematic workflow emerging to convert fast-shipped AI demos into sustainable businesses.",
+      "post": "Someone raised $700M just to build a \"universal AI interface.\"\n\nMeanwhile, most founders can't afford to run the agent demos they already built.\n\nThe math is absurd.\n\nDaytona: 850K daily agent runs, 74% growth. Infrastructure that works.\n\nYour prototype: 5 users, burns $200 in compute costs, needs VC funding to handle 50 users.\n\nThe gap isn't technical anymore. It's architectural.\n\nEvery team I talk to has the same story:\n\n- Shipped agent demo in 2 weeks\n- Demo works, users love it\n- Compute bill arrives, economics break\n- Back to building chatbots\n\nMicrosoft just showed the way out with MagenticLite.\n\nSmall models orchestrated through specialized tasks instead of one frontier model handling everything.\n\nSame user experience. 50x less compute cost.\n\nBut here's the part nobody talks about: there's a systematic workflow emerging to convert vibe-coded prototypes into production-ready agent systems.\n\nSwyx documented 16 hours, 103 commits to turn a prototype into an agent-ready codebase.\n\nThat's not chaos. That's a process.\n\nThe founders who systematize this conversion (tooling, services, training) are solving the universal pain point for every AI-first builder who shipped fast and now needs to scale.\n\nAt Atlan, we've learned the hard way: the constraint isn't what agents can do.\n\nIt's what you can afford for them to do at the user volume you need to build a business.\n\nWhat's the ugliest workaround in your current agent setup that you're avoiding because of compute costs?"
+    }
+  ]
+}
