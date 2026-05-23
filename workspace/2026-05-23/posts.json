@@ -1,0 +1,31 @@
+{
+  "date": "2026-05-23",
+  "lead_title": "AI market credibility is under pressure as both revenue metrics and open-source claims are being gamed by insiders",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A",
+      "hook_score": 8,
+      "conviction": "L2: The verification infrastructure to audit AI vendor claims already exists — founders who don't use it are choosing to get burned.",
+      "post": "Due diligence on AI vendors just became a standard practice.\n\nTechCrunch exposed how AI startups stretch ARR definitions with investor approval this week.\n\nSome count usage-based pricing projections as committed recurring revenue.\n\nOthers bundle consulting with software subscriptions to inflate the numbers.\n\nTheir VCs know and participate.\n\nWhen compute costs demand real ROI calculations, inflated ARR makes evaluation impossible.\n\nCompanies making build-versus-buy decisions need actual customer retention rates and unit economics.\n\nNot projected usage extrapolated into fictional recurring revenue.\n\nThe obvious solution already exists.\n\nThe verification infrastructure already exists.\n\nGitHub shows actual code commits if they claim open-source.\n\nHuggingFace tracks model downloads and community engagement.\n\nYou can verify customer case studies through LinkedIn searches for the companies mentioned.\n\nAsk for references and call them directly.\n\nThe information asymmetry only exists if you don't check.\n\nBudget 2-3 hours for proper due diligence on any vendor relationship over $10,000 annually.\n\nIMO, the teams that audit vendor claims systematically compound advantages through better technology choices.\n\nThe ones that trust self-reported metrics get locked into platforms built on creative accounting.\n\nWhat vendor claims are you taking at face value right now?"
+    },
+    {
+      "option": 2,
+      "template": "absurdist-truth-teller",
+      "hook_pattern": "C",
+      "hook_score": 8,
+      "conviction": "L1: AI labs are using open-source marketing to attract developers while maintaining closed development practices — builders get the worst of both models.",
+      "post": "Someone claimed \"America's open source AI lab\" status while releasing nothing.\n\nNathan Lambert called this out this week.\n\nLabs announce open-source commitments in press releases while keeping code, weights, and datasets proprietary.\n\nThe marketing benefits arrive immediately.\n\nThe actual releases never materialize.\n\nWhen Anthropic acquired Stainless, they bought the SDK generation tools that OpenAI and Google use for their APIs.\n\nReal open-source projects would have forked and improved those tools collectively.\n\nInstead, labs acquire infrastructure vendors to control developer experience while claiming community values.\n\nThe credibility gap matters because builders make technology choices based on ecosystem sustainability.\n\nChoosing a proprietary AI platform locks teams into vendor relationships.\n\nOpen-source alternatives provide flexibility and community support.\n\nWhen labs use open-source marketing to attract developers while maintaining closed practices, builders get the worst of both models.\n\nVendor lock-in disguised as community contribution.\n\nAt Atlan, we audit vendor open-source claims through public metrics rather than trusting marketing promises.\n\nCheck their GitHub for actual commits if they claim open-source.\n\nVerify community engagement through HuggingFace downloads.\n\nThe forcing function comes from competitive pressure.\n\nTeams building on genuinely open platforms compound advantages through community contributions.\n\nThose locked into proprietary platforms claiming open-source benefits lose both flexibility and community use.\n\nWhat platform are you building on, and did you verify their open-source claims?"
+    },
+    {
+      "option": 3,
+      "template": "personal-I-observer",
+      "hook_pattern": "H",
+      "hook_score": 7,
+      "conviction": "L3: Systematic verification of AI vendor credibility is now a competitive necessity as inflated metrics proliferate.",
+      "post": "Every week I watch AI founders make partnership decisions on self-reported vendor metrics.\n\nTechCrunch exposed how AI startups and their VCs stretch ARR definitions together this week.\n\nSome count usage-based projections as committed revenue.\n\nOthers bundle consulting with subscriptions to inflate recurring numbers.\n\nThe market's credibility problem runs deeper than hype cycles.\n\nWhen startup revenue metrics get gamed by insiders and open-source branding becomes marketing theater, due diligence becomes competitive advantage.\n\nI build AI agents at Atlan and we've learned verification separates builders who ship from those who get burned by inflated promises.\n\nThe infrastructure is mature enough that founders can't hide behind \"early stage\" excuses for misleading metrics.\n\nGitHub shows actual code commits if they claim open-source.\n\nHuggingFace tracks downloads and community engagement.\n\nLinkedIn searches verify customer case studies.\n\nReference calls reveal the truth.\n\nWhen compute costs force clear ROI calculations on every AI investment, trust-but-verify becomes the baseline.\n\nTeams that establish systematic vendor auditing processes compound better technology decisions.\n\nThose that anchor partnerships on creative accounting face down rounds when growth doesn't match projections.\n\nTbh, most founders I talk to still skip the verification step.\n\nThe teams that don't are building lasting advantages through better infrastructure choices.\n\nWhat's your process for auditing AI vendor claims before committing budget?"
+    }
+  ]
+}
