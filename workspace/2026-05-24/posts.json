@@ -1,0 +1,31 @@
+{
+  "date": "2026-05-24",
+  "lead_title": "Fact-checking demos close skeptical buyers faster than feature presentations",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "commentary-take",
+      "hook_pattern": "B",
+      "hook_score": 8,
+      "conviction": "L2: Enterprise buyers trust their own domain knowledge more than vendor claims — fact-checking demos let them prove the system's limitations to themselves.",
+      "post": "Every enterprise sales meeting has the same credibility problem.\n\nThe buyer assumes your demo is cherry-picked. They've seen perfect presentations fail on their messy data. They trust skepticism over vendor promises.\n\nEthan Mollick found the fix: throw content they know well into GPT-5.5 Pro and ask for a fact check.\n\nCitations + depth of critique changes minds faster than feature lists.\n\nThe psychology is simple:\n\nInstead of vendors proving capabilities to skeptical buyers, the buyers prove the system's limitations to themselves using content they control.\n\nWhen the system passes their tests, they've convinced themselves rather than being convinced by a sales presentation.\n\nAt Atlan we've learned this applies beyond AI. The fastest path to enterprise trust isn't showing what works, it's letting them test what breaks.\n\nEvery failed demo becomes proof the system handles their edge cases. Every accurate citation becomes evidence they can verify independently.\n\nThe verification quality matters. Surface-level fact-checking that misses contextual nuances confirms buyer concerns. Deep analysis that catches subtle inaccuracies demonstrates understanding that matches human fact-checkers.\n\nThe best enterprise sales strategy is giving buyers the tools to reject you.\n\nMost never do.\n\nWhat content would your toughest enterprise buyer use to test your system?"
+    },
+    {
+      "option": 2,
+      "template": "data-point",
+      "hook_pattern": "E",
+      "hook_score": 8,
+      "conviction": "L3: Fine-tuning 397B models in hours removes the technical barriers that prevented most founders from building vertical AI products.",
+      "post": "Garry Tan fine-tuned a 397B model in a couple hours.\n\nJust hours with standard compute resources.\n\nHours.\n\nThis changes everything for builders building vertical AI products.\n\nThe competitive advantage shifts from technical infrastructure to data quality and product execution. Teams that previously couldn't compete on model customization can now iterate on domain-specific training data as fast as teams with dedicated ML expertise.\n\nI build AI agents at Atlan and domain-specific context matters more than model size for our use cases.\n\nGeneric foundation models can't match vertical-specific fine-tuned models for specialized workflows. But fine-tuning was too expensive for most founders to attempt.\n\nThe timing matters because vertical AI markets are heating up:\n\n- Legal teams need models trained on case law\n- Publishers need models trained on fact-checking workflows\n- Research institutions need models trained on academic standards\n\nThe accessibility changes product strategy calculations. Teams can now test custom models for domain-specific tasks that generic models struggle with. The workflow accessibility means experimentation costs drop while customization quality increases.\n\nThe accessibility of 397B model fine-tuning may change product strategy for teams that assumed prompt engineering was the ceiling.\n\nWhat domain-specific training data would unlock for your product if fine-tuning was this accessible?"
+    },
+    {
+      "option": 3,
+      "template": "pattern-observation",
+      "hook_pattern": "G",
+      "hook_score": 8,
+      "conviction": "L1: Open-source agent infrastructure is converging around composable, MIT-licensed components that eliminate vendor dependency for RAG-based products.",
+      "post": "Three things shipped this week that connect.\n\nGBrain drops as MIT-licensed SOTA retrieval for agents. ZeroEntropy provides top embedding and reranking. Fine-tuning 397B models takes hours instead of weeks.\n\nThe pattern: proprietary moats are evaporating.\n\nTeams building agent-based products no longer choose between expensive proprietary solutions and inferior open-source alternatives. They get production-quality components with zero vendor lock-in.\n\nWhen we build agents at Atlan, we don't want black-box dependencies for core infrastructure. MCP server support means swapping components based on performance requirements instead of vendor contracts.\n\nThe timing aligns with enterprise agent adoption. Teams are moving beyond proof-of-concept agents into production systems that require reliable performance without technical risks.\n\nMIT licensing changes the economics. No premium for latest retrieval. No restrictions on commercial use. No vendor dependency for infrastructure that agents can't function without.\n\nThis is what happens when infrastructure becomes widely accessible without cloud provider control.\n\nThe question isn't whether to use these components. It's how fast you can integrate them before your competitors realize what's available.\n\nWhich part of your agent stack would you replace first if cost wasn't a factor?"
+    }
+  ]
+}
