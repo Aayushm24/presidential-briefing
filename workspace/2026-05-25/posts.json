@@ -1,0 +1,31 @@
+{
+  "date": "2026-05-25",
+  "lead_title": "AI augmentation requires more human judgment and craft, not less — the 'more automation, more humans' paradox is becoming a product design principle",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "commentary-take",
+      "hook_pattern": "A",
+      "hook_score": 8,
+      "conviction": "L2: The AI automation paradox reveals that successful products amplify human judgment rather than replace it — the interface layer becomes the competitive moat.",
+      "post": "Every week I watch founders automate the wrong things.\n\nThey build agents that handle complex decisions.\n\nThey skip the boring stuff that actually compounds.\n\nDan Shipper spent a year watching 30 employees use AI daily at Every. The more automation they added, the more human decisions they had to make.\n\nEvery automated workflow spawned new judgment calls about when to intervene, how to interpret outputs, which tools to chain together.\n\nThe employees who got the most value from AI spent more time on meta-work, deciding what to automate, evaluating results, switching context between systems.\n\nI build AI agents for GTM workflows at Atlan and this tracks perfectly.\n\nThe magic happens in the spaces between automated tasks.\n\n- Prompt crafting for specific contexts\n- Output evaluation against business goals\n- Context switching between different systems\n- Exception handling when automation breaks\n\nWhen we build agents at Atlan, we don't have them click buttons, they call APIs, read from databases, talk to other apps through MCPs, and post results where we want them.\n\nBut the humans never open the app when the agent is working.\n\nThey're busy making judgment calls about what the automation should do next.\n\nIMO, the builders who design AI products assuming users will delegate entirely will lose to those who design for active human participation.\n\nThe interface layer, how humans and AI negotiate who does what and when, becomes the competitive moat.\n\nWhat does your team spend more time on, configuring AI or using it?"
+    },
+    {
+      "option": 2,
+      "template": "data-point",
+      "hook_pattern": "E",
+      "hook_score": 9,
+      "conviction": "L3: The 30-employee experiment at Every proves that AI augmentation creates more human touchpoints, not fewer — successful teams need workflow scaffolding designed for active participation.",
+      "post": "30 employees used AI daily for a year.\n\nThe result? More human decisions, not fewer.\n\nDan Shipper runs Every, a media company that became an accidental laboratory for AI-assisted work. Every person from editors to operations used AI for their daily tasks.\n\nWhat he discovered breaks the standard automation narrative.\n\nThe more AI his team used, the more judgment calls they had to make.\n\nEvery automated workflow created new categories of human work:\n\n- When to intervene in AI outputs\n- How to interpret results for stakeholders\n- Which tools to chain for specific contexts\n- How to handle edge cases automation missed\n\nThe employees who got the most value didn't delegate tasks to AI.\n\nThey developed personal systems for human-AI handoff.\n\nWriters started drafts themselves, fed specific sections to models for expansion, evaluated tone against their intended message, then wove AI content back into their voice.\n\nOperations people automated data pulls but spent significantly more time on interpretation and exception handling.\n\nEditors automated research but invested much more effort in source verification and angle development.\n\nI've been building agents for months and the results can be magical, but magical still costs hours of fighting context management, output quality, hallucinations, edge cases, and latency.\n\nThe most valuable human work happens in the spaces between automated tasks.\n\nThe teams that nail this human-AI collaboration pattern create products their users can't live without.\n\nWhat percentage of your AI workflow time goes to configuring vs using the output?"
+    },
+    {
+      "option": 3,
+      "template": "pattern-observation",
+      "hook_pattern": "A",
+      "hook_score": 7,
+      "conviction": "L1: Most agent frameworks optimize for complex reasoning while missing the reflex tasks that actually compound into productivity gains — boring automation beats brilliant reasoning.",
+      "post": "Everyone building AI agents focuses on the prefrontal cortex.\n\nPlanning. Reasoning. Multi-step chains.\n\nMeanwhile, your mortgage gets paid by standing order, not committee.\n\nI see this pattern everywhere I look.\n\nGarry Tan nailed it: most agent frameworks treat all cognition as high cognition. The winners nail boring stuff first.\n\nDan Shipper's year-long experiment at Every confirms this split.\n\nThe highest-impact AI implementations automated reflex tasks, pulling data, formatting documents, scheduling posts.\n\nThis freed cognitive capacity for editorial decisions, strategy calls, creative problem-solving.\n\nThe teams that tried to automate creative or strategic work found AI helpful for generating options, but human judgment remained essential for selecting and executing the best ones.\n\nEvery week I watch builders optimize for the wrong cognitive layer.\n\nThey chase sophisticated reasoning systems when simple automations that eliminate decision fatigue create more value.\n\nA workflow that automatically sorts incoming emails by urgency beats a sophisticated agent that drafts responses.\n\nBecause sorting happens reflexively while response crafting requires active human judgment about tone, strategy, relationship context.\n\nAt Atlan, we've learned this the hard way building agents for GTM workflows.\n\nThe magic happens when you automate the routine tasks so humans can focus on the judgment calls that compound.\n\nHuman brains handle roughly seven pieces of information simultaneously. Every routine task that requires active attention consumes one slot.\n\nAutomate the routine tasks and you liberate cognitive capacity for higher-value decisions that compound over time.\n\nThe race is to identify which tasks should become reflexive and which require active human participation.\n\nWhat boring task takes you 15 minutes weekly that you haven't automated yet?"
+    }
+  ]
+}
