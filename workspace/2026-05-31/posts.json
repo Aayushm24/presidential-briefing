@@ -1,0 +1,31 @@
+{
+  "date": "2026-05-31",
+  "lead_title": "AI cost structures break as token-based billing hits every team using AI",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A",
+      "hook_score": 8,
+      "conviction": "L2: Most teams are optimizing the wrong cost layer — they're tracking tool subscriptions while agent workflows burn through token budgets 10x faster than human usage patterns.",
+      "post": "AI budgets aren't broken because tools got expensive.\n\nThey're broken because we planned for human usage and got agent usage instead.\n\nEvery week I watch teams hit the same wall.\n\nThey budgeted $5,000 monthly for AI based on developers making 20 Claude calls daily.\n\nThen their agent workflows went live.\n\nSame developers. Same tasks. But now the agent makes 200 calls to complete what took 20 manual calls.\n\nPlanning, implementation, testing, documentation, error handling.\n\nEach autonomous step burns tokens.\n\nAt Atlan, we learned this firsthand building Jake, our AI SDR.\n\nJake booked 47 meetings in 3 months by making thousands of token calls for research, qualification, and follow-up. A human SDR doing the same work might make 50 calls total.\n\nToken consumption doesn't scale with human behavior. It scales with workflow automation.\n\nGitHub's Copilot billing shift to consumption-based pricing just made this visible to everyone.\n\nTeams report costs spiking 5-10x their previous subscriptions.\n\nThe flat-rate era is over.\n\nTeams who instrument token usage now and build cost controls into their agent architecture win.\n\nTeams who keep thinking in subscription models blow their budgets in Q3.\n\nSet token budget limits. Monitor consumption patterns. Build fallback strategies when budgets hit limits.\n\nWhat's your current token burn rate compared to six months ago?"
+    },
+    {
+      "option": 2,
+      "template": "personal-I-observer",
+      "hook_pattern": "B",
+      "hook_score": 9,
+      "conviction": "L1: GitHub's token billing change is the canary in the coal mine — every AI tool will make this shift because agent workflows make flat-rate pricing financially impossible for vendors.",
+      "post": "I've been tracking our AI costs for 8 months at Atlan.\n\nThe pattern is terrifying.\n\nJanuary: $3,200 across all AI tools.\nMay: $14,700 for the same team size.\n\nNothing broke. Everything got better.\n\nOur agents became reliable enough for production. Jake books meetings autonomously. Our BDR pipeline runs without human review checkpoints.\n\nBut reliable agents are expensive agents.\n\nA human writing code asks Claude for one function. Our agent building the same feature makes calls for planning, implementation, testing, docs, and error handling.\n\nSame outcome. 10x the token cost.\n\nGitHub's Copilot billing change signals what every AI vendor will do.\n\nFlat-rate pricing only works when usage is predictable.\n\nWhen teams shift from occasional AI help to agent-driven workflows, usage variance explodes.\n\nVendors can't absorb that through subscriptions.\n\nTeams with high Copilot usage report token costs spiking 5-10x their previous subscriptions. A developer who used Copilot occasionally might have spent $10 monthly. Same developer using Copilot extensively now hits $300.\n\nThe solution is smarter architecture, not cheaper AI.\n\nTeams who build token budget limits into their agent loops now avoid the procurement crisis everyone else hits in Q4.\n\nSet maximum recursion depth. Implement fallback strategies. Switch to cheaper models for cost-sensitive tasks.\n\nHow many token calls does your most important automated workflow make?"
+    },
+    {
+      "option": 3,
+      "template": "vulnerable-victor",
+      "hook_pattern": "D",
+      "hook_score": 8,
+      "conviction": "L3: The billing model shift exposes the deeper measurement problem — teams spending 5x more on AI can't prove the ROI because productivity measurement for knowledge work remains fundamentally broken.",
+      "post": "Our AI costs exploded 400% this year and I can't prove it's worth it...\n\nThat keeps me awake some nights.\n\nAt Atlan, we went from $3,200 to $14,700 monthly on AI tools.\n\nJake booked 47 meetings in 3 months. Our BDR pipeline handles Demandbase research automatically. Code reviews happen faster.\n\nThe team feels more productive. Velocity appears higher.\n\nBut when the CFO asks \"what's the business value of that extra $11,500 monthly?\" the honest answer is complicated.\n\nHow do you measure the value of better code reviews? How do you price avoiding bugs that never happen? How do you calculate the benefit of research that happens in minutes instead of hours?\n\nTraditional software ROI calculations break down with AI.\n\nCRM software increases conversion rates. Project management software improves delivery timelines.\n\nAI productivity gains are diffuse and context-dependent.\n\nSimon Willison nailed it: productivity measurement for knowledge workers has been unsolved for decades. AI just makes the problem visible with bigger numbers.\n\nThis measurement gap creates real risk.\n\nDuring downturns, CFOs cut spending they can't measure. AI tools that feel essential might get eliminated if their value can't be proven.\n\nThe teams who survive instrument specific outcomes instead of general productivity.\n\nTrack bug reduction rates. Monitor research task completion times. Measure feature delivery timelines.\n\nConnect AI usage to business metrics your CFO already cares about.\n\nWhat specific metric would prove your AI spend is working?"
+    }
+  ]
+}
