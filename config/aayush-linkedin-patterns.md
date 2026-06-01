@@ -173,13 +173,13 @@ p.p.s First day at the Vipassana center 👇🏻
 | **commentary-take** | 3 | 0 | 0% | n/a | ← never shipped
 | **contrarian** | 17 | 0 | 0% | n/a | ← never shipped
 | **contrarian philosopher** | 1 | 0 | 0% | n/a | ← never shipped
-| **contrarian-philosopher** | 16 | 0 | 0% | n/a | ← never shipped
-| **data-point** | 15 | 0 | 0% | n/a | ← never shipped
+| **contrarian-philosopher** | 18 | 0 | 0% | n/a | ← never shipped
+| **data-point** | 16 | 0 | 0% | n/a | ← never shipped
 | **dot-connecting** | 2 | 0 | 0% | n/a | ← never shipped
-| **pattern-observation** | 9 | 0 | 0% | n/a | ← never shipped
+| **pattern-observation** | 10 | 0 | 0% | n/a | ← never shipped
 | **personal story** | 1 | 0 | 0% | n/a | ← never shipped
 | **personal-I observer** | 5 | 0 | 0% | n/a | ← never shipped
-| **personal-I-observer** | 5 | 0 | 0% | n/a | ← never shipped
+| **personal-I-observer** | 6 | 0 | 0% | n/a | ← never shipped
 | **personal-discovery** | 6 | 0 | 0% | n/a | ← never shipped
 | **personal-i-observer** | 1 | 0 | 0% | n/a | ← never shipped
 | **personal-observer** | 3 | 0 | 0% | n/a | ← never shipped
@@ -187,19 +187,19 @@ p.p.s First day at the Vipassana center 👇🏻
 | **relatable-human** | 3 | 0 | 0% | n/a | ← never shipped
 | **vulnerable victor** | 1 | 0 | 0% | n/a | ← never shipped
 | **vulnerable-observer** | 1 | 0 | 0% | n/a | ← never shipped
-| **vulnerable-victor** | 1 | 0 | 0% | n/a | ← never shipped
+| **vulnerable-victor** | 2 | 0 | 0% | n/a | ← never shipped
 
 ### By source hook pattern
 
 | Hook | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
-| **A** | 28 | 0 | 0% | n/a |
+| **A** | 30 | 0 | 0% | n/a |
 | **A.b** | 10 | 0 | 0% | n/a |
 | **A.c** | 12 | 0 | 0% | n/a |
-| **B** | 15 | 0 | 0% | n/a |
-| **C** | 19 | 0 | 0% | n/a |
-| **D** | 3 | 0 | 0% | n/a |
-| **E** | 12 | 0 | 0% | n/a |
+| **B** | 16 | 0 | 0% | n/a |
+| **C** | 20 | 0 | 0% | n/a |
+| **D** | 4 | 0 | 0% | n/a |
+| **E** | 13 | 0 | 0% | n/a |
 | **F** | 1 | 0 | 0% | n/a |
 | **G** | 6 | 0 | 0% | n/a |
 | **H** | 2 | 0 | 0% | n/a |
