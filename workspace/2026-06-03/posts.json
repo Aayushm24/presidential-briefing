@@ -1,0 +1,31 @@
+{
+  "date": "2026-06-03",
+  "lead_title": "GitHub preps the platform for agents as 85 million developers meet their agentic future",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian",
+      "hook_pattern": "A",
+      "hook_score": 8,
+      "conviction": "L2: The platform wars aren't about models anymore — they're about who controls the development workflow when agents become teammates.",
+      "post": "GitHub's biggest challenge isn't Copilot competition.\n\nIt's 85 million developers who don't know agents are about to break their platform.\n\nEvery week I watch teams hit GitHub's API limits when their agents start doing real work.\n\nThe problem isn't the agent. It's that GitHub was built for humans who open one pull request, wait for review, then merge.\n\nAgents spawn 20 workstreams simultaneously. They coordinate changes across multiple repos. They need authentication schemes that don't exist and rate limits that assume human usage patterns.\n\nKyle Daigle laid this out on Latent Space: GitHub is rebuilding core infrastructure because agents operate in completely different patterns than humans.\n\nAt Atlan, when we build agents, we don't have them click buttons. They call APIs, read databases, and coordinate through MCPs. But GitHub's current architecture creates artificial bottlenecks that slow everything down.\n\nThe technical implications run deep:\n- Authentication for agents acting with delegated authority\n- Rate limits that distinguish agent workflows from abuse\n- Permissions that span organizational boundaries\n\nThis isn't about making GitHub faster for developers.\n\nIt's about making GitHub work when half your development team are autonomous agents.\n\nMicrosoft gets this. They're building MAI-Code-1-Flash specifically for VS Code integration in ways external models can't match.\n\nThe pattern is platform control over pure performance.\n\nWhat happens when your agents can't ship because they broke your git workflow?"
+    },
+    {
+      "option": 2,
+      "template": "data-point",
+      "hook_pattern": "A.c",
+      "hook_score": 9,
+      "conviction": "L1: Uber burning through their entire annual AI budget in 4 months is every CTO's wakeup call about consumption economics vs software licensing.",
+      "post": "Uber capped employee AI usage after burning through their annual budget in 4 months.\n\nEvery CTO I talk to just felt their stomach drop.\n\nThe math looked simple during pilot programs: 50 employees testing Claude Code for 3 months, $10,000 in tokens. Scale to 29,000 employees = $1.9M annual budget.\n\nBut real adoption curves don't scale from pilot data.\n\nThe top 10% of power users discovered AI workflows that 10x their output. Instead of occasional code completion, they built entire features using AI pair programming. Instead of one-off documents, they created AI-powered content pipelines.\n\nUsage exploded because AI actually works well enough to use daily now.\n\nThe budget shock is hitting everywhere:\n- Google's own employees adopting internal AI tools\n- Meta's teams burning tokens at unpredicted rates\n- Microsoft facing similar explosions quarterly\n\nMost executives still think about AI costs like software licenses: predictable per-seat pricing that scales linearly with headcount.\n\nBut AI operates on consumption economics that scale with usage intensity, not user count.\n\nAt Atlan, we track AI spending alongside productivity metrics: features shipped per token, pipeline value per dollar spent. The ROI is there, but you need visibility before the budget explodes.\n\nThe governance challenge is immediate. Cap per employee? You punish high performers. Cap per team? Teams game the system. Productivity-based allocation? Most companies can't measure knowledge worker output accurately enough.\n\nUber chose hard caps: maximum AI spending per employee per month. Crude but implementable immediately.\n\nWhat's your plan when your team's AI usage suddenly jumps 5x because they found workflows that actually work?"
+    },
+    {
+      "option": 3,
+      "template": "pattern-observation",
+      "hook_pattern": "E",
+      "hook_score": 8,
+      "conviction": "L3: The three-layer AI stack is consolidating around platform control, not performance — GitHub controls workflow, Microsoft controls tools, Cohere controls compliance.",
+      "post": "Three announcements this week connect into one pattern.\n\nGitHub rebuilding for agents. Microsoft building MAI models in-house. Cohere targeting regulated enterprises with Command A+.\n\nEach represents a different layer consolidating around platform control rather than pure performance.\n\nGitHub isn't building better models. They're rebuilding collaboration primitives that agents need, authentication, rate limiting, permissions for systems that spawn multiple workstreams and coordinate across repos simultaneously.\n\nMicrosoft isn't chasing the parameter arms race. MAI-Code-1-Flash has just 137B parameters but integrates with VS Code in ways external models can't replicate. The advantage comes from platform integration, not model capability.\n\nCohere's Command A+ doesn't beat GPT-4 on benchmarks. But it's the only option for enterprises that can't use cloud AI due to regulatory constraints. They win by solving deployment problems, not building better models.\n\nThe pattern: AI competition is shifting from model capabilities to platform control.\n\nPure model providers risk getting squeezed between platform companies above and hardware providers below.\n\nAt Atlan, this changes our evaluation framework. We pick AI tools based on platform integration and deployment requirements, not just model performance.\n\nThe best model that doesn't integrate with your workflow is worse than a good model that does.\n\nFor builders, this means:\n- Evaluate based on where the tool fits in your stack\n- Consider switching costs, not just performance metrics\n- Platform lock-in matters more than benchmark scores\n\nThe companies winning AI deployments control critical infrastructure layers: development tools, deployment infrastructure, or compliance frameworks.\n\nWhich layer of your AI stack do you actually control?"
+    }
+  ]
+}
