@@ -169,22 +169,22 @@ p.p.s First day at the Vipassana center 👇🏻
 | **absurd-mirror** | 1 | 0 | 0% | n/a | ← never shipped
 | **absurdist** | 4 | 0 | 0% | n/a | ← never shipped
 | **absurdist-data-point** | 1 | 0 | 0% | n/a | ← never shipped
-| **absurdist-truth-teller** | 13 | 0 | 0% | n/a | ← never shipped
+| **absurdist-truth-teller** | 16 | 0 | 0% | n/a | ← never shipped
 | **commentary-take** | 3 | 0 | 0% | n/a | ← never shipped
 | **contrarian** | 21 | 0 | 0% | n/a | ← never shipped
 | **contrarian philosopher** | 1 | 0 | 0% | n/a | ← never shipped
-| **contrarian-philosopher** | 19 | 0 | 0% | n/a | ← never shipped
-| **data-point** | 19 | 0 | 0% | n/a | ← never shipped
+| **contrarian-philosopher** | 23 | 0 | 0% | n/a | ← never shipped
+| **data-point** | 20 | 0 | 0% | n/a | ← never shipped
 | **dot-connecting** | 2 | 0 | 0% | n/a | ← never shipped
 | **pattern-observation** | 11 | 0 | 0% | n/a | ← never shipped
 | **personal story** | 1 | 0 | 0% | n/a | ← never shipped
 | **personal-I observer** | 5 | 0 | 0% | n/a | ← never shipped
-| **personal-I-observer** | 7 | 0 | 0% | n/a | ← never shipped
+| **personal-I-observer** | 10 | 0 | 0% | n/a | ← never shipped
 | **personal-discovery** | 8 | 0 | 0% | n/a | ← never shipped
 | **personal-i-observer** | 1 | 0 | 0% | n/a | ← never shipped
 | **personal-observer** | 4 | 0 | 0% | n/a | ← never shipped
 | **relatable** | 1 | 0 | 0% | n/a | ← never shipped
-| **relatable-human** | 3 | 0 | 0% | n/a | ← never shipped
+| **relatable-human** | 4 | 0 | 0% | n/a | ← never shipped
 | **vulnerable victor** | 1 | 0 | 0% | n/a | ← never shipped
 | **vulnerable-observer** | 1 | 0 | 0% | n/a | ← never shipped
 | **vulnerable-victor** | 2 | 0 | 0% | n/a | ← never shipped
@@ -193,13 +193,13 @@ p.p.s First day at the Vipassana center 👇🏻
 
 | Hook | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
-| **A** | 33 | 0 | 0% | n/a |
-| **A.b** | 11 | 0 | 0% | n/a |
-| **A.c** | 16 | 0 | 0% | n/a |
-| **B** | 20 | 0 | 0% | n/a |
-| **C** | 22 | 0 | 0% | n/a |
+| **A** | 34 | 0 | 0% | n/a |
+| **A.b** | 14 | 0 | 0% | n/a |
+| **A.c** | 17 | 0 | 0% | n/a |
+| **B** | 23 | 0 | 0% | n/a |
+| **C** | 24 | 0 | 0% | n/a |
 | **D** | 4 | 0 | 0% | n/a |
-| **E** | 14 | 0 | 0% | n/a |
+| **E** | 16 | 0 | 0% | n/a |
 | **F** | 1 | 0 | 0% | n/a |
 | **G** | 6 | 0 | 0% | n/a |
 | **H** | 2 | 0 | 0% | n/a |
