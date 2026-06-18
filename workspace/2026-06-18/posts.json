@@ -1,0 +1,31 @@
+{
+  "date": "2026-06-18",
+  "lead_title": "Agentic AI scales past the experiment phase, but $12M/hour dependency risk changes everything",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A.c",
+      "hook_score": 8,
+      "conviction": "L2: Enterprises paying $1.7B for agentic workflows while their AI strategies optimize for the wrong capabilities — massive consulting opportunity.",
+      "post": "Databricks just hit $1.7 billion in AI revenue.\n\n70% growth in 6 months. 25% of their total ARR.\n\nBut here's the thing everyone's missing.\n\nThe companies paying those billions? Their AI strategies were written before agentic workflows existed.\n\nEvery week I watch enterprises execute playbooks from late 2025. Model access. Prompt optimization. Feature enhancement.\n\nMeanwhile, the technology moved to autonomous operations.\n\nDatabricks customers aren't buying \"AI-powered\" upgrades. They're buying systems that run their data pipelines without human oversight. Month-long data science projects compressed into week-long automated processes.\n\nAt Atlan, we see it too. Teams with 15 data engineers now need 5 engineers plus agents handling pipeline maintenance and model retraining.\n\nThe economics are brutal. When AI products outgrow the platforms they sit on, every enterprise software company faces build-or-be-displaced pressure. Salesforce, ServiceNow, and Workday are watching Databricks prove enterprises will pay premium for workflow autonomy.\n\nThe gap between pre-agentic strategies and autonomous workflow reality? That's the largest consulting opportunity in enterprise software.\n\nIMO, companies locked into 2025 AI strategies become either acquisition targets or massive rebuild projects.\n\nWhat would your team's workflow look like if AI had always been autonomous?"
+    },
+    {
+      "option": 2,
+      "template": "personal-I-observer",
+      "hook_pattern": "A.c",
+      "hook_score": 9,
+      "conviction": "L1: Platform dependency risk now has a measurable price tag that changes every build-vs-buy decision.",
+      "post": "$12 million per hour.\n\nThat's what Garry Tan calculated the Fable 5 ban cost in lost developer productivity.\n\nI build AI agents at Atlan and this number changed how I think about every API decision.\n\nThe math is simple. 5 million developers use AI coding tools daily. Fully-loaded cost: $90 per hour. When the platform goes dark, the productivity hit is immediate and measurable.\n\nThis is the first credible quantification of AI platform dependency risk.\n\nBefore this week, platform risk was something CTOs worried about in architecture reviews. Now it's a specific price tag that boards can understand.\n\nThe same week Databricks announced $1.7 billion in agentic AI revenue, every developer using AI tools got a lesson in what happens when that infrastructure disappears overnight.\n\nWhen we build agents at Atlan, we don't just evaluate capability and cost anymore. We factor in regulatory risk, vendor stability, and operational continuity. The cascade effect extends beyond the immediate ban. Every enterprise using AI coding tools now faces questions about redundancy, data sovereignty, and operational continuity that didn't exist when these tools were productivity add-ons rather than critical infrastructure.\n\nThe teams willing to pay $1.7 billion for autonomous workflows will also pay premium prices for AI infrastructure that can't be shut down by platform decisions.\n\nPlatform risk isn't a future concern. It's a current expense that needs to be engineered around.\n\nWhat's your backup plan when your primary AI tool goes dark for 24 hours?"
+    },
+    {
+      "option": 3,
+      "template": "relatable-human",
+      "hook_pattern": "B",
+      "hook_score": 8,
+      "conviction": "L3: Small teams with owned AI infrastructure beat enterprises with platform dependencies — the cost difference is now calculable.",
+      "post": "I spent this morning auditing every AI API our agents depend on.\n\nThe exercise was triggered by one number: $12 million per hour.\n\nThat's what the Fable 5 ban cost in lost developer productivity. 5 million developers suddenly without their primary workflow automation.\n\nI've been building AI agents for months and never quantified dependency risk until now.\n\nHere's what I found:\n- 7 external APIs for different workflow steps\n- 4 had no documented failover\n- 2 were single points of failure for critical GTM processes\n\nThe teams paying Databricks $1.7 billion for autonomous workflows understand something most don't. When platform shutdowns cost $12 million per hour, owned infrastructure becomes competitive advantage.\n\nEvery enterprise locked into pre-agentic strategies faces the same choice. Buy autonomous workflow capabilities from vendors, or rebuild internally with dependency risk designed out from day one.\n\nAt Atlan we've been building this layer for a while. The difference between $90 per hour productivity and zero productivity when platforms fail? That gap justifies premium pricing for reliability.\n\nSmall teams with owned AI infrastructure operate at fundamentally different risk profiles than enterprises with platform dependencies.\n\nThe cost difference is no longer abstract. It's $12 million per hour.\n\nHow many external AI APIs does your product depend on right now?"
+    }
+  ]
+}
