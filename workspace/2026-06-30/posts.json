@@ -1,0 +1,31 @@
+{
+  "date": "2026-06-30",
+  "lead_title": "AI coding tools are collapsing traditional software development workflows, enabling tiny teams to ship at previously impossible speed and scale",
+  "best_option": 1,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A",
+      "hook_score": 8,
+      "conviction": "L2: The debate over team size misses the real shift — coordination overhead is collapsing, making traditional engineering management obsolete for AI-native companies.",
+      "post": "Small teams beat 50-person orgs in 2026.\n\nEddie Kim just proved it.\n\nHis 5-person team at Gusto shipped a full AI product line in 10 weeks using Claude Code.\n\nNo Figma mockups. No Jira tickets. No documentation.\n\nJust a permanent Zoom room and aggressive iteration.\n\nMost CTOs are still hiring like it's 2022. Building org charts. Adding process layers. Fighting coordination tax.\n\nThey're optimizing the wrong metric.\n\nAI handles the coordination overhead that normally scales with team size.\n\nWhen 25 engineers spend weeks aligning on requirements, 5 people with AI agents ship and iterate in real-time.\n\nAt Atlan, we've been building agents for months and this tracks.\n\nThe difference isn't the tools. It's treating Claude Code as an execution layer, not just a coding assistant.\n\n- Documentation happens in working code\n- Testing happens through AI iteration\n- Design handoffs happen via shared screens\n\nThe bottleneck isn't typing speed anymore. It's decision-making speed.\n\nHere's what scares incumbents: Gusto's team structure scales down, not up.\n\nYou can't take a 50-person engineering org and make it work like 5 people.\n\nBut you can start with 5 and stay small longer than anyone thought possible.\n\nThe founders who get this early win the next wave.\n\nThe ones who don't get stuck paying 2022 costs on 2026 timelines.\n\nWhat's your team building that requires 50 people instead of 5?"
+    },
+    {
+      "option": 2,
+      "template": "absurdist-truth-teller",
+      "hook_pattern": "C",
+      "hook_score": 8,
+      "conviction": "L1: Most builders haven't noticed that mobile supervision of AI coding agents is turning programming into an async management job — you can ship code while sleeping.",
+      "post": "Coding agents now work night shifts better than junior engineers.\n\nCursor just shipped a mobile app that lets you supervise coding agents from anywhere.\n\nCommuting. Meetings. Sleep.\n\nYour agent codes while you're not even at a computer.\n\nI watched a builder set up a complex refactoring before leaving the office.\n\nProvided direction from his phone during dinner.\n\nReturned the next morning to working code ready for review.\n\nThe agent worked 14 hours. The human worked 20 minutes.\n\nThis changes the math on everything.\n\nYour working day just extended without extending your coding hours.\n\nEarly adopters are already using this pattern:\n- Set objectives before leaving\n- Check progress remotely\n- Review and ship the next morning\n\nWhat does this look like in practice? A junior engineer who never sleeps, never burns out, and often writes better code than humans.\n\nThe bottleneck shifts from typing speed to decision-making speed.\n\nBut here's the absurd part: most builders are still treating AI coding tools like fancy autocomplete.\n\nOne terminal. One session. Human always present.\n\nMeanwhile, the ones who figure out async supervision are shipping 10x faster.\n\nThey're managing code production like a night shift operation.\n\nWhile everyone else argues about prompt engineering, they're sleeping through their deployments.\n\nThe weirdest competitive advantage in 2026: learning to manage code you never wrote while you were unconscious.\n\nHow do you even put that on a resume?"
+    },
+    {
+      "option": 3,
+      "template": "relatable-human",
+      "hook_pattern": "B",
+      "hook_score": 7,
+      "conviction": "L3: The $550B memory investment timeline gives builders a concrete roadmap for when AI hardware constraints lift — plan your scaling around 2027-2028, not wishful thinking.",
+      "post": "I plan AI infrastructure investments like most people plan vacation budgets.\n\nBadly. With hope instead of math.\n\nSamsung and SK Hynix just committed $550 billion to solve \"RAMageddon\", the memory shortage choking AI systems.\n\nThat's not a number. That's a timeline.\n\nNew fab facilities take 3-4 years to build and ramp production.\n\nSo memory becomes abundant and cheap around 2027-2028.\n\nIf construction starts now.\n\nEvery builder planning AI infrastructure is betting on this timeline whether they realize it or not.\n\nScale beyond current memory constraints? You're betting these fabs deliver on schedule.\n\nBuild conservative systems that fit today's limits? You're betting they don't.\n\nAt Atlan, we've been thinking about this for our agent infrastructure.\n\nThe honest truth: I have no idea if $550B in South Korean investment is realistic.\n\nBut I know the alternative.\n\nMemory stays the limiting factor on AI scaling through the decade.\n\nYour 2026 system design is either future-proof or obsolete by 2028.\n\nNo middle ground.\n\nHere's what I'm watching: whether these facilities break ground in the next 6 months.\n\nIf they do, we plan for abundant memory in 3 years.\n\nIf they don't, we design for scarcity through 2030.\n\nThe most expensive mistake: building for tomorrow's hardware with today's timeline.\n\nOr building for today's constraints when tomorrow's abundance is already funded.\n\nWhat's your memory ceiling right now, and what happens if it disappears in 2028?"
+    }
+  ]
+}
