@@ -167,38 +167,38 @@ p.p.s First day at the Vipassana center 👇🏻
 | Template | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
 | **absurd-mirror** | 1 | 0 | 0% | n/a | ← never shipped
-| **absurdist** | 5 | 0 | 0% | n/a | ← never shipped
+| **absurdist** | 6 | 0 | 0% | n/a | ← never shipped
 | **absurdist-data-point** | 1 | 0 | 0% | n/a | ← never shipped
-| **absurdist-truth-teller** | 21 | 0 | 0% | n/a | ← never shipped
+| **absurdist-truth-teller** | 23 | 0 | 0% | n/a | ← never shipped
 | **commentary-take** | 6 | 0 | 0% | n/a | ← never shipped
-| **contrarian** | 25 | 0 | 0% | n/a | ← never shipped
+| **contrarian** | 28 | 0 | 0% | n/a | ← never shipped
 | **contrarian philosopher** | 1 | 0 | 0% | n/a | ← never shipped
-| **contrarian-philosopher** | 30 | 0 | 0% | n/a | ← never shipped
-| **data-point** | 25 | 0 | 0% | n/a | ← never shipped
+| **contrarian-philosopher** | 31 | 0 | 0% | n/a | ← never shipped
+| **data-point** | 26 | 0 | 0% | n/a | ← never shipped
 | **dot-connecting** | 3 | 0 | 0% | n/a | ← never shipped
 | **pattern-observation** | 16 | 0 | 0% | n/a | ← never shipped
 | **personal story** | 1 | 0 | 0% | n/a | ← never shipped
 | **personal-I observer** | 6 | 0 | 0% | n/a | ← never shipped
 | **personal-I-observer** | 15 | 0 | 0% | n/a | ← never shipped
-| **personal-discovery** | 9 | 0 | 0% | n/a | ← never shipped
+| **personal-discovery** | 11 | 0 | 0% | n/a | ← never shipped
 | **personal-i-observer** | 2 | 0 | 0% | n/a | ← never shipped
 | **personal-observer** | 4 | 0 | 0% | n/a | ← never shipped
 | **relatable** | 1 | 0 | 0% | n/a | ← never shipped
-| **relatable-human** | 7 | 0 | 0% | n/a | ← never shipped
+| **relatable-human** | 8 | 0 | 0% | n/a | ← never shipped
 | **vulnerable victor** | 1 | 0 | 0% | n/a | ← never shipped
 | **vulnerable-observer** | 1 | 0 | 0% | n/a | ← never shipped
-| **vulnerable-victor** | 2 | 0 | 0% | n/a | ← never shipped
+| **vulnerable-victor** | 3 | 0 | 0% | n/a | ← never shipped
 
 ### By source hook pattern
 
 | Hook | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
-| **A** | 44 | 0 | 0% | n/a |
+| **A** | 48 | 0 | 0% | n/a |
 | **A.b** | 18 | 0 | 0% | n/a |
-| **A.c** | 28 | 0 | 0% | n/a |
-| **B** | 25 | 0 | 0% | n/a |
-| **C** | 30 | 0 | 0% | n/a |
-| **D** | 5 | 0 | 0% | n/a |
+| **A.c** | 30 | 0 | 0% | n/a |
+| **B** | 27 | 0 | 0% | n/a |
+| **C** | 33 | 0 | 0% | n/a |
+| **D** | 6 | 0 | 0% | n/a |
 | **E** | 19 | 0 | 0% | n/a |
 | **F** | 1 | 0 | 0% | n/a |
 | **G** | 11 | 0 | 0% | n/a |
