@@ -1,0 +1,31 @@
+{
+  "date": "2026-07-05",
+  "lead_title": "Claude Fable is crossing a practitioner trust threshold for production-grade software work with measurable cost-outcome data",
+  "best_option": 1,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A.b",
+      "hook_score": 8,
+      "conviction": "L2: AI code review ROI beats human review economics when measured by bugs caught per dollar, not development speed",
+      "post": "Everyone has AI code reviewers.\n\nAlmost no one is measuring the right thing.\n\nSimon Willison just let Claude Fable do a final review of sqlite-utils 4.0 before shipping. Cost: 49.25. Result: 5 release blockers caught, including a connection-poisoning data loss bug.\n\nThat's cheaper than 30 minutes with any senior engineer.\n\nBut here's what most teams miss.\n\nThey track \"time saved coding\" instead of \"production bugs prevented.\"\n\n- Time saved = nice-to-have productivity win\n- Bugs prevented = measurable revenue protection\n- Data loss prevented = reputation damage avoided\n\nAt Atlan, we've been testing AI review as a quality gate, not just a speed tool.\n\nThe numbers don't lie. 49 to catch bugs that would cost thousands in customer support and reputation repair.\n\nThe worst bug Fable caught? Table.delete_where() runs DELETE via a bare execute() with no atomic wrapper. Every subsequent operation takes the savepoint branch and never commits. Complete data loss when the database reopens.\n\nSimon missed it in his own final review. Fable caught it in minutes.\n\nYour human reviewers are still better at architecture and business logic.\n\nYour AI reviewers are better at systematic edge cases and transaction handling.\n\nThe winning teams use both. They run AI review first for systematic bugs, then human review for business logic validation.\n\nUse both. Measure bugs caught per dollar, not just lines per minute.\n\nWhat's the costliest bug your last human-only review missed?"
+    },
+    {
+      "option": 2,
+      "template": "personal-discovery",
+      "hook_pattern": "B",
+      "hook_score": 8,
+      "conviction": "L3: Teams should start tracking cost-per-bug and cost-per-release as standard engineering metrics for AI code review",
+      "post": "I've been running AI code review wrong for months.\n\nAt Atlan, we kept using Claude for \"faster development\" instead of \"better releases.\"\n\nThen Simon Willison shared something that changed how I think about AI review entirely.\n\nHe let Claude Fable do final review on sqlite-utils 4.0. 49.25 total cost. The result? 5 release blockers caught, including one that would have poisoned database connections and caused complete data loss.\n\nThe economics are brutal:\n- Senior engineer review: 00-400/hour\n- Claude Fable comprehensive review: 49 total\n- Production bug costs: thousands in support + reputation damage\n\nBut here's what I learned about my own mistake.\n\nI was measuring \"lines reviewed per minute\" instead of \"critical bugs caught per dollar.\"\n\nWrong metric. Wrong outcome.\n\nThe teams that get AI review right treat it as autonomous quality control, not coding assistance.\n\nThey run it on pre-merge branches. They give it transaction boundaries to validate. They let it catch the systematic edge cases human reviewers often miss.\n\nOver 37 prompts and 34 commits, Fable worked through comprehensive feedback while Simon went to a 4th of July parade. The AI handled sustained attention for thorough debugging. The human provided high-level direction and final verification.\n\nMost importantly: they track cost-per-bug prevented, not time-per-feature shipped.\n\nIMO, any team shipping to customers should be running this math on their current review process.\n\nWhat would catching 5 release blockers be worth to your last sprint?"
+    },
+    {
+      "option": 3,
+      "template": "news-take",
+      "hook_pattern": "A.c",
+      "hook_score": 7,
+      "conviction": "L1: The trust threshold for AI in production software decisions is shifting from copilot to autonomous agent",
+      "post": "Claude Fable just found 5 release blockers for 49.25.\n\nSimon Willison documented the whole thing. SQLite-utils 4.0 final review. One AI agent. 37 prompts. 34 commits. 5 critical bugs caught, including connection poisoning that would cause data loss.\n\nBut here's what nobody is talking about.\n\nThis isn't about the money or the bugs.\n\n\"49 to prevent thousands in damage\" makes the ROI case. But Simon's real point was different:\n\n\"I didn't trust Opus enough for high-risk software decisions. I'm reaching that trust level with Fable.\"\n\nThat's the shift.\n\nFrom \"AI suggests, human validates\" to \"AI decides, human monitors.\"\n\nThe practitioners I follow are crossing this threshold one by one. They're letting AI make autonomous choices about transaction handling, test coverage, documentation updates.\n\nDecisions that break production if wrong.\n\nAnd they're doing it because the reliability finally matches the stakes.\n\nThe specific trust behaviors matter here. Simon let Fable handle complex technical decisions like Python 3.12 autocommit compatibility and comprehensive test suite validation. Not simple coding tasks, decisions requiring understanding of system interactions, edge cases, and backward compatibility.\n\nThe bottleneck isn't AI capability anymore. It's human willingness to delegate critical decisions to systems they don't fully understand.\n\nMost teams are still in copilot mode. The ones crossing to agent mode are shipping faster with fewer production issues.\n\nWhere's your team on that spectrum?"
+    }
+  ]
+}
