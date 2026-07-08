@@ -1,0 +1,31 @@
+{
+  "date": "2026-07-08",
+  "lead_title": "Open-source AI has a China problem, and founders building on it should panic now",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A.c",
+      "hook_score": 8,
+      "conviction": "L1: The $9.75B forward-deployed engineering spend proves AI still needs massive human expertise to work in real business contexts.",
+      "post": "Five AI companies spent $9.75 billion on forward-deployed engineers this year.\n\nNot on better models. Not on compute. On humans.\n\nEvery week I watch builders treat AI like plug-and-play software.\n\nBut the biggest number in AI this year tells a different story.\n\nForward-deployed engineering means sending engineers to live inside customer offices. Configure the AI system. Train their teams. Operate it daily.\n\nThis creates permanent human infrastructure, not traditional consulting.\n\nIf AI models were truly ready for deployment, companies wouldn't need armies of implementation specialists.\n\nThe $9.75 billion spend went from \"a Palantir signature\" to 25% of Accenture's labor budget.\n\nThat's not a niche deployment model anymore.\n\nAt Atlan, we've learned shipping agents fast and fixing them publicly beats shipping perfectly.\n\nBut even our best agents need humans in the loop for the complex stuff.\n\nThe successful pattern: start with forward-deployed teams to prove value. Then gradually automate the human work into the product.\n\nThat transition takes years, not months. Meanwhile, you need enough margin to fund human deployment at scale.\n\nI think this explains why AI companies raise such large rounds relative to traditional SaaS companies. They're not just funding R&D and customer acquisition. They're funding human deployment teams that cost $200,000+ per year per customer.\n\nWhat does your AI actually need humans for right now?"
+    },
+    {
+      "option": 2,
+      "template": "personal-observer",
+      "hook_pattern": "A",
+      "hook_score": 9,
+      "conviction": "L2: The entire open-source AI ecosystem depends on Chinese researchers continuing to release frontier models — and that assumption is about to fail.",
+      "post": "Every startup's AI strategy has the same hidden dependency.\n\nChinese researchers sharing their work.\n\nI see it across my network. Teams building on Llama alternatives for cost reasons. Sovereign AI projects banking on DeepSeek releases. Startups using open-weights models instead of paying OpenAI.\n\nBut what happens if Chinese labs stop releasing model weights?\n\nThree forces could break the pattern. US export controls tightening further. Chinese government restrictions on foreign access. Chinese labs realizing they can monetize instead of giving away for research prestige.\n\nBuilding a real AI product on open weights takes 12-18 months. Policy changes happen in weeks.\n\nThe symbiosis between frontier labs and open-source works because frontier labs push boundaries while open-source implementations chase them 6-12 months later.\n\nBut that chase depends on the chasers keeping up.\n\nDeepSeek stops releasing weights tomorrow? Sovereign AI projects lose their technical foundation. Startups hit a capability ceiling. The entire \"open-source will make AI cheap\" thesis collapses.\n\nI keep coming back to the timeline mismatch.\n\nThe foundation of AI strategy is changing faster than most builders realize. Build vs buy decisions depend on continued access to open-weights models that might disappear.\n\nIMO, the window to architect around this risk is narrowing fast.\n\nWhat's your backup plan if open-weights models disappear in six months?"
+    },
+    {
+      "option": 3,
+      "template": "absurdist-truth-teller",
+      "hook_pattern": "C",
+      "hook_score": 8,
+      "conviction": "L3: Microsoft's own AI models can't beat third-party models in Microsoft's own products — proving that even massive resources hit quality gaps when building in-house.",
+      "post": "Microsoft built MAI-1 to power Office applications they control.\n\nTheir own model loses to Anthropic's in Excel tasks.\n\nThink about that absurdity for a second.\n\nMicrosoft has 200,000 employees, $200+ billion cash, and more enterprise customer feedback than almost any company.\n\nThey built MAI-1 specifically for Office. Yet Claude plugins outperform native Copilot integration.\n\nThis is the in-house model trap.\n\nEvery team I talk to is weighing build vs buy for AI. Microsoft just gave us the answer.\n\nBuilding frontier AI capabilities requires continuous scaling, massive compute clusters, and specialized research talent.\n\nMost companies lack one of these. Microsoft, with infinite resources, still produces models that underperform external alternatives.\n\nFor builders, this proves the build side carries enormous hidden costs. You're not just building a model. You're building the research capability to keep that model competitive indefinitely.\n\nAt Atlan, we use Claude for most of our agent workflows because it consistently outperforms alternatives we could build ourselves.\n\nThe lesson: vendor lock-in creates immediate product risk, but so does trying to match frontier capabilities in-house.\n\nSometimes the thing you can't build is exactly what you should buy.\n\nHow much of your AI stack are you building that you should probably be buying?"
+    }
+  ]
+}
