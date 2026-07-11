@@ -1,0 +1,31 @@
+{
+  "date": "2026-07-11",
+  "lead_title": "Work mode is the new chat mode: AI just shifted from conversation to task completion",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A",
+      "hook_score": 8,
+      "conviction": "L2: Most founders are still building chat interfaces when the real value is in autonomous task execution — the conversation paradigm was training wheels.",
+      "post": "Chat mode is dead.\n\nI see it across every AI product launch, founders still optimizing for better responses when users actually want autonomous execution.\n\nChatGPT just proved this with their mode split. Same model. Different capabilities. Work mode can run code that talks to the internet. Chat mode can't.\n\nSimon Willison tested both with yt-dlp to extract YouTube subtitles. Chat mode failed. Work mode succeeded.\n\nThat architectural difference creates a capability gap users notice immediately. A tool that can fetch real data, execute scripts, and modify external systems is fundamentally different from a tool that can only respond to what you tell it.\n\nEvery week I watch builders ship AI products that try to be both conversational and execution-focused. They end up being neither.\n\nThe successful pattern: design for delegation and verification rather than conversation and explanation. Give users the ability to assign tasks with specific outcomes, then give them the ability to inspect and modify how those tasks were completed.\n\nAt Atlan, when we build agents, we don't have them click buttons. They call APIs, read from databases, talk to other apps through MCPs, and post results where we want them.\n\nThe humans never open the app when the agent is working.\n\nThe interface paradigm moved from \"ask and answer\" to \"delegate and execute.\" Builders who get this early win.\n\nWhat tasks do your users currently do manually that AI could do better?"
+    },
+    {
+      "option": 2,
+      "template": "personal-I-observer",
+      "hook_pattern": "A.c",
+      "hook_score": 9,
+      "conviction": "L1: Creative iteration cycles are compressing so dramatically that product teams can test exponentially more ideas in the same time budget.",
+      "post": "One prompt just compressed weeks of creative work into minutes.\n\nEthan Mollick gave Fable a simple instruction: \"Take this game and do something incredible with it to make it something very different. Be creative.\"\n\nFable turned a basic city-building game into DEEP TIME, players create cities, watch them be abandoned and forgotten, then excavate them as future archaeologists.\n\nComplete creative transformation. Live demo anyone can play right now.\n\nI build AI agents at Atlan and this tracks. Traditional tools help you implement ideas faster. AI agents help you discover ideas you wouldn't have had.\n\nThe mechanism: Fable understands code at the conceptual level, not just the syntax level. When it reads game code, it sees underlying systems, resource generation, time progression, user interaction patterns, rather than just functions and variables.\n\nThat conceptual understanding lets it remix systems into new experiences.\n\nThis changes the economics of product development:\n\n- Instead of spending six weeks building one concept to test, generate twenty and build the three that test best\n- Creative iteration becomes a different game, generate variations, select winners\n- The bottleneck shifts from \"can I build this?\" to \"which version should I build?\"\n\nTeams that adapt their workflow to this reality ship more creative products.\n\nThe compound effect over twelve months is massive.\n\nWhat creative process in your workflow takes weeks that could take minutes?"
+    },
+    {
+      "option": 3,
+      "template": "absurdist-truth-teller",
+      "hook_pattern": "C",
+      "hook_score": 8,
+      "conviction": "L3: Knowledge workers need to see the AI's reasoning process, not just its outputs, to trust and build on the work.",
+      "post": "Most AI tools treat knowledge workers like toddlers.\n\nGive me the summary. Give me the analysis. Give me the recommendation.\n\nBut knowledge workers aren't toddlers. They need to understand the reasoning chain to trust and build on AI-generated work.\n\nEthan Mollick contrasts NotebookLM with what he calls \"software-brained\" AI tools. NotebookLM doesn't just produce research outputs. It exposes the analysis process, shows source connections, and lets users trace how conclusions formed from evidence.\n\nMost AI products optimize for clean final outputs. But that's backwards.\n\nWhen a human colleague gives you analysis, you can ask follow-up questions about their reasoning. You can challenge assumptions. You can explore alternative interpretations of the same evidence.\n\nAI tools that enable this kind of interaction feel more trustworthy and generate more useful outputs.\n\nThe deeper principle: AI tools for knowledge work should feel like collaboration with a transparent colleague, not delegation to a black box.\n\nEvery week I see builders ship AI products that hide the thinking process. They assume users only care about results.\n\nWrong.\n\nUsers want to see which sources influenced which conclusions, where assumptions were made, and which connections might be uncertain.\n\nShow the work, not just the answer.\n\nHow transparent is the reasoning in your AI product?"
+    }
+  ]
+}
