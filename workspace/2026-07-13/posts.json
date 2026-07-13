@@ -1,0 +1,31 @@
+{
+  "date": "2026-07-13",
+  "lead_title": "The workforce has split on AI while the window for open models closes fast",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A",
+      "hook_score": 8,
+      "conviction": "L2: The workforce bifurcation isn't random — it's selection pressure. AI-native teams will naturally cluster while traditional teams resist.",
+      "post": "Half the workforce thrives with AI. Half struggles with burnout.\n\nEveryone's treating this like a training problem.\n\nIMO, it's selection pressure.\n\nWorkers who thrive with AI gravitate toward AI companies. Workers who resist cluster at traditional companies avoiding automation.\n\nThat's the real split.\n\nAI-native teams hire the energized segment. Traditional teams compete for shrinking pools of AI-resistant workers.\n\nI see it at Atlan.\n\nWhen we hire for agent work, we skip resumes listing Claude Code experience. We look for people already using it daily. Same with Cursor, v0, Replit agents. They adapt faster. Ship better features. Ask different questions.\n\nThat's selection pressure, not training gaps.\n\nWorkers struggling with AI tools are optimizing for different environments. Traditional workflows, human-only processes, predictable change cycles.\n\nBut the market is bifurcating.\n\nShopify made AI fluency a hiring criteria. Klarna cut 700 support roles after Copilot rollouts. Duolingo went AI-first on contractor work. The gap between AI-comfortable and AI-resistant workers is becoming a hiring signal.\n\nThe economic incentive compounds this. AI-comfortable workers command higher salaries because they deliver measurable productivity improvements. Workers who resist face wage stagnation as AI-augmented colleagues produce more.\n\nMost founders still treat AI comfort as nice-to-have.\n\nWhat if it's the primary signal of future performance?"
+    },
+    {
+      "option": 2,
+      "template": "relatable-human",
+      "hook_pattern": "E",
+      "hook_score": 8,
+      "conviction": "L1: Founders don't realize they face a permanent fork in the next six months — both workforce strategy and model choice compound quickly.",
+      "post": "Lenny's Newsletter surveyed thousands of tech workers this week.\n\nThe workforce split almost exactly in half.\n\nHalf thrive with AI tools. Half struggle with burnout at record highs.\n\nMeanwhile Nathan Lambert argues open source AI has six months left before closed models make it irrelevant.\n\nEveryone's debating these as separate stories.\n\nI think they're the same story.\n\nThe teams hiring AI-native workers naturally choose closed models. They prioritize capability over cost. Build workflows assuming the model improves, not degrades.\n\nTeams with AI-resistant workers choose open models. They prioritize control over performance. Need extensive training for workers who resist AI tools plus extensive infrastructure for limited capabilities.\n\nThe middle paths create the most risk.\n\nAI-native teams building on open models hit capability walls that frustrate workers expecting rapid improvement.\n\nAI-resistant teams building on closed models pay premium costs for capabilities they underutilize.\n\nAt Atlan, we've been building agents for months and this tracks.\n\nThe decisions compound quickly. Workforce choice determines model strategy. Model strategy determines product possibilities. Product possibilities determine which customers you can serve.\n\nTeams that recognize this inflection point early gain competitive advantages.\n\nWhat does your current team composition tell you about your model strategy?"
+    },
+    {
+      "option": 3,
+      "template": "personal-I-observer",
+      "hook_pattern": "B",
+      "hook_score": 7,
+      "conviction": "L3: The timing window for open model strategies is closing faster than builders acknowledge — commit now or abandon.",
+      "post": "I've been tracking AI infrastructure choices across my network.\n\nEvery week I watch founders delay the open vs closed model decision.\n\n\"We'll figure it out when we scale.\"\n\"Let's prototype on open, switch to closed later.\"\n\"The gap will narrow soon.\"\n\nNathan Lambert just published analysis that made me rethink everything.\n\nOpen source AI has six months before viability ends.\n\nThe mechanism is data access, not compute costs. Closed model companies signed exclusive partnerships with content providers that open projects cannot replicate.\n\nWhen the next trains on premium datasets, open alternatives fall behind permanently.\n\nFor builders, this creates a strategic fork.\n\nTeams betting on open models need to commit fully and immediately. Half-measures create technical debt and vendor lock-in. Open strategies require building around limitations, creating independent data moats, accepting narrower capability ceilings.\n\nThe alternative is recognizing closed models will dominate most use cases within twelve months.\n\nI build AI agents at Atlan.\n\nWe chose closed models early because we prioritized capability over cost. Every model improvement feels like free feature upgrades rather than integration challenges.\n\nBut I know teams committed to open models shipping incredible products. The key is commitment. Pick the path. Build for it. Don't hedge.\n\nThe window for hybrid strategies is closing.\n\nWhich path are you actually building for?"
+    }
+  ]
+}
