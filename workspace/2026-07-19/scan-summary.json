@@ -1,0 +1,93 @@
+{
+  "date": "2026-07-19",
+  "generated_at": "2026-07-19T02:28:05Z",
+  "rss": {
+    "feeds_total": 36,
+    "feeds_processed": 35,
+    "feeds_failed": 1,
+    "items_returned": 4,
+    "cutoff_utc": "2026-07-18T02:26:57.391808+00:00",
+    "failing_feeds": [
+      {
+        "url": "https://importai.substack.com/feed",
+        "status": "malformed",
+        "error": "<unknown>:2:1326: not well-formed (invalid token)"
+      }
+    ]
+  },
+  "sitemap": {
+    "sources_total": 4,
+    "sources_ok": 4,
+    "sources_failed": 0,
+    "items_total": 0,
+    "per_source": [
+      {
+        "name": "Cohere",
+        "sitemap_url": "https://cohere.com/sitemap.xml",
+        "filter": "/blog/",
+        "ua": "default",
+        "status": "ok",
+        "error": null,
+        "urls_in_window": 0,
+        "items_scraped": 0,
+        "page_errors": []
+      },
+      {
+        "name": "AI Daily Brief",
+        "sitemap_url": "https://aidailybrief.beehiiv.com/sitemap.xml",
+        "filter": "/p/",
+        "ua": "googlebot",
+        "status": "ok",
+        "error": null,
+        "urls_in_window": 0,
+        "items_scraped": 0,
+        "page_errors": []
+      },
+      {
+        "name": "Superhuman AI",
+        "sitemap_url": "https://www.superhuman.ai/sitemap.xml",
+        "filter": "/p/",
+        "ua": "googlebot",
+        "status": "ok",
+        "error": null,
+        "urls_in_window": 0,
+        "items_scraped": 0,
+        "page_errors": []
+      },
+      {
+        "name": "The Neuron",
+        "sitemap_url": "https://www.theneurondaily.com/sitemap.xml",
+        "filter": "/p/",
+        "ua": "googlebot",
+        "status": "ok",
+        "error": null,
+        "urls_in_window": 0,
+        "items_scraped": 0,
+        "page_errors": []
+      }
+    ]
+  },
+  "x": {
+    "grok_status": "ok",
+    "grok_fail_reason": null,
+    "posts_returned_raw": 12,
+    "posts_within_24h": 11,
+    "posts_dropped_stale": 1,
+    "cutoff_utc": "2026-07-18T02:28:05.031036+00:00",
+    "dropped_detail": [
+      {
+        "url": "https://x.com/emollick/status/2078274765475709035",
+        "reason": "older_than_24h",
+        "date_of_post": "Sat, 18 Jul 2026 00:24:51 GMT"
+      }
+    ]
+  },
+  "totals": {
+    "rss_items": 4,
+    "sitemap_items": 0,
+    "x_posts": 11,
+    "total": 15
+  },
+  "status": "scan-ok",
+  "degraded_reasons": []
+}
