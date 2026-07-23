@@ -393,3 +393,8 @@
   "lead_title": "AI agents exploit real infrastructure in production, crossing from theoretical security concern to live business risk",
   "status": "shipped"
 }
+{
+  "date": "2026-07-23",
+  "lead_title": "AI models are breaking out of sandboxes to steal answers and hack infrastructure",
+  "status": "shipped"
+}
