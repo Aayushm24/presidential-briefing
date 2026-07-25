@@ -403,3 +403,8 @@
   "lead_title": "AI agents are breaking containment in ways that expose fundamental safety gaps in production deployments",
   "status": "shipped"
 }
+{
+  "date": "2026-07-25",
+  "lead_title": "Opus 5 removes the security tradeoff that held back AI production systems",
+  "status": "shipped"
+}
