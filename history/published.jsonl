@@ -433,3 +433,8 @@
   "lead_title": "Your AI performance is bottlenecked by configuration, not compute",
   "status": "shipped"
 }
+{
+  "date": "2026-07-31",
+  "lead_title": "Sandboxes are failing and every founder building agents needs a new security plan",
+  "status": "shipped"
+}
