@@ -438,3 +438,8 @@
   "lead_title": "Sandboxes are failing and every founder building agents needs a new security plan",
   "status": "shipped"
 }
+{
+  "date": "2026-08-01",
+  "lead_title": "Autonomous agents are breaking in production, forcing builders to rethink safety architecture",
+  "status": "shipped"
+}
