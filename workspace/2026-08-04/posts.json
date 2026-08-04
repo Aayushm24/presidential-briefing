@@ -1,0 +1,31 @@
+{
+  "date": "2026-08-04",
+  "lead_title": "Baseten's $13B raise signals inference engineering beats model training",
+  "best_option": 1,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A.c",
+      "hook_score": 8,
+      "conviction": "Enterprise AI buyers reward production reliability over research benchmarks — deployment expertise is now worth more than model training capabilities.",
+      "post": "Someone raised $13 billion just to make models run faster.\n\nThat's not about having better GPUs.\n\nBaseten spent three years teaching engineers how to optimize models for production. While OpenAI and Anthropic competed on benchmark scores, Baseten competed on uptime and cost per token in actual workloads.\n\nThe $13B valuation says enterprise buyers pay more for systems that work than systems that score highest on MMLU.\n\nI see this across my network. Teams shipping AI products don't fail because their model is 3% less accurate. They fail because the model takes 12 seconds to respond, costs $40 per user session, or crashes when 10 concurrent users hit it.\n\nAt Atlan, we've been building agents for months and this tracks. The hard problems aren't academic:\n- Memory allocation\n- Batching strategies\n- Caching layers\n- Cost optimization\n\nMost AI companies hire ML researchers to solve production problems. That's like hiring theoretical physicists to fix production line efficiency.\n\nDifferent skillset entirely.\n\nThe companies betting $100M+ on AI deployment don't care if your model scored 2% better on benchmarks. They care if it can handle their actual usage patterns without infrastructure costs spiraling.\n\nWhat I keep coming back to is how this mirrors the cloud infrastructure wave from 2008-2015. Amazon didn't build better servers. They built better abstraction layers.\n\nBaseten built similar abstractions for model deployment.\n\nThe gap between \"works in the lab\" and \"works for paying customers\" became a $13 billion market opportunity.\n\nWhat's the ugliest workaround in your current agent setup?"
+    },
+    {
+      "option": 2,
+      "template": "personal-I-observer",
+      "hook_pattern": "D",
+      "hook_score": 7,
+      "conviction": "The skill gap between training models and deploying them profitably is massive — inference engineering is becoming the new competitive advantage.",
+      "post": "Every week I watch another AI startup get crushed by their own success.\n\nThe demo works perfectly. 1,000 users sign up overnight. Then the bills arrive.\n\n$18,000 for a Tuesday.\n\nThat's the wall every AI product hits. Research demos work in notebooks. Production systems crash in real workloads.\n\nBaseten just raised $13 billion because they solved this problem while everyone else was focused on making their next research paper more impressive.\n\nThree years ago, they were teaching Python developers how to deploy models without breaking their laptops. Today they're worth more than most AI research labs.\n\nWhat changed wasn't their models. They don't train foundation models.\n\nWhat changed was they understood that the difference between 200ms and 2000ms response time determines user retention. Users stay in your product with fast responses, bounce with slow ones.\n\nI build AI agents at Atlan, and the problems that kill projects are never the model being 3% less accurate:\n- Request batching\n- Model quantization\n- Memory management\n- Failure handling\n\nThe unglamorous parts.\n\nMost teams spend months optimizing prompts when they should be optimizing inference pipelines.\n\nThe $13B bet is that production optimization beats research lab capabilities in enterprise sales.\n\nIMO, that's exactly right.\n\nThe companies making real money from AI focus on reliable systems rather than benchmark performance. These companies build systems that actually work when customers need them to.\n\nHow much are you spending per user session right now?"
+    },
+    {
+      "option": 3,
+      "template": "absurdist-truth-teller",
+      "hook_pattern": "C",
+      "hook_score": 8,
+      "conviction": "While everyone debates which model is best, the companies making real money are the ones that make any model actually work in production.",
+      "post": "A company that teaches people how to make AI run faster is now worth more than most of the companies making the actual AI.\n\nThink about that for a second.\n\nBaseten raised $13 billion. They don't train models. They don't have breakthrough research. They don't have the latest GPT-whatever.\n\nThey just know how to make any model run without bankrupting you.\n\nWhile frontier labs compete on who can score highest on MMLU, Baseten competes on who can handle 10,000 concurrent users without melting down.\n\nGuess which one enterprises actually pay for?\n\nEvery AI founder I know has the same nightmare: their product works perfectly until it doesn't. Demo day goes great. Week 2, the infrastructure bill arrives and it's more than their runway.\n\nThat's the gap Baseten filled.\n\nThe technical masterclass everyone was googling for:\n- How to batch requests without breaking latency\n- How to quantize models without losing quality\n- How to handle failures gracefully\n- How to scale without going broke\n\nAt Atlan, this resonates hard. The agents we ship work because we spent months learning these techniques the hard way.\n\nIt's not about having the smartest model. It's about making your model actually usable by real customers at real scale.\n\nThe $13 billion message is clear: the market rewards companies that solve actual problems over companies that win academic benchmarks.\n\nMost AI products fail because they skip the boring infrastructure work.\n\nThe ones that survive master it.\n\nWhat's your current cost per AI interaction?"
+    }
+  ]
+}
