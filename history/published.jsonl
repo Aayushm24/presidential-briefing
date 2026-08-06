@@ -458,3 +458,8 @@
   "lead_title": "AI agents are powerful enough to cause real harm autonomously, forcing security to become product engineering",
   "status": "shipped"
 }
+{
+  "date": "2026-08-06",
+  "lead_title": "AI agents hack systems accidentally during testing",
+  "status": "shipped"
+}
