@@ -1,0 +1,31 @@
+{
+  "date": "2026-08-12",
+  "lead_title": "Open-weight and cloud-deployed model availability is making inference cheap and expanding the surface area for vertical AI applications",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian",
+      "hook_pattern": "A",
+      "hook_score": 8,
+      "conviction": "L2: When infrastructure becomes free, the value moves to knowing what questions to ask it — not building the models.",
+      "post": "Meta just open-sourced a 30B parameter model that uses 52 KiB per token.\n\nSix months ago, getting GPT-4 level performance meant paying OpenAI or Anthropic. Today it means downloading 60GB and running local inference.\n\nI see it across my network, teams shipping with identical models but getting wildly different outcomes.\n\nThe infrastructure layer is becoming cheap enough that everyone can access frontier-quality models. But the companies making real money are the ones building vertical applications that solve specific workflow problems.\n\nAt Atlan, we've learned the hard part isn't the model anymore. It's knowing what workflows to automate and how to integrate into processes teams already follow.\n\nWhen Chai Discovery closed four pharma deals this summer, it wasn't because they had better models than everyone else. They embedded model outputs into the actual day-to-day processes that drug discovery teams already follow.\n\nThe revenue proof matters because vertical AI has been mostly demo-heavy until this year. When pharma companies, who move slower than almost anyone, start paying, it signals the technology crossed a reliability threshold.\n\nWhat changed was not the underlying models. What changed was the workflow integration.\n\nIMO, the next wave of AI companies won't compete on model access. They'll compete on domain expertise and workflow embedding.\n\nWhat specific workflow in your industry could you automate better than anyone else?"
+    },
+    {
+      "option": 2,
+      "template": "data-point",
+      "hook_pattern": "A.c",
+      "hook_score": 9,
+      "conviction": "L3: $1.04M in pipeline from an AI that didn't exist a year ago shows how quickly vertical applications convert when they solve real workflow problems.",
+      "post": "52 KiB per token.\n\nThat's Meta's Muse Glimmer memory usage, 75% less than most frontier models.\n\nEvery week I watch the infrastructure layer get cheaper while vertical applications get more expensive to build well.\n\nHere's what I'm seeing:\n\n- Meta releases 30B open-weight models that run locally\n- OpenAI puts specialized models directly into AWS Bedrock\n- Chai Discovery closes four paying pharma contracts in one summer\n\nThe pattern is always the same.\n\nRaw intelligence becomes commodity. Domain expertise becomes moat.\n\nI build AI agents at Atlan, and the magic isn't in the model. It's in knowing exactly which signals matter for GTM workflows and how to thread them through the tools teams already use daily.\n\nJake, our AI SDR, booked 47 meetings in three months because we built workflow integration, not model capability. The AI calls APIs, reads from databases, talks to other apps through MCPs, and posts results where we want them.\n\nWhen Chai Discovery landed those pharma deals, they weren't selling better models. They were selling molecular design workflows that combine protein structure prediction with drug-target interaction modeling, embedded into processes drug teams already follow.\n\nThat's proprietary data.\n\nThe companies winning this wave aren't building better models. They're building better distribution into existing workflows.\n\nWhat do you know about your domain that the model doesn't?"
+    },
+    {
+      "option": 3,
+      "template": "pattern-observation",
+      "hook_pattern": "B",
+      "hook_score": 7,
+      "conviction": "L1: Most teams are still competing on model access when the real competition moved to workflow integration months ago.",
+      "post": "Every startup I talk to is worried about the same thing.\n\n\"What happens when OpenAI ships our feature?\"\n\nI get it. When infrastructure becomes cheap, feature parity feels inevitable.\n\nBut here's what I keep coming back to.\n\nMeta just released a 30B model with extreme memory efficiency that runs locally. OpenAI put Daybreak cybersecurity models directly into AWS Bedrock. The infrastructure is becoming free.\n\nYet Chai Discovery closed four pharma deals this summer using similar foundational capabilities as dozens of other Bio×AI startups.\n\nThe difference wasn't the model. The difference was workflow integration.\n\nMost teams are still building the model. The winners are building the memory layer, the data connectors, the approval workflows, the output formatting that fits existing processes.\n\nAt Atlan, when we build agents, we don't have them click buttons. They call APIs, read from databases, post results where people expect them.\n\nThat's the thing competitors can't copy.\n\nNot the model output. The context management, the edge case handling, the integration points that make adoption frictionless for teams who already have twelve other tools they can't abandon.\n\nWhen the cost of raw intelligence drops, value moves to knowing what questions to ask it and how to deliver answers in formats teams can actually use.\n\nAre you building better models or better workflows?"
+    }
+  ]
+}
