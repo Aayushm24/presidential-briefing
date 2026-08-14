@@ -170,38 +170,38 @@ p.p.s First day at the Vipassana center 👇🏻
 | **absurd-mirror** | 2 | 0 | 0% | n/a | ← never shipped
 | **absurdist** | 10 | 0 | 0% | n/a | ← never shipped
 | **absurdist-data-point** | 1 | 0 | 0% | n/a | ← never shipped
-| **absurdist-truth-teller** | 40 | 0 | 0% | n/a | ← never shipped
+| **absurdist-truth-teller** | 41 | 0 | 0% | n/a | ← never shipped
 | **commentary-take** | 6 | 0 | 0% | n/a | ← never shipped
-| **contrarian** | 39 | 0 | 0% | n/a | ← never shipped
+| **contrarian** | 40 | 0 | 0% | n/a | ← never shipped
 | **contrarian philosopher** | 1 | 0 | 0% | n/a | ← never shipped
-| **contrarian-philosopher** | 56 | 0 | 0% | n/a | ← never shipped
-| **data-point** | 33 | 0 | 0% | n/a | ← never shipped
+| **contrarian-philosopher** | 59 | 0 | 0% | n/a | ← never shipped
+| **data-point** | 34 | 0 | 0% | n/a | ← never shipped
 | **dot-connecting** | 5 | 0 | 0% | n/a | ← never shipped
 | **news-take** | 1 | 0 | 0% | n/a | ← never shipped
 | **observation-first** | 1 | 0 | 0% | n/a | ← never shipped
-| **pattern-observation** | 17 | 0 | 0% | n/a | ← never shipped
+| **pattern-observation** | 18 | 0 | 0% | n/a | ← never shipped
 | **personal story** | 1 | 0 | 0% | n/a | ← never shipped
 | **personal-I observer** | 6 | 0 | 0% | n/a | ← never shipped
-| **personal-I-observer** | 29 | 0 | 0% | n/a | ← never shipped
+| **personal-I-observer** | 31 | 0 | 0% | n/a | ← never shipped
 | **personal-discovery** | 15 | 0 | 0% | n/a | ← never shipped
 | **personal-i-observer** | 5 | 0 | 0% | n/a | ← never shipped
 | **personal-observer** | 7 | 0 | 0% | n/a | ← never shipped
 | **relatable** | 2 | 0 | 0% | n/a | ← never shipped
-| **relatable-human** | 17 | 0 | 0% | n/a | ← never shipped
+| **relatable-human** | 19 | 0 | 0% | n/a | ← never shipped
 | **vulnerable victor** | 1 | 0 | 0% | n/a | ← never shipped
 | **vulnerable-observer** | 1 | 0 | 0% | n/a | ← never shipped
-| **vulnerable-victor** | 6 | 0 | 0% | n/a | ← never shipped
+| **vulnerable-victor** | 7 | 0 | 0% | n/a | ← never shipped
 
 ### By source hook pattern
 
 | Hook | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
-| **A** | 80 | 0 | 0% | n/a |
+| **A** | 84 | 0 | 0% | n/a |
 | **A.b** | 23 | 0 | 0% | n/a |
-| **A.c** | 44 | 0 | 0% | n/a |
-| **B** | 44 | 0 | 0% | n/a |
-| **C** | 54 | 0 | 0% | n/a |
-| **D** | 8 | 0 | 0% | n/a |
+| **A.c** | 48 | 0 | 0% | n/a |
+| **B** | 46 | 0 | 0% | n/a |
+| **C** | 55 | 0 | 0% | n/a |
+| **D** | 9 | 0 | 0% | n/a |
 | **E** | 32 | 0 | 0% | n/a |
 | **F** | 1 | 0 | 0% | n/a |
 | **G** | 15 | 0 | 0% | n/a |
