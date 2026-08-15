@@ -1,0 +1,31 @@
+{
+  "date": "2026-08-15",
+  "lead_title": "AI agents are becoming the primary unit of enterprise compute consumption, not individual users or queries",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A",
+      "hook_score": 8,
+      "conviction": "L2: The infrastructure layer is still optimized for human usage patterns — but humans aren't the primary consumers anymore, agents are",
+      "post": "Your infrastructure assumes humans are using it.\n\nThat assumption is expensive.\n\nEvery week I see another product team optimizing for human burst patterns, thinking about peak hours, user spikes, session timeouts designed around coffee breaks.\n\nMeanwhile 70% of Databricks queries now come from AI agents.\n\nNot demos. Revenue-driving queries that customers pay for.\n\nAt Atlan, we've learned this firsthand building agents for GTM workflows. The agents never rest. They don't have coffee breaks. They don't work 9-to-5.\n\nThey consume compute like a river, not like rainfall.\n\nThe French startup Kog just raised funding betting that most GPU infrastructure is optimized wrong, designed for human-burst loads when agents need sustained-compute loads.\n\nIf they're right, every team building agent products needs to rethink their entire architecture stack.\n\n- Rate limits designed for humans don't work for agents\n- Pricing that assumes spiky usage misses constant consumption\n- Reliability guarantees built for session patterns break on persistent workflows\n\nMost SaaS companies are still building for yesterday's user.\n\nIMO the teams who redesign for agent-first consumption win the next wave.\n\nThe ones still optimizing for human usage patterns get disrupted by competitors who built for the actual user.\n\nWhat does your usage graph tell you about who's really using your product?"
+    },
+    {
+      "option": 2,
+      "template": "personal-I-observer",
+      "hook_pattern": "E",
+      "hook_score": 8,
+      "conviction": "L3: Teams need to start measuring agent vs human consumption to understand their real usage patterns and plan infrastructure accordingly",
+      "post": "70% of Databricks queries now come from AI agents.\n\nI've been watching this shift across multiple companies, but that Databricks number stopped me cold.\n\nNot because agents are using enterprise software, that's expected.\n\nBecause 70% means agents are the majority consumer, not humans.\n\nThat's not AI adoption. That's infrastructure transformation.\n\nEvery product I see is still architected for humans:\n- Session timeouts for lunch breaks\n- Rate limits for typing speed\n- Peak hours around work schedules\n\nBut agents don't take breaks. They don't have peak hours. They consume compute like a baseline load, not a burst pattern.\n\nGarry Tan claims 1 person plus 20 agents beats full engineering departments at big tech companies. If true, coordination costs just collapsed.\n\nThe math is simple:\n- 20 agents × continuous operation = sustained compute load\n- 1 human × intermittent oversight = spiky management pattern\n\nYour pricing model, reliability guarantees, and infrastructure planning still assume the human is doing the work.\n\nThe agent is doing the work. The human is configuring the agents.\n\nAt Atlan, when we build agents for GTM workflows, they run APIs, pull from databases, and post results where we need them. The humans never open the app while the agent is working.\n\nThat's a different usage pattern than what most SaaS products price for.\n\nWhat percentage of your usage comes from agents versus humans?\n\nIf you don't know, you're planning infrastructure for yesterday's user."
+    },
+    {
+      "option": 3,
+      "template": "pattern-observation",
+      "hook_pattern": "G",
+      "hook_score": 7,
+      "conviction": "L1: The cost of coordination is collapsing so fast that small teams with agent swarms will consistently outbuild traditional engineering teams",
+      "post": "Three data points from this week that connect to something bigger.\n\nDatabricks reports 70% of their queries now come from AI agents, not human analysts.\n\nGarry Tan claims 1 person coordinating 20 AI agents outperforms full engineering departments at big tech companies.\n\nFrench startup Kog raised funding to optimize GPUs for agent-sustained loads instead of human-burst patterns.\n\nHere's what I think these connect to:\n\nThe coordination cost collapse is happening faster than anyone modeled.\n\nManaging 20 agents requires different skills than managing 20 engineers. No performance reviews. No meetings. No interpersonal dynamics.\n\nYou configure them once and scale execution horizontally.\n\nThe bottleneck shifts from people management to prompt engineering and quality control.\n\nMost infrastructure providers are still optimizing for human usage:\n- Spiky loads during work hours\n- Session-based pricing\n- Rate limits designed for typing speed\n\nBut agents consume like a baseline, not a burst.\n\nAt Atlan, our agents call APIs, read databases, and integrate across systems without humans clicking buttons. They work nights, weekends, and holidays at the same intensity.\n\nThat's a different cost structure than what most teams plan for.\n\nThe teams who understand agent economics first will consistently underbid the teams who don't.\n\nBecause their cost per unit of work keeps dropping while traditional teams' costs stay flat.\n\nHow many agents is your team coordinating versus how many humans?\n\nThat ratio might predict who wins your category in 12 months."
+    }
+  ]
+}
