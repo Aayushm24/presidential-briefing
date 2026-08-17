@@ -168,22 +168,22 @@ p.p.s First day at the Vipassana center 👇🏻
 |---|---|---|---|---|
 | **absurd-comparison** | 1 | 0 | 0% | n/a | ← never shipped
 | **absurd-mirror** | 2 | 0 | 0% | n/a | ← never shipped
-| **absurdist** | 10 | 0 | 0% | n/a | ← never shipped
+| **absurdist** | 11 | 0 | 0% | n/a | ← never shipped
 | **absurdist-data-point** | 1 | 0 | 0% | n/a | ← never shipped
 | **absurdist-truth-teller** | 41 | 0 | 0% | n/a | ← never shipped
-| **commentary-take** | 6 | 0 | 0% | n/a | ← never shipped
-| **contrarian** | 40 | 0 | 0% | n/a | ← never shipped
+| **commentary-take** | 7 | 0 | 0% | n/a | ← never shipped
+| **contrarian** | 42 | 0 | 0% | n/a | ← never shipped
 | **contrarian philosopher** | 1 | 0 | 0% | n/a | ← never shipped
-| **contrarian-philosopher** | 59 | 0 | 0% | n/a | ← never shipped
-| **data-point** | 34 | 0 | 0% | n/a | ← never shipped
+| **contrarian-philosopher** | 60 | 0 | 0% | n/a | ← never shipped
+| **data-point** | 35 | 0 | 0% | n/a | ← never shipped
 | **dot-connecting** | 5 | 0 | 0% | n/a | ← never shipped
 | **news-take** | 1 | 0 | 0% | n/a | ← never shipped
 | **observation-first** | 1 | 0 | 0% | n/a | ← never shipped
-| **pattern-observation** | 18 | 0 | 0% | n/a | ← never shipped
+| **pattern-observation** | 19 | 0 | 0% | n/a | ← never shipped
 | **personal story** | 1 | 0 | 0% | n/a | ← never shipped
 | **personal-I observer** | 6 | 0 | 0% | n/a | ← never shipped
-| **personal-I-observer** | 31 | 0 | 0% | n/a | ← never shipped
-| **personal-discovery** | 15 | 0 | 0% | n/a | ← never shipped
+| **personal-I-observer** | 32 | 0 | 0% | n/a | ← never shipped
+| **personal-discovery** | 16 | 0 | 0% | n/a | ← never shipped
 | **personal-i-observer** | 5 | 0 | 0% | n/a | ← never shipped
 | **personal-observer** | 7 | 0 | 0% | n/a | ← never shipped
 | **relatable** | 2 | 0 | 0% | n/a | ← never shipped
@@ -196,15 +196,15 @@ p.p.s First day at the Vipassana center 👇🏻
 
 | Hook | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
-| **A** | 84 | 0 | 0% | n/a |
-| **A.b** | 23 | 0 | 0% | n/a |
-| **A.c** | 48 | 0 | 0% | n/a |
+| **A** | 86 | 0 | 0% | n/a |
+| **A.b** | 24 | 0 | 0% | n/a |
+| **A.c** | 49 | 0 | 0% | n/a |
 | **B** | 46 | 0 | 0% | n/a |
-| **C** | 55 | 0 | 0% | n/a |
-| **D** | 9 | 0 | 0% | n/a |
-| **E** | 32 | 0 | 0% | n/a |
+| **C** | 56 | 0 | 0% | n/a |
+| **D** | 10 | 0 | 0% | n/a |
+| **E** | 34 | 0 | 0% | n/a |
 | **F** | 1 | 0 | 0% | n/a |
-| **G** | 15 | 0 | 0% | n/a |
+| **G** | 16 | 0 | 0% | n/a |
 | **H** | 2 | 0 | 0% | n/a |
 
 ### How to use this in /write-posts
