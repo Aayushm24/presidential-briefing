@@ -58,7 +58,7 @@ Read by `/write-posts` when generating the 3 daily options. Use this to weight w
 
 | Style | Count | Avg engagement |
 |---|---|---|
-| **Vulnerable Victor** | 5 | 94.2 |
+| **Vulnerable Victor** | 5 | 94.4 |
 | **Contrarian Philosopher** | 2 | 69.5 |
 | **Relatable Human** | 1 | 67.0 |
 | **Unclassified** | 22 | 42.0 |
@@ -170,19 +170,19 @@ p.p.s First day at the Vipassana center 👇🏻
 | **absurd-mirror** | 2 | 0 | 0% | n/a | ← never shipped
 | **absurdist** | 11 | 0 | 0% | n/a | ← never shipped
 | **absurdist-data-point** | 1 | 0 | 0% | n/a | ← never shipped
-| **absurdist-truth-teller** | 41 | 0 | 0% | n/a | ← never shipped
-| **commentary-take** | 7 | 0 | 0% | n/a | ← never shipped
+| **absurdist-truth-teller** | 43 | 0 | 0% | n/a | ← never shipped
+| **commentary-take** | 8 | 0 | 0% | n/a | ← never shipped
 | **contrarian** | 42 | 0 | 0% | n/a | ← never shipped
 | **contrarian philosopher** | 1 | 0 | 0% | n/a | ← never shipped
-| **contrarian-philosopher** | 60 | 0 | 0% | n/a | ← never shipped
-| **data-point** | 35 | 0 | 0% | n/a | ← never shipped
+| **contrarian-philosopher** | 63 | 0 | 0% | n/a | ← never shipped
+| **data-point** | 36 | 0 | 0% | n/a | ← never shipped
 | **dot-connecting** | 5 | 0 | 0% | n/a | ← never shipped
 | **news-take** | 1 | 0 | 0% | n/a | ← never shipped
 | **observation-first** | 1 | 0 | 0% | n/a | ← never shipped
-| **pattern-observation** | 19 | 0 | 0% | n/a | ← never shipped
+| **pattern-observation** | 20 | 0 | 0% | n/a | ← never shipped
 | **personal story** | 1 | 0 | 0% | n/a | ← never shipped
 | **personal-I observer** | 6 | 0 | 0% | n/a | ← never shipped
-| **personal-I-observer** | 32 | 0 | 0% | n/a | ← never shipped
+| **personal-I-observer** | 35 | 0 | 0% | n/a | ← never shipped
 | **personal-discovery** | 16 | 0 | 0% | n/a | ← never shipped
 | **personal-i-observer** | 5 | 0 | 0% | n/a | ← never shipped
 | **personal-observer** | 7 | 0 | 0% | n/a | ← never shipped
@@ -190,21 +190,21 @@ p.p.s First day at the Vipassana center 👇🏻
 | **relatable-human** | 19 | 0 | 0% | n/a | ← never shipped
 | **vulnerable victor** | 1 | 0 | 0% | n/a | ← never shipped
 | **vulnerable-observer** | 1 | 0 | 0% | n/a | ← never shipped
-| **vulnerable-victor** | 7 | 0 | 0% | n/a | ← never shipped
+| **vulnerable-victor** | 8 | 0 | 0% | n/a | ← never shipped
 
 ### By source hook pattern
 
 | Hook | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
-| **A** | 86 | 0 | 0% | n/a |
+| **A** | 89 | 0 | 0% | n/a |
 | **A.b** | 24 | 0 | 0% | n/a |
-| **A.c** | 49 | 0 | 0% | n/a |
-| **B** | 46 | 0 | 0% | n/a |
-| **C** | 56 | 0 | 0% | n/a |
+| **A.c** | 53 | 0 | 0% | n/a |
+| **B** | 47 | 0 | 0% | n/a |
+| **C** | 58 | 0 | 0% | n/a |
 | **D** | 10 | 0 | 0% | n/a |
-| **E** | 34 | 0 | 0% | n/a |
+| **E** | 35 | 0 | 0% | n/a |
 | **F** | 1 | 0 | 0% | n/a |
-| **G** | 16 | 0 | 0% | n/a |
+| **G** | 17 | 0 | 0% | n/a |
 | **H** | 2 | 0 | 0% | n/a |
 
 ### How to use this in /write-posts
