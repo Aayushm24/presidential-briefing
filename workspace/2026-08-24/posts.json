@@ -1,0 +1,31 @@
+{
+  "date": "2026-08-24",
+  "lead_title": "Price beats performance as Anthropic's best model sees 8% adoption despite technical superiority",
+  "best_option": 1,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A.b",
+      "hook_score": 8,
+      "conviction": "L2: The capability race is over. The economics race just started.",
+      "post": "Everyone wants the best AI model.\n\nAlmost no one can afford to actually use it.\n\nAnthropic built Fable, their most capable model yet. Released in July with breakthrough performance on every benchmark that matters.\n\n8% market adoption.\n\nTheir older, cheaper Opus 4.8? 28% market share.\n\nSame month. Same company. Same buyers.\n\nThe story every AI founder tells themselves: \"when people see what this can do, price won't matter.\"\n\nThe Ramp data from 70,000 companies tells a different story.\n\nCFOs approve budgets for problems that need solving. Not problems that could theoretically be solved better.\n\nWhen Opus 4.8 handles customer support, content generation, and code review at a fraction of Fable's cost, the math gets simple.\n\nEvery week I watch teams choose good-enough-and-affordable over breakthrough-and-expensive.\n\nThe capability race was phase one.\n\nPhase two is unit economics. And most AI companies are still fighting the last war.\n\nDrew Breunig nailed it this week: teams stopped waiting for cheaper frontier models and started optimizing the harnesses they already have.\n\nThat shift changes everything.\n\nThe winners from here won't be the smartest models. They'll be the ones that deliver 80% of flagship capability at 40% of flagship cost.\n\nIMO, if your AI product strategy assumes customers will pay premium for performance, you're building for 2024 while competing in 2026.\n\nWhat's the cheapest model that actually solves your customer's problem?"
+    },
+    {
+      "option": 2,
+      "template": "personal-I-observer",
+      "hook_pattern": "A",
+      "hook_score": 7,
+      "conviction": "L3: Practical teams are investing in optimization rather than waiting for price drops.",
+      "post": "I've been watching the same pattern across my network for months.\n\nTeams deploy an expensive AI model. Get amazing results in demos. Then hit the budget wall when they try to scale.\n\nThe Fable launch crystallized it.\n\nMost capable model Anthropic has ever shipped. Exceptional performance on everything I tested.\n\nBut at $180 per million tokens, my regular workflows became math problems.\n\n8% adoption rate in July. Even with all that capability.\n\nEvery conversation I have with founders now starts the same way: \"we love the quality, but the costs...\"\n\nHere's what changed: teams stopped waiting.\n\nDrew Breunig wrote about this shift perfectly. Before Fable, engineering teams avoided prompt optimization and context management. New models arrived regularly at flat or declining prices.\n\nWhy invest months optimizing when you could wait six months for better-and-cheaper?\n\nFable broke that pattern.\n\nNow teams are building harnesses, optimizing context strategies, and treating prompt engineering as core infrastructure.\n\nAt Atlan, we've been doing this for months. The results are better than waiting ever was.\n\nBetter performance with existing models. Predictable costs. Systems that compound learning instead of starting fresh with each model release.\n\nThe teams that figure this out first will have better workflows AND better unit economics when the next breakthrough drops.\n\nWhat's your team optimizing instead of waiting for?"
+    },
+    {
+      "option": 3,
+      "template": "relatable-human",
+      "hook_pattern": "B",
+      "hook_score": 7,
+      "conviction": "L1: Most people haven't noticed that price-performance completely flipped the enterprise buying pattern.",
+      "post": "I spent an hour yesterday reading Ramp's AI spending data.\n\n70,000 companies. Real credit card transactions. July 2026.\n\nOne number stopped me cold: 8%.\n\nThat's Anthropic's Fable adoption rate. Their newest, most capable model.\n\nOpus 4.8, their cheaper alternative from months ago? 28% market share.\n\nI had to read it twice.\n\nThis is the model that handles complex reasoning the old ones couldn't touch. The one that actually completes multi-step tasks without breaking.\n\nBut companies are choosing the cheaper option by 3-to-1.\n\nHere's the thing nobody talks about: most enterprise AI usage isn't pushing capability limits.\n\nCustomer support responses. Content generation. Code reviews. Data processing.\n\nTasks where \"good enough and affordable\" beats \"exceptional and expensive\" every time.\n\nThe finance team approving these budgets doesn't care about benchmark scores. They care about cost per completed task.\n\nI think we're watching the AI market grow up in real time.\n\nEarly adopters chased the newest model regardless of cost. Current adopters optimize for value.\n\nThe shift feels quiet but it's massive.\n\nWhat really struck me is how this mirrors every other enterprise software category. Early cloud computing, early SaaS, early mobile apps - all followed the same pattern.\n\nFirst wave: expensive, powerful, limited adoption.\nSecond wave: cheaper, good enough, mass market.\n\nThe next wave of AI companies won't win on raw intelligence. They'll win on intelligent pricing.\n\nHow much are you actually paying per problem solved?"
+    }
+  ]
+}
