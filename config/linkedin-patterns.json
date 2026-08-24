@@ -101,13 +101,13 @@
     },
     "other": {
       "count": 24,
-      "avg_engagement": 42.5
+      "avg_engagement": 42.6
     }
   },
   "style_stats": {
     "Vulnerable Victor": {
       "count": 5,
-      "avg_engagement": 94.4
+      "avg_engagement": 94.6
     },
     "Contrarian Philosopher": {
       "count": 2,
@@ -159,7 +159,7 @@
       17
     ],
     "medium (1000-2000)": [
-      22,
+      23,
       7,
       2,
       17,
