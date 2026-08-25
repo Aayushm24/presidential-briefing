@@ -1,0 +1,31 @@
+{
+  "date": "2026-08-25",
+  "lead_title": "AI agents cross into real infrastructure as founders spend $20,000 monthly on production workloads",
+  "best_option": 1,
+  "options": [
+    {
+      "option": 1,
+      "template": "vulnerable-victor",
+      "hook_pattern": "A.c",
+      "hook_score": 9,
+      "conviction": "The Devin $20K/month case proves agent unit economics work when you commit to orchestration, not when you dabble — and Aayush's own Jake agent tracks the same curve.",
+      "post": "Someone is running 15 AI agents from a handwritten paper list.\n\n$20,000 a month on Devin. One founder. No dashboards. A physical piece of paper tracking which agent is doing what.\n\nThat's Ryan Carson's actual setup.\n\n40 pull requests a day. Customer success across multiple law firm accounts. Investor updates. All handled by agents with names and boundaries, orchestrated by a human with a pen.\n\nI've been building Jake, our AI SDR at Atlan, for 8 months. Jake booked 47 meetings in 3 months and brought back 4 closed-lost accounts. I know exactly what Carson is describing.\n\nThe magical part is real. So is the unglamorous part.\n\nAt Atlan, we've learned agents work when they replace entire workflows, not individual tasks. Jake doesn't \"help with chat.\" He owns the full loop, qualification through booking. Carson's Watchdog doesn't \"help customer success.\" It replaces the team.\n\nThe unit economics only work when you commit to that scope.\n\nMost founders I talk to are still running agents like plugins. One tab. One task. Marginal help. They look at $20K/month and see extravagance. IMO they're missing what that spend actually buys ↓\n\n- fewer humans doing coordination work\n- workflows that run at 3am\n- domains with clear owners\n\n$20K on 15 agents beats $200K on 2 hires when the agents own the whole loop.\n\nThe uncomfortable part: it took me months of fighting context, hallucinations and edge cases before Jake was actually useful. Carson's paper list isn't a stunt. It's what orchestration looks like when the tooling hasn't caught up to the ambition.\n\nWhat's the ugliest workaround in your current agent setup?"
+    },
+    {
+      "option": 2,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A.b",
+      "hook_score": 8,
+      "conviction": "Garry Tan's \"build an AI harness or be replaced\" framing is right, but the real question isn't whether to build one — it's whether your team is willing to delete the workflows that made you successful.",
+      "post": "Every software company is now racing to add an AI harness.\n\nAlmost none are willing to delete the workflow underneath it.\n\nGarry Tan's framing this week was sharp: build AI solutions on top of the deterministic layers, or get replaced by someone who does. APIs stay. SQL stays. The soft layer above them gets rebuilt.\n\nI think most teams heard the first half and ignored the second.\n\nAdding an AI button on top of your existing product is not building a harness. It's decoration. The harness only matters if you're willing to let it eat the workflow the button used to sit on.\n\nAt Atlan we realized going AI Native means asking a harder question than \"how do we add AI to X?\" The real question is \"why does X exist at all?\"\n\nOne optimizes. One eliminates.\n\nThe debate only gets interesting when you're honest about which one you're doing.\n\nCarson's $20K/month Devin bill isn't him adding AI to his engineering process. He deleted the engineering process. 15 agents replaced roles. 40 PRs a day close themselves. The harness ate the workflow.\n\nMeanwhile most SaaS teams I see are shipping \"AI Assistants\" that live next to the workflow they were supposed to replace. Same clicks. Same forms. Same reports. Now with a chat window.\n\nThat's not a harness. That's a costume.\n\nThe uncomfortable part IMO: the deterministic layers Tan is pointing at (APIs, SQL, event streams) are already commodities. The moat was never there. The moat is in the workflow logic sitting on top, and most companies can't bring themselves to torch it.\n\nWhat workflow in your product would you delete if AI had always existed?"
+    },
+    {
+      "option": 3,
+      "template": "absurdist-truth-teller",
+      "hook_pattern": "A.c",
+      "hook_score": 8,
+      "conviction": "A $6B valuation for spatial AI agents and a founder spending $20K/month on Devin both signal that institutional capital is now pricing agents as infrastructure, not experiments.",
+      "post": "A guy with a paper list just outspent most seed-stage startups on AI agents.\n\n$20,000 a month. On Devin. Tracked by hand.\n\nMeanwhile Valor and Point72 wrote a check that put General Intuition at a $6 billion valuation for spatial AI agents that don't have a product yet.\n\nBoth stories landed the same week. Everyone treated them as separate.\n\nI think they're the same story.\n\nOne is a solo founder proving the unit economics work at 15 concurrent agents. The other is institutional capital pricing in that this becomes a platform. Neither is betting on \"AI potential\" anymore. Both are betting on adoption that's already happening in production.\n\nThat's the shift.\n\nFor 18 months the agent conversation was demos, benchmarks, and Twitter threads about o1. The actual signal was somewhere else: how much are practitioners willing to spend, and how much are LPs willing to underwrite?\n\n$20K/month per founder. $6B pre-money for a foundation model company with no revenue.\n\nThose are not \"wait and see\" numbers.\n\nI build agents at Atlan and the boring truth is Carson's setup looks like ours. Named agents. Clear domains. Human orchestration on top. It's not magic. It's operations.\n\nThe magic part is what the market is now willing to pay for that operations layer.\n\nMost founders I talk to are still framing agents as a feature they'll add \"when the tooling matures.\" IMO the tooling matured somewhere between Q1 and Q2 this year and nobody sent a memo.\n\nThe window for wait-and-see is closing quietly, while a guy with a paper list runs 15 agents from his desk.\n\nWhere is your team on the paper-list-to-platform curve right now?"
+    }
+  ]
+}
