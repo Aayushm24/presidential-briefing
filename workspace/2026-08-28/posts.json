@@ -1,0 +1,31 @@
+{
+  "date": "2026-08-28",
+  "lead_title": "Claude Code's auto mode blocks its own cleanup commands after prompt injection attacks",
+  "best_option": 1,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A.c",
+      "hook_score": 8,
+      "conviction": "L2 - The security community has the infrastructure answer, but AI companies keep looking for prompt fixes",
+      "post": "Johann Rehberger achieved an 80% success rate breaking Claude Code's auto mode.\n\nThe safety mechanism designed to protect coding agents actually prevented Claude from cleaning up its own compromise.\n\nEvery team I talk to is asking the same question: how do we secure agents in production?\n\nThe answer isn't better classifiers. It's containers.\n\nAt Atlan, when we build agents for GTM workflows, they run isolated from our main systems. Network restrictions. Credential isolation. Container boundaries.\n\nThe infrastructure approach that's worked in security for decades.\n\nBut AI companies keep trying to solve this with smarter prompts and better command analysis.\n\nHere's what's actually happening:\n\nAuto mode analyzes each command in isolation. It approved \"create file from base64\" then blocked \"kill process\" without understanding these were attack and response.\n\nCommand-level classification can't see sequences. A zip file extraction followed by Python imports that resolve unexpectedly. Legitimate operations that become malicious through timing and context.\n\nThe gap between what agents observe and what runtimes actually execute.\n\nSimon Willison reached the same conclusion: containers remain mandatory infrastructure, not optional safety.\n\nTeams treating Claude Code like an IDE plugin instead of autonomous code execution are missing the threat model entirely.\n\nThe convenience of unrestricted access isn't worth the blast radius when the attack succeeds.\n\nIMO, the founders who figure out secure agent deployment early get access to capabilities that unprotected teams can't risk using.\n\nWhat's the ugliest security workaround in your current agent setup?"
+    },
+    {
+      "option": 2,
+      "template": "personal-I-observer",
+      "hook_pattern": "A",
+      "hook_score": 7,
+      "conviction": "L1 - Most founders missed the unit economics shift that makes AI agents economically viable now",
+      "post": "AI companies bled money for two years running agents at scale.\n\nThat just changed.\n\nI've been tracking AI unit economics across dozens of startups since 2024. Most founders still think agents are too expensive to deploy continuously.\n\nThey're optimizing for the wrong cost structure.\n\nTomasz Tunguz quantified what I've been seeing: AI went from -94% gross margins to revenue-per-megawatt positive in 2026.\n\nThe shift happened through inference cost collapse, not training efficiency.\n\nTeams that couldn't afford to run agents at startup-scale usage can now deploy them profitably.\n\nWhen we build agents at Atlan, the cost conversation moved from \"can we afford to run this?\" to \"does this generate enough value per compute hour?\"\n\nThe economic constraint shifted from operational costs to opportunity costs.\n\nRevenue-per-megawatt becomes the new unit economic foundation for AI-first companies. Like revenue-per-employee was for software companies.\n\nTeams that master this calculation early get access to AI capabilities that were financially impossible six months ago.\n\nThe infrastructure requirements make sense when agents pay for themselves through revenue generation rather than bleeding compute costs.\n\nI think this economic foundation is why we're seeing realtime video generation and reasoning models become practical simultaneously.\n\nThe compound effect of multiple AI capabilities reaching economic viability at once creates new product possibilities that neither enabled alone.\n\nWhat AI capability would your team deploy if the economics suddenly made sense?"
+    },
+    {
+      "option": 3,
+      "template": "absurdist-truth-teller",
+      "hook_pattern": "C",
+      "hook_score": 8,
+      "conviction": "L3 - Teams building video features need to know realtime generation crossed the speed barrier this week",
+      "post": "H3 Max creates high-quality video faster than it takes to watch it.\n\nMeanwhile, most teams still think video AI means submitting jobs and waiting for results.\n\nEthan Mollick documented the speed breakthrough that changes everything: realtime generation through a web interface, including prompt enhancement processing.\n\nThe feedback loop compression that makes video creation feel like collaborative document editing.\n\nI build AI agents that generate marketing assets for Atlan's GTM workflows. Until this week, video meant batch processing. Request, wait, review, iterate tomorrow.\n\nNow it means: create, iterate, ship.\n\nThe technical achievement centers on inference optimization, not model architecture improvements. H3 Max reaches realtime speeds through specialized hardware acceleration and pipeline improvements.\n\nSimilar speed gains are possible across other video systems with similar infrastructure investments.\n\nFor product teams, this enables video features that require immediate user feedback:\n\n- Prototyping workflows become interactive\n- Educational content creation happens in real-time\n- Marketing asset generation supports synchronous collaboration\n\nThe infrastructure requirements align perfectly with the container-based security model teams need for coding agents anyway.\n\nTeams investing in proper AI infrastructure get access to both secure agent deployment and realtime media generation simultaneously.\n\nThe economic model mirrors the broader unit economics shift. Realtime generation makes video AI practical for applications with immediate feedback requirements.\n\nTeams can now justify video AI investments based on user engagement metrics rather than just production efficiency gains.\n\nWhat video workflow would you automate if generation happened at conversation speed?"
+    }
+  ]
+}
