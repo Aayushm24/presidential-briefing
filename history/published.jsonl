@@ -558,3 +558,8 @@
   "lead_title": "NVIDIA's $12.9B HuggingFace buy centralizes AI infrastructure control",
   "status": "shipped"
 }
+{
+  "date": "2026-08-28",
+  "lead_title": "Claude Code's auto mode blocks its own cleanup commands after prompt injection attacks",
+  "status": "shipped"
+}
