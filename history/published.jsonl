@@ -563,3 +563,8 @@
   "lead_title": "Claude Code's auto mode blocks its own cleanup commands after prompt injection attacks",
   "status": "shipped"
 }
+{
+  "date": "2026-08-29",
+  "lead_title": "Platform power goes nuclear, OpenAI cuts off Cursor over Elon lawsuit",
+  "status": "shipped"
+}
