@@ -1,0 +1,103 @@
+# LinkedIn posts, 2026-08-29
+
+**Lead:** Platform power goes nuclear, OpenAI cuts off Cursor over Elon lawsuit
+**Briefing type:** pattern
+**Best option:** 2 (pre-council self-score)
+
+---
+
+## OPTION 1, Contrarian Philosopher (hook score: 8)
+
+**Conviction:** L2: Platform risk shifted from theoretical to existential when billionaire grudges can kill your product overnight, the implicit API contract just broke.
+
+**Post:**
+Platform risk just graduated from pricing changes to existential threats.
+
+OpenAI killed Cursor's API access Wednesday morning. Not given a pricing change. Not throttled. Cut off.
+
+The reason? Elon's legal battle with Sam Altman. OpenAI decided supporting a tool popular with Elon's companies created legal exposure. So they nuked one of the most-used AI coding assistants overnight.
+
+This breaks the implicit contract that drove the API economy.
+
+Founders assumed platform risk meant higher prices, competitive products, or terms changes. They didn't assume billionaire courtroom drama would reach into their infrastructure and flip the off switch.
+
+At Atlan, we've learned the hard way that every dependency is a single point of failure waiting to activate.
+
+What caught my eye: zero warning. No migration period. No appeals process. The API keys just stopped working.
+
+That's the power dynamic when your entire product depends on someone else's servers. You build the business, but they control whether it exists tomorrow.
+
+The precedent is terrifying. OpenAI just proved they'll weaponize API access in fights that have nothing to do with your business. If you built on GPT-4, Claude, or any major model API, your biggest risk isn't competition.
+
+It's getting caught in crossfire between people you've never met.
+
+What's your backup plan if your primary API disappears tomorrow?
+
+---
+
+## OPTION 2, Relatable Human (hook score: 7)
+
+**Conviction:** L1: Most founders building on AI APIs are about to learn platform dependency the hard way, through someone else's grudge match.
+
+**Post:**
+I build AI agents at Atlan every day.
+
+Every single one depends on external APIs. OpenAI for reasoning, Anthropic for code, maybe Gemini for specific tasks.
+
+Yesterday I watched the Cursor team lose their entire business model in hours.
+
+OpenAI didn't just change pricing or update terms. They cut off API access completely. The reason? Elon Musk's legal battle with Sam Altman had nothing to do with Cursor, but everything to do with their survival.
+
+Here's what terrifies me: the silence.
+
+- No warning
+- No migration timeline
+- No appeals process
+- API keys just... stopped working
+
+I keep thinking about every founder I know building on third-party AI APIs. ChatGPT wrappers, Claude integrations, model switching layers. All of them assume platform risk means gradually getting squeezed on pricing.
+
+None of them planned for their entire infrastructure disappearing because billionaires decided to fight in court.
+
+Every team I talk to has the same architecture: 90% of their product logic sits behind someone else's API gateway. When that gateway closes, there's no product left.
+
+The math is brutal. Cursor had millions of users. Built over years. Gone in a morning because of legal drama they weren't part of.
+
+tbh, this changes how I think about every dependency decision at Atlan. The question isn't just "what if this gets expensive?" anymore.
+
+It's "what if this just vanishes?"
+
+How many API dependencies does your product have that could disappear tomorrow?
+
+---
+
+## OPTION 3, Pattern Observer (hook score: 8)
+
+**Conviction:** L3: Infrastructure control is being weaponized across the AI stack, from API access to chip supply, and builders need to audit their single points of failure now.
+
+**Post:**
+Three stories dropped this week that connect in a terrifying way.
+
+OpenAI killed Cursor's API access over Elon's lawsuit. Microsoft locked up $1 billion worth of Nvidia chips through exclusive debt arrangements. Open-weight model teams got acquired faster than anyone building revenue models.
+
+The pattern? Control of the AI stack is centralizing through weaponized dependencies.
+
+Every week I watch founders building on third-party infrastructure discover new ways their business can disappear overnight. Not through competition. Through power plays that have nothing to do with their product.
+
+Here's what I'm seeing across three layers:
+
+- Model layer: API access becomes a legal weapon (OpenAI vs Cursor)
+- Infrastructure layer: Chip capacity gets locked behind exclusive deals (Neocloud Lambda → Microsoft only)
+- Talent layer: Open-source teams acquired to prevent competitive model training (Meta buying Llama creators for $2B)
+
+The scary part? None of these moves target the startups directly. They're collateral damage in bigger games.
+
+Platform risk used to mean gradual pricing squeezes or feature competition. Now it means your core infrastructure can vanish because people you've never met decided to fight over something completely unrelated to your business.
+
+At Atlan, we're auditing every single dependency this week. Every API endpoint, every model provider, every infrastructure layer that could get caught in someone else's crossfire.
+
+The question every founder needs to ask: what happens if your biggest dependency disappears in the next 48 hours?
+
+Not "gets more expensive" or "changes terms." Disappears completely.
+
+Do you have a plan for that?
