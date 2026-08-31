@@ -50,7 +50,7 @@ Read by `/write-posts` when generating the 3 daily options. Use this to weight w
 |---|---|---|
 | **D** Time Bomb | 1 | 392.0 |
 | **A** Contrarian Truth | 2 | 47.5 |
-| **other** Other/Unclassified | 24 | 42.6 |
+| **other** Other/Unclassified | 24 | 42.7 |
 | **C** Absurd Comparison | 1 | 41.0 |
 | **B** Identity / Confession | 4 | 33.8 |
 
@@ -58,7 +58,7 @@ Read by `/write-posts` when generating the 3 daily options. Use this to weight w
 
 | Style | Count | Avg engagement |
 |---|---|---|
-| **Vulnerable Victor** | 5 | 94.8 |
+| **Vulnerable Victor** | 5 | 95.0 |
 | **Contrarian Philosopher** | 2 | 69.5 |
 | **Relatable Human** | 1 | 67.0 |
 | **Unclassified** | 22 | 42.0 |
@@ -170,16 +170,16 @@ p.p.s First day at the Vipassana center 👇🏻
 | **absurd-mirror** | 2 | 0 | 0% | n/a | ← never shipped
 | **absurdist** | 11 | 0 | 0% | n/a | ← never shipped
 | **absurdist-data-point** | 1 | 0 | 0% | n/a | ← never shipped
-| **absurdist-truth-teller** | 46 | 0 | 0% | n/a | ← never shipped
+| **absurdist-truth-teller** | 47 | 0 | 0% | n/a | ← never shipped
 | **commentary-take** | 9 | 0 | 0% | n/a | ← never shipped
-| **contrarian** | 42 | 0 | 0% | n/a | ← never shipped
+| **contrarian** | 43 | 0 | 0% | n/a | ← never shipped
 | **contrarian philosopher** | 1 | 0 | 0% | n/a | ← never shipped
-| **contrarian-philosopher** | 67 | 0 | 0% | n/a | ← never shipped
+| **contrarian-philosopher** | 68 | 0 | 0% | n/a | ← never shipped
 | **data-point** | 37 | 0 | 0% | n/a | ← never shipped
 | **dot-connecting** | 5 | 0 | 0% | n/a | ← never shipped
 | **news-take** | 1 | 0 | 0% | n/a | ← never shipped
 | **observation-first** | 1 | 0 | 0% | n/a | ← never shipped
-| **pattern-observation** | 21 | 0 | 0% | n/a | ← never shipped
+| **pattern-observation** | 22 | 0 | 0% | n/a | ← never shipped
 | **personal story** | 1 | 0 | 0% | n/a | ← never shipped
 | **personal-I observer** | 6 | 0 | 0% | n/a | ← never shipped
 | **personal-I-observer** | 38 | 0 | 0% | n/a | ← never shipped
@@ -187,21 +187,21 @@ p.p.s First day at the Vipassana center 👇🏻
 | **personal-i-observer** | 5 | 0 | 0% | n/a | ← never shipped
 | **personal-observer** | 7 | 0 | 0% | n/a | ← never shipped
 | **relatable** | 2 | 0 | 0% | n/a | ← never shipped
-| **relatable-human** | 20 | 0 | 0% | n/a | ← never shipped
+| **relatable-human** | 21 | 0 | 0% | n/a | ← never shipped
 | **vulnerable victor** | 1 | 0 | 0% | n/a | ← never shipped
 | **vulnerable-observer** | 1 | 0 | 0% | n/a | ← never shipped
-| **vulnerable-victor** | 9 | 0 | 0% | n/a | ← never shipped
+| **vulnerable-victor** | 10 | 0 | 0% | n/a | ← never shipped
 
 ### By source hook pattern
 
 | Hook | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
-| **A** | 91 | 0 | 0% | n/a |
+| **A** | 93 | 0 | 0% | n/a |
 | **A.b** | 26 | 0 | 0% | n/a |
 | **A.c** | 59 | 0 | 0% | n/a |
-| **B** | 48 | 0 | 0% | n/a |
-| **C** | 60 | 0 | 0% | n/a |
-| **D** | 10 | 0 | 0% | n/a |
+| **B** | 49 | 0 | 0% | n/a |
+| **C** | 61 | 0 | 0% | n/a |
+| **D** | 12 | 0 | 0% | n/a |
 | **E** | 36 | 0 | 0% | n/a |
 | **F** | 1 | 0 | 0% | n/a |
 | **G** | 18 | 0 | 0% | n/a |
