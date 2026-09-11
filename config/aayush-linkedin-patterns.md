@@ -170,19 +170,19 @@ p.p.s First day at the Vipassana center 👇🏻
 | **absurd-mirror** | 2 | 0 | 0% | n/a | ← never shipped
 | **absurdist** | 11 | 0 | 0% | n/a | ← never shipped
 | **absurdist-data-point** | 1 | 0 | 0% | n/a | ← never shipped
-| **absurdist-truth-teller** | 48 | 0 | 0% | n/a | ← never shipped
-| **commentary-take** | 9 | 0 | 0% | n/a | ← never shipped
+| **absurdist-truth-teller** | 50 | 0 | 0% | n/a | ← never shipped
+| **commentary-take** | 10 | 0 | 0% | n/a | ← never shipped
 | **contrarian** | 43 | 0 | 0% | n/a | ← never shipped
 | **contrarian philosopher** | 1 | 0 | 0% | n/a | ← never shipped
-| **contrarian-philosopher** | 71 | 0 | 0% | n/a | ← never shipped
-| **data-point** | 37 | 0 | 0% | n/a | ← never shipped
+| **contrarian-philosopher** | 74 | 0 | 0% | n/a | ← never shipped
+| **data-point** | 39 | 0 | 0% | n/a | ← never shipped
 | **dot-connecting** | 5 | 0 | 0% | n/a | ← never shipped
 | **news-take** | 1 | 0 | 0% | n/a | ← never shipped
 | **observation-first** | 1 | 0 | 0% | n/a | ← never shipped
-| **pattern-observation** | 22 | 0 | 0% | n/a | ← never shipped
+| **pattern-observation** | 24 | 0 | 0% | n/a | ← never shipped
 | **personal story** | 1 | 0 | 0% | n/a | ← never shipped
 | **personal-I observer** | 6 | 0 | 0% | n/a | ← never shipped
-| **personal-I-observer** | 41 | 0 | 0% | n/a | ← never shipped
+| **personal-I-observer** | 43 | 0 | 0% | n/a | ← never shipped
 | **personal-discovery** | 16 | 0 | 0% | n/a | ← never shipped
 | **personal-i-observer** | 5 | 0 | 0% | n/a | ← never shipped
 | **personal-observer** | 7 | 0 | 0% | n/a | ← never shipped
@@ -196,15 +196,15 @@ p.p.s First day at the Vipassana center 👇🏻
 
 | Hook | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
-| **A** | 95 | 0 | 0% | n/a |
+| **A** | 99 | 0 | 0% | n/a |
 | **A.b** | 27 | 0 | 0% | n/a |
-| **A.c** | 61 | 0 | 0% | n/a |
-| **B** | 51 | 0 | 0% | n/a |
-| **C** | 61 | 0 | 0% | n/a |
-| **D** | 12 | 0 | 0% | n/a |
-| **E** | 37 | 0 | 0% | n/a |
+| **A.c** | 63 | 0 | 0% | n/a |
+| **B** | 52 | 0 | 0% | n/a |
+| **C** | 63 | 0 | 0% | n/a |
+| **D** | 13 | 0 | 0% | n/a |
+| **E** | 38 | 0 | 0% | n/a |
 | **F** | 1 | 0 | 0% | n/a |
-| **G** | 19 | 0 | 0% | n/a |
+| **G** | 20 | 0 | 0% | n/a |
 | **H** | 2 | 0 | 0% | n/a |
 
 ### How to use this in /write-posts
