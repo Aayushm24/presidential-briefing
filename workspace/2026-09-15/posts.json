@@ -1,0 +1,31 @@
+{
+  "date": "2026-09-15",
+  "lead_title": "AI infrastructure capex is plateauing while software layers capture the next wave",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian",
+      "hook_pattern": "A.b",
+      "hook_score": 8,
+      "conviction": "L2: The market rotation from infrastructure to software isn't about slowing AI progress — it's about recognizing where the recurring revenue actually lives in the AI stack.",
+      "post": "Everyone's buying AI infrastructure.\nAlmost no one's making money from it.\n\nEvery week I watch the same pattern.\n\nCompanies spend millions on NVIDIA chips and cloud instances. Then they hire security platforms like SentinelOne to monitor every inference, Zscaler to control every API call, and Rubrik to backup every model version.\n\nThe infrastructure gets bought once. The software gets paid monthly.\n\nThat's why SentinelOne jumped 15.8% while NVIDIA dropped 2.8% in a single trading session. The market finally figured out what builders have known for months: monetizing AI usage beats enabling AI usage.\n\nHere's the mechanism most people miss:\n\nExperimental AI workloads need chips and cloud instances. Production AI workloads need chips, cloud instances, AND security platforms, AND compliance monitoring, AND data governance, AND backup systems.\n\nThe software layer revenue scales with deployment maturity. The hardware layer revenue scales with raw compute demand.\n\nWhen AI deployment shifts from exponential to linear, subscription models compound while hardware sales flatten.\n\nAt Atlan, we've been building agents for months and this tracks. We pay once for the compute that runs Jake, our AI SDR. We pay monthly for every platform that secures, monitors, and governs what Jake does with customer data.\n\nThe question isn't how do I build the best AI infrastructure.\n\nThe question is how do I capture recurring revenue from AI workloads after they're deployed?"
+    },
+    {
+      "option": 2,
+      "template": "absurdist",
+      "hook_pattern": "A.c",
+      "hook_score": 9,
+      "conviction": "L1: Security platforms captured 15%+ gains while AI infrastructure fell because they charge rent on AI workloads instead of selling shovels to dig them.",
+      "post": "SentinelOne gained $2.4 billion in market cap yesterday just to babysit AI-generated code.\n\nWhile NVIDIA lost $70 billion selling the chips that create it.\n\nThe math is backwards until you see it.\n\nEvery AI workload needs three layers. Compute infrastructure, security platforms, and application software. When a research team experiments with Claude Code, they need layer one. When a bank deploys AI for loan decisions, they need all three.\n\nSecurity becomes mandatory, not optional.\n\nThat's why yesterday's winners weren't the hyperscalers. They were the platforms protecting enterprise workloads:\n- SentinelOne: +15.8%\n- Zscaler: +15.5%\n- CrowdStrike: +15.4%\n- Rubrik: +13.9%\n\nThese companies make money every time a new AI model gets deployed into production. NVIDIA makes money once when the hardware gets bought.\n\nI build AI agents at Atlan and see this firsthand. Jake, our AI SDR, handles chat on atlan.com. The compute to run Jake costs us once. The platforms to secure what Jake accesses cost us monthly, forever.\n\nWhen hardware capex pauses for breath, the software layer doesn't just catch up. It accelerates.\n\nThe recurring revenue models win when growth rates normalize.\n\nThe companies charging for AI usage just got a 15%+ market premium over companies charging for AI enablement.\n\nWhat are you building that gets paid every time AI gets used?"
+    },
+    {
+      "option": 3,
+      "template": "personal-discovery",
+      "hook_pattern": "A",
+      "hook_score": 8,
+      "conviction": "L3: The AI pacing debate creates longer development windows for application companies to build sustainable advantages before foundation models commoditize their features.",
+      "post": "I've been tracking AI infrastructure stocks wrong.\n\nFor months I thought the rotation to software was about better products.\n\nTurns out it's about better timing.\n\nThe AI pacing debate that triggered this week's market move creates formal checks and delayed releases rather than slowing progress. Pacing means OpenAI trains GPT-7 but waits six months for safety reviews before release.\n\nThat delay changes everything for application companies.\n\nPreviously, foundation model capabilities jumped every 6-12 months with minimal warning. Application companies had to assume their advantages would become generic with the next model release.\n\nUnder pacing, they get protected development windows.\n\nSix extra months for companies like Superhuman, Notion, and Cursor to compound their lead using current capabilities. Six months to build deeper integration, better user experiences, stronger network effects.\n\nInfrastructure companies face the opposite dynamic. Their advantage gets commoditized faster because chips become standard faster than applications get commoditized.\n\nThat's why the market moved so decisively toward software companies this week. SentinelOne +15.8%. CrowdStrike +15.4%. NVIDIA -2.8%.\n\nI think the market sees what most builders don't: pacing turns AI from a hardware arms race into a software endurance race.\n\nThe teams building the stickiest products during capability pauses will own the usage when capabilities jump forward again.\n\nAt Atlan, we're using this window to go deeper on agent workflow integration rather than betting on the next model upgrade.\n\nWhat's your team building that gets stronger with time instead of obsolete with the next model release?"
+    }
+  ]
+}
