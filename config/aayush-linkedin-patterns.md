@@ -168,25 +168,25 @@ p.p.s First day at the Vipassana center 👇🏻
 |---|---|---|---|---|
 | **absurd-comparison** | 1 | 0 | 0% | n/a | ← never shipped
 | **absurd-mirror** | 2 | 0 | 0% | n/a | ← never shipped
-| **absurdist** | 11 | 0 | 0% | n/a | ← never shipped
+| **absurdist** | 14 | 0 | 0% | n/a | ← never shipped
 | **absurdist-data-point** | 1 | 0 | 0% | n/a | ← never shipped
 | **absurdist-truth-teller** | 50 | 0 | 0% | n/a | ← never shipped
 | **commentary-take** | 11 | 0 | 0% | n/a | ← never shipped
-| **contrarian** | 44 | 0 | 0% | n/a | ← never shipped
+| **contrarian** | 48 | 0 | 0% | n/a | ← never shipped
 | **contrarian philosopher** | 1 | 0 | 0% | n/a | ← never shipped
 | **contrarian-philosopher** | 75 | 0 | 0% | n/a | ← never shipped
-| **data-point** | 42 | 0 | 0% | n/a | ← never shipped
+| **data-point** | 43 | 0 | 0% | n/a | ← never shipped
 | **dot-connecting** | 5 | 0 | 0% | n/a | ← never shipped
 | **news-take** | 1 | 0 | 0% | n/a | ← never shipped
 | **observation-first** | 1 | 0 | 0% | n/a | ← never shipped
-| **pattern-observation** | 26 | 0 | 0% | n/a | ← never shipped
+| **pattern-observation** | 27 | 0 | 0% | n/a | ← never shipped
 | **personal story** | 1 | 0 | 0% | n/a | ← never shipped
 | **personal-I observer** | 6 | 0 | 0% | n/a | ← never shipped
 | **personal-I-observer** | 44 | 0 | 0% | n/a | ← never shipped
-| **personal-discovery** | 16 | 0 | 0% | n/a | ← never shipped
+| **personal-discovery** | 18 | 0 | 0% | n/a | ← never shipped
 | **personal-i-observer** | 5 | 0 | 0% | n/a | ← never shipped
 | **personal-observer** | 7 | 0 | 0% | n/a | ← never shipped
-| **relatable** | 2 | 0 | 0% | n/a | ← never shipped
+| **relatable** | 3 | 0 | 0% | n/a | ← never shipped
 | **relatable-human** | 23 | 0 | 0% | n/a | ← never shipped
 | **vulnerable victor** | 1 | 0 | 0% | n/a | ← never shipped
 | **vulnerable-observer** | 1 | 0 | 0% | n/a | ← never shipped
@@ -196,13 +196,13 @@ p.p.s First day at the Vipassana center 👇🏻
 
 | Hook | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
-| **A** | 101 | 0 | 0% | n/a |
-| **A.b** | 28 | 0 | 0% | n/a |
-| **A.c** | 64 | 0 | 0% | n/a |
-| **B** | 52 | 0 | 0% | n/a |
-| **C** | 63 | 0 | 0% | n/a |
+| **A** | 105 | 0 | 0% | n/a |
+| **A.b** | 29 | 0 | 0% | n/a |
+| **A.c** | 66 | 0 | 0% | n/a |
+| **B** | 54 | 0 | 0% | n/a |
+| **C** | 65 | 0 | 0% | n/a |
 | **D** | 13 | 0 | 0% | n/a |
-| **E** | 41 | 0 | 0% | n/a |
+| **E** | 42 | 0 | 0% | n/a |
 | **F** | 1 | 0 | 0% | n/a |
 | **G** | 22 | 0 | 0% | n/a |
 | **H** | 2 | 0 | 0% | n/a |
