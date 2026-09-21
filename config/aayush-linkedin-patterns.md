@@ -172,14 +172,14 @@ p.p.s First day at the Vipassana center 👇🏻
 | **absurdist-data-point** | 1 | 0 | 0% | n/a | ← never shipped
 | **absurdist-truth-teller** | 50 | 0 | 0% | n/a | ← never shipped
 | **commentary-take** | 11 | 0 | 0% | n/a | ← never shipped
-| **contrarian** | 48 | 0 | 0% | n/a | ← never shipped
+| **contrarian** | 49 | 0 | 0% | n/a | ← never shipped
 | **contrarian philosopher** | 1 | 0 | 0% | n/a | ← never shipped
 | **contrarian-philosopher** | 75 | 0 | 0% | n/a | ← never shipped
-| **data-point** | 43 | 0 | 0% | n/a | ← never shipped
+| **data-point** | 44 | 0 | 0% | n/a | ← never shipped
 | **dot-connecting** | 5 | 0 | 0% | n/a | ← never shipped
 | **news-take** | 1 | 0 | 0% | n/a | ← never shipped
 | **observation-first** | 1 | 0 | 0% | n/a | ← never shipped
-| **pattern-observation** | 27 | 0 | 0% | n/a | ← never shipped
+| **pattern-observation** | 28 | 0 | 0% | n/a | ← never shipped
 | **personal story** | 1 | 0 | 0% | n/a | ← never shipped
 | **personal-I observer** | 6 | 0 | 0% | n/a | ← never shipped
 | **personal-I-observer** | 44 | 0 | 0% | n/a | ← never shipped
@@ -196,10 +196,10 @@ p.p.s First day at the Vipassana center 👇🏻
 
 | Hook | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
-| **A** | 105 | 0 | 0% | n/a |
-| **A.b** | 29 | 0 | 0% | n/a |
+| **A** | 106 | 0 | 0% | n/a |
+| **A.b** | 30 | 0 | 0% | n/a |
 | **A.c** | 66 | 0 | 0% | n/a |
-| **B** | 54 | 0 | 0% | n/a |
+| **B** | 55 | 0 | 0% | n/a |
 | **C** | 65 | 0 | 0% | n/a |
 | **D** | 13 | 0 | 0% | n/a |
 | **E** | 42 | 0 | 0% | n/a |
