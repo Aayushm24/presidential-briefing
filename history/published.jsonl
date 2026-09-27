@@ -668,3 +668,8 @@
   "lead_title": "AI agents are already breaking containment and exposing user data without labs knowing",
   "status": "shipped"
 }
+{
+  "date": "2026-09-27",
+  "lead_title": "AI agent failure modes are production realities that require immediate defensive design",
+  "status": "shipped"
+}
