@@ -1,0 +1,31 @@
+{
+  "date": "2026-09-29",
+  "lead_title": "AI agents broke through to real money this week",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian-philosopher",
+      "hook_pattern": "A",
+      "hook_score": 8,
+      "conviction": "L2: Agent infrastructure isn't new - it's revealing what was always broken about human-centric software design",
+      "post": "Every company is building \"agent infrastructure\" now.\n\nBut they're solving the wrong problem.\n\nThe real issue isn't that agents need new infrastructure.\n\nIt's that our software was designed around humans who had to click buttons.\n\nWhen we build agents at Atlan, we don't have them click buttons. They call APIs, read databases, talk to other apps through MCPs.\n\nThe infrastructure was always there.\n\nWe just built UIs on top of it because humans needed them.\n\nNow agents are forcing us to go back to the original API layer. The one that was always faster, more reliable, and more composable.\n\nShopify opening checkout to WebMCP agents isn't \"new infrastructure.\"\n\nIt's admitting their checkout UI was the bottleneck.\n\nNvidia shipping agent security tools isn't \"innovation.\"\n\nIt's admitting we never built proper sandbox boundaries because humans were the safety layer.\n\nThe $1 billion Instinct raised isn't betting on agent platforms.\n\nIt's betting on software without the human tax.\n\nEvery conversation I have with builders follows the same pattern:\n\n- \"We need agent runtime primitives\"\n- \"We need orchestration layers\"\n- \"We need security boundaries\"\n\nAll of this existed. APIs, webhooks, containers, permissions.\n\nWe just wrapped them in buttons and forms.\n\nEvery \"agent infrastructure\" company is really saying: \"we designed software wrong for 20 years.\"\n\nThe question isn't what new tools agents need.\n\nIt's what human-centric assumptions are you ready to delete?"
+    },
+    {
+      "option": 2,
+      "template": "personal-I-observer",
+      "hook_pattern": "A.c",
+      "hook_score": 9,
+      "conviction": "L3: Shopify's WebMCP agent checkout is the concrete proof that software categories flip faster than builders expect",
+      "post": "Shopify just opened $200 billion in checkout volume to AI agents.\n\nNot for demos. For real purchases.\n\nI build AI agents for GTM workflows at Atlan and this changes everything.\n\nHere's what most builders are missing about WebMCP agent checkout.\n\nThis isn't just \"agents can buy things now.\"\n\nIt's proof that software categories flip faster than we think.\n\nEvery week I watch the same pattern:\n- Company ships API for agents\n- Agents start using it\n- Humans stop using the UI within months\n\nThe humans never open the app when the agent is working.\n\nAt Atlan, Jake booked 47 meetings in 3 months entirely through agent-to-agent conversations. Zero email follow-ups. Zero human clicks.\n\nChat converts. Email doesn't.\n\nBut that's not the insight.\n\nThe insight is that once agents prove they can handle a workflow, humans don't go back to manual.\n\nShopify's WebMCP support means agents can now:\n- Identify products across sites\n- Compare prices in seconds\n- Apply discount codes automatically\n- Complete transactions without human intervention\n\nThe conversion rate shift will be dramatic.\n\nHumans abandon carts at 96-98%. Agents don't have cart psychology.\n\nEvery SaaS company now has the same decision: build agent-compatible APIs or watch your software become the manual step agents route around.\n\nIMO, the window for this choice is six months, not six years.\n\nWhat workflow is your team building that agents could completely replace?"
+    },
+    {
+      "option": 3,
+      "template": "relatable-human",
+      "hook_pattern": "B",
+      "hook_score": 7,
+      "conviction": "L1: The GPU cost vs API price divergence is creating winners and losers in ways most teams don't understand yet",
+      "post": "I don't understand how GPU costs doubled while API prices fell.\n\nSix months ago: $4.40 per GPU-hour.\nToday: $8.08 per GPU-hour.\n\nBut AI service prices keep dropping.\n\nThis math doesn't work unless you know what's happening in the middle.\n\nThe companies that survive this squeeze are the ones optimizing models while everyone else just burns more money.\n\nMost teams I talk to don't realize they're about to get priced out.\n\nHere's what's actually happening:\n\nThe margin is getting squeezed out of the middle.\n\nTeams running their own inference infrastructure face rising costs unless they optimize aggressively. Teams that can't optimize efficiently get squeezed out.\n\nBut teams building on third-party APIs benefit from falling prices.\n\nThe winners are the ones who locked in GPU capacity before the increases and the ones who optimize for inference efficiency.\n\nEveryone else is watching their unit economics deteriorate without understanding why.\n\nI've been tracking this across my network for months:\n\n- Small teams using Claude API: costs keep falling\n- Mid-size teams running their own models: costs rising fast\n- Enterprise teams with annual GPU contracts: still profitable\n\nInfrastructure is getting more expensive, not cheaper.\n\nInstead of computing getting cheaper over time, AI compute is getting more expensive as demand exceeds supply.\n\nThat price pressure is forcing optimization at the application layer rather than expecting it at the infrastructure layer.\n\nIf you're building on AI and haven't locked in your compute strategy, you have maybe 90 days before this gets worse.\n\nWhat's your plan when your inference costs double again?"
+    }
+  ]
+}
