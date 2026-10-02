@@ -168,13 +168,13 @@ p.p.s First day at the Vipassana center 👇🏻
 |---|---|---|---|---|
 | **absurd-comparison** | 1 | 0 | 0% | n/a | ← never shipped
 | **absurd-mirror** | 2 | 0 | 0% | n/a | ← never shipped
-| **absurdist** | 15 | 0 | 0% | n/a | ← never shipped
+| **absurdist** | 16 | 0 | 0% | n/a | ← never shipped
 | **absurdist-data-point** | 1 | 0 | 0% | n/a | ← never shipped
-| **absurdist-truth-teller** | 51 | 0 | 0% | n/a | ← never shipped
+| **absurdist-truth-teller** | 52 | 0 | 0% | n/a | ← never shipped
 | **commentary-take** | 11 | 0 | 0% | n/a | ← never shipped
-| **contrarian** | 52 | 0 | 0% | n/a | ← never shipped
+| **contrarian** | 54 | 0 | 0% | n/a | ← never shipped
 | **contrarian philosopher** | 1 | 0 | 0% | n/a | ← never shipped
-| **contrarian-philosopher** | 77 | 0 | 0% | n/a | ← never shipped
+| **contrarian-philosopher** | 79 | 0 | 0% | n/a | ← never shipped
 | **data-point** | 44 | 0 | 0% | n/a | ← never shipped
 | **dot-connecting** | 7 | 0 | 0% | n/a | ← never shipped
 | **news-take** | 1 | 0 | 0% | n/a | ← never shipped
@@ -182,28 +182,28 @@ p.p.s First day at the Vipassana center 👇🏻
 | **pattern-observation** | 28 | 0 | 0% | n/a | ← never shipped
 | **personal story** | 1 | 0 | 0% | n/a | ← never shipped
 | **personal-I observer** | 6 | 0 | 0% | n/a | ← never shipped
-| **personal-I-observer** | 46 | 0 | 0% | n/a | ← never shipped
+| **personal-I-observer** | 48 | 0 | 0% | n/a | ← never shipped
 | **personal-discovery** | 21 | 0 | 0% | n/a | ← never shipped
 | **personal-i-observer** | 5 | 0 | 0% | n/a | ← never shipped
 | **personal-observer** | 7 | 0 | 0% | n/a | ← never shipped
-| **relatable** | 3 | 0 | 0% | n/a | ← never shipped
-| **relatable-human** | 24 | 0 | 0% | n/a | ← never shipped
+| **relatable** | 4 | 0 | 0% | n/a | ← never shipped
+| **relatable-human** | 26 | 0 | 0% | n/a | ← never shipped
 | **unlabeled** | 3 | 0 | 0% | n/a | ← never shipped
 | **vulnerable victor** | 1 | 0 | 0% | n/a | ← never shipped
 | **vulnerable-observer** | 1 | 0 | 0% | n/a | ← never shipped
-| **vulnerable-victor** | 10 | 0 | 0% | n/a | ← never shipped
+| **vulnerable-victor** | 11 | 0 | 0% | n/a | ← never shipped
 
 ### By source hook pattern
 
 | Hook | Generated | Picked | Pickup rate | Avg engagement when picked |
 |---|---|---|---|---|
-| **A** | 110 | 0 | 0% | n/a |
-| **A.b** | 31 | 0 | 0% | n/a |
-| **A.c** | 68 | 0 | 0% | n/a |
-| **B** | 57 | 0 | 0% | n/a |
-| **C** | 68 | 0 | 0% | n/a |
+| **A** | 113 | 0 | 0% | n/a |
+| **A.b** | 32 | 0 | 0% | n/a |
+| **A.c** | 71 | 0 | 0% | n/a |
+| **B** | 60 | 0 | 0% | n/a |
+| **C** | 69 | 0 | 0% | n/a |
 | **D** | 13 | 0 | 0% | n/a |
-| **E** | 43 | 0 | 0% | n/a |
+| **E** | 44 | 0 | 0% | n/a |
 | **F** | 1 | 0 | 0% | n/a |
 | **G** | 24 | 0 | 0% | n/a |
 | **H** | 2 | 0 | 0% | n/a |
