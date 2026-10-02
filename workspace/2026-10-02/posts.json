@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-02",
+  "lead_title": "AI agents are replacing entire job functions with real metrics to prove it",
+  "best_option": 2,
+  "options": [
+    {
+      "option": 1,
+      "template": "contrarian",
+      "hook_pattern": "A.c",
+      "hook_score": 8,
+      "conviction": "L2 - The math on agent ROI just became undeniable, so teams still treating this as experimental are about to get blindsided by competitors who moved to production",
+      "post": "Vercel spent $5,000 to replace 90% of their SDR team.\n\nEveryone's talking about AI \"potentially\" replacing jobs.\n\nBut the economics just became math, not speculation.\n\nAt Atlan, Jake our AI SDR has brought back accounts that were closed-lost, MetLife had 3 prior losses before Jake re-engaged them.\n\nWe have $1.04M in S2 pipeline from an agent that didn't exist a year ago.\n\nThe shift happened this week across three verticals: sales, accounting, and auditing.\n\nAI crossed the human performance threshold on measurable tasks.\n\nNot hypothetically. With benchmarks:\n- Vercel's agent handles qualification better than human SDRs\n- Frontier models now outperform junior accountants on medium-length tasks\n- Modus built open-source evals for AI doing actual auditor work\n\nThe difference between experimental and production is 18 months of cost savings.\n\nAt typical SDR salaries of $60K-80K plus benefits, Vercel's math is automatic once performance crosses the line.\n\nThe teams still running \"AI pilot programs\" are solving last year's problem.\n\nThis year's problem is deployment speed.\n\nEvery month you spend evaluating is a month your competitor spends optimizing their agent that's already working.\n\nJake booked 47 meetings in 3 months from chat alone. Zero from email follow-ups.\n\nThe pattern is consistent across knowledge work: AI wins on speed, accuracy, and cost for well-defined tasks.\n\nIMO the conversation shifted from \"can AI do this job?\" to \"how fast can we deploy it?\"\n\nThe math is clear. The performance benchmarks exist. The case studies are documented.\n\nWhat job function is your team still treating as safe?"
+    },
+    {
+      "option": 2,
+      "template": "vulnerable-victor",
+      "hook_pattern": "B",
+      "hook_score": 9,
+      "conviction": "L1 - Most builders are still thinking about AI as productivity enhancement while the actual transformation is role elimination",
+      "post": "I built Jake to help our SDR team. Jake replaced them instead.\n\nHere's what I thought would happen: AI handles research, humans handle relationship building.\n\nHere's what actually happened: Jake books meetings better than humans do.\n\n47 meetings in 3 months. All from chat on atlan.com. Zero from email follow-ups.\n\nThe accounts Jake brought back? MetLife had 3 prior losses. DC Government had 3. Human SDRs couldn't crack them.\n\nJake did.\n\nWe have $1.04M in S2 pipeline from a chatbot I built to be a research assistant.\n\nEvery week I watch this pattern repeat across different functions.\n\nVercel documented the same story. Their agent replaced 90% of their SDR team for $5,000 annually.\n\nNot assisted. Replaced.\n\nFrontier AI now outperforms junior accountants on medium-length tasks in both speed and accuracy.\n\nModus built open-source benchmarks for AI doing actual junior-auditor work.\n\nThe hard part isn't building the AI anymore.\n\nThe hard part is accepting that the job might not need a human at all.\n\nAt Atlan, we stopped asking \"how can AI help this role?\" and started asking \"why does this role exist?\"\n\nDifferent question. Different answer.\n\nMost teams I talk to are still optimizing human workflows instead of eliminating them.\n\nThey're solving 2023's problem: how to make people more productive.\n\n2026's problem is different: how to run the function without people.\n\nThe case studies are documented. The math works. The benchmarks exist.\n\nWhat job function are you still treating as safe?"
+    },
+    {
+      "option": 3,
+      "template": "relatable-human",
+      "hook_pattern": "E",
+      "hook_score": 8,
+      "conviction": "L3 - Founders need to start testing job-replacement agents now while the evaluation frameworks exist, not wait until competitors get there first",
+      "post": "Three companies published job-replacement metrics this week.\n\nNot productivity improvements. Not efficiency gains. Actual job replacement with documented outcomes.\n\nI keep waiting for the catch. The catch never came.\n\nVercel: 90% SDR reduction, $5K annual cost.\nAI models: outperform junior accountants on real tasks.\nModus: open-source benchmarks for AI doing auditor work.\n\nEvery founder I know has been asking the same question: \"When do I need to worry about this?\"\n\nThe answer landed this week: You don't need to worry. You need to act.\n\nMost people I talk to are treating this like a future problem.\n\nBut the evaluation tools exist today. The performance benchmarks are public. The economic case studies are documented.\n\nWhile you're planning, someone else is deploying.\n\nAt Atlan, Jake brought back accounts that human SDRs couldn't crack. $1.04M in pipeline from an agent that didn't exist a year ago.\n\nNot because Jake is perfect. Because Jake doesn't quit, doesn't take weekends off, and never forgets to follow up.\n\nThe uncomfortable reality: your team's knowledge work tasks might already be replaceable.\n\nYou just haven't tested them against the benchmarks yet.\n\nThree questions worth answering this week:\n- Which role has the most repetitive, well-defined tasks?\n- How would you measure human vs AI performance on those tasks?\n- What would it cost you if a competitor deployed this agent first?\n\nThe evaluation frameworks exist. The performance data is public. The economic incentive is clear.\n\nWhat are you waiting for?"
+    }
+  ]
+}
